@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import common.basic.utils.StringUtil;
 
 public class MetaData {
     private static final String prefix = "android.MetaData.";
@@ -32,7 +33,11 @@ public class MetaData {
 
     private static String get(Context context, String key, String defaultValue) {
         try {
-            return getMetaData(context).getString(prefix + key, defaultValue);
+            final String string = getMetaData(context).getString(prefix + key);
+            if(StringUtil.isNullOrEmpty(string))
+                return defaultValue;
+
+            return string;
         }
         catch (PackageManager.NameNotFoundException e) {
             return defaultValue;
