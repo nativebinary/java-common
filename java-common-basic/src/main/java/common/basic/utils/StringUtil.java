@@ -11,11 +11,11 @@ public class StringUtil {
 
 
 
-    public static boolean isNullOrEmpty(String filename) {
-        if(filename == null)
+    public static boolean isNullOrEmpty(String s) {
+        if(s == null)
             return true;
 
-        if("".equals(filename))
+        if("".equals(s))
             return true;
 
         return false;
