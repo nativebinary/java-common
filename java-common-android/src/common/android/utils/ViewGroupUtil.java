@@ -2,7 +2,6 @@ package common.android.utils;
 
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Space;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +23,7 @@ public class ViewGroupUtil {
 
         final int childCount = viewGroup.getChildCount();
         for (int i = 0; i < childCount; i++) {
-            final View viewChild = viewGroup.getChildAt(i);
-            if(viewChild instanceof Space)
-                listView.add(viewChild);
+            listView.add(viewGroup.getChildAt(i));
         }
 
         return listView;
