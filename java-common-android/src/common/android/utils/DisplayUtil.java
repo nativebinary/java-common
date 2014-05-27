@@ -12,8 +12,6 @@ public class DisplayUtil {
     }
 
     public static Size getPointSize(Display display) {
-        Point point = new Point();
-        display.getSize(point);
-        return new Size(point.x,point.y);
+        return new Size(display.getWidth(), display.getHeight());
     }
 }
