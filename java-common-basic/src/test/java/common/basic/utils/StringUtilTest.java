@@ -64,8 +64,7 @@ public class StringUtilTest extends Assert {
 
     @Test
     public void testJoin(){
-        String testString[]={"a","b","c","d","e"};
-        assertEquals("a/b/c/d/e",StringUtil.join("/",testString));
+        assertEquals("a/b/c/d/e",StringUtil.join("/", "a", "b", "c", "d", "e"));
     }
 
     @Test
