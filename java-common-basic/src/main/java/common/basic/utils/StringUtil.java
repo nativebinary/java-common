@@ -111,7 +111,7 @@ public class StringUtil {
     }
 
 
-    public static String join(String splitter, Object... arrayObject) {
+    public static String join(String splitter, String... arrayObject) {
         return join(splitter, ListUtil.toListString(arrayObject));
     }
 
