@@ -3,7 +3,7 @@ package common.basic.logs;
 public class Logger {
     static ILogger logger = new LoggerStandardOut();
 
-    Logger() throws InstantiationException {
+    public Logger() throws InstantiationException {
         throw new InstantiationException();
     }
 
