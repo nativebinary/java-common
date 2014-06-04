@@ -122,6 +122,15 @@ public class ListUtil {
         return hasMore;
     }
 
+    public static <T> T find(List<T> list, IPredicator<T> predicator) {
+        for (T t : list) {
+            if(predicator.predicate(t))
+                return t;
+        }
+
+        return null;
+    }
+
     public static interface ICallbackTransform<TIn, TOut> {
         TOut transform(TIn in);
     }

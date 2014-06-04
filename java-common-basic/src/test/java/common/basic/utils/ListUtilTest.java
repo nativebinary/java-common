@@ -1,5 +1,6 @@
 package common.basic.utils;
 
+import common.basic.interfaces.IPredicator;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -55,6 +56,32 @@ public class ListUtilTest extends Assert {
         testResult.add("c");
 
         assertEquals(testResult, ListUtil.create(new String[]{"a", "b", "c"}));
+    }
+
+    @Test
+    public void testFind() {
+        List<Integer> list = new ArrayList<Integer>();
+        for (int i = 0; i < 100; i++) {
+            list.add(i);
+        }
+
+        int i = ListUtil.find(list, new IPredicator<Integer>() {
+            @Override
+            public boolean predicate(Integer integer) {
+                return integer == 10;
+            }
+        });
+
+        assertEquals(10, i);
+
+        final Integer integer = ListUtil.find(list, new IPredicator<Integer>() {
+            @Override
+            public boolean predicate(Integer integer) {
+                return integer == 1000;
+            }
+        });
+        assertNull(integer);
+
     }
 
     @Test
