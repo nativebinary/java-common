@@ -131,6 +131,16 @@ public class ListUtil {
         return null;
     }
 
+    public static <T> List<T> findAll(List<T> list, IPredicator<T> predicator) {
+        List<T> listResult = new ArrayList<T>();
+        for (T t : list) {
+            if(predicator.predicate(t))
+                listResult.add(t);
+        }
+
+        return listResult;
+    }
+
     public static interface ICallbackTransform<TIn, TOut> {
         TOut transform(TIn in);
     }

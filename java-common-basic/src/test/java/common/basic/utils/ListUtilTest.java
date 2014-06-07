@@ -85,6 +85,23 @@ public class ListUtilTest extends Assert {
     }
 
     @Test
+    public void testFindAll() {
+        List<Integer> list = new ArrayList<Integer>();
+        for (int i = 0; i < 100; i++) {
+            list.add(i);
+        }
+
+        final List<Integer> list10 = ListUtil.findAll(list, new IPredicator<Integer>() {
+            @Override
+            public boolean predicate(Integer integer) {
+                return (integer % 10) == 0;
+            }
+        });
+
+        assertEquals(10, list10.size());
+    }
+
+    @Test
     public void testIsValidIndex(){
 
         final ArrayList<String> list = new ArrayList<String>();
