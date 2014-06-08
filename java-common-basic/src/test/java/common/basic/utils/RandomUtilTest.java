@@ -18,9 +18,11 @@ public class RandomUtilTest extends Assert {
     }
     @Test
     public void testNextString() throws Exception {
+        assertEquals(0, RandomUtil.nextString(0).length());
         assertEquals(1, RandomUtil.nextString(1).length());
         assertEquals(2, RandomUtil.nextString(2).length());
         assertEquals(100, RandomUtil.nextString(100).length());
+        assertEquals(1024, RandomUtil.nextString(1024).length());
     }
 
 
