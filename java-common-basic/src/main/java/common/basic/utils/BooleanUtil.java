@@ -36,6 +36,6 @@ public class BooleanUtil {
     }
 
     public static boolean convertYN(String value) {
-        return StringUtil.equals("Y", value);
+        return StringUtil.equals("Y", value) || StringUtil.equals("y", value);
     }
 }
