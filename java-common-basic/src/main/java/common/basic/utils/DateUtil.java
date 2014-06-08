@@ -18,52 +18,75 @@ public class DateUtil {
     public static final long Week = Day * 7;
 
 
-    static SimpleDateFormat formatter_yyyyMMddHHmmss = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss", Locale.KOREA );
-    static SimpleDateFormat formatter_yyyyMMddHHmmssSSS = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss.SSS", Locale.KOREA );
-    static SimpleDateFormat formatter_yyyyMMddHHmmssForFile = new SimpleDateFormat( "yyyyMMdd_HHmmss", Locale.KOREA );
-    static SimpleDateFormat formatter_yyyyMMdd = new SimpleDateFormat( "yyyyMMdd", Locale.KOREA );
-    static SimpleDateFormat formatter_yyyy_MM_dd = new SimpleDateFormat( "yyyy-MM-dd", Locale.KOREA );
-    static SimpleDateFormat formatter_yyyyMM = new SimpleDateFormat( "yyyyMM", Locale.KOREA );
-    static SimpleDateFormat formatter_yyyy = new SimpleDateFormat( "yyyy", Locale.KOREA );
-    static SimpleDateFormat formatter_MM = new SimpleDateFormat( "MM", Locale.KOREA );
+    final static SimpleDateFormat formatter_yyyyMMddHHmmss = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA);
+    final static SimpleDateFormat formatter_yyyyMMddHHmmssSSS = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.KOREA);
+    final static SimpleDateFormat formatter_yyyyMMddHHmmssForFile = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.KOREA);
+    final static SimpleDateFormat formatter_yyyy_MM_dd = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
+    final static SimpleDateFormat formatter_yyyyMMdd = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
+    final static SimpleDateFormat formatter_yyyyMM = new SimpleDateFormat("yyyyMM", Locale.KOREA);
+    final static SimpleDateFormat formatter_yyyy = new SimpleDateFormat("yyyy", Locale.KOREA);
+    final static SimpleDateFormat formatter_MM = new SimpleDateFormat("MM", Locale.KOREA);
+    final static SimpleDateFormat formatter_HHmm = new SimpleDateFormat("HHmm", Locale.KOREA);
+    final static SimpleDateFormat formatter_EEE = new SimpleDateFormat("EEE", Locale.US);
 
-    static SimpleDateFormat formatter_nginxlog = new SimpleDateFormat("dd/MMM/yyyy:HH:mm:ss Z");
-
-
-    public static String yyyyMMddHHmmss(Date date)
-    {
-        return formatter_yyyyMMddHHmmss.format ( date );
+    public static String yyyyMMddHHmmss(Date date) {
+        synchronized(formatter_yyyyMMddHHmmss) {
+            return formatter_yyyyMMddHHmmss.format(date);
+        }
     }
 
-
-    public static String yyyyMMddHHmmssSSS(Date date)
-    {
-        return formatter_yyyyMMddHHmmssSSS.format ( date );
+    public static String yyyyMMddHHmmssSSS(Date date) {
+        synchronized (formatter_yyyyMMddHHmmssSSS) {
+            return formatter_yyyyMMddHHmmssSSS.format(date);
+        }
     }
-
 
     public static String yyyyMMddHHmmssForFile(Date date) {
-        return formatter_yyyyMMddHHmmssForFile.format ( date );
-    }
-
-    public static String yyyyMMdd(Date date) {
-        return formatter_yyyyMMdd.format( date );
+        synchronized (formatter_yyyyMMddHHmmssForFile) {
+            return formatter_yyyyMMddHHmmssForFile.format(date);
+        }
     }
 
     public static String yyyy_MM_dd(Date date) {
-        return formatter_yyyy_MM_dd.format( date );
+        synchronized (formatter_yyyy_MM_dd) {
+            return formatter_yyyy_MM_dd.format(date);
+        }
+    }
+
+    public static String yyyyMMdd(Date date) {
+        synchronized (formatter_yyyyMMdd) {
+            return formatter_yyyyMMdd.format(date);
+        }
     }
 
     public static String yyyyMM(Date date) {
-        return formatter_yyyyMM.format( date );
+        synchronized (formatter_yyyyMM) {
+            return formatter_yyyyMM.format(date);
+        }
     }
 
     public static String yyyy(Date date) {
-        return formatter_yyyy.format( date );
+        synchronized (formatter_yyyy) {
+            return formatter_yyyy.format(date);
+        }
     }
 
     public static String MM(Date date) {
-        return formatter_MM.format( date );
+        synchronized (formatter_MM) {
+            return formatter_MM.format(date);
+        }
+    }
+
+    public static String HHmm(Date date) {
+        synchronized (formatter_HHmm) {
+            return formatter_HHmm.format(date);
+        }
+    }
+
+    public static String EEE(Date date) {
+        synchronized (formatter_EEE) {
+            return formatter_EEE.format(date);
+        }
     }
 
     public static Date parse(String s) {
@@ -79,7 +102,7 @@ public class DateUtil {
         }
     }
 
-    public static Date getDateRandom(Date dateFrom, Date dateTo){
+    public static Date getDateRandom(Date dateFrom, Date dateTo) {
         Calendar cal = Calendar.getInstance();
 
         cal.setTime(dateFrom);
@@ -90,7 +113,7 @@ public class DateUtil {
 
         BigDecimal diff = decTo.subtract(decFrom);
         BigDecimal factor = new BigDecimal(Math.random()).multiply(diff);
-        return new Date((factor.add(decFrom)).longValue());
+        return new Date(factor.add(decFrom).longValue());
     }
 
     public static long nowTime() {
