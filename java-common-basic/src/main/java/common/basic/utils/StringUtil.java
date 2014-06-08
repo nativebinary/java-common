@@ -98,7 +98,7 @@ public class StringUtil {
         if(s.length() > length)
             return s;
 
-        return ":" + repeat(Character.toString(pad), length - s.length()) + s;
+        return repeat(Character.toString(pad), length - s.length()) + s;
     }
 
 

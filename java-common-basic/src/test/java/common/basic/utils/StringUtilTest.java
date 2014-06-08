@@ -71,6 +71,7 @@ public class StringUtilTest extends Assert {
     public void testPadLeft(){
         assertEquals("     ",StringUtil.padLeft(null, 5, ' '));
         assertEquals("     ",StringUtil.padLeft("", 5, ' '));
+        assertEquals("    a",StringUtil.padLeft("a", 5, ' '));
         assertEquals("testString",StringUtil.padLeft("testString", 5, ' '));
     }
 
