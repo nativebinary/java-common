@@ -26,7 +26,7 @@ public class RandomUtil {
             sb.append(UuidUtil.generateWithoutDash());
         }
 
-        sb.delete(length, sb.length() - 1);
+        sb.delete(length, sb.length());
         return sb.toString();
     }
 

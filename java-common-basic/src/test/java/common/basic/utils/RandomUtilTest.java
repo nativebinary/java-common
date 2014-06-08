@@ -16,4 +16,13 @@ public class RandomUtilTest extends Assert {
         assertEquals(5, RandomUtil.nextLeadingZeroInt(99999).length());
         assertEquals(10, RandomUtil.nextLeadingZeroInt(2000000000).length());
     }
+    @Test
+    public void testNextString() throws Exception {
+        assertEquals(1, RandomUtil.nextString(1).length());
+        assertEquals(2, RandomUtil.nextString(2).length());
+        assertEquals(100, RandomUtil.nextString(100).length());
+    }
+
+
+
 }
