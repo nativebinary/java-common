@@ -12,7 +12,7 @@ public class LogUtil {
         throw new InstantiationException();
     }
     public static String makeMessage(Object[] arrayObject, Level level, int stackRewindCount) {
-        return makeMessage(arrayObject, level, stackRewindCount, false);
+        return makeMessage(arrayObject, level, stackRewindCount + 1, false);
     }
 
     public static String makeMessage(Object[] arrayObject, Level level, int stackRewindCount, boolean includeDateTime) {
