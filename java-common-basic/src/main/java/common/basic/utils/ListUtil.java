@@ -242,4 +242,8 @@ public class ListUtil {
         return list == null || list.isEmpty();
 
     }
+
+    public static <T> void swap(List<T> list, int index1, int index2) {
+        Collections.swap(list, index1, index2);
+    }
 }

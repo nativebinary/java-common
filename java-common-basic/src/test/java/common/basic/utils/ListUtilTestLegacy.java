@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ListUtilTest extends Assert {
+public class ListUtilTestLegacy extends Assert {
 
     @Test(expected = InstantiationException.class)
     public void testConstructor() throws Exception {
