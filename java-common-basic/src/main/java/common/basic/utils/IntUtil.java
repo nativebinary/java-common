@@ -1,7 +1,5 @@
 package common.basic.utils;
 
-import common.basic.logs.Logger;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +13,6 @@ public class IntUtil {
         try {
             return Integer.parseInt(value);
         } catch (Exception e) {
-            Logger.e(e);
             return defaultValue;
         }
     }

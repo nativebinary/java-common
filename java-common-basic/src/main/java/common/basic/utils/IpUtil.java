@@ -1,18 +1,28 @@
 package common.basic.utils;
 
-import sun.net.util.IPAddressUtil;
+import common.basic.logs.Logger;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 public class IpUtil {
-    public static long ipStringToLong(String ipString) {
-        byte[] bytes = IPAddressUtil.textToNumericFormatV4(ipString);
+    IpUtil() throws InstantiationException {
+        throw new InstantiationException();
+    }
 
-        if (bytes.length != 4)
-            return -1;
+    public static byte[] toArrayByte(String ip) {
+        try {
+            InetAddress inetAddress = InetAddress.getByName(ip);
+            return inetAddress.getAddress();
+        }
+        catch (UnknownHostException e) {
+            Logger.e(e);
+            return null;
+        }
+    }
 
-        return ((0x000000FF & (long)bytes[0]) << 24
-                | (0x000000FF & (long)bytes[1]) << 16
-                | (0x000000FF & (long)bytes[2]) << 8
-                | (0x000000FF & (long)bytes[3]));
+    public static long toInt(String ip) {
+        return ByteUtil.toInt(toArrayByte(ip));
     }
 
     public static long cidrToMask(int cidr) {
