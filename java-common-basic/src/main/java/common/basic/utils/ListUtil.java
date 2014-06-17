@@ -110,7 +110,7 @@ public class ListUtil {
 		if(list == null || 0 == list.size())
 			return null;
 
-		return list.get(RandomUtil.next(0, list.size()));
+		return list.get(RandomUtil.nextInt(0, list.size()));
 	}
 
     public static <T> boolean hasMore(List<T> list, int limit) {

@@ -30,12 +30,20 @@ public class RandomUtil {
         return sb.toString();
     }
 
-    public static int next() {
+    public static int nextInt() {
         return random.nextInt();
     }
 
-    public static int next(int start, int until) {
-        return start + random.nextInt(until - start);
+    public static int nextInt(int i) {
+        return random.nextInt(i);
+    }
+
+    public static int nextInt(int start, int until) {
+        return start + nextInt(until - start);
+    }
+
+    public static boolean nextBoolean(){
+        return nextInt() % 2 == 0;
     }
 
     public static float nextFloat() {

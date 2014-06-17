@@ -16,7 +16,7 @@ public class IpUtil {
             return inetAddress.getAddress();
         }
         catch (UnknownHostException e) {
-            Logger.e(e);
+            Logger.e(ip, e);
             return null;
         }
     }
