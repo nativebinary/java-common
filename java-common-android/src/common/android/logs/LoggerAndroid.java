@@ -53,7 +53,7 @@ public class LoggerAndroid implements ILogger {
         if(!isLoggable(Level.Verbose))
             return;
 
-        Log.v(tag, LogUtil.makeMessage(arrayObject, Level.Verbose, stackRewindCount));
+        Log.v(tag, ":" + LogUtil.makeMessage(arrayObject, Level.Verbose, stackRewindCount));
     }
 
     @Override
@@ -61,7 +61,7 @@ public class LoggerAndroid implements ILogger {
         if(!isLoggable(Level.Debug))
             return;
 
-        Log.d(tag, LogUtil.makeMessage(arrayObject, Level.Debug, stackRewindCount));
+        Log.d(tag, ":" + LogUtil.makeMessage(arrayObject, Level.Debug, stackRewindCount));
     }
 
     @Override
@@ -69,7 +69,7 @@ public class LoggerAndroid implements ILogger {
         if(!isLoggable(Level.Info))
             return;
 
-        Log.i(tag, LogUtil.makeMessage(arrayObject, Level.Info, stackRewindCount));
+        Log.i(tag, ":" + LogUtil.makeMessage(arrayObject, Level.Info, stackRewindCount));
     }
 
     @Override
@@ -77,7 +77,7 @@ public class LoggerAndroid implements ILogger {
         if(!isLoggable(Level.Warn))
             return;
 
-        Log.w(tag, LogUtil.makeMessage(arrayObject, Level.Warn, stackRewindCount));
+        Log.w(tag, ":" + LogUtil.makeMessage(arrayObject, Level.Warn, stackRewindCount));
     }
 
     @Override
@@ -85,7 +85,7 @@ public class LoggerAndroid implements ILogger {
         if(!isLoggable(Level.Error))
             return;
 
-        Log.e(tag, LogUtil.makeMessage(arrayObject, Level.Error, stackRewindCount));
+        Log.e(tag, ":" + LogUtil.makeMessage(arrayObject, Level.Error, stackRewindCount));
     }
 
 
@@ -95,7 +95,7 @@ public class LoggerAndroid implements ILogger {
         if(!isLoggable(Level.Verbose))
             return;
 
-        Log.v(tag, LogUtil.makeMessage(arrayObject, Level.Verbose, stackRewindCount + additionalStackRewindCount));
+        Log.v(tag, ":" + LogUtil.makeMessage(arrayObject, Level.Verbose, stackRewindCount + additionalStackRewindCount));
     }
 
     @Override
@@ -103,7 +103,7 @@ public class LoggerAndroid implements ILogger {
         if(!isLoggable(Level.Debug))
             return;
 
-        Log.d(tag, LogUtil.makeMessage(arrayObject, Level.Debug, stackRewindCount + additionalStackRewindCount));
+        Log.d(tag, ":" + LogUtil.makeMessage(arrayObject, Level.Debug, stackRewindCount + additionalStackRewindCount));
     }
 
     @Override
@@ -111,7 +111,7 @@ public class LoggerAndroid implements ILogger {
         if(!isLoggable(Level.Info))
             return;
 
-        Log.i(tag, LogUtil.makeMessage(arrayObject, Level.Info, stackRewindCount + additionalStackRewindCount));
+        Log.i(tag, ":" + LogUtil.makeMessage(arrayObject, Level.Info, stackRewindCount + additionalStackRewindCount));
     }
 
     @Override
@@ -119,7 +119,7 @@ public class LoggerAndroid implements ILogger {
         if(!isLoggable(Level.Warn))
             return;
 
-        Log.w(tag, LogUtil.makeMessage(arrayObject, Level.Warn, stackRewindCount + additionalStackRewindCount));
+        Log.w(tag, ":" + LogUtil.makeMessage(arrayObject, Level.Warn, stackRewindCount + additionalStackRewindCount));
     }
 
     @Override
@@ -127,7 +127,7 @@ public class LoggerAndroid implements ILogger {
         if(!isLoggable(Level.Error))
             return;
 
-        Log.e(tag, LogUtil.makeMessage(arrayObject, Level.Error, stackRewindCount + additionalStackRewindCount));
+        Log.e(tag, ":" + LogUtil.makeMessage(arrayObject, Level.Error, stackRewindCount + additionalStackRewindCount));
     }
 
 

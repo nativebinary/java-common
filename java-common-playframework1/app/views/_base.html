@@ -1,0 +1,85 @@
+#{extends '_baseSkeleton.html' /}
+
+#{set 'moreHeadForBase'}
+    <script type="text/javascript">
+        $(function() {
+            $('#buttonLogin').click(function () {
+                $('#divLogin').slideToggle();
+                return false;
+            });
+            $('#formLogin').ajaxForm({
+                success: function (data, textStatus, jqXHR) {
+                    location.reload();
+                },
+                error: function (jqXHR, textStatus, httpStatus) {
+                    alert(jqXHR.responseJSON.message);
+                }
+            });
+
+            $('#buttonJoin').click(function () {
+
+            });
+            $('#buttonLogout').click(function () {
+                $.get('@{api.v1.Auth.logout()}', function (data, textStatus, jqXHR) {
+                    location.reload();
+                }).error(function (jqXHR, textStatue, httpStatus) {
+                    alert(jqXHR.responseJSON.message);
+                });
+            });
+        });
+    </script>
+#{/set}
+
+<div id="container">
+    <div id="header">
+        <div id="logo">
+            <a href="@{Home.index()}">&{"Home.index"}</a>
+        </div>
+        <div id="nav">
+            <ul>
+            #{isNotLoggedIn}
+                <li><a href="#" id="buttonLogin">Login</a></li>
+            #{/isNotLoggedIn}
+
+            #{isLoggedIn}
+                <li>${session.AccountEmail}</li>
+                <li><a href="#" id="buttonLogout">&{"Auth.logout"}</a></li>
+            #{/isLoggedIn}
+
+            #{isAdmin}
+                <li><a href="@{Tests.index()}">&{"Tests.index"}</a></li>
+                <li><a href="@{Admins.index()}">&{"Admins.index"}</a></li>
+            #{/isAdmin}
+            </ul>
+        </div>
+        #{isNotLoggedIn}
+            <div id="divLogin">
+                <form id="formLogin" action="@{api.v1.Auth.login()}" method="post">
+                    <label>
+                        <input type="text" name="email" placeholder="email"/>
+                    </label>
+                    <label>
+                        <input type="password" name="password" placeholder="password"/>
+                    </label>
+                    <input type="submit" value="Login"/>
+                </form>
+            </div>
+        #{/isNotLoggedIn}
+    </div>
+
+    <div id="flash">
+    #{if flash.success}
+        <div class="success">&{flash.success}</div>
+    #{/if}
+    #{if flash.error || error}
+        <div class="error">&{error ?: flash.error}</div>
+    #{/if}
+    </div>
+    <div id="content">
+    #{doLayout /}
+    </div>
+    <div id="footer">
+        Copyright © 2012-2014 nativebinary. All rights reserved
+    </div>
+</div>
+

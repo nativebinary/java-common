@@ -3,13 +3,19 @@
 # ~~~~
 
 # Home page
-GET     /                                       Application.index
+GET     /                                                   Home.index
 
 # Ignore favicon requests
-GET     /favicon.ico                            404
+GET     /favicon.ico                                        404
 
 # Map static resources from the /app/public folder to the /public path
-GET     /public/                                staticDir:public
+GET     /public/                                            staticDir:public
 
 # Catch all
-*       /{controller}/{action}                  {controller}.{action}
+*       /api/v1/{controller}                                api.v1.{controller}.redirectToSlash
+*       /api/v1/{controller}/                               api.v1.{controller}.index
+*       /api/v1/{controller}/{action}                       api.v1.{controller}.{action}
+
+*       /{controller}                                       {controller}.redirectToSlash
+*       /{controller}/                                      {controller}.index
+*       /{controller}/{action}                              {controller}.{action}

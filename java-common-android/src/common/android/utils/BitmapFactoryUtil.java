@@ -48,6 +48,8 @@ public class BitmapFactoryUtil {
 
         options.inSampleSize = calculateInSampleSize(options, sizeRequest.width, sizeRequest.height);
         options.inJustDecodeBounds = false;
+        options.inPreferredConfig = Bitmap.Config.RGB_565;
+        options.inDither = true;
 
         for (InputStream inputStreamForActualDecode : arrayInputStreamForActualDecode) {
             try {
@@ -111,7 +113,7 @@ public class BitmapFactoryUtil {
         // Raw height and width of image
         final int height = options.outHeight;
         final int width = options.outWidth;
-        int inSampleSize = 2;
+        int inSampleSize = 1;
 
         if (height > reqHeight || width > reqWidth) {
 

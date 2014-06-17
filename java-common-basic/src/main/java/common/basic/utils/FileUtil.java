@@ -1,9 +1,9 @@
 package common.basic.utils;
 
 import common.basic.logs.Logger;
-//import org.apache.commons.io.FileUtils;
-//import org.apache.commons.io.comparator.LastModifiedFileComparator;
-//import org.apache.commons.io.comparator.NameFileComparator;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.comparator.LastModifiedFileComparator;
+import org.apache.commons.io.comparator.NameFileComparator;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -123,14 +123,14 @@ public class FileUtil {
 
 
 
-//    public static void overwriteDirThrows(File fileSrc, File fileDst) throws IOException {
-//        FileUtil.mkdirsThrows(fileDst, true);
-//        if(fileSrc.exists())
-//        {
-//            FileUtil.deleteRecursiveThrows(fileDst, true);
-//            FileUtil.copyRecursiveThrows(fileSrc, fileDst);
-//        }
-//    }
+    public static void overwriteDirThrows(File fileSrc, File fileDst) throws IOException {
+        FileUtil.mkdirsThrows(fileDst, true);
+        if(fileSrc.exists())
+        {
+            deleteRecursiveThrows(fileDst, true);
+            copyRecursiveThrows(fileSrc, fileDst);
+        }
+    }
 
 
     //<editor-fold desc="void mkdirsThrows();">
@@ -292,9 +292,6 @@ public class FileUtil {
         void onFile(File file);
     }
 
-
-    // File file = new File(FmFileDefine.ROOT_FILE_MANAGER_PATH);
-
     public static void traversePath(File file, ITraverseListener listener) {
         if (!file.exists())
             return;
@@ -354,7 +351,7 @@ public class FileUtil {
         return mkdirs(folder);
     }
 
-    private static File mkdirs(File folder) {
+    public static File mkdirs(File folder) {
         if (!folder.exists()) {
             folder.mkdirs();
         }
@@ -420,22 +417,22 @@ public class FileUtil {
         return ArrayUtil.isNull(arrayFile, new File[]{});
     }
 
-//    public static File[] getArrayFileOrderByLastModifiedDesc(File file) {
-//        final File[] arrayFile = getArrayFile(file);
-//        Arrays.sort(arrayFile, LastModifiedFileComparator.LASTMODIFIED_REVERSE);
-//        return arrayFile;
-//    }
-//
-//    public static File[] getArrayFileOrderByNameDesc(File file) {
-//        final File[] arrayFile = getArrayFile(file);
-//        Arrays.sort(arrayFile, NameFileComparator.NAME_REVERSE);
-//        return arrayFile;
-//    }
-//
-//
-//    public static void copyRecursiveThrows(File fileSrc, File fileDest) throws IOException {
-//        FileUtils.copyDirectory(fileSrc, fileDest);
-//    }
+    public static File[] getArrayFileOrderByLastModifiedDesc(File file) {
+        final File[] arrayFile = getArrayFile(file);
+        Arrays.sort(arrayFile, LastModifiedFileComparator.LASTMODIFIED_REVERSE);
+        return arrayFile;
+    }
+
+    public static File[] getArrayFileOrderByNameDesc(File file) {
+        final File[] arrayFile = getArrayFile(file);
+        Arrays.sort(arrayFile, NameFileComparator.NAME_REVERSE);
+        return arrayFile;
+    }
+
+
+    public static void copyRecursiveThrows(File fileSrc, File fileDest) throws IOException {
+        FileUtils.copyDirectory(fileSrc, fileDest);
+    }
 
     public static boolean isAncestorOf(File ancestor, File descendant) {
         if (descendant == null)
@@ -463,23 +460,23 @@ public class FileUtil {
         }
     }
 
-//    public static void moveThrows(File fileSrc, File fileDst) throws IOException {
-//        FileUtils.moveFile(fileSrc, fileDst);
-//    }
-//
-//    public static void moveOverwriteThrows(File fileSrc, File fileDst) throws IOException {
-//        if(fileDst.exists())
-//            deleteThrows(fileDst, true);
-//
-//        FileUtils.moveFile(fileSrc, fileDst);
-//    }
-//
-//    public static void copyOverwriteThrows(File fileSrc, File fileDst) throws IOException {
-//        if(fileDst.exists())
-//            deleteThrows(fileDst, true);
-//
-//        FileUtils.copyFile(fileSrc, fileDst);
-//    }
+    public static void moveThrows(File fileSrc, File fileDst) throws IOException {
+        FileUtils.moveFile(fileSrc, fileDst);
+    }
+
+    public static void moveOverwriteThrows(File fileSrc, File fileDst) throws IOException {
+        if(fileDst.exists())
+            deleteThrows(fileDst, true);
+
+        FileUtils.moveFile(fileSrc, fileDst);
+    }
+
+    public static void copyOverwriteThrows(File fileSrc, File fileDst) throws IOException {
+        if(fileDst.exists())
+            deleteThrows(fileDst, true);
+
+        FileUtils.copyFile(fileSrc, fileDst);
+    }
 
     public static void touchThrows(File file) throws IOException {
         touchThrows(file, new Date().getTime());

@@ -8,18 +8,21 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Build;
+import android.support.v4.view.ViewPager;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import common.android.enums.GravityEnum;
 import common.basic.geometiries.Padding;
 import common.basic.geometiries.Size;
 import common.basic.logs.Logger;
@@ -126,9 +129,9 @@ public class ViewUtil {
         return findView(view, id, GridView.class);
     }
 
-//    public static ViewPager findViewPager(Activity activity, int id) {
-//        return findView(activity, id, ViewPager.class);
-//    }
+    public static ViewPager findViewPager(Activity activity, int id) {
+        return findView(activity, id, ViewPager.class);
+    }
 
 
     // relativeScreen
@@ -322,5 +325,26 @@ public class ViewUtil {
 
     public static void setChecked(View view, int id, boolean checked) {
         findCheckBox(view, id).setChecked(checked);
+    }
+
+    public static void setFrameLayoutLayoutParamsGravity(View view, GravityEnum gravityEnum) {
+        final ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+        FrameLayout.LayoutParams frameLayoutLayoutParams = Cast.as(FrameLayout.LayoutParams.class, layoutParams);
+        if(null != frameLayoutLayoutParams)
+        {
+            frameLayoutLayoutParams.gravity = gravityEnum.gravity;
+            view.setLayoutParams(frameLayoutLayoutParams);
+            return;
+        }
+
+        LinearLayout.LayoutParams linearLayoutLayoutParams = Cast.as(LinearLayout.LayoutParams.class, layoutParams);
+        if(null != linearLayoutLayoutParams)
+        {
+            linearLayoutLayoutParams.gravity = gravityEnum.gravity;
+            view.setLayoutParams(linearLayoutLayoutParams);
+            return;
+        }
+
+        Logger.e(gravityEnum);
     }
 }

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+
+        <title>&{request.controller + '.' + request.actionMethod}</title>
+
+        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
+
+        <link rel="stylesheet/less" type="text/css" href="@{'/public/stylesheets/less.less'}" />
+
+        <script type="text/javascript" src="@{'/public/javascripts/json2.js'}"></script>
+        <script type="text/javascript" src="@{'/public/javascripts/less-1.7.1.min.js'}"></script>
+        <script type="text/javascript" src="@{'/public/javascripts/jquery-1.11.1.min.js'}"></script>
+        <script type="text/javascript" src="@{'/public/javascripts/jquery.form-3.50.0.min.js'}"></script>
+        <script type="text/javascript" src="@{'/public/javascripts/moment-with-langs-2.7.0.min.js'}"></script>
+
+        *{<script type="text/javascript" src="@{'/public/javascripts/trimpath-template-1.0.38.js'}"></script>}*
+
+        <script type="text/javascript" src="@{'/public/javascripts/js.js'}"></script>
+
+        #{get 'moreCss' /}
+        #{get 'moreStyles' /}
+        #{get 'moreJs' /}
+        #{get 'moreScripts' /}
+        #{get 'moreHead'/}
+
+        #{get 'moreHeadForBase'/}
+
+        #{isDev}
+            <script>
+                $(function(){less.watch();});
+            </script>
+        #{/isDev}
+    </head>
+    <body class="${logics.ApplicationConf.application_name()} ${request.controller} ${request.actionMethod}">
+            #{doLayout /}
+    </body>
+</html>

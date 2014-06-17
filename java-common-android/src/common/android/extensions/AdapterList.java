@@ -36,6 +36,14 @@ public abstract class AdapterList<T> extends BaseAdapter {
         list.addAll(listToAdd);
     }
 
+    public void add(int index, T t) {
+        list.add(index, t);
+    }
+
+    public void addFirst(T t) {
+        list.add(0, t);
+    }
+
     public void clear() {
         list.clear();
     }
@@ -46,6 +54,10 @@ public abstract class AdapterList<T> extends BaseAdapter {
 
     public void remove(int i) {
         list.remove(i);
+    }
+
+    public boolean contain(T t) {
+        return list.contains(t);
     }
 
     @Override

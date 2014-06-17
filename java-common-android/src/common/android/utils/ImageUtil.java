@@ -7,6 +7,12 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
+import common.basic.geometiries.Size;
+import common.basic.logs.Logger;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 
 public class ImageUtil {
 
@@ -44,4 +50,20 @@ public class ImageUtil {
         return result;
     }
 
+    public static byte[] resizeDisplaySize(File file, Size size, int quality) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        try {
+            Bitmap bitmap = BitmapFactoryUtil.decode(file, size);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, stream);
+            return stream.toByteArray();
+        } finally {
+            try {
+                stream.close();
+            } catch (IOException e) {
+                Logger.e(e);
+
+            }
+        }
+
+    }
 }

@@ -1,0 +1,49 @@
+#{extends './_admins.html' /}
+
+#{set 'moreJs'}
+<script type="text/javascript">
+    var until = ${Long.MAX_VALUE};
+    $(function(){
+        $('#more').click(function () {
+            $.get(
+                    '@{api.v1.Accounts.list()}',
+                    { until: until },
+                    function (data, textStatus, jqXHR) {
+                        for(var i = 0; i < data.length; i++)
+                        {
+                            var tr = $('<tr/>');
+                            var row = data[i];
+                            tr.append($('<td/>').html($('<a/>').text(row.id).attr('href', '@{Admins.accountEdit()}?account.id=' + row.id)));
+                            tr.append($('<td/>').text(row.dateCreated));
+                            tr.append($('<td/>').text(row.dateModified));
+                            tr.append($('<td/>').text(row.dateEmailVerified));
+                            tr.append($('<td/>').text(row.email));
+                            tr.append($('<td/>').text(row.dateEmailVerified));
+                            tr.append($('<td/>').text(row.emailVerificationCode));
+                            tr.append($('<td/>').text(row.dateLeaved));
+                            tr.append($('<td/>').text(row.leavedReason));
+                            tr.append($('<td/>').text(row.dateLastLoggedIn));
+                            $('#table').append(tr);
+                            until = row.id;
+                        }
+                    }
+            );
+        }).click();
+    });
+</script>
+#{/set}
+<table id="table" class="table100">
+    <tr>
+        <th>id</th>
+        <th>dateCreated</th>
+        <th>dateModified</th>
+        <th>dateEmailVerified</th>
+        <th>email</th>
+        <th>dateEmailVerified</th>
+        <th>emailVerificationCode</th>
+        <th>dateLeaved</th>
+        <th>leavedReason</th>
+        <th>dateLastLoggedIn</th>
+    </tr>
+</table>
+<button id="more">more</button>

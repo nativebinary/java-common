@@ -10,13 +10,13 @@
 //import common.android.utils.ThreadUtil;
 //import common.basic.logs.Logger;
 //import common.basic.utils.StringUtil;
+//import common.basic.twitters.TwitterUtil;
 //import twitter4j.Paging;
 //import twitter4j.Query;
 //import twitter4j.QueryResult;
 //import twitter4j.Status;
 //import twitter4j.Twitter;
 //import twitter4j.TwitterException;
-//import twitter4j.TwitterFactory;
 //import twitter4j.auth.AccessToken;
 //import twitter4j.auth.RequestToken;
 //
@@ -40,8 +40,7 @@
 //    public static final String sharedPreferencesKeyTwitterAccessToken = "sharedPreferencesKeyTwitterAccessToken";
 //    public static final String sharedPreferencesKeyTwitterAccessTokenSecret = "sharedPreferencesKeyTwitterAccessTokenSecret";
 //
-//    public static final String consumerKey = ""; // TODO: Refactor to logic
-//    public static final String consumerSecret = ""; // TODO: Refactor to logic
+//
 //    public static final String urlCallback = "oauth://twitter";
 //
 //    final WebView webView;
@@ -75,7 +74,7 @@
 //                            return false;
 //                        }
 //
-//                        common.utils.ThreadUtil.create("TwitterHelper", new Runnable() {
+//                        common.basic.utils.ThreadUtil.create("TwitterHelper", new Runnable() {
 //                            @Override
 //                            public void run() {
 //                                try {
@@ -103,18 +102,7 @@
 //    }
 //
 //    public Twitter get() {
-//        Twitter twitter = TwitterFactory.getSingleton();
-//        try {
-//            twitter.setOAuthConsumer(consumerKey, consumerSecret);
-//        }
-//        catch (IllegalStateException ignored) { }
-//
-//        final AccessToken accessToken = accessTokenLoad();
-//        if (null != accessToken) {
-//            twitter.setOAuthAccessToken(accessToken);
-//        }
-//
-//        return twitter;
+//        return TwitterUtil.get(accessTokenLoad());
 //    }
 //
 //    private AccessToken accessTokenLoad() {
@@ -207,6 +195,22 @@
 //        return new ArrayList<Status>();
 //    }
 //
+//    public Status getStatusById(long id) {
+//        final Twitter twitter = get();
+//
+//        if(isLoggedIn()) {
+//            try {
+//                return twitter.showStatus(id);
+//            } catch (TwitterException e) {
+//                Logger.e(e);
+//            }
+//        } else {
+//            requestAuth();
+//        }
+//
+//        return null;
+//    }
+//
 //    public List<Status> getListStatusFavorite(long maxId) {
 //        try {
 //            Logger.e(maxId);
@@ -272,4 +276,6 @@
 //            webView.clearCache(true);
 //        CookieManager.getInstance().removeAllCookie();
 //    }
+//
+//
 //}

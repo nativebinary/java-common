@@ -3,9 +3,11 @@ package common.android.utils;
 import android.content.Context;
 import common.android.extensions.CookieStorePersistent;
 import common.android.extensions.MultipartEntityProgress;
-import common.basic.interfaces.ICallbackProgress;
 import common.basic.logs.Logger;
 import common.basic.utils.Cast;
+import common.basic.utils.CloseableUtil;
+import common.basic.utils.GoogleHttpClientUtil;
+import common.basic.interfaces.ICallback;
 import common.basic.utils.StringUtil;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -24,7 +26,11 @@ import org.apache.http.protocol.HttpContext;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.nio.charset.Charset;
+import java.util.Locale;
 import java.util.Map;
 
 public class AndroidHttpClientUtil {
@@ -71,6 +77,8 @@ public class AndroidHttpClientUtil {
 
         final HttpClient httpClient = createHttpClient(context);
         final HttpGet httpGet = new HttpGet(url);
+        // TODO change Language
+         httpGet.addHeader("Accept-Language", Locale.getDefault().getLanguage());
         final HttpResponse httpResponse = httpClient.execute(httpGet, localContext);
 
         final StatusLine statusLine = httpResponse.getStatusLine();
@@ -87,21 +95,27 @@ public class AndroidHttpClientUtil {
     }
 
     public static HttpEntity httpPost(Context context, String url, Map<String, Object> map) throws IOException, AndroidHttpClientUtilException {
-        return httpPost(context, url, map, new ICallbackProgress() {
+        return httpPost(context, url, map, new HttpEntityUtil.ICallbackToFile() {
             @Override
-            public void callback(long progress, long max) {
-                Logger.d(progress, max);
+            public void callback(long progress, long contentLength) {
+                Logger.d(progress, contentLength);
             }
-        });
+
+            @Override
+            public boolean isInterruptRequested() {
+                return false;
+            }
+        } );
+
     }
 
-    public static HttpEntity httpPost(Context context, String url, Map<String, Object> map, ICallbackProgress callbackProgress) throws IOException, AndroidHttpClientUtilException {
+    public static HttpEntity httpPost(Context context, String url, Map<String, Object> map, HttpEntityUtil.ICallbackToFile callbackToFile) throws IOException, AndroidHttpClientUtilException {
         Logger.i(url);
 
         final HttpClient httpClient = createHttpClient(context);
         HttpPost httpPost = new HttpPost(url);
 
-        final MultipartEntityProgress multipartEntity = new MultipartEntityProgress(HttpMultipartMode.STRICT, callbackProgress);
+        final MultipartEntityProgress multipartEntity = new MultipartEntityProgress(HttpMultipartMode.STRICT, callbackToFile);
 
         for (String key : map.keySet()) {
             Object value = map.get(key);
@@ -120,6 +134,7 @@ public class AndroidHttpClientUtil {
         }
 
         httpPost.setEntity(multipartEntity);
+        httpPost.addHeader("Accept-Language", Locale.getDefault().getLanguage());
         HttpResponse httpResponse = httpClient.execute(httpPost, localContext);
 
         final StatusLine statusLine = httpResponse.getStatusLine();
@@ -141,15 +156,53 @@ public class AndroidHttpClientUtil {
         return HttpEntityUtil.toString(httpEntity);
     }
 
-    public static String httpPostReturnsString(Context context, String url, Map<String, Object> map, ICallbackProgress callbackProgress) throws AndroidHttpClientUtilException, IOException {
-        final HttpEntity httpEntity = httpPost(context, url, map, callbackProgress);
+    public static String httpPostReturnsString(Context context, String url, Map<String, Object> map) throws AndroidHttpClientUtilException, IOException {
+        final HttpEntity httpEntity = httpPost(context, url, map);
         return HttpEntityUtil.toString(httpEntity);
     }
 
 
-    public static void httpGetSaveToFile(Context context, String url, File file, final ICallbackProgress callbackProgress) throws AndroidHttpClientUtilException, IOException {
+    public static void httpGetSaveToFile(Context context, String url, File file, final HttpEntityUtil.ICallbackToFile callbackToFile) throws AndroidHttpClientUtilException, IOException {
         final HttpEntity httpEntity = httpGet(context, url);
-        HttpEntityUtil.toFile(httpEntity, file, callbackProgress);
+        HttpEntityUtil.toFile(httpEntity, file, callbackToFile);
     }
+
+    public static void downloadAsByteArray(final URL url, final ICallback<InputStream> callback) {
+        Logger.i(url);
+        common.basic.utils.ThreadUtil.create("download", new Runnable() {
+            @Override
+            public void run() {
+                final String protocol = url.getProtocol().toLowerCase();
+
+                if ("http".equals(protocol) || "https".equals(protocol)) {
+                    GoogleHttpClientUtil.downloadAsStream(url, new ICallback<InputStream>() {
+                        @Override
+                        public void onSuccess(InputStream inputStream) {
+                            callback.onSuccess(inputStream);
+                        }
+
+                        @Override
+                        public void onFail(Exception e) {
+                            callback.onFail(e);
+                        }
+                    });
+                }
+                else {
+
+                    try {
+                        final URLConnection urlConnection = url.openConnection();
+
+                        final InputStream inputStream = urlConnection.getInputStream();
+                        callback.onSuccess(inputStream);
+                        CloseableUtil.close(inputStream);
+                    }
+                    catch (Exception e) {
+                        callback.onFail(e);
+                    }
+                }
+            }
+        }).start();
+    }
+
 
 }

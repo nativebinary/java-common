@@ -1,0 +1,24 @@
+#{extends './_admins.html' /}
+
+#{set 'moreJs'}
+<script type="text/javascript">
+    $(function(){
+        $('#form').ajaxForm({
+            success: function (data, textStatus, jqXHR) {
+                location.href = '@{Admins.accountList()}';
+            },
+            error: function (jqXHR, textStatus, httpStatus) {
+                alert(jqXHR.responseJSON.message);
+            }
+        });
+    });
+</script>
+#{/set}
+
+<form id="form" action="@{api.v1.Accounts.update()}">
+    <label>id<input type="text" readonly="readonly" name="id" value="${account.id}"/></label>
+    <label>email<input type="text" readonly="readonly" name="email" value="${account.email}"/></label>
+    <label>nickname<input type="text" name="nickname" value="${account.nickname}"/></label>
+    <label>description<input type="text" name="description" value="${account.description}"/></label>
+    <input type="submit"/>
+</form>

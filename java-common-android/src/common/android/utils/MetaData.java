@@ -7,7 +7,7 @@ import android.os.Bundle;
 import common.basic.utils.StringUtil;
 
 public class MetaData {
-    private static final String prefix = "android.MetaData.";
+    private static final String prefix = "common.android.MetaData.";
 
     public static boolean isDev(Context context) {
         return get(context, "isDev", false);

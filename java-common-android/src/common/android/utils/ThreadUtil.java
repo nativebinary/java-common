@@ -3,8 +3,8 @@ package common.android.utils;
 import android.os.Handler;
 import android.os.Looper;
 import common.basic.logs.Logger;
-import common.basic.utils.ICallback;
-import common.basic.utils.ICallbackVoid;
+import common.basic.interfaces.ICallback;
+import common.basic.interfaces.ICallbackVoid;
 
 public class ThreadUtil {
 

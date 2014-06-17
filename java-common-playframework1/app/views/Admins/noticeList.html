@@ -1,0 +1,33 @@
+#{extends './_admins.html' /}
+
+#{set 'moreJs'}
+<script type="text/javascript">
+    $(function(){
+
+    });
+</script>
+#{/set}
+
+#{set 'moreCss'}
+<style type="text/css">
+#noticeWrite input[type=text] {
+    width: 500px;
+}
+</style>
+#{/set}
+
+<h2>발송</h2>
+#{form @Admins.noticeWriteProc(), method:'post', id:'noticeWrite'}
+    <label>ticker <input type="text" name="notice.ticker" value="" placeholder="수신시 상단에 잠깐 나타나는 문자열"/>수신시 상단에 잠깐 나타나는 문자열</label><br/>
+    <label>contentTitle <input type="text" name="notice.contentTitle" value="" placeholder="Notification Center에서 굵게 표시되는 제목"/>Notification Center에서 굵게 표시되는 제목</label><br/>
+    <label>contentText <input type="text" name="notice.contentText" value="" placeholder="Notification Center에서 가늘게 표시되는 내용"/>Notification Center에서 가늘게 표시되는 내용</label><br/>
+    <label>url <input type="text" name="notice.url" value="http://nativebinary.com/" placeholder="클릭시 Open할 URL"/>클릭시 Open할 URL</label><br/>
+    <input type="submit"/>
+#{/form}
+
+<h2>이력</h2>
+#{list list}
+<div>
+${_}
+</div>
+#{/list}

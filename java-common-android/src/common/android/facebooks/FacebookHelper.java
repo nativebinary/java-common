@@ -3,8 +3,6 @@
 //import android.app.Activity;
 //import com.facebook.Session;
 //import com.facebook.SessionState;
-//import common.basic.logs.Logger;
-//import common.basic.utils.CollectionUtil;
 //
 //import java.util.List;
 //

@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import common.basic.geometiries.Size;
 import common.basic.logs.Logger;
 import common.basic.utils.CloseableUtil;
-import common.basic.utils.ICallback;
+import common.basic.interfaces.ICallback;
 import common.basic.utils.StreamUtil;
 
 import java.io.ByteArrayOutputStream;
@@ -50,7 +50,8 @@ public class BitmapUtil {
         ByteArrayOutputStream byteArrayOutputStream = null;
         try {
             byteArrayOutputStream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+			// TODO: remove hard-coded 80
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 80, byteArrayOutputStream);
             return byteArrayOutputStream.toByteArray();
         }
         finally {
@@ -62,4 +63,32 @@ public class BitmapUtil {
         final Bitmap bitmap = BitmapFactoryUtil.decode(arrayByteCover, new Size(width, height));
         return BitmapUtil.toArrayByte(bitmap);
     }
+
+    public static void loadBitmap(final ImageView imageView, final InputStream inputStream, final Size size) {
+        ThreadUtil.runOnNotUiThreadAndRunCallbackOnUiThread(new ThreadUtil.CallbackRunOnNotUiThreadAndRunCallbackOnUiThread<Bitmap>(new ICallback<Bitmap>() {
+            @Override
+            public void onSuccess(Bitmap bitmap) {
+                imageView.setImageBitmap(bitmap);
+            }
+
+            @Override
+            public void onFail(Exception e) {
+                Logger.e(e);
+            }
+        }) {
+            @Override
+            public Bitmap onNotUiThread() throws Exception {
+                return BitmapFactoryUtil.decode(StreamUtil.getArrayByteAll(inputStream), size);
+            }
+        });
+    }
+    public static void loadBitmap(final InputStream inputStream, final Size size, final ICallback<Bitmap> callback) {
+        ThreadUtil.runOnNotUiThreadAndRunCallbackOnUiThread(new ThreadUtil.CallbackRunOnNotUiThreadAndRunCallbackOnUiThread<Bitmap>(callback) {
+            @Override
+            public Bitmap onNotUiThread() throws Exception {
+                return BitmapFactoryUtil.decode(StreamUtil.getArrayByteAll(inputStream), size);
+            }
+        });
+    }
+
 }

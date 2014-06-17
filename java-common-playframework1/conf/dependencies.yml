@@ -2,3 +2,4 @@
 
 require:
     - play
+    - play -> siena 2.0.7
