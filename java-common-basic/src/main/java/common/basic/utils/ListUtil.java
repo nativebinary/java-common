@@ -97,14 +97,17 @@ public class ListUtil {
         return list;
     }
 
-    public static <T> T getByInfiniteIndex(List<T> list, int i) {
+    private static <T> int getIndexByInfiniteIndex(List<T> list, int i) {
         final int size = list.size();
-
         i = i % size;
         if(i < 0)
             i += size;
 
-        return list.get(i);
+        return i;
+    }
+
+    public static <T> T getByInfiniteIndex(List<T> list, int i) {
+        return list.get(getIndexByInfiniteIndex(list, i));
     }
 
     public static <T> T getByInfiniteIndexWithOffset(List<T> list, int i, int offset) {
