@@ -8,7 +8,7 @@ class ListUtilTest extends Specification {
         then: thrown(InstantiationException)
     }
 
-    def "get"() {
+    def "getByInfiniteIndex"() {
         expect:
         ListUtil.getByInfiniteIndex([1, 2, 3, 4, 5], i) == v
 
@@ -45,6 +45,47 @@ class ListUtilTest extends Specification {
         18      | 4
         19      | 5
     }
+
+    def "getByInfiniteIndexWithOffset"() {
+        expect:
+        ListUtil.getByInfiniteIndexWithOffset([1, 2, 3, 4, 5], i, 3) == v
+
+        where:
+        i       | v
+        -10     | 4
+        -9      | 5
+        -8      | 1
+        -7      | 2
+        -6      | 3
+        -5      | 4
+        -4      | 5
+        -3      | 1
+        -2      | 2
+        -1      | 3
+        0       | 4
+        1       | 5
+        2       | 1
+        3       | 2
+        4       | 3
+        5       | 4
+        6       | 5
+        7       | 1
+        8       | 2
+        9       | 3
+        10      | 4
+        11      | 5
+        12      | 1
+        13      | 2
+        14      | 3
+        15      | 4
+        16      | 5
+        17      | 1
+        18      | 2
+        19      | 3
+    }
+
+
+
 
 
     def "Swap"() {

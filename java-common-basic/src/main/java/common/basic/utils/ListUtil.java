@@ -107,6 +107,11 @@ public class ListUtil {
         return list.get(i);
     }
 
+    public static <T> T getByInfiniteIndexWithOffset(List<T> list, int i, int offset) {
+        return getByInfiniteIndex(list, i + offset);
+    }
+
+
     public static <T> T getLast(List<T> listStatus) {
         final int size = listStatus.size();
         if(size == 0)
