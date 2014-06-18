@@ -2,7 +2,6 @@ package common.basic.utils
 
 import spock.lang.Specification
 
-@SuppressWarnings("GroovyPointlessBoolean")
 class IpUtilTest extends Specification {
     def "ctor"() {
         when: new IpUtil()
