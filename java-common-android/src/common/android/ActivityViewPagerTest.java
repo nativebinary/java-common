@@ -25,9 +25,9 @@ public class ActivityViewPagerTest extends FragmentActivityBase {
         setContentView(R.layout.activity_view_pager_test);
 
         final ViewPager viewPager = ViewUtil.findViewPager(this, R.id.viewPager);
-        final List<String> list = ListUtil.create("A", "B", "C", "D", "E");
+        final List<String> list = ListUtil.create("A");
 
-        makeRotate(viewPager, new IProviderRotate() {
+        makeRotate(viewPager, new ProviderRotate() {
             @Override
             public int getCount() {
                 return list.size();
@@ -50,7 +50,7 @@ public class ActivityViewPagerTest extends FragmentActivityBase {
                     @Override
                     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
                         final Button button = new Button(getContext());
-                        button.setText(ListUtil.getByInfiniteIndexWithOffset(list, i, -1));
+                        button.setText(list.get(getIndexFromVirtualIndex(i)));
                         return button;
                     }
                 };
@@ -59,14 +59,26 @@ public class ActivityViewPagerTest extends FragmentActivityBase {
 
     }
 
-    private static interface IProviderRotate {
-        Context getContext();
-        FragmentManager getFragmentManager();
-        Fragment getFragment(int i);
-        int getCount();
+    public static abstract class ProviderRotate {
+        public abstract Context getContext();
+        public abstract FragmentManager getFragmentManager();
+        public abstract Fragment getFragment(int virtualIndex);
+        public abstract int getCount();
+
+        public int getVirtualCount() {
+            return getCount() + 2;
+        }
+
+        public int getVirtualIndexFromIndex(int i) {
+            return ListUtil.getIndexByInfiniteIndexWithOffset(getCount(), i, 1);
+        }
+
+        public int getIndexFromVirtualIndex(int i) {
+            return ListUtil.getIndexByInfiniteIndexWithOffset(getCount(), i, -1);
+        }
     }
 
-    private static void makeRotate(final ViewPager viewPager, final IProviderRotate provider) {
+    private static void makeRotate(final ViewPager viewPager, final ProviderRotate provider) {
         viewPager.setAdapter(new FragmentStatePagerAdapter(provider.getFragmentManager()) {
             @Override
             public Fragment getItem(final int i) {
@@ -83,11 +95,11 @@ public class ActivityViewPagerTest extends FragmentActivityBase {
             @Override
             public void onPageSelected(int position) {
                 Logger.e(position);
-                if (viewPager.getCurrentItem() == provider.getCount() + 2 - 1) {
+                if (viewPager.getCurrentItem() == provider.getVirtualCount() - 1) {
                     viewPager.setCurrentItem(1, false);
                 }
                 if (viewPager.getCurrentItem() == 0) {
-                    viewPager.setCurrentItem(provider.getCount() + 2 - 2, false);
+                    viewPager.setCurrentItem(provider.getVirtualCount() - 2, false);
                 }
             }
 
