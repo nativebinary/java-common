@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import common.android.extensions.FragmentActivityBase;
 import common.android.utils.ViewUtil;
 import common.basic.logs.Logger;
 import common.basic.utils.ListUtil;

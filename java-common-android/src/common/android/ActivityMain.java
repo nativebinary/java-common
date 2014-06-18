@@ -6,6 +6,7 @@ import android.view.View;
 import com.google.android.gcm.GCMRegistrar;
 import common.android.api.v1.ApiV1Auth;
 import common.android.api.v1.ApiV1Echos;
+import common.android.extensions.ActivityBase;
 import common.android.utils.ToastUtil;
 import common.android.utils.ViewUtil;
 import common.basic.interfaces.ICallback;

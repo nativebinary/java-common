@@ -1,10 +1,10 @@
-package common.android;
+package common.android.extensions;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import common.basic.logs.Logger;
 
-public abstract class FragmentActivityBase extends FragmentActivity {
+public abstract class ActivityBase extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

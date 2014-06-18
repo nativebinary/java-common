@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.TextView;
 import com.google.android.gcm.GCMRegistrar;
+import common.android.extensions.ActivityBase;
 import common.android.helpers.CacheHelper;
 import common.android.helpers.MemoryWatcher;
 import common.android.logs.LoggerAndroid;

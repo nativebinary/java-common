@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import common.android.extensions.ActivityBase;
 
 public class ActivityDev extends ActivityBase {
 
