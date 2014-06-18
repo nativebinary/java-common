@@ -45,10 +45,10 @@ public class ViewPagerUtil {
             @Override
             public void onPageSelected(int position) {
                 Logger.e(position);
-                if (viewPager.getCurrentItem() == provider.getVirtualCount() - 1) {
+                if (position == provider.getVirtualCount() - 1) {
                     viewPager.setCurrentItem(1, false);
                 }
-                if (viewPager.getCurrentItem() == 0) {
+                if (position == 0) {
                     viewPager.setCurrentItem(provider.getVirtualCount() - 2, false);
                 }
             }
