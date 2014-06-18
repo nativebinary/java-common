@@ -97,6 +97,16 @@ public class ListUtil {
         return list;
     }
 
+    public static <T> T getByInfiniteIndex(List<T> list, int i) {
+        final int size = list.size();
+
+        i = i % size;
+        if(i < 0)
+            i += size;
+
+        return list.get(i);
+    }
+
     public static <T> T getLast(List<T> listStatus) {
         final int size = listStatus.size();
         if(size == 0)
@@ -104,14 +114,14 @@ public class ListUtil {
 
         return listStatus.get(size - 1);
     }
-	
-	
+
 	public static <T> T getRandomValue(List<T> list) {
 		if(list == null || 0 == list.size())
 			return null;
 
 		return list.get(RandomUtil.nextInt(0, list.size()));
 	}
+
 
     public static <T> boolean hasMore(List<T> list, int limit) {
         boolean hasMore = list.size() > limit;
