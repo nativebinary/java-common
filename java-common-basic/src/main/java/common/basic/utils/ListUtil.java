@@ -97,7 +97,7 @@ public class ListUtil {
         return list;
     }
 
-    private static <T> int getIndexByInfiniteIndex(List<T> list, int i) {
+    public static <T> int getIndexByInfiniteIndex(List<T> list, int i) {
         final int size = list.size();
         i = i % size;
         if(i < 0)
