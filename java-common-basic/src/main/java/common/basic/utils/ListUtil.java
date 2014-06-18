@@ -105,19 +105,31 @@ public class ListUtil {
         return i;
     }
 
-    public static <T> int getIndexByInfiniteIndex(List<T> list, int i) {
-        final int size = list.size();
-        return getIndexByInfiniteIndex(size, i);
+    public static int getIndexByInfiniteIndexWithOffset(int size, int i, int offset)
+    {
+        return getIndexByInfiniteIndex(size, i + offset);
     }
 
+    public static <T> int getIndexByInfiniteIndex(List<T> list, int i) {
+        return getIndexByInfiniteIndex(list.size(), i);
+    }
+
+
     public static <T> T getByInfiniteIndex(List<T> list, int i) {
-        return list.get(getIndexByInfiniteIndex(list, i));
+        return list.get(getIndexByInfiniteIndex(list.size(), i));
     }
 
     public static <T> T getByInfiniteIndexWithOffset(List<T> list, int i, int offset) {
-        return getByInfiniteIndex(list, i + offset);
+        return list.get(getIndexByInfiniteIndexWithOffset(list.size(), i, offset));
     }
 
+    public static <T> T getFirst(List<T> listStatus) {
+        final int size = listStatus.size();
+        if(size == 0)
+            return null;
+
+        return listStatus.get(0);
+    }
 
     public static <T> T getLast(List<T> listStatus) {
         final int size = listStatus.size();
