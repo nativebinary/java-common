@@ -1,10 +1,13 @@
 package common.android;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import com.google.android.gcm.GCMRegistrar;
 import common.android.api.v1.ApiV1Auth;
 import common.android.api.v1.ApiV1Echos;
 import common.android.utils.ToastUtil;
+import common.android.utils.ViewUtil;
 import common.basic.interfaces.ICallback;
 import common.basic.logs.Logger;
 import common.basic.utils.HashMapStringObject;
@@ -15,6 +18,12 @@ public class ActivityMain extends ActivityBase {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+        ViewUtil.setOnClickListener(this, R.id.buttonActivityDev, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ActivityMain.this, ActivityDev.class));
+            }
+        });
     }
 
     @Override

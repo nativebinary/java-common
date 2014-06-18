@@ -21,7 +21,7 @@ import models.OS;
 public class GCMIntentService extends GCMBaseIntentService {
     public static final String PROJECT_ID = "662295485384";
 
-    int notificationId = RandomUtil.next();
+    int notificationId = RandomUtil.nextInt();
 
     //public 기본 생성자를 무조건 만들어야 한다.
     public GCMIntentService() {

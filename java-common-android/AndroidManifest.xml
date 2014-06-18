@@ -41,7 +41,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ActivityMain" android:label="@string/app_name" />
+        <activity android:name=".ActivityMain" />
+        <activity android:name=".ActivityDev" />
+        <activity android:name=".ActivityViewPagerTest" />
 
         <activity android:screenOrientation="portrait" android:theme="@android:style/Theme.Translucent.NoTitleBar" android:name=".ActivityReceiver">
             <intent-filter>
