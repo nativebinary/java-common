@@ -13,6 +13,7 @@ public class AlertDialogUtil {
                 .setNegativeButton(android.R.string.cancel, onClickListenerCancel)
                 .show();
     }
+
     public static void confirm(Context context, int title, int message, DialogInterface.OnClickListener onClickListenerOk) {
         new AlertDialog.Builder(context)
                 .setTitle(title)
