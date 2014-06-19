@@ -4,12 +4,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.ViewGroup;
 import common.basic.utils.ListUtil;
 
 public class ViewPagerUtil {
     public static abstract class ProviderRotate {
-        public abstract Fragment getFragment(int virtualIndex);
         public abstract int getCount();
+        public abstract Fragment getItem(int virtualIndex);
+        public void destroyItem(ViewGroup container, int position, Object object) { }
 
         public void onPageSelected(int position) { }
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) { }
@@ -32,13 +34,20 @@ public class ViewPagerUtil {
     public static void makeRotate(final ViewPager viewPager, final FragmentManager fragmentManager, final ProviderRotate provider) {
         viewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
             @Override
-            public Fragment getItem(final int i) {
-                return provider.getFragment(i);
+            public int getCount() {
+                return provider.getVirtualCount();
             }
 
             @Override
-            public int getCount() {
-                return provider.getVirtualCount();
+            public Fragment getItem(final int i) {
+                return provider.getItem(i);
+            }
+
+            @Override
+            public void destroyItem(ViewGroup container, int position, Object object) {
+                super.destroyItem(container, position, object);
+
+                provider.destroyItem(container, position, object);
             }
         });
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {

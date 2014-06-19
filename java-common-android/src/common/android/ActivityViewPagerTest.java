@@ -32,7 +32,7 @@ public class ActivityViewPagerTest extends FragmentActivityBase {
             }
 
             @Override
-            public Fragment getFragment(final int virtualIndex) {
+            public Fragment getItem(final int virtualIndex) {
                 return new Fragment() {
                     @Override
                     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
