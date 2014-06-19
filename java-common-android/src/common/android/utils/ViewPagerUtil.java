@@ -1,35 +1,36 @@
 package common.android.utils;
 
-import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import common.basic.logs.Logger;
 import common.basic.utils.ListUtil;
 
 public class ViewPagerUtil {
     public static abstract class ProviderRotate {
-        public abstract Context getContext();
-        public abstract FragmentManager getFragmentManager();
         public abstract Fragment getFragment(int virtualIndex);
         public abstract int getCount();
 
-        public int getVirtualCount() {
+        public void onPageSelected(int position) { }
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) { }
+        public void onPageScrollStateChanged(int state) { }
+
+        public final int getVirtualCount() {
             return getCount() + 2;
         }
 
-        public int getVirtualIndexFromIndex(int index) {
+        public final int getVirtualIndexFromIndex(int index) {
             return ListUtil.getIndexByInfiniteIndexWithOffset(getCount(), index, 1);
         }
 
-        public int getIndexFromVirtualIndex(int virtualIndex) {
+        public final int getIndexFromVirtualIndex(int virtualIndex) {
             return ListUtil.getIndexByInfiniteIndexWithOffset(getCount(), virtualIndex, -1);
         }
+
     }
 
-    public static void makeRotate(final ViewPager viewPager, final ProviderRotate provider) {
-        viewPager.setAdapter(new FragmentStatePagerAdapter(provider.getFragmentManager()) {
+    public static void makeRotate(final ViewPager viewPager, final FragmentManager fragmentManager, final ProviderRotate provider) {
+        viewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
             @Override
             public Fragment getItem(final int i) {
                 return provider.getFragment(i);
@@ -44,22 +45,27 @@ public class ViewPagerUtil {
 
             @Override
             public void onPageSelected(int position) {
-                Logger.e(position);
                 if (position == provider.getVirtualCount() - 1) {
                     viewPager.setCurrentItem(1, false);
+                    return;
                 }
+
                 if (position == 0) {
                     viewPager.setCurrentItem(provider.getVirtualCount() - 2, false);
+                    return;
                 }
+
+                provider.onPageSelected(position);
             }
 
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                provider.onPageScrolled(position, positionOffset, positionOffsetPixels);
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
+                provider.onPageScrollStateChanged(state);
             }
         });
         viewPager.setCurrentItem(1);

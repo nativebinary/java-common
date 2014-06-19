@@ -1,9 +1,7 @@
 package common.android;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +10,7 @@ import android.widget.Button;
 import common.android.extensions.FragmentActivityBase;
 import common.android.utils.ViewPagerUtil;
 import common.android.utils.ViewUtil;
+import common.basic.logs.Logger;
 import common.basic.utils.ListUtil;
 
 import java.util.List;
@@ -26,33 +25,29 @@ public class ActivityViewPagerTest extends FragmentActivityBase {
         final ViewPager viewPager = ViewUtil.findViewPager(this, R.id.viewPager);
         final List<String> list = ListUtil.create("A", "B", "C", "D", "E");
 
-        ViewPagerUtil.makeRotate(viewPager, new ViewPagerUtil.ProviderRotate() {
+        ViewPagerUtil.makeRotate(viewPager, getSupportFragmentManager(), new ViewPagerUtil.ProviderRotate() {
             @Override
             public int getCount() {
                 return list.size();
             }
 
             @Override
-            public Context getContext() {
-                return ActivityViewPagerTest.this;
-            }
-
-            @Override
-            public FragmentManager getFragmentManager() {
-                return getSupportFragmentManager();
-            }
-
-
-            @Override
             public Fragment getFragment(final int virtualIndex) {
                 return new Fragment() {
                     @Override
                     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-                        final Button button = new Button(getContext());
+                        final Button button = new Button(ActivityViewPagerTest.this);
                         button.setText(list.get(getIndexFromVirtualIndex(virtualIndex)));
                         return button;
                     }
                 };
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+
+                Logger.e(position);
             }
         });
 
