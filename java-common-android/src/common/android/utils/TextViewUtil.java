@@ -24,7 +24,5 @@ public class TextViewUtil {
         }
 
         textView.setTypeface(null, Typeface.NORMAL);
-
-
     }
 }
