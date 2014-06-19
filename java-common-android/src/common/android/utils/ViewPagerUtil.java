@@ -9,6 +9,9 @@ import common.basic.utils.ListUtil;
 
 public class ViewPagerUtil {
     public static abstract class ProviderRotate {
+        private FragmentStatePagerAdapter fragmentStatePagerAdapter;
+        private ViewPager.OnPageChangeListener onPageChangeListener;
+
         public abstract int getCount();
         public abstract Fragment getItem(int virtualIndex);
         public void destroyItem(ViewGroup container, int position, Object object) { }
@@ -29,10 +32,13 @@ public class ViewPagerUtil {
             return ListUtil.getIndexByInfiniteIndexWithOffset(getCount(), virtualIndex, -1);
         }
 
+        public final void notifyDataSetChanged() {
+            fragmentStatePagerAdapter.notifyDataSetChanged();
+        }
     }
 
     public static void makeRotate(final ViewPager viewPager, final FragmentManager fragmentManager, final ProviderRotate provider) {
-        viewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
+        viewPager.setAdapter(provider.fragmentStatePagerAdapter = new FragmentStatePagerAdapter(fragmentManager) {
             @Override
             public int getCount() {
                 return provider.getVirtualCount();
@@ -50,7 +56,7 @@ public class ViewPagerUtil {
                 provider.destroyItem(container, position, object);
             }
         });
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        viewPager.setOnPageChangeListener(provider.onPageChangeListener = new ViewPager.OnPageChangeListener() {
 
             @Override
             public void onPageSelected(int position) {
