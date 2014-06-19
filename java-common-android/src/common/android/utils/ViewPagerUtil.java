@@ -9,6 +9,14 @@ import common.basic.utils.ListUtil;
 
 public class ViewPagerUtil {
     public static abstract class ProviderRotate {
+        public static int getVirtualIndexFromIndex(int count, int index) {
+            return ListUtil.getIndexByInfiniteIndexWithOffset(count, index, 1);
+        }
+
+        public static int getIndexFromVirtualIndex(int count, int virtualIndex) {
+            return ListUtil.getIndexByInfiniteIndexWithOffset(count, virtualIndex, -1);
+        }
+
         private FragmentStatePagerAdapter fragmentStatePagerAdapter;
         private ViewPager.OnPageChangeListener onPageChangeListener;
 
@@ -25,12 +33,13 @@ public class ViewPagerUtil {
         }
 
         public final int getVirtualIndexFromIndex(int index) {
-            return ListUtil.getIndexByInfiniteIndexWithOffset(getCount(), index, 1);
+            return getVirtualIndexFromIndex(getCount(), index);
         }
 
         public final int getIndexFromVirtualIndex(int virtualIndex) {
-            return ListUtil.getIndexByInfiniteIndexWithOffset(getCount(), virtualIndex, -1);
+            return getIndexFromVirtualIndex(getCount(), virtualIndex);
         }
+
 
         public final void notifyDataSetChanged() {
             fragmentStatePagerAdapter.notifyDataSetChanged();
