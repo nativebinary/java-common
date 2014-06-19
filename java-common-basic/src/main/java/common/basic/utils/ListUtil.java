@@ -98,11 +98,6 @@ public class ListUtil {
     }
 
     public static int getIndexByInfiniteIndex(int size, int i) {
-        if(size == 0) {
-            Logger.e("size == 0");
-            return -1;
-        }
-
         i = i % size;
         if(i < 0)
             i += size;
