@@ -37,7 +37,7 @@ public class ViewPagerUtil {
 
             @Override
             public int getCount() {
-                return provider.getCount() + 2;
+                return provider.getVirtualCount();
             }
         });
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
