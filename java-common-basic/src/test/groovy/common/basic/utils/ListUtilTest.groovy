@@ -8,6 +8,28 @@ class ListUtilTest extends Specification {
         then: thrown(InstantiationException)
     }
 
+    def "getIndexNext"() {
+        expect:
+        ListUtil.getIndexNext(size, i) == result
+
+        where:
+        size       | i      || result
+        10         | 0      || 1
+        10         | 5      || 6
+        10         | 9      || 0
+    }
+
+    def "getIndexPrev"() {
+        expect:
+        ListUtil.getIndexPrev(size, i) == result
+
+        where:
+        size       | i      || result
+        10         | 0      || 9
+        10         | 5      || 4
+        10         | 9      || 8
+    }
+
     def "getByInfiniteIndex"() {
         expect:
         ListUtil.getByInfiniteIndex([1, 2, 3, 4, 5], i) == v

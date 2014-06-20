@@ -97,6 +97,14 @@ public class ListUtil {
         return list;
     }
 
+    public static int getIndexNext(int size, int i) {
+        return getIndexByInfiniteIndexWithOffset(size, i, 1);
+    }
+
+    public static int getIndexPrev(int size, int i) {
+        return getIndexByInfiniteIndexWithOffset(size, i, -1);
+    }
+
     public static int getIndexByInfiniteIndex(int size, int i) {
         i = i % size;
         if(i < 0)
@@ -105,8 +113,7 @@ public class ListUtil {
         return i;
     }
 
-    public static int getIndexByInfiniteIndexWithOffset(int size, int i, int offset)
-    {
+    public static int getIndexByInfiniteIndexWithOffset(int size, int i, int offset) {
         return getIndexByInfiniteIndex(size, i + offset);
     }
 
