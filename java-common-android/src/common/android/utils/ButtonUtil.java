@@ -39,6 +39,7 @@ public class ButtonUtil {
                 int action = event.getAction();
                 switch (action) {
                     case MotionEvent.ACTION_DOWN:
+                        fired[0] = false;
                         HandlerUtil.postDelayed(handler, holdInterval, runnable);
                         break;
 
