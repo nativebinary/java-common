@@ -16,7 +16,10 @@ public class ActivityDev extends ActivityBase {
         LinearLayout linearLayout = new LinearLayout(this);
         setContentView(linearLayout);
 
-        for(final Class clazz : new Class[] { ActivityViewPagerTest.class })
+        for(final Class clazz : new Class[] {
+                ActivityViewPagerTest.class
+
+        })
         {
             final Button button = new Button(this);
             button.setText(clazz.getSimpleName());
