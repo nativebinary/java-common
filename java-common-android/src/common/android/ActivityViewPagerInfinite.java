@@ -15,7 +15,7 @@ import common.basic.utils.ListUtil;
 
 import java.util.List;
 
-public class ActivityViewPagerTest extends FragmentActivityBase {
+public class ActivityViewPagerInfinite extends FragmentActivityBase {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +36,7 @@ public class ActivityViewPagerTest extends FragmentActivityBase {
                 return new Fragment() {
                     @Override
                     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-                        final Button button = new Button(ActivityViewPagerTest.this);
+                        final Button button = new Button(ActivityViewPagerInfinite.this);
                         button.setText(list.get(getIndexFromVirtualIndex(virtualIndex)));
                         return button;
                     }

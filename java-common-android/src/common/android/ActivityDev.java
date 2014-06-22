@@ -17,7 +17,7 @@ public class ActivityDev extends ActivityBase {
         setContentView(linearLayout);
 
         for(final Class clazz : new Class[] {
-                ActivityViewPagerTest.class,
+                ActivityViewPagerInfinite.class,
                 ActivityButtonTapAndHold.class
         })
         {

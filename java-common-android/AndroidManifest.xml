@@ -43,7 +43,7 @@
 
         <activity android:name=".ActivityMain" />
         <activity android:name=".ActivityDev" />
-        <activity android:name=".ActivityViewPagerTest" />
+        <activity android:name=".ActivityViewPagerInfinite" />
         <activity android:name=".ActivityButtonTapAndHold" />
 
         <activity android:screenOrientation="portrait" android:theme="@android:style/Theme.Translucent.NoTitleBar" android:name=".ActivityReceiver">
