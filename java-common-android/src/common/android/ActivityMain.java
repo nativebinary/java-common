@@ -57,6 +57,8 @@ public class ActivityMain extends ActivityBase {
             }
         });
 
+        if(Config.isAha00a())
+            ViewUtil.findButton(this, R.id.buttonActivityDev).performClick();
     }
 
     @Override

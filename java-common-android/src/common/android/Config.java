@@ -13,7 +13,7 @@ public class Config {
     public static String getServerHostEndPoint(){
         final String model = Build.MODEL;
 
-        if (StringUtil.equals(model, "20131025 Galaxy S4  HTC One  Xperia Z - 4.2.2 - with Google Apps - API 17 - 1080x1920"))
+        if (isAha00a(model))
         {
 //            return serverUcloud;
             return aha00a;
@@ -33,5 +33,13 @@ public class Config {
 
         Logger.i(model);
         return serverUcloud;
+    }
+
+    public static boolean isAha00a() {
+        return isAha00a(Build.MODEL);
+    }
+
+    public static boolean isAha00a(String model) {
+        return StringUtil.equals(model, "20131025 Galaxy S4  HTC One  Xperia Z - 4.2.2 - with Google Apps - API 17 - 1080x1920");
     }
 }

@@ -17,8 +17,8 @@ public class ActivityDev extends ActivityBase {
         setContentView(linearLayout);
 
         for(final Class clazz : new Class[] {
-                ActivityViewPagerTest.class
-
+                ActivityViewPagerTest.class,
+                ActivityButtonTapAndHold.class
         })
         {
             final Button button = new Button(this);
