@@ -83,7 +83,7 @@ public class ActivitySplash extends ActivityBase {
 
 
     private void launchActivityMain() {
-        HandlerUtil.postDelayed(3000, new Runnable() {
+        HandlerUtil.postDelayed(500, new Runnable() {
             @Override
             public void run() {
                 try {
