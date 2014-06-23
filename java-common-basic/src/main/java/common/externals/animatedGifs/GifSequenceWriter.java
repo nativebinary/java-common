@@ -1,5 +1,7 @@
 package common.externals.animatedGifs;
 
+// from http://elliot.kroo.net/software/java/GifSequenceWriter/GifSequenceWriter.java
+
 //
 //  GifSequenceWriter.java
 //
