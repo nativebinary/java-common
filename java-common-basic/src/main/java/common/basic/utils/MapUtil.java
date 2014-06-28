@@ -5,7 +5,6 @@ import common.basic.interfaces.ITransform;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class MapUtil {
     MapUtil() throws InstantiationException {
@@ -41,8 +40,7 @@ public class MapUtil {
     public static <TKey, TValue> Map<TKey, TValue> transformKey(Map<TKey, TValue> map, ITransform<TKey> transform) {
         HashMap<TKey, TValue> mapResult = new HashMap<TKey, TValue>();
 
-        final Set<TKey> setKey = map.keySet();
-        for (TKey key : setKey) {
+        for (TKey key : map.keySet()) {
             mapResult.put(transform.transform(key), map.get(key));
         }
 
