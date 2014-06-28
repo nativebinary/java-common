@@ -1,5 +1,7 @@
 package common.basic.utils;
 
+import common.basic.interfaces.ITransform;
+
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,10 +36,6 @@ public class MapUtil {
 
             map.put(key, bigDecimal.intValue());
         }
-    }
-
-    public static interface ITransform<T> {
-        T transform(T t);
     }
 
     public static <TKey, TValue> Map<TKey, TValue> transformKey(Map<TKey, TValue> map, ITransform<TKey> transform) {

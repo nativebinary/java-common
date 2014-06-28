@@ -1,5 +1,6 @@
 package common.basic.utils
 
+import common.basic.interfaces.ITransform
 import spock.lang.Specification
 
 @SuppressWarnings("GroovyPointlessBoolean")
@@ -53,8 +54,8 @@ class MapUtilTest extends Specification {
                 .and("a", "a")
                 .and("b", "b")
 
-        def result1 = MapUtil.transformKey(map, { _ -> _ } as MapUtil.ITransform<String>);
-        def result2 = MapUtil.transformKey(map, { _ -> "K" + _ } as MapUtil.ITransform<String>);
+        def result1 = MapUtil.transformKey(map, { _ -> _ } as ITransform<String>);
+        def result2 = MapUtil.transformKey(map, { _ -> "K" + _ } as ITransform<String>);
 
         expect:
         "a" == result1.get("a")
