@@ -47,4 +47,19 @@ class MapUtilTest extends Specification {
         1 == (int)map.get("i")
         1 == (int)map.get("bd")
     }
+
+    def ""(){
+        def map = new MapBuilderT<String, Object>()
+                .and("a", "a")
+                .and("b", "b")
+
+        def result1 = MapUtil.transformKey(map, { _ -> _ } as MapUtil.ITransform<String>);
+        def result2 = MapUtil.transformKey(map, { _ -> "K" + _ } as MapUtil.ITransform<String>);
+
+        expect:
+        "a" == result1.get("a")
+        "b" == result1.get("b")
+        "a" == result2.get("Ka")
+        "b" == result2.get("Kb")
+    }
 }
