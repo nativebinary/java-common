@@ -215,6 +215,15 @@ public class ReflectionUtil {
         return listField;
     }
 
+    public static <T> Map<String, Field> getMapFieldDeclaredRecursive(Class<T> clazz) {
+        final List<Field> listFieldDeclaredRecursive = getListFieldDeclaredRecursive(clazz);
+
+        final Map<String, Field> mapField = new HashMap<String, Field>();
+        for (Field field : listFieldDeclaredRecursive) {
+            mapField.put(field.getName(), field);
+        }
+        return mapField;
+    }
 
     public static <T> Field getFieldDeclaredRecursive(Class<T> clazz, String fieldName) throws NoSuchFieldException {
         try {
@@ -232,4 +241,5 @@ public class ReflectionUtil {
             }
         }
     }
+
 }
