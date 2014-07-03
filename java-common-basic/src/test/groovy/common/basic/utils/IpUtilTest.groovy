@@ -1,5 +1,6 @@
 package common.basic.utils
 
+import common.basic.logs.Logger
 import spock.lang.Specification
 
 class IpUtilTest extends Specification {
@@ -10,7 +11,9 @@ class IpUtilTest extends Specification {
 
     def "toArrayByte"() {
         expect:
+        Logger.setDebug(false);
         i == IpUtil.toArrayByte(s)
+        Logger.setDebug(true);
 
         where:
         i              || s
