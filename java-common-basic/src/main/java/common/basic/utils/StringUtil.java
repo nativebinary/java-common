@@ -135,7 +135,7 @@ public class StringUtil {
 
     public static String toString(Object o) {
         if(o == null)
-            return "[null]";
+            return "" + null;
 
         return o.toString();
     }

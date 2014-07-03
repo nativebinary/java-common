@@ -4,8 +4,38 @@ import spock.lang.Specification
 
 class ListUtilTest extends Specification {
     def "ctor"() {
-        when: new IntUtil()
+        when: new ListUtil()
         then: thrown(InstantiationException)
+    }
+
+    static class NoToString {
+        final int i;
+        final String s;
+
+        NoToString(int i, String s) {
+            this.i = i;
+            this.s = s
+        }
+    }
+
+    static class HasToString extends NoToString {
+        HasToString(int i, String s) {
+            super(i, s)
+        }
+
+        @Override
+        public String toString() {
+            return String.format("%d%s", i, s);
+        }
+    }
+
+    def "toListString"() {
+
+        Object[] array = [null, 1, "A", new NoToString(10, "B"), new HasToString(20, "C")];
+        List<String> list = ListUtil.toListString(array);
+
+        expect:
+        list == ["null", "1", "A", "{\"i\":10,\"s\":\"B\"}", "20C"]
     }
 
     def "getIndexNext"() {

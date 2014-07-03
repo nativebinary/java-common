@@ -77,10 +77,10 @@ public class StringUtilTest extends Assert {
 
     @Test
     public void testToString(){
-        assertEquals("[null]",StringUtil.toString(null));
+        assertEquals("null", StringUtil.toString(null));
 
         String testString = "test";
-        assertEquals("test",StringUtil.toString(testString));
+        assertEquals("test", StringUtil.toString(testString));
     }
 
    @Test
