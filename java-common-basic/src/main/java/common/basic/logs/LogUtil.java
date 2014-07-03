@@ -11,6 +11,9 @@ public class LogUtil {
     LogUtil() throws InstantiationException {
         throw new InstantiationException();
     }
+
+    static int maxSignatureLength = 0;
+
     public static String makeMessage(Object[] arrayObject, Level level, int stackRewindCount) {
         return makeMessage(arrayObject, level, stackRewindCount + 1, false);
     }
@@ -26,20 +29,23 @@ public class LogUtil {
         final int lineNumber = stackTraceElement.getLineNumber();
 
         final String signature = String.format("at %s.%s(%s:%d)", className, methodName, fileName, lineNumber);
+        maxSignatureLength = Math.max(maxSignatureLength, signature.length());
         String argument = StringUtil.join("\t", list);
         if(StringUtil.isNullOrEmpty(argument))
         {
             argument = className.substring(className.lastIndexOf(".") + 1) + "." + stackTraceElement.getMethodName() + "(...)";
         }
 
-        final int padLength = 150;
+        final String signaturePart = StringUtil.padLeft(signature, maxSignatureLength + 10 - level.getLength(), ' ');
+
         if(includeDateTime)
         {
-            return StringUtil.padLeft(DateUtil.yyyyMMddHHmmssSSS(new Date()), 30 - level.getLength(), ' ') + StringUtil.padLeft(signature, padLength, ' ') + " : " + argument;
+            final String dateTimePart = DateUtil.yyyyMMddHHmmssSSS(new Date());
+            return dateTimePart + signaturePart + " : " + argument;
         }
         else
         {
-            return StringUtil.padLeft(signature, padLength - level.getLength(), ' ') + " : " + argument;
+            return signaturePart + " : " + argument;
         }
     }
 }
