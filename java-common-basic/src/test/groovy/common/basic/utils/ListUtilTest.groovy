@@ -1,5 +1,6 @@
 package common.basic.utils
 
+import common.basic.interfaces.IPredicator
 import spock.lang.Specification
 
 class ListUtilTest extends Specification {
@@ -136,9 +137,28 @@ class ListUtilTest extends Specification {
         19      | 3
     }
 
+    def "has"() {
+        def list = ListUtil.create("A", "B", "C", "D", "E")
 
+        expect:
+        final String capture = toFind;
+        result == ListUtil.has(list, new IPredicator<String>() {
+            @Override
+            boolean predicate(String s) {
+                return StringUtil.equals(s, capture);
+            }
+        })
 
-
+        where:
+        toFind | result
+        "A"    | true
+        "B"    | true
+        "C"    | true
+        "D"    | true
+        "E"    | true
+        "F"    | false
+        "G"    | false
+    }
 
     def "Swap"() {
         def range = IntUtil.generateListRange(5)

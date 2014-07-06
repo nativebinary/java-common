@@ -170,6 +170,16 @@ public class ListUtil {
         return hasMore;
     }
 
+
+    public static <T> boolean has(List<T> list, IPredicator<T> predicator) {
+        for (T t : list) {
+            if(predicator.predicate(t))
+                return true;
+        }
+
+        return false;
+    }
+
     public static <T> T find(List<T> list, IPredicator<T> predicator) {
         for (T t : list) {
             if(predicator.predicate(t))
