@@ -21,8 +21,8 @@ class LogUtilTest extends Specification {
         }
     }
 
-    static class HasToString extends NoToString {
-        HasToString(int i, String s) {
+    static class ClassHasOwnToString extends NoToString {
+        ClassHasOwnToString(int i, String s) {
             super(i, s)
         }
 
@@ -34,7 +34,7 @@ class LogUtilTest extends Specification {
 
     def "ToListStringForLog"() {
 
-        Object[] array = [null, 1, "A", new Rect(new Point(10, 10), new Size(10, 10)), new HasToString(20, "C")];
+        Object[] array = [null, 1, "A", new Rect(new Point(10, 10), new Size(10, 10)), new ClassHasOwnToString(20, "C")];
         List<String> list = LogUtil.toListStringForLog(array);
 
         expect:
