@@ -31,11 +31,11 @@ class ListUtilTest extends Specification {
 
     def "toListString"() {
 
-        Object[] array = [null, 1, "A", new NoToString(10, "B"), new HasToString(20, "C")];
+        Object[] array = [null, 1, "A", new HasToString(20, "C")];
         List<String> list = ListUtil.toListString(array);
 
         expect:
-        list == ["null", "1", "A", "{\"i\":10,\"s\":\"B\"}", "20C"]
+        list == ["null", "1", "A", "20C"]
     }
 
     def "getIndexNext"() {

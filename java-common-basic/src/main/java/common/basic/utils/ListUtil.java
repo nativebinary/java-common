@@ -36,30 +36,20 @@ public class ListUtil {
 
         for (Object o : arrayObject)
         {
-            try {
-                if(o == null)
-                {
-                    list.add("" + null);
-                    continue;
-                }
-
-                final Throwable throwable = Cast.as(o, Throwable.class);
-                if (throwable != null)
-                {
-                    list.add(ThrowableUtil.getStackTrace(throwable));
-                    continue;
-                }
-
-                if(o.getClass().getMethod("toString").getDeclaringClass() != Object.class) {
-                    list.add(o.toString());
-                    continue;
-                }
-
-                list.add(JsonUtil.toJsonString(o));
+            if(o == null)
+            {
+                list.add("" + null);
+                continue;
             }
-            catch (NoSuchMethodException e) {
-                Logger.e("It's impossible", e);
+
+            final Throwable throwable = Cast.as(o, Throwable.class);
+            if (throwable != null)
+            {
+                list.add(ThrowableUtil.getStackTrace(throwable));
+                continue;
             }
+
+            list.add(StringUtil.toString(o));
         }
         return list;
     }

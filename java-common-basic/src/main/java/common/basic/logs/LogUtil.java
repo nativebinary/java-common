@@ -1,9 +1,13 @@
 package common.basic.logs;
 
+import common.basic.utils.Cast;
 import common.basic.utils.DateUtil;
-import common.basic.utils.ListUtil;
+import common.basic.utils.JsonUtil;
+import common.basic.utils.ReflectionUtil;
 import common.basic.utils.StringUtil;
+import common.basic.utils.ThrowableUtil;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +23,7 @@ public class LogUtil {
     }
 
     public static String makeMessage(Object[] arrayObject, Level level, int stackRewindCount, boolean includeDateTime) {
-        List<String> list = ListUtil.toListString(arrayObject);
+        List<String> list = toListStringForLog(arrayObject);
 
         final StackTraceElement[] arrayStackTraceElement = Thread.currentThread().getStackTrace();
         final StackTraceElement stackTraceElement = arrayStackTraceElement[stackRewindCount];
@@ -48,4 +52,35 @@ public class LogUtil {
             return signaturePart + " : " + argument;
         }
     }
+
+    public static List<String> toListStringForLog(Object[] arrayObject) {
+        List<String> list = new ArrayList<String>();
+
+        for (Object o : arrayObject)
+        {
+            list.add(toStringForLog(o));
+        }
+
+        return list;
+    }
+
+    private static String toStringForLog(Object o) {
+        if(o == null)
+            return "" + null;
+
+        final Throwable throwable = Cast.as(o, Throwable.class);
+        if (throwable != null)
+            return ThrowableUtil.getStackTrace(throwable);
+
+        try {
+            if(o.getClass().getMethod("toString").getDeclaringClass() != Object.class)
+                return o.toString();
+        }
+        catch (NoSuchMethodException e) {
+            Logger.e(e);
+        }
+
+        return JsonUtil.toJsonString(ReflectionUtil.toMap(o));
+    }
+
 }
