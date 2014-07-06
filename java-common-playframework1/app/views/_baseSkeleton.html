@@ -2,18 +2,33 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="author" content="nativebinary Inc.">
+        <meta name="keyword" content="nativebinary,네이티브바이너리,software,developer">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>&{request.controller + '.' + request.actionMethod}</title>
+        <title>
+            #{if title}
+                ${title}
+            #{/if}
+            #{else}
+                &{request.controller + '.' + request.actionMethod}
+            #{/else}
+        </title>
 
         <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
 
         <link rel="stylesheet/less" type="text/css" href="@{'/public/stylesheets/less.less'}" />
+        <link rel="stylesheet/less" type="text/css" href="@{'/public/stylesheets/nb.less'}">
+        #{get 'moreLess' /}
 
         <script type="text/javascript" src="@{'/public/javascripts/json2.js'}"></script>
         <script type="text/javascript" src="@{'/public/javascripts/less-1.7.1.min.js'}"></script>
         <script type="text/javascript" src="@{'/public/javascripts/jquery-1.11.1.min.js'}"></script>
         <script type="text/javascript" src="@{'/public/javascripts/jquery.form-3.50.0.min.js'}"></script>
         <script type="text/javascript" src="@{'/public/javascripts/moment-with-langs-2.7.0.min.js'}"></script>
+
+        <script type="text/javascript" src="@{'/public/javascripts/consolelog-2.0.0.min.js'}"></script>
+        <script type="text/javascript" src="@{'/public/javascripts/consolelog.detailprint-2.0.0.min.js'}"></script>
 
         *{<script type="text/javascript" src="@{'/public/javascripts/trimpath-template-1.0.38.js'}"></script>}*
 
@@ -28,10 +43,15 @@
         #{get 'moreHeadForBase'/}
 
         #{isDev}
-            <script>
+            <script type="text/javascript">
                 $(function(){less.watch();});
             </script>
         #{/isDev}
+        <script type="text/javascript">
+            $(function () {
+                log("Welcome to nativebinary!");
+            });
+        </script>
     </head>
     <body class="${logics.ApplicationConf.application_name()} ${request.controller} ${request.actionMethod}">
             #{doLayout /}
