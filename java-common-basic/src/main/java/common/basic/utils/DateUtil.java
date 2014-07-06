@@ -28,6 +28,7 @@ public class DateUtil {
     final static SimpleDateFormat formatter_MM = new SimpleDateFormat("MM", Locale.KOREA);
     final static SimpleDateFormat formatter_HHmm = new SimpleDateFormat("HHmm", Locale.KOREA);
     final static SimpleDateFormat formatter_EEE = new SimpleDateFormat("EEE", Locale.US);
+    final static SimpleDateFormat formatter_Korean = new SimpleDateFormat("yyyy년MM월dd일", Locale.KOREA);
 
     public static String yyyyMMddHHmmss(Date date) {
         synchronized(formatter_yyyyMMddHHmmss) {
@@ -83,9 +84,9 @@ public class DateUtil {
         }
     }
 
-    public static String EEE(Date date) {
-        synchronized (formatter_EEE) {
-            return formatter_EEE.format(date);
+    public static String korean(Date date) {
+        synchronized (formatter_Korean) {
+            return formatter_Korean.format(date);
         }
     }
 
