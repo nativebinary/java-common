@@ -6,7 +6,7 @@ import common.android.extensions.MultipartEntityProgress;
 import common.basic.logs.Logger;
 import common.basic.utils.Cast;
 import common.basic.utils.CloseableUtil;
-import common.basic.utils.GoogleHttpClientUtil;
+import common.basic.externals.google.GoogleHttpClientUtil;
 import common.basic.interfaces.ICallback;
 import common.basic.utils.StringUtil;
 import org.apache.http.HttpEntity;

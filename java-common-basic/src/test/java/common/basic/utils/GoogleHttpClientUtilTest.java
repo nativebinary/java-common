@@ -1,5 +1,6 @@
 package common.basic.utils;
 
+import common.basic.externals.google.GoogleHttpClientUtil;
 import common.basic.managers.HolderTempFile;
 import org.junit.After;
 import org.junit.Assert;

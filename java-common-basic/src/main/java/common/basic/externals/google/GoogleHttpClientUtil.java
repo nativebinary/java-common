@@ -1,4 +1,4 @@
-package common.basic.utils;
+package common.basic.externals.google;
 
 import com.google.api.client.http.ByteArrayContent;
 import com.google.api.client.http.FileContent;
@@ -13,6 +13,8 @@ import com.google.api.client.http.MultipartContent;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import common.basic.interfaces.ICallback;
 import common.basic.logs.Logger;
+import common.basic.utils.CloseableUtil;
+import common.basic.utils.MimeType;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
