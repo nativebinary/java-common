@@ -42,8 +42,10 @@ public class ParamBuilder extends ArrayList<NameValuePair> {
         return paramBuilder;
     }
 
-    public void append(String key, List<String> listValue) {
+    public ParamBuilder append(String key, List<String> listValue) {
         for (String value : listValue)
             super.add(new BasicNameValuePair(key, value));
+
+        return this;
     }
 }
