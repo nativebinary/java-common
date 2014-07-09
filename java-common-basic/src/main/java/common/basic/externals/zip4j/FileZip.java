@@ -1,7 +1,6 @@
-package common.basic.zips;
+package common.basic.externals.zip4j;
 
 import common.basic.utils.StringUtil;
-import common.basic.utils.ZipFileUtil;
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 

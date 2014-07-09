@@ -1,4 +1,4 @@
-package common.basic.zips;
+package common.basic.externals.zip4j;
 
 import common.basic.utils.CloseableUtil;
 import common.basic.utils.FileUtil;

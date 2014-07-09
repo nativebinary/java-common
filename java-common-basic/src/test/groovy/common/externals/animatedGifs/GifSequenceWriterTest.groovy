@@ -1,5 +1,6 @@
 package common.externals.animatedGifs
 
+import common.basic.externals.animatedGifs.GifSequenceWriter
 import common.basic.utils.StreamUtil
 import groovy.transform.TypeChecked
 import spock.lang.Specification

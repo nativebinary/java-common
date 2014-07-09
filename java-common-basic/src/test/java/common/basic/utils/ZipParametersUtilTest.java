@@ -1,5 +1,6 @@
 package common.basic.utils;
 
+import common.basic.externals.zip4j.ZipParametersUtil;
 import org.junit.Assert;
 import org.junit.Test;
 

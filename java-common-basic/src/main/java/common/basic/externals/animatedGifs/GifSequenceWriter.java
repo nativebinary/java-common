@@ -1,4 +1,4 @@
-package common.externals.animatedGifs;
+package common.basic.externals.animatedGifs;
 
 // from http://elliot.kroo.net/software/java/GifSequenceWriter/GifSequenceWriter.java
 

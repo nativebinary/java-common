@@ -1,4 +1,4 @@
-package common.basic.zips;
+package common.basic.externals.zip4j;
 
 import common.basic.logs.Logger;
 import net.lingala.zip4j.core.ZipFile;

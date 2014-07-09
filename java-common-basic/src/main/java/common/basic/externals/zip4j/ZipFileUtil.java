@@ -1,6 +1,8 @@
-package common.basic.utils;
+package common.basic.externals.zip4j;
 
 import common.basic.logs.Logger;
+import common.basic.utils.CloseableUtil;
+import common.basic.utils.StreamUtil;
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 import net.lingala.zip4j.io.ZipInputStream;
