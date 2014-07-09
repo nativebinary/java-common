@@ -1,5 +1,6 @@
-package common.basic.utils;
+package common.basic.externals.jsoup;
 
+import common.basic.utils.StringUtil;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;

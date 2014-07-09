@@ -1,5 +1,7 @@
-package common.basic.htmlFetcher;
+package common.basic.externals.jsoup;
 
+import common.basic.htmlFetcher.MaxSelector;
+import common.basic.htmlFetcher.Retryable;
 import common.basic.logs.Logger;
 import common.basic.utils.StringUtil;
 import common.basic.utils.URLUtil;

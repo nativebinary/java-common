@@ -1,4 +1,4 @@
-package common.basic.htmlFetcher;
+package common.basic.externals.jsoup;
 
 import org.jsoup.nodes.Document;
 

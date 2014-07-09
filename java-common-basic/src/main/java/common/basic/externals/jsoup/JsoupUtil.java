@@ -1,4 +1,4 @@
-package common.basic.utils;
+package common.basic.externals.jsoup;
 
 import common.basic.logs.Logger;
 import org.jsoup.Jsoup;

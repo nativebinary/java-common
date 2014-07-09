@@ -1,5 +1,6 @@
 package common.basic.utils;
 
+import common.basic.externals.jsoup.JsoupUtil;
 import org.junit.Assert;
 import org.junit.Test;
 

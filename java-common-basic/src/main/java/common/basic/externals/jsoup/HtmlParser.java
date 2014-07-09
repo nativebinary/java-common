@@ -1,6 +1,6 @@
-package common.basic.htmlFetcher;
+package common.basic.externals.jsoup;
 
-import common.basic.utils.JsoupDocumentUtil;
+import common.basic.externals.jsoup.JsoupDocumentUtil;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
