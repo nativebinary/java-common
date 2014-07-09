@@ -12,7 +12,7 @@ import common.android.utils.NotificationManagerUtil;
 import common.basic.interfaces.ICallback;
 import common.basic.logs.Logger;
 import common.basic.utils.EnumUtil;
-import common.basic.utils.GsonUtil;
+import common.basic.jsons.GsonUtil;
 import common.basic.utils.RandomUtil;
 import models.Notice;
 import models.NotificationType;

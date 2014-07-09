@@ -1,6 +1,6 @@
 package models;
 
-import common.basic.utils.GsonUtil;
+import common.basic.jsons.GsonUtil;
 import common.basic.utils.StringUtil;
 import common.basic.utils.UuidUtil;
 import common.play1.utils.CryptoUtil;

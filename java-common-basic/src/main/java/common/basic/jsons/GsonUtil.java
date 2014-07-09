@@ -1,4 +1,4 @@
-package common.basic.utils;
+package common.basic.jsons;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
