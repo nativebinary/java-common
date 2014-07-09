@@ -84,6 +84,12 @@ public class DateUtil {
         }
     }
 
+    public static String EEE(Date date) {
+        synchronized (formatter_EEE) {
+            return formatter_EEE.format(date);
+        }
+    }
+	
     public static String korean(Date date) {
         synchronized (formatter_Korean) {
             return formatter_Korean.format(date);
