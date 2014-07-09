@@ -4,7 +4,7 @@ import java.util.zip.CRC32;
 
 public class CrcUtil {
 
-    CrcUtil() throws InstantiationException {
+    public CrcUtil() throws InstantiationException {
         throw new InstantiationException();
     }
 

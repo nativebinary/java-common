@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class ResultSetUtil {
 
-    ResultSetUtil() throws InstantiationException {
+    public ResultSetUtil() throws InstantiationException {
         throw new InstantiationException();
     }
 

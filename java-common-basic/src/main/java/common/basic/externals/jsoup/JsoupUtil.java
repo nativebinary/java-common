@@ -12,7 +12,7 @@ import java.io.InputStream;
 
 public class JsoupUtil {
 
-    JsoupUtil() throws InstantiationException {
+    public JsoupUtil() throws InstantiationException {
         throw new InstantiationException();
     }
 

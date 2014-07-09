@@ -3,7 +3,7 @@ package common.basic.utils;
 import java.util.UUID;
 
 public class UuidUtil {
-    UuidUtil() throws InstantiationException {
+    public UuidUtil() throws InstantiationException {
         throw new InstantiationException();
     }
 

@@ -13,7 +13,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 public class StreamUtil {
-    StreamUtil() throws InstantiationException {
+    public StreamUtil() throws InstantiationException {
         throw new InstantiationException();
     }
 

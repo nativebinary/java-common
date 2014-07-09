@@ -5,7 +5,7 @@ import java.util.List;
 
 public class IntUtil {
 
-    IntUtil() throws InstantiationException {
+    public IntUtil() throws InstantiationException {
         throw new InstantiationException();
     }
 

@@ -2,7 +2,7 @@ package common.basic.utils;
 
 public class BooleanUtil {
 
-    BooleanUtil() throws InstantiationException {
+    public BooleanUtil() throws InstantiationException {
         throw new InstantiationException();
     }
 

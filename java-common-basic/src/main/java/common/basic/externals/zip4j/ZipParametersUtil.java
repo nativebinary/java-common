@@ -4,7 +4,7 @@ import net.lingala.zip4j.model.ZipParameters;
 import net.lingala.zip4j.util.Zip4jConstants;
 
 public class ZipParametersUtil {
-    ZipParametersUtil() throws InstantiationException {
+    public ZipParametersUtil() throws InstantiationException {
         throw new InstantiationException();
     }
 

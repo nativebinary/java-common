@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class ReflectionUtil {
 
-    ReflectionUtil() throws InstantiationException {
+    public ReflectionUtil() throws InstantiationException {
         throw new InstantiationException();
     }
 

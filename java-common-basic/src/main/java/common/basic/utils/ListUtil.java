@@ -12,7 +12,7 @@ import java.util.Set;
 
 public class ListUtil {
 
-    ListUtil() throws InstantiationException {
+    public ListUtil() throws InstantiationException {
         throw new InstantiationException();
     }
 

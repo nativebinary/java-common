@@ -31,7 +31,7 @@ public class GoogleHttpClientUtil {
         httpRequestFactory = new NetHttpTransport().createRequestFactory();
     }
 
-    GoogleHttpClientUtil() throws InstantiationException {
+    public GoogleHttpClientUtil() throws InstantiationException {
         throw new InstantiationException();
     }
 

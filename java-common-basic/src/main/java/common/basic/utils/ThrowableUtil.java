@@ -6,7 +6,7 @@ import java.io.UnsupportedEncodingException;
 
 public class ThrowableUtil {
 
-    ThrowableUtil() throws InstantiationException {
+    public ThrowableUtil() throws InstantiationException {
         throw new InstantiationException();
     }
 

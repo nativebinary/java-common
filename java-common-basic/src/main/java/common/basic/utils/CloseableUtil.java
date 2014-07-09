@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class CloseableUtil {
 
-    CloseableUtil() throws InstantiationException {
+    public CloseableUtil() throws InstantiationException {
         throw new InstantiationException();
     }
 

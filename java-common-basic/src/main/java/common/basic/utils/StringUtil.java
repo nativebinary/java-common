@@ -5,7 +5,7 @@ import java.util.List;
 public class StringUtil {
     public static final String empty = "";
 
-    StringUtil() throws InstantiationException {
+    public StringUtil() throws InstantiationException {
         throw new InstantiationException();
     }
 

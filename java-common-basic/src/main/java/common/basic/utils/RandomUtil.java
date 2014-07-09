@@ -9,7 +9,7 @@ public class RandomUtil {
         random = new Random();
     }
 
-    RandomUtil() throws InstantiationException {
+    public RandomUtil() throws InstantiationException {
         throw new InstantiationException();
     }
 

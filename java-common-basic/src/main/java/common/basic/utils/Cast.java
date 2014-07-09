@@ -2,7 +2,7 @@ package common.basic.utils;
 
 public class Cast {
 
-    Cast() throws InstantiationException {
+    public Cast() throws InstantiationException {
         throw new InstantiationException();
     }
 

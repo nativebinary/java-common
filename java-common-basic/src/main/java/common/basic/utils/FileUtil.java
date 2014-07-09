@@ -25,7 +25,7 @@ public class FileUtil {
         return null == fileImage || !fileImage.exists();
     }
 
-    FileUtil() throws InstantiationException {
+    public FileUtil() throws InstantiationException {
         throw new InstantiationException();
     }
 

@@ -4,7 +4,7 @@ import java.io.File;
 
 public class PathUtilNew {
 
-    PathUtilNew() throws InstantiationException {
+    public PathUtilNew() throws InstantiationException {
         throw new InstantiationException();
     }
 

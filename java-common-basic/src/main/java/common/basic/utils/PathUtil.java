@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class PathUtil {
 
-    PathUtil() throws InstantiationException {
+    public PathUtil() throws InstantiationException {
         throw new InstantiationException();
     }
 

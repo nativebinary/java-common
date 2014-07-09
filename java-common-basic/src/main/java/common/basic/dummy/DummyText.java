@@ -47,7 +47,7 @@ public class DummyText {
 
     }
 
-    DummyText() throws InstantiationException {
+    public DummyText() throws InstantiationException {
         throw new InstantiationException();
     }
 

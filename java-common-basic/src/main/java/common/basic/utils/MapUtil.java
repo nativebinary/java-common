@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MapUtil {
-    MapUtil() throws InstantiationException {
+    public MapUtil() throws InstantiationException {
         throw new InstantiationException();
     }
 

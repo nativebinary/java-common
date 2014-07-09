@@ -13,7 +13,7 @@ import java.util.List;
 
 public class GsonUtil {
 
-    GsonUtil() throws InstantiationException {
+    public GsonUtil() throws InstantiationException {
         throw new InstantiationException();
     }
 

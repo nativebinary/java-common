@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class ArrayUtil {
 
-    ArrayUtil() throws InstantiationException {
+    public ArrayUtil() throws InstantiationException {
         throw new InstantiationException();
     }
 

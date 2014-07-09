@@ -13,7 +13,7 @@ public class ByteUtil {
                 | (0x000000FF & (int)arrayByte[3]));
     }
 
-    ByteUtil() throws InstantiationException {
+    public ByteUtil() throws InstantiationException {
         throw new InstantiationException();
     }
 

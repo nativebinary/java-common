@@ -3,7 +3,7 @@ package common.basic.utils;
 import java.io.UnsupportedEncodingException;
 
 public class EncodingUtil {
-    EncodingUtil() throws InstantiationException {
+    public EncodingUtil() throws InstantiationException {
         throw new InstantiationException();
     }
 

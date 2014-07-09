@@ -6,7 +6,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 public class IpUtil {
-    IpUtil() throws InstantiationException {
+    public IpUtil() throws InstantiationException {
         throw new InstantiationException();
     }
 
