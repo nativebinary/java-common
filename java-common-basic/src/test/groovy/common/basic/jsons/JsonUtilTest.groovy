@@ -13,12 +13,37 @@ class JsonUtilTest extends Specification {
         1       || "1"
     }
 
-    def "FromJson"() {
+    def "FromJsonWithGson"() {
+        setup:
+        def original = JsonUtil.json;
+        JsonUtil.json = new IJsonGson();
+
         expect:
         JsonUtil.fromJson(s, c) == o
 
+        cleanup:
+        JsonUtil.json = original;
+
         where:
-         s              || c            || o
-         "{x:10,y:20}"  || Point.class  || new Point(10, 20)
+        s                      || c            || o
+        "{\"x\":10,\"y\":20}"  || Point.class  || new Point(10, 20)
+
+    }
+
+    def "FromJsonWithJackson"() {
+
+        setup:
+        def original = JsonUtil.json;
+        JsonUtil.json = new IJsonJackson();
+
+        expect:
+        JsonUtil.fromJson(s, c) == o
+
+        cleanup:
+        JsonUtil.json = original;
+
+        where:
+        s                      || c            || o
+        "{\"x\":10,\"y\":20}"  || Point.class  || new Point(10, 20)
     }
 }

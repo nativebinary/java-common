@@ -12,4 +12,15 @@ class JacksonUtilTest extends Specification {
         input                                                                                || expect
         "{\"a\": { \"b\": { \"c\": \"d\", \"E\": \"F\", \"G\": [10] } }, \"H\": [1, 2, 3] }" || [a: [b: [c: "d", E: "F", G: [10]]], H: [1, 2, 3]]
     }
+
+    def "toListMap"() {
+        expect:
+        JacksonUtil.toListMap(input) == expect;
+
+        where:
+        input                            || expect
+        "[ { \"a\": 1}, { \"b\": 2 }, { \"c\": \"d\"} ]" || [[a:1], [b:2], [c:"d"]]
+
+
+    }
 }

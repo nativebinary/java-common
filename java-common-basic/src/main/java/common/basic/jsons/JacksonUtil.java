@@ -1,14 +1,14 @@
 package common.basic.jsons;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.type.MapType;
-import com.fasterxml.jackson.databind.type.TypeFactory;
 import common.basic.logs.Logger;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Map;
 
 public class JacksonUtil {
@@ -97,10 +97,7 @@ public class JacksonUtil {
 
 
     public static Map<String, Object> toMap(String json) throws IOException {
-        final ObjectMapper mapper = new ObjectMapper();
-        final TypeFactory typeFactory = mapper.getTypeFactory();
-        final MapType mapType = typeFactory.constructMapType(Map.class, String.class, Object.class);
-        return mapper.readValue(json, mapType);
+        return new ObjectMapper().readValue(json, new TypeReference<Map<String, Object>>() {});
     }
 
     public static Map<String, Object> toMapCatches(String json){
@@ -112,4 +109,17 @@ public class JacksonUtil {
         }
     }
 
+    public static List<Map<String, Object>> toListMapCatches(String json) {
+        try {
+            return toListMap(json);
+        }
+        catch (IOException e) {
+            Logger.e(e);
+            return null;
+        }
+    }
+
+    private static List<Map<String, Object>> toListMap(String json) throws IOException {
+        return new ObjectMapper().readValue(json, new TypeReference<List<Map<String, Object>>>() {});
+    }
 }
