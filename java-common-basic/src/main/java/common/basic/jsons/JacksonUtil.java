@@ -27,8 +27,7 @@ public class JacksonUtil {
     }
 
 
-
-    private static <T> T fromJson(String json, Class<T> clazz) throws IOException {
+    public static <T> T fromJson(String json, Class<T> clazz) throws IOException {
         return new ObjectMapper().readValue(json, clazz);
     }
 
@@ -46,7 +45,7 @@ public class JacksonUtil {
         }
     }
 
-    public static <A> A fromJsonCatches(JsonNode jsonNode, Class<A> clazz) {
+    public static <T> T fromJsonCatches(JsonNode jsonNode, Class<T> clazz) {
         try {
             return fromJson(jsonNode, clazz);
         }
@@ -57,8 +56,6 @@ public class JacksonUtil {
     }
 
 
-
-
     public static JsonNode toJsonNode(String json) throws IOException {
         return new ObjectMapper().readValue(json, JsonNode.class);
     }
@@ -67,8 +64,7 @@ public class JacksonUtil {
         return new ObjectMapper().readValue(inputStream, JsonNode.class);
     }
 
-    public static JsonNode toJsonNode(Object paramObject)
-    {
+    public static JsonNode toJsonNode(Object paramObject) {
         return new ObjectMapper().valueToTree(paramObject);
     }
 
@@ -94,20 +90,35 @@ public class JacksonUtil {
     }
 
 
+    public static List<Object> toList(String json) throws IOException {
+        return new ObjectMapper().readValue(json, new TypeReference<List<Object>>() {});
+    }
+
+    public static List<Object> toListCatches(String json) {
+        try {
+            return toList(json);
+        }
+        catch (IOException e) {
+            Logger.e(e);
+            return null;
+        }
+    }
 
 
     public static Map<String, Object> toMap(String json) throws IOException {
         return new ObjectMapper().readValue(json, new TypeReference<Map<String, Object>>() {});
     }
 
-    public static Map<String, Object> toMapCatches(String json){
+    public static Map<String, Object> toMapCatches(String json) {
         try {
             return toMap(json);
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             Logger.e(e);
             return null;
         }
     }
+
 
     public static List<Map<String, Object>> toListMapCatches(String json) {
         try {
@@ -123,3 +134,5 @@ public class JacksonUtil {
         return new ObjectMapper().readValue(json, new TypeReference<List<Map<String, Object>>>() {});
     }
 }
+
+

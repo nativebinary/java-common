@@ -15,6 +15,16 @@ public class JsonEngineJackson implements IJsonEngine {
     }
 
     @Override
+    public List<Object> toList(String json) {
+        return JacksonUtil.toListCatches(json);
+    }
+
+    @Override
+    public Map<String, Object> toMap(String json) {
+        return JacksonUtil.toMapCatches(json);
+    }
+
+    @Override
     public List<Map<String, Object>> toListMap(String json) {
         return JacksonUtil.toListMapCatches(json);
     }

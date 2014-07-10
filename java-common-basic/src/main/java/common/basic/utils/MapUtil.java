@@ -11,6 +11,23 @@ public class MapUtil {
         throw new InstantiationException();
     }
 
+    public static <TKey, TValue> boolean equals(Map<TKey, TValue> map1, Map<TKey, TValue> map2) {
+        if(map1.size() != map1.size())
+            return false;
+
+        for (TKey key : map1.keySet()) {
+            if(!map2.containsKey(key))
+                return false;
+
+            final TValue value1 = map1.get(key);
+            final TValue value2 = map1.get(key);
+            if (!value1.equals(value2))
+                return false;
+        }
+
+        return true;
+    }
+
     public static <TKey, TValue> boolean isNullOrEmpty(Map<TKey, TValue> map) {
         if(null == map)
             return true;

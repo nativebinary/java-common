@@ -20,11 +20,19 @@ public class JsonUtil {
 
 
     public static String toJson(Object o) {
-        return JsonUtil.jsonEngine.toJson(o);
+        return jsonEngine.toJson(o);
     }
 
     public static <T> T fromJson(String json, Class<T> clazz) {
-        return JsonUtil.jsonEngine.fromJson(json, clazz);
+        return jsonEngine.fromJson(json, clazz);
+    }
+
+    public static List<Object> toList(String json) {
+        return jsonEngine.toList(json);
+    }
+
+    public static Map<String, Object> toMap(String json) {
+        return jsonEngine.toMap(json);
     }
 
     public static List<Map<String, Object>> toListMap(String json) {

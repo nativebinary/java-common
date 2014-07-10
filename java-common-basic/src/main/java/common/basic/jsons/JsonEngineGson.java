@@ -17,6 +17,16 @@ public class JsonEngineGson implements IJsonEngine {
     }
 
     @Override
+    public List<Object> toList(String json) {
+        return GsonUtil.fromJsonArray(json, new TypeToken<List<Object>>() {});
+    }
+
+    @Override
+    public Map<String, Object> toMap(String json) {
+        return GsonUtil.fromJsonMap(json);
+    }
+
+    @Override
     public List<Map<String, Object>> toListMap(String json) {
         return GsonUtil.fromJsonArray(json, new TypeToken<List<Map<String, Object>>>() {});
     }
