@@ -1,6 +1,8 @@
 package jobs;
 
+import common.CommonInit;
 import common.basic.databases.DatabaseManager;
+import common.basic.jsons.JsonEngineGson;
 import common.basic.logs.Logger;
 import common.play1.logs.LoggerPlay;
 import common.play1.utils.JobUtil;
@@ -19,8 +21,7 @@ import java.sql.Connection;
 public class JobOnApplicationStart extends Job {
 
     public void doJob() {
-        Logger.setLogger(new LoggerPlay());
-        Logger.setDebug(true);
+        CommonInit.init(new LoggerPlay(), true, new JsonEngineGson());
 
         initDatabaseManager();
         initAccount();

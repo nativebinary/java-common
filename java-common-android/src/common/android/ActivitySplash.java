@@ -6,20 +6,21 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.TextView;
 import com.google.android.gcm.GCMRegistrar;
+import common.CommonInit;
 import common.android.extensions.ActivityBase;
 import common.android.helpers.CacheHelper;
 import common.android.helpers.MemoryWatcher;
 import common.android.logs.LoggerAndroid;
 import common.android.utils.HandlerUtil;
 import common.android.utils.MetaData;
+import common.basic.jsons.JsonEngineGson;
 import common.basic.logs.Logger;
 import common.basic.utils.DateUtil;
 
 public class ActivitySplash extends ActivityBase {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Logger.setLogger(new LoggerAndroid("NB"));
-        Logger.setDebug(MetaData.isDev(this));
+        CommonInit.init(new LoggerAndroid("NB"), MetaData.isDev(this), new JsonEngineGson());
 
         super.onCreate(savedInstanceState);
 

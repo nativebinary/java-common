@@ -6,18 +6,28 @@ import java.util.Map;
 public class JsonUtil {
 
 
-    static IJson json = new IJsonGson();
-    // static IJson json = new IJsonJackson();
+    static IJsonEngine jsonEngine = new JsonEngineGson();
+
+    public JsonUtil() throws InstantiationException {
+        throw new InstantiationException();
+    }
+
+    public static IJsonEngine setJsonEngine(IJsonEngine jsonEngine) {
+        IJsonEngine old = JsonUtil.jsonEngine;
+        JsonUtil.jsonEngine = jsonEngine;
+        return old;
+    }
+
 
     public static String toJson(Object o) {
-        return JsonUtil.json.toJson(o);
+        return JsonUtil.jsonEngine.toJson(o);
     }
 
     public static <T> T fromJson(String json, Class<T> clazz) {
-        return JsonUtil.json.fromJson(json, clazz);
+        return JsonUtil.jsonEngine.fromJson(json, clazz);
     }
 
     public static List<Map<String, Object>> toListMap(String json) {
-        return JsonUtil.json.toListMap(json);
+        return JsonUtil.jsonEngine.toListMap(json);
     }
 }

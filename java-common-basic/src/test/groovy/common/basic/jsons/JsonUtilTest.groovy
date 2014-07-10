@@ -15,14 +15,13 @@ class JsonUtilTest extends Specification {
 
     def "FromJsonWithGson"() {
         setup:
-        def original = JsonUtil.json;
-        JsonUtil.json = new IJsonGson();
+        def old = JsonUtil.setJsonEngine(new JsonEngineGson());
 
         expect:
         JsonUtil.fromJson(s, c) == o
 
         cleanup:
-        JsonUtil.json = original;
+        JsonUtil.setJsonEngine(old);
 
         where:
         s                      || c            || o
@@ -33,14 +32,13 @@ class JsonUtilTest extends Specification {
     def "FromJsonWithJackson"() {
 
         setup:
-        def original = JsonUtil.json;
-        JsonUtil.json = new IJsonJackson();
+        def old = JsonUtil.setJsonEngine(new JsonEngineJackson());
 
         expect:
         JsonUtil.fromJson(s, c) == o
 
         cleanup:
-        JsonUtil.json = original;
+        JsonUtil.setJsonEngine(old);
 
         where:
         s                      || c            || o

@@ -1,5 +1,7 @@
 <%@ page import="common.basic.logs.Logger" %>
 <%@ page import="common.struts2.logs.LoggerStruts2" %>
+<%@ page import="common.CommonInit" %>
+<%@ page import="common.basic.jsons.JsonEngineGson" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -9,8 +11,7 @@
 <h1>
     java-common-struts2
     <%
-        Logger.setLogger(new LoggerStruts2());
-        Logger.setDebug(true);
+        CommonInit.init(new LoggerStruts2(), true, new JsonEngineGson());
         Logger.e();
     %>
 </h1>

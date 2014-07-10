@@ -7,8 +7,10 @@ public class Logger {
         throw new InstantiationException();
     }
 
-    public static void setLogger(ILogger logger) {
+    public static ILogger setLogger(ILogger logger) {
+        ILogger old = Logger.logger;
         Logger.logger = logger;
+        return old;
     }
 
     public static void setDebug(boolean debug) {
