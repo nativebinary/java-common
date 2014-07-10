@@ -9,7 +9,6 @@ import com.google.gson.reflect.TypeToken;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 
@@ -97,8 +96,7 @@ public class GsonUtil {
 
     public static Map<String, Object> fromJsonMap(String json) {
         Gson gson = new Gson();
-        Type stringStringMap = new TypeToken<Map<String, String>>(){}.getType();
 
-        return gson.fromJson(json, stringStringMap);
+        return gson.fromJson(json, new TypeToken<Map<String, String>>(){}.getType());
     }
 }
