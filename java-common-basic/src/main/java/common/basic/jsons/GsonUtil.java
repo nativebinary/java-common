@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
+import common.basic.logs.Logger;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -43,7 +44,13 @@ public class GsonUtil {
         return new Gson().fromJson(jsonObject, clazz);
     }
 
+    @Deprecated // use toList()
     public static <T, U extends TypeToken<List<T>>> List<T> fromJsonArray(String json, U typeToken) {
+        Logger.e("deprecatd method.");
+        return new Gson().fromJson(json, typeToken.getType());
+    }
+
+    public static <T, U extends TypeToken<List<T>>> List<T> toList(String json, U typeToken) {
         return new Gson().fromJson(json, typeToken.getType());
     }
 

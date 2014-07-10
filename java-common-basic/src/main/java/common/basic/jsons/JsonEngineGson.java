@@ -18,7 +18,7 @@ public class JsonEngineGson implements IJsonEngine {
 
     @Override
     public List<Object> toList(String json) {
-        return GsonUtil.fromJsonArray(json, new TypeToken<List<Object>>() {});
+        return GsonUtil.toList(json, new TypeToken<List<Object>>() {});
     }
 
     @Override
@@ -28,6 +28,6 @@ public class JsonEngineGson implements IJsonEngine {
 
     @Override
     public List<Map<String, Object>> toListMap(String json) {
-        return GsonUtil.fromJsonArray(json, new TypeToken<List<Map<String, Object>>>() {});
+        return GsonUtil.toList(json, new TypeToken<List<Map<String, Object>>>() {});
     }
 }
