@@ -1,4 +1,4 @@
-package common.basic.jsons;
+package common.basic.facades.jsons;
 
 import java.util.List;
 import java.util.Map;
@@ -6,7 +6,7 @@ import java.util.Map;
 public class JsonUtil {
 
 
-    static IJsonEngine jsonEngine = new JsonEngineGson();
+    static IJsonEngine jsonEngine;
 
     public JsonUtil() throws InstantiationException {
         throw new InstantiationException();

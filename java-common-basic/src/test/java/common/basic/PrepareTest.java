@@ -1,7 +1,7 @@
 package common.basic;
 
 import common.CommonInit;
-import common.basic.jsons.JsonEngineGson;
+import common.basic.facades.jsons.gson.JsonEngineGson;
 import common.basic.logs.Logger;
 import common.basic.logs.LoggerStandardOut;
 import org.junit.After;

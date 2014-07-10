@@ -4,7 +4,7 @@ import com.google.android.gcm.server.Constants;
 import com.google.android.gcm.server.Message;
 import com.google.android.gcm.server.Result;
 import com.google.android.gcm.server.Sender;
-import common.basic.jsons.GsonUtil;
+import common.basic.facades.jsons.gson.GsonUtil;
 import common.basic.utils.HashMapStringObject;
 
 import java.io.IOException;

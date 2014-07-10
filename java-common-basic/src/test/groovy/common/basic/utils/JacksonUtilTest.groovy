@@ -1,6 +1,6 @@
 package common.basic.utils
 
-import common.basic.jsons.JacksonUtil
+import common.basic.facades.jsons.jackson.JacksonUtil
 import spock.lang.Specification
 
 class JacksonUtilTest extends Specification {

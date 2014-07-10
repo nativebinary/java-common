@@ -3,7 +3,7 @@ package common.basic.genModels;
 
 import common.CommonInit;
 import common.basic.interfaces.RunnableThrowsException;
-import common.basic.jsons.JsonEngineGson;
+import common.basic.facades.jsons.gson.JsonEngineGson;
 import common.basic.logs.Logger;
 import common.basic.logs.LoggerStandardOut;
 import common.basic.utils.FileUtil;

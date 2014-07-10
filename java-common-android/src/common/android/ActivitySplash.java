@@ -13,7 +13,7 @@ import common.android.helpers.MemoryWatcher;
 import common.android.logs.LoggerAndroid;
 import common.android.utils.HandlerUtil;
 import common.android.utils.MetaData;
-import common.basic.jsons.JsonEngineGson;
+import common.basic.facades.jsons.gson.JsonEngineGson;
 import common.basic.logs.Logger;
 import common.basic.utils.DateUtil;
 

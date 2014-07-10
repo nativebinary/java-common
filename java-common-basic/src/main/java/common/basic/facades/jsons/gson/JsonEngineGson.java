@@ -1,6 +1,7 @@
-package common.basic.jsons;
+package common.basic.facades.jsons.gson;
 
 import com.google.gson.reflect.TypeToken;
+import common.basic.facades.jsons.IJsonEngine;
 
 import java.util.List;
 import java.util.Map;

@@ -2,7 +2,7 @@ package jobs;
 
 import common.CommonInit;
 import common.basic.databases.DatabaseManager;
-import common.basic.jsons.JsonEngineGson;
+import common.basic.facades.jsons.gson.JsonEngineGson;
 import common.basic.logs.Logger;
 import common.play1.logs.LoggerPlay;
 import common.play1.utils.JobUtil;

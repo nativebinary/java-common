@@ -1,7 +1,7 @@
 <%@ page import="common.basic.logs.Logger" %>
 <%@ page import="common.struts2.logs.LoggerStruts2" %>
 <%@ page import="common.CommonInit" %>
-<%@ page import="common.basic.jsons.JsonEngineGson" %>
+<%@ page import="common.basic.facades.jsons.gson.JsonEngineGson" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>

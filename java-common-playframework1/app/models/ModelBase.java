@@ -1,6 +1,6 @@
 package models;
 
-import common.basic.jsons.GsonUtil;
+import common.basic.facades.jsons.gson.GsonUtil;
 import play.modules.siena.EnhancedModel;
 import siena.core.lifecycle.PreInsert;
 import siena.core.lifecycle.PreSave;
