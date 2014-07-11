@@ -1,4 +1,4 @@
-package common.basic.twitters;
+package common.basic.externals.twitter4j;
 
 import twitter4j.Twitter;
 import twitter4j.TwitterFactory;
