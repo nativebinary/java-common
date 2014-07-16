@@ -12,6 +12,7 @@ import java.util.Set;
 
 public class ListUtil {
 
+
     public ListUtil() throws InstantiationException {
         throw new InstantiationException();
     }
@@ -304,4 +305,27 @@ public class ListUtil {
     public static <T> void swap(List<T> list, int index1, int index2) {
         Collections.swap(list, index1, index2);
     }
+
+    public static <T> List<T> concatenate(List<T> lhs, List<T> rhs) {
+        List<T> listConcatenated = new ArrayList<T>();
+        listConcatenated.addAll(lhs);
+        listConcatenated.addAll(rhs);
+        return listConcatenated;
+    }
+
+    public static <T> List<T> combine(List<T> top, List<T> bottom) {
+        int start = (top.size() <= bottom.size() ? 0 : top.size() - bottom.size());
+
+        for (int i = start; i < top.size(); i++) {
+            List<T> bottomOfTop = top.subList(i, top.size());
+            List<T> topOfBottom = bottom.subList(0, top.size() - i);
+            if (equals(bottomOfTop, topOfBottom)) {
+                List<T> topOfTop = top.subList(0, i);
+                return concatenate(topOfTop, bottom);
+            }
+        }
+
+        return concatenate(top, bottom);
+    }
+
 }
