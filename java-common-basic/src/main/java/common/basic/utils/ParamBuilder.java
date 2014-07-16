@@ -18,6 +18,16 @@ public class ParamBuilder extends ArrayList<NameValuePair> {
         return this;
     }
 
+    public ParamBuilder append(String key, int value) {
+        super.add(new BasicNameValuePair(key, Integer.toString(value)));
+        return this;
+    }
+
+    public ParamBuilder append(String key, long value) {
+        super.add(new BasicNameValuePair(key, Long.toString(value)));
+        return this;
+    }
+
     public static ParamBuilder create() {
         return new ParamBuilder();
     }
