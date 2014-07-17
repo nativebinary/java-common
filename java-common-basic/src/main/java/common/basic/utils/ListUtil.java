@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class ListUtil {
+public class ListUtil extends CollectionUtil {
 
 
     public ListUtil() throws InstantiationException {
@@ -172,23 +172,7 @@ public class ListUtil {
     }
 
 
-    public static <T> boolean has(List<T> list, IPredicator<T> predicator) {
-        for (T t : list) {
-            if(predicator.predicate(t))
-                return true;
-        }
 
-        return false;
-    }
-
-    public static <T> T find(List<T> list, IPredicator<T> predicator) {
-        for (T t : list) {
-            if(predicator.predicate(t))
-                return t;
-        }
-
-        return null;
-    }
 
     public static <T> List<T> findAll(List<T> list, IPredicator<T> predicator) {
         List<T> listResult = new ArrayList<T>();
