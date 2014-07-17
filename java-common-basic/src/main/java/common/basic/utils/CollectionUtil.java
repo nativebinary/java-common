@@ -5,9 +5,13 @@ import common.basic.interfaces.IPredicator;
 import java.util.Collection;
 
 public class CollectionUtil {
-    public static boolean isSubsetOf(Collection<String> subset, Collection<String> superSet) {
-        for (String string : subset) {
-            if (!superSet.contains(string)) {
+    public CollectionUtil() throws InstantiationException {
+        throw new InstantiationException();
+    }
+
+    public static <T> boolean isSubsetOf(Collection<T> subset, Collection<T> superSet) {
+        for (T t : subset) {
+            if (!superSet.contains(t)) {
                 return false;
             }
         }

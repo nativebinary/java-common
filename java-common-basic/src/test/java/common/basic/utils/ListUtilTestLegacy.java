@@ -59,32 +59,6 @@ public class ListUtilTestLegacy extends Assert {
     }
 
     @Test
-    public void testFind() {
-        List<Integer> list = new ArrayList<Integer>();
-        for (int i = 0; i < 100; i++) {
-            list.add(i);
-        }
-
-        int i = ListUtil.find(list, new IPredicator<Integer>() {
-            @Override
-            public boolean predicate(Integer integer) {
-                return integer == 10;
-            }
-        });
-
-        assertEquals(10, i);
-
-        final Integer integer = ListUtil.find(list, new IPredicator<Integer>() {
-            @Override
-            public boolean predicate(Integer integer) {
-                return integer == 1000;
-            }
-        });
-        assertNull(integer);
-
-    }
-
-    @Test
     public void testFindAll() {
         List<Integer> list = new ArrayList<Integer>();
         for (int i = 0; i < 100; i++) {
