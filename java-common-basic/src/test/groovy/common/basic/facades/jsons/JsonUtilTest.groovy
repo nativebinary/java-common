@@ -1,6 +1,5 @@
-package common.basic.jsons
+package common.basic.facades.jsons
 
-import common.basic.facades.jsons.JsonUtil
 import common.basic.facades.jsons.gson.JsonEngineGson
 import common.basic.facades.jsons.jackson.JsonEngineJackson
 import common.basic.geometiries.Point
