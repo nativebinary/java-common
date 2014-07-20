@@ -1,6 +1,7 @@
 package common.externals.animatedGifs
-
 import common.basic.externals.animatedGifs.GifSequenceWriter
+import common.basic.logs.Logger
+import common.basic.utils.DateUtil
 import common.basic.utils.StreamUtil
 import groovy.transform.TypeChecked
 import spock.lang.Specification
@@ -10,7 +11,9 @@ import javax.imageio.stream.MemoryCacheImageOutputStream
 
 @TypeChecked
 class GifSequenceWriterTest extends Specification {
-    def test() {
+    def "writeToSequence"() {
+        Logger.e(DateUtil.yyyyMMddHHmmssSSS(new Date()))
+
         def array = [
                 "000.png", "001.png", "002.png", "003.png", "004.png",
                 "005.png", "006.png", "007.png", "008.png", "009.png",
@@ -32,10 +35,30 @@ class GifSequenceWriterTest extends Specification {
 
         expect:
         byteArrayOutputStream.toByteArray() == StreamUtil.getArrayByteAll(getInputStream("result.gif"))
+
+        Logger.e(DateUtil.yyyyMMddHHmmssSSS(new Date()))
+
+//
+//        BufferedImage bufferedImage = ImageIO.read(getInputStream("000.png"));
+//        Graphics graphics = bufferedImage.getGraphics();
+//        Graphics2D graphics2D = (Graphics2D)graphics;
+//        graphics2D.rotate(45);
+//        graphics2D.drawImage(ImageIO.read(getInputStream("001.png")), 10, 10, 100, 100, new ImageObserver() {
+//            @Override
+//            boolean imageUpdate(Image image, int i, int i2, int i3, int i4, int i5) {
+//                return false;
+//            }
+//        })
+//        bufferedImage.
+//
+
+
+
     }
 
     def getInputStream(String s) {
         getClass().getClassLoader().getResourceAsStream(s)
     }
+
 }
 
