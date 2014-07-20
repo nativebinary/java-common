@@ -3,13 +3,11 @@ import common.basic.externals.animatedGifs.GifSequenceWriter
 import common.basic.logs.Logger
 import common.basic.utils.DateUtil
 import common.basic.utils.StreamUtil
-import groovy.transform.TypeChecked
 import spock.lang.Specification
 
 import javax.imageio.ImageIO
 import javax.imageio.stream.MemoryCacheImageOutputStream
 
-@TypeChecked
 class GifSequenceWriterTest extends Specification {
     def "writeToSequence"() {
         Logger.e(DateUtil.yyyyMMddHHmmssSSS(new Date()))
@@ -25,9 +23,7 @@ class GifSequenceWriterTest extends Specification {
         def memoryCacheImageOutputStream = new MemoryCacheImageOutputStream(byteArrayOutputStream);
         def gifSequenceWriter = new GifSequenceWriter(memoryCacheImageOutputStream, ImageIO.read(getInputStream(array[0])).getType(), 1, true);
 
-        array.each({
-            String name -> gifSequenceWriter.writeToSequence(ImageIO.read(getInputStream(name)));
-        });
+        array.each({ String name -> gifSequenceWriter.writeToSequence(ImageIO.read(getInputStream(name))); });
 
         gifSequenceWriter.close();
         memoryCacheImageOutputStream.close();
