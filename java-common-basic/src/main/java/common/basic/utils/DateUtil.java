@@ -24,6 +24,7 @@ public class DateUtil {
     final static SimpleDateFormat formatter_Korean = new SimpleDateFormat("yyyy년MM월dd일", Locale.KOREA);
     final static SimpleDateFormat formatter_MM = new SimpleDateFormat("MM", Locale.KOREA);
     final static SimpleDateFormat formatter_nginxlog = new SimpleDateFormat("dd/MMM/yyyy:HH:mm:ss Z");
+    final static SimpleDateFormat formatter_yyMMdd = new SimpleDateFormat("yyMMdd", Locale.KOREA);
     final static SimpleDateFormat formatter_yyyy = new SimpleDateFormat("yyyy", Locale.KOREA);
     final static SimpleDateFormat formatter_yyyy_MM_dd = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
     final static SimpleDateFormat formatter_yyyyMM = new SimpleDateFormat("yyyyMM", Locale.KOREA);
@@ -38,6 +39,7 @@ public class DateUtil {
     public static String korean(Date date) { synchronized (formatter_Korean) { return formatter_Korean.format(date); } }
     public static String MM(Date date) { synchronized (formatter_MM) { return formatter_MM.format(date); } }
     public static String nginxlog(Date date) { synchronized (formatter_nginxlog) { return formatter_nginxlog.format(date); } }
+    public static String yyMMdd(Date date) { synchronized (formatter_yyMMdd) { return formatter_yyMMdd.format(date); } }
     public static String yyyy(Date date) { synchronized (formatter_yyyy) { return formatter_yyyy.format(date); } }
     public static String yyyy_MM_dd(Date date) { synchronized (formatter_yyyy_MM_dd) { return formatter_yyyy_MM_dd.format(date); } }
     public static String yyyyMM(Date date) { synchronized (formatter_yyyyMM) { return formatter_yyyyMM.format(date); } }
