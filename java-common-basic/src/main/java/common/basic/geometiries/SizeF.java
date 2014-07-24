@@ -46,7 +46,7 @@ public class SizeF {
     @Override
     public String toString() {
         return "SizeF{" +
-                ", width=" + width +
+                "width=" + width +
                 ", height=" + height +
                 '}';
     }

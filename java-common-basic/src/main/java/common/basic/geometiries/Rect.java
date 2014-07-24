@@ -49,6 +49,6 @@ public class Rect {
     public boolean contains(PointF point) {
         return
                 (left() <= point.x && point.x <= right()) &&
-                        (top() <= point.y && point.y <= bottom());
+                (top() <= point.y && point.y <= bottom());
     }
 }
