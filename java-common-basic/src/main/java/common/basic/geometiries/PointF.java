@@ -15,6 +15,10 @@ public class PointF {
         this.y = y;
     }
 
+    public PointF multiply(float v) {
+        return new PointF(x * v, y * v);
+    }
+
     public PointF divideBy(float division) {
         return new PointF(x / division, y / division);
     }

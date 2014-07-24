@@ -15,6 +15,10 @@ public class Point {
         this.y = y;
     }
 
+    public Point multiply(int v) {
+        return new Point(x * v, y * v);
+    }
+
     public Point divideBy(int division) {
         return new Point(x / division, y / division);
     }
