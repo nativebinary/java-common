@@ -48,7 +48,7 @@ public class Point {
                 '}';
     }
 
-    public SizeF delta(PointF pointCurrent) {
-        return new SizeF(Math.abs(this.x - pointCurrent.x), Math.abs(this.y - pointCurrent.y));
+    public Size delta(Point pointCurrent) {
+        return new Size(Math.abs(this.x - pointCurrent.x), Math.abs(this.y - pointCurrent.y));
     }
 }
