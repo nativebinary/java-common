@@ -1,5 +1,7 @@
 package common.basic.geometiries;
 
+import common.basic.facades.jsons.JsonUtil;
+
 public class RectD {
     public static RectD empty = new RectD(PointD.empty, SizeD.empty);
 
@@ -31,11 +33,11 @@ public class RectD {
         return point.y;
     }
 
-    private double right() {
+    public double right() {
         return point.x + size.width;
     }
 
-    private double bottom() {
+    public double bottom() {
         return point.y + size.height;
     }
 
@@ -50,5 +52,19 @@ public class RectD {
         return
                 (left() <= point.x && point.x <= right()) &&
                 (top() <= point.y && point.y <= bottom());
+    }
+
+    public PointD center() {
+        final SizeD half = size.divideBy(2);
+        return point.offset(half);
+    }
+
+    public RectD offset(SizeD size) {
+        return new RectD(point.offset(size), this.size);
+    }
+
+    @Override
+    public String toString() {
+        return JsonUtil.toJson(this);
     }
 }

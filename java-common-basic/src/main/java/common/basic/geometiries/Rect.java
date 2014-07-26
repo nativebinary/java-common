@@ -1,5 +1,7 @@
 package common.basic.geometiries;
 
+import common.basic.facades.jsons.JsonUtil;
+
 public class Rect {
     public static Rect empty = new Rect(Point.empty, Size.empty);
 
@@ -13,6 +15,10 @@ public class Rect {
     public Rect(Point point, Size size) {
         this.point = point;
         this.size = size;
+    }
+
+    public Rect(int x, int y, int width, int height) {
+        this(new Point(x, y), new Size(width, height));
     }
 
     public int width() {
@@ -50,5 +56,9 @@ public class Rect {
         return
                 (left() <= point.x && point.x <= right()) &&
                 (top() <= point.y && point.y <= bottom());
+    }
+    @Override
+    public String toString() {
+        return JsonUtil.toJson(this);
     }
 }

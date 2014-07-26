@@ -1,5 +1,7 @@
 package common.basic.geometiries;
 
+import common.basic.facades.jsons.JsonUtil;
+
 public class RectF {
     public static RectF empty = new RectF(PointF.empty, SizeF.empty);
 
@@ -50,5 +52,10 @@ public class RectF {
         return
                 (left() <= point.x && point.x <= right()) &&
                 (top() <= point.y && point.y <= bottom());
+    }
+
+    @Override
+    public String toString() {
+        return JsonUtil.toJson(this);
     }
 }

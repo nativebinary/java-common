@@ -38,6 +38,6 @@ class LogUtilTest extends Specification {
         List<String> list = LogUtil.toListStringForLog(array);
 
         expect:
-        list == ["null", "1", "A", "{\"point\":{\"x\":10,\"y\":10},\"empty\":{\"point\":{\"x\":0,\"y\":0},\"size\":{\"width\":0,\"height\":0}},\"size\":{\"width\":10,\"height\":10}}", "20C"]
+        list == ["null", "1", "A", "{\"point\":{\"x\":10,\"y\":10},\"size\":{\"width\":10,\"height\":10}}", "20C"]
     }
 }

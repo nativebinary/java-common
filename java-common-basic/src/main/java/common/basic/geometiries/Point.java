@@ -1,5 +1,7 @@
 package common.basic.geometiries;
 
+import common.basic.facades.jsons.JsonUtil;
+
 public class Point {
     public static Point empty = new Point(0, 0);
 
@@ -45,11 +47,7 @@ public class Point {
 
     @Override
     public String toString() {
-        return "Point{" +
-                "super=" + super.toString() +
-                ", x=" + x +
-                ", y=" + y +
-                '}';
+        return JsonUtil.toJson(this);
     }
 
     public Size delta(Point pointCurrent) {

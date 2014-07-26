@@ -1,5 +1,7 @@
 package common.basic.geometiries;
 
+import common.basic.facades.jsons.JsonUtil;
+
 public class SizeF {
     public static SizeF empty = new SizeF(0, 0);
 
@@ -45,9 +47,6 @@ public class SizeF {
 
     @Override
     public String toString() {
-        return "SizeF{" +
-                "width=" + width +
-                ", height=" + height +
-                '}';
+        return JsonUtil.toJson(this);
     }
 }

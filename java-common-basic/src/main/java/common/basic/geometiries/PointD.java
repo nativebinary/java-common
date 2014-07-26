@@ -1,5 +1,7 @@
 package common.basic.geometiries;
 
+import common.basic.facades.jsons.JsonUtil;
+
 public class PointD {
     public static PointD empty = new PointD(0, 0);
 
@@ -49,14 +51,34 @@ public class PointD {
 
     @Override
     public String toString() {
-        return "PointD{" +
-                "super=" + super.toString() +
-                ", x=" + x +
-                ", y=" + y +
-                '}';
+        return JsonUtil.toJson(this);
     }
 
-    public SizeD delta(PointD pointCurrent) {
-        return new SizeD((double)Math.abs(this.x - pointCurrent.x), (double)Math.abs(this.y - pointCurrent.y));
+    public SizeD delta(PointD point) {
+        return new SizeD((double)Math.abs(this.x - point.x), (double)Math.abs(this.y - point.y));
+    }
+
+    public PointD median(PointD point) {
+        return offset(delta(point).divideBy(2));
+    }
+
+    public PointD offset(SizeD size) {
+        return new PointD(x + size.width, y + size.height);
+    }
+
+    public PointD advance(PointD point) {
+        return new PointD(x + point.x, y + point.y);
+    }
+
+    public SizeD differ(PointD point) {
+        return new SizeD(x - point.x, y - point.y);
+    }
+
+    public PointD absolute() {
+        return new PointD(Math.abs(x), Math.abs(y));
+    }
+
+    public PointD negate() {
+        return new PointD(-x, -y);
     }
 }
