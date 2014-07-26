@@ -11,18 +11,18 @@ class LogUtilTest extends Specification {
         then: thrown(InstantiationException)
     }
 
-    static class NoToString {
+    public static class ClassDoesNotHaveToString {
         final int i;
         final String s;
 
-        NoToString(int i, String s) {
+        public ClassDoesNotHaveToString(int i, String s) {
             this.i = i;
             this.s = s
         }
     }
 
-    static class ClassHasOwnToString extends NoToString {
-        ClassHasOwnToString(int i, String s) {
+    public static class ClassDoesHaveToString extends ClassDoesNotHaveToString {
+        public ClassDoesHaveToString(int i, String s) {
             super(i, s)
         }
 
@@ -34,7 +34,12 @@ class LogUtilTest extends Specification {
 
     def "ToListStringForLog"() {
 
-        Object[] array = [null, 1, "A", new Rect(new Point(10, 10), new Size(10, 10)), new ClassHasOwnToString(20, "C")];
+        def nullRef = null
+        def integer = 1
+        def string = "A"
+        def rect = new Rect(new Point(10, 10), new Size(10, 10))
+        ClassDoesHaveToString classDoesHaveToString = new ClassDoesHaveToString(20, "C")
+        Object[] array = [nullRef, integer, string, rect, classDoesHaveToString];
         List<String> list = LogUtil.toListStringForLog(array);
 
         expect:
