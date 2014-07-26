@@ -5,6 +5,6 @@ import spock.lang.Specification
 class DateUtilTest extends Specification {
     def "yyMMdd"() {
         expect:
-        DateUtil.yyMMdd(new Date(1406239188787)) == "140725";
+        DateUtil.yyMMdd(DateUtil.parse("2014-07-25")) == "140725";
     }
 }
