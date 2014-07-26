@@ -17,6 +17,16 @@ public class PointF {
         this.y = y;
     }
 
+
+    public PointF absolute() {
+        return new PointF(Math.abs(x), Math.abs(y));
+    }
+
+    public PointF negate() {
+        return new PointF(-x, -y);
+    }
+
+
     public PointF multiply(float v) {
         return new PointF(x * v, y * v);
     }
@@ -24,6 +34,29 @@ public class PointF {
     public PointF divideBy(float division) {
         return new PointF(x / division, y / division);
     }
+
+
+    public SizeF delta(PointF point) {
+        return new SizeF((float)Math.abs(this.x - point.x), (float)Math.abs(this.y - point.y));
+    }
+
+    public PointF median(PointF point) {
+        return offset(delta(point).divideBy(2));
+    }
+
+    public PointF offset(SizeF size) {
+        return new PointF(x + size.width, y + size.height);
+    }
+
+    public PointF advance(PointF point) {
+        return new PointF(x + point.x, y + point.y);
+    }
+
+    public SizeD differ(PointF point) {
+        return new SizeD(x - point.x, y - point.y);
+    }
+
+
 
     @Override
     public boolean equals(Object o) {
@@ -48,9 +81,5 @@ public class PointF {
     @Override
     public String toString() {
         return JsonUtil.toJson(this);
-    }
-
-    public SizeF delta(PointF pointCurrent) {
-        return new SizeF(Math.abs(this.x - pointCurrent.x), Math.abs(this.y - pointCurrent.y));
     }
 }

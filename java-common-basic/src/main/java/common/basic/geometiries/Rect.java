@@ -21,6 +21,7 @@ public class Rect {
         this(new Point(x, y), new Size(width, height));
     }
 
+
     public int width() {
         return size.width;
     }
@@ -45,6 +46,12 @@ public class Rect {
         return point.y + size.height;
     }
 
+    public Point center() {
+        final Size half = size.divideBy(2);
+        return point.offset(half);
+    }
+
+
     public Rect deflate(int full) {
         final int half = full / 2;
         final Point pointNew = new Point(point.x + half, point.y + half);
@@ -52,11 +59,19 @@ public class Rect {
         return new Rect(pointNew, sizeNew);
     }
 
+
     public boolean contains(PointF point) {
         return
                 (left() <= point.x && point.x <= right()) &&
                 (top() <= point.y && point.y <= bottom());
     }
+
+
+    public Rect offset(Size size) {
+        return new Rect(point.offset(size), this.size);
+    }
+
+
     @Override
     public String toString() {
         return JsonUtil.toJson(this);

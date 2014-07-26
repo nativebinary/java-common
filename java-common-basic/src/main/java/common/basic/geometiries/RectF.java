@@ -17,6 +17,11 @@ public class RectF {
         this.size = size;
     }
 
+    public RectF(int x, int y, int width, int height) {
+        this(new PointF(x, y), new SizeF(width, height));
+    }
+
+
     public float width() {
         return size.width;
     }
@@ -33,26 +38,39 @@ public class RectF {
         return point.y;
     }
 
-    private float right() {
+    public float right() {
         return point.x + size.width;
     }
 
-    private float bottom() {
+    public float bottom() {
         return point.y + size.height;
     }
 
+    public PointF center() {
+        final SizeF half = size.divideBy(2);
+        return point.offset(half);
+    }
+
+
     public RectF deflate(float full) {
-        final float half = full / 2;
+        final float half = (float)full / 2;
         final PointF pointNew = new PointF(point.x + half, point.y + half);
-        final SizeF sizeNew = new SizeF(size.width - full, size.height - full);
+        final SizeF sizeNew = new SizeF((float)(size.width - full), (float)(size.height - full));
         return new RectF(pointNew, sizeNew);
     }
+
 
     public boolean contains(PointF point) {
         return
                 (left() <= point.x && point.x <= right()) &&
-                (top() <= point.y && point.y <= bottom());
+                        (top() <= point.y && point.y <= bottom());
     }
+
+
+    public RectF offset(SizeF size) {
+        return new RectF(point.offset(size), this.size);
+    }
+
 
     @Override
     public String toString() {

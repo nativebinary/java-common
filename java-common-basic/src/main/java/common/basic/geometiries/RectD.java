@@ -17,6 +17,11 @@ public class RectD {
         this.size = size;
     }
 
+    public RectD(int x, int y, int width, int height) {
+        this(new PointD(x, y), new SizeD(width, height));
+    }
+
+
     public double width() {
         return size.width;
     }
@@ -41,6 +46,12 @@ public class RectD {
         return point.y + size.height;
     }
 
+    public PointD center() {
+        final SizeD half = size.divideBy(2);
+        return point.offset(half);
+    }
+
+
     public RectD deflate(double full) {
         final double half = full / 2;
         final PointD pointNew = new PointD(point.x + half, point.y + half);
@@ -48,20 +59,18 @@ public class RectD {
         return new RectD(pointNew, sizeNew);
     }
 
+
     public boolean contains(PointF point) {
         return
                 (left() <= point.x && point.x <= right()) &&
                 (top() <= point.y && point.y <= bottom());
     }
 
-    public PointD center() {
-        final SizeD half = size.divideBy(2);
-        return point.offset(half);
-    }
 
     public RectD offset(SizeD size) {
         return new RectD(point.offset(size), this.size);
     }
+
 
     @Override
     public String toString() {
