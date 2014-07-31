@@ -1,4 +1,0 @@
-rootProject.name = 'java-common'
-
-include 'java-common-basic'
-
