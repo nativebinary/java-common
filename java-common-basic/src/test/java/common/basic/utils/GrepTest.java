@@ -12,28 +12,59 @@ public class GrepTest {
     @Test
     public void testExecute() throws Exception {
 
-        Grep grep = new Grep();
-        ArrayList<String> strings = new ArrayList<String>();
-        strings.add("aa\nbb\ncc\ndd\naa\ncc");
-        strings.add("aa");
-        strings.add("cc");
+        String input = "Further increasing height to her frame, the Problem hitmaker opted for nude pumps, which contrasted nicely against her bronzed complexion, while her light brown locks were worn in a voluminous high pony-tail with cascading curls.\n" +
+                "Accessories were minimal – just sleek diamond studs and a delicate bracelet, while she sported a brown lip, golden eye shadow and seriously long lashes.\n" +
+                "\n" +
+                "\n" +
+                "Read more: http://www.dailymail.co.uk/tvshowbiz/article-2721666/Ariana-Grande-flashes-lot-leg-sexy-bejewelled-mini-dress-Teen-Choice-Awards.html#ixzz3A5IWZbNk\n" +
+                "Follow us: @MailOnline on Twitter | DailyMail on Facebook\n" +
+                "abcdefgaldkfjlkawejflkawjflkawjefkljaweklfjlkjffffffff";
 
-        assertEquals("aa\naa", grep.execute(strings.get(0), strings.get(1)));
+        ArrayList<String> toFind = new ArrayList<String>();
+        toFind.add("curls");
+        toFind.add("http://www.dailymail.co.uk/tvshowbiz/article-2721666/Ariana-Grande-flashes-lot-leg-sexy-bejewelled-mini-dress-Teen-Choice-Awards.html");
+        toFind.add("@");
+        toFind.add(" ");
 
-        assertNotEquals("aa\naa", grep.execute(strings.get(0), strings.get(2)));
+        ArrayList<String> result = new ArrayList<String>();
+        result.add("Further increasing height to her frame, the Problem hitmaker opted for nude pumps, which contrasted nicely against her bronzed complexion, while her light brown locks were worn in a voluminous high pony-tail with cascading curls.");
+        result.add("Read more: http://www.dailymail.co.uk/tvshowbiz/article-2721666/Ariana-Grande-flashes-lot-leg-sexy-bejewelled-mini-dress-Teen-Choice-Awards.html#ixzz3A5IWZbNk");
+        result.add("Follow us: @MailOnline on Twitter | DailyMail on Facebook");
+        result.add("Further increasing height to her frame, the Problem hitmaker opted for nude pumps, which contrasted nicely against her bronzed complexion, while her light brown locks were worn in a voluminous high pony-tail with cascading curls.\n" +
+                "Accessories were minimal – just sleek diamond studs and a delicate bracelet, while she sported a brown lip, golden eye shadow and seriously long lashes.\n" +
+                "Read more: http://www.dailymail.co.uk/tvshowbiz/article-2721666/Ariana-Grande-flashes-lot-leg-sexy-bejewelled-mini-dress-Teen-Choice-Awards.html#ixzz3A5IWZbNk\n" +
+                "Follow us: @MailOnline on Twitter | DailyMail on Facebook");
+
+        for(int i=0; i<toFind.size(); i++) {
+
+            assertEquals(result.get(i), Grep.execute(input, toFind.get(i)));
+        }
+
+        toFind.clear();
+        toFind.add("us: @MailOnline on Twitter | DailyMai");
+        toFind.add("@");
+        toFind.add(" ");
+        toFind.add("curls");
+
+        for(int i=0; i<toFind.size(); i++) {
+
+            assertNotEquals(result.get(i), Grep.execute(input, toFind.get(i)));
+        }
     }
 
     @Test
     public void testExecuteInvert() throws Exception {
 
         Grep grep = new Grep();
-        ArrayList<String> strings = new ArrayList<String>();
-        strings.add("aa\nbb\ncc\ndd\naa\ncc");
-        strings.add("aa");
-        strings.add("cc");
+        ArrayList<String> input = new ArrayList<String>();
+        input.add("aa\nbb\ncc\ndd\naa\ncc");
 
-        assertEquals("bb\ncc\ndd\ncc", grep.executeInvert(strings.get(0), strings.get(1)));
+        ArrayList<String> toFind = new ArrayList<String>();
+        toFind.add("aa");
+        toFind.add("cc");
 
-        assertNotEquals("bb\ncc\ndd\ncc", grep.executeInvert(strings.get(0), strings.get(2)));
+        assertEquals("bb\ncc\ndd\ncc", grep.executeInvert(input.get(0), toFind.get(0)));
+
+        assertNotEquals("bb\ncc\ndd\ncc", grep.executeInvert(input.get(0), toFind.get(1)));
     }
 }
