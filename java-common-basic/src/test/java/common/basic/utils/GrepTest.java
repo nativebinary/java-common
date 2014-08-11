@@ -11,13 +11,13 @@ public class GrepTest {
     @Test
     public void testExecute() throws Exception {
 
-            String input = "Further increasing height to her frame, the Problem hitmaker opted for nude pumps, which contrasted nicely against her bronzed complexion, while her light brown locks were worn in a voluminous high pony-tail with cascading curls.\n" +
-                    "Accessories were minimal – just sleek diamond studs and a delicate bracelet, while she sported a brown lip, golden eye shadow and seriously long lashes.\n" +
-                    "\n" +
-                    "\n" +
-                    "Read more: http://www.dailymail.co.uk/tvshowbiz/article-2721666/Ariana-Grande-flashes-lot-leg-sexy-bejewelled-mini-dress-Teen-Choice-Awards.html#ixzz3A5IWZbNk\n" +
-                    "Follow us: @MailOnline on Twitter | DailyMail on Facebook\n" +
-                    "abcdefgaldkfjlkawejflkawjflkawjefkljaweklfjlkjffffffff";
+        String input = "Further increasing height to her frame, the Problem hitmaker opted for nude pumps, which contrasted nicely against her bronzed complexion, while her light brown locks were worn in a voluminous high pony-tail with cascading curls.\n" +
+                "Accessories were minimal – just sleek diamond studs and a delicate bracelet, while she sported a brown lip, golden eye shadow and seriously long lashes.\n" +
+                "\n" +
+                "\n" +
+                "Read more: http://www.dailymail.co.uk/tvshowbiz/article-2721666/Ariana-Grande-flashes-lot-leg-sexy-bejewelled-mini-dress-Teen-Choice-Awards.html#ixzz3A5IWZbNk\n" +
+                "Follow us: @MailOnline on Twitter | DailyMail on Facebook\n" +
+                "abcdefgaldkfjlkawejflkawjflkawjefkljaweklfjlkjffffffff";
 
         ArrayList<String> toFind = new ArrayList<String>();
         toFind.add("curls");
