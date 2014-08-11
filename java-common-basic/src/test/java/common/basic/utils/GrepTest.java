@@ -1,6 +1,5 @@
 package common.basic.utils;
 
-import common.basic.logs.Logger;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -12,13 +11,13 @@ public class GrepTest {
     @Test
     public void testExecute() throws Exception {
 
-        String input = "Further increasing height to her frame, the Problem hitmaker opted for nude pumps, which contrasted nicely against her bronzed complexion, while her light brown locks were worn in a voluminous high pony-tail with cascading curls.\n" +
-                "Accessories were minimal – just sleek diamond studs and a delicate bracelet, while she sported a brown lip, golden eye shadow and seriously long lashes.\n" +
-                "\n" +
-                "\n" +
-                "Read more: http://www.dailymail.co.uk/tvshowbiz/article-2721666/Ariana-Grande-flashes-lot-leg-sexy-bejewelled-mini-dress-Teen-Choice-Awards.html#ixzz3A5IWZbNk\n" +
-                "Follow us: @MailOnline on Twitter | DailyMail on Facebook\n" +
-                "abcdefgaldkfjlkawejflkawjflkawjefkljaweklfjlkjffffffff";
+            String input = "Further increasing height to her frame, the Problem hitmaker opted for nude pumps, which contrasted nicely against her bronzed complexion, while her light brown locks were worn in a voluminous high pony-tail with cascading curls.\n" +
+                    "Accessories were minimal – just sleek diamond studs and a delicate bracelet, while she sported a brown lip, golden eye shadow and seriously long lashes.\n" +
+                    "\n" +
+                    "\n" +
+                    "Read more: http://www.dailymail.co.uk/tvshowbiz/article-2721666/Ariana-Grande-flashes-lot-leg-sexy-bejewelled-mini-dress-Teen-Choice-Awards.html#ixzz3A5IWZbNk\n" +
+                    "Follow us: @MailOnline on Twitter | DailyMail on Facebook\n" +
+                    "abcdefgaldkfjlkawejflkawjflkawjefkljaweklfjlkjffffffff";
 
         ArrayList<String> toFind = new ArrayList<String>();
         toFind.add("curls");
@@ -55,16 +54,58 @@ public class GrepTest {
     @Test
     public void testExecuteInvert() throws Exception {
 
-        Grep grep = new Grep();
-        ArrayList<String> input = new ArrayList<String>();
-        input.add("aa\nbb\ncc\ndd\naa\ncc");
+        String input = "Further increasing height to her frame, the Problem hitmaker opted for nude pumps, which contrasted nicely against her bronzed complexion, while her light brown locks were worn in a voluminous high pony-tail with cascading curls.\n" +
+                "Accessories were minimal – just sleek diamond studs and a delicate bracelet, while she sported a brown lip, golden eye shadow and seriously long lashes.\n" +
+                "\n" +
+                "\n" +
+                "Read more: http://www.dailymail.co.uk/tvshowbiz/article-2721666/Ariana-Grande-flashes-lot-leg-sexy-bejewelled-mini-dress-Teen-Choice-Awards.html#ixzz3A5IWZbNk\n" +
+                "Follow us: @MailOnline on Twitter | DailyMail on Facebook\n" +
+                "abcdefgaldkfjlkawejflkawjflkawjefkljaweklfjlkjffffffff";
 
         ArrayList<String> toFind = new ArrayList<String>();
-        toFind.add("aa");
-        toFind.add("cc");
+        toFind.add("curls");
+        toFind.add("http://www.dailymail.co.uk/tvshowbiz/article-2721666/Ariana-Grande-flashes-lot-leg-sexy-bejewelled-mini-dress-Teen-Choice-Awards.html");
+        toFind.add("@");
+        toFind.add(" ");
 
-        assertEquals("bb\ncc\ndd\ncc", grep.executeInvert(input.get(0), toFind.get(0)));
+        ArrayList<String> result = new ArrayList<String>();
 
-        assertNotEquals("bb\ncc\ndd\ncc", grep.executeInvert(input.get(0), toFind.get(1)));
+        result.add("Accessories were minimal – just sleek diamond studs and a delicate bracelet, while she sported a brown lip, golden eye shadow and seriously long lashes.\n" +
+                "\n" +
+                "\n" +
+                "Read more: http://www.dailymail.co.uk/tvshowbiz/article-2721666/Ariana-Grande-flashes-lot-leg-sexy-bejewelled-mini-dress-Teen-Choice-Awards.html#ixzz3A5IWZbNk\n" +
+                "Follow us: @MailOnline on Twitter | DailyMail on Facebook\n" +
+                "abcdefgaldkfjlkawejflkawjflkawjefkljaweklfjlkjffffffff");
+        result.add("Further increasing height to her frame, the Problem hitmaker opted for nude pumps, which contrasted nicely against her bronzed complexion, while her light brown locks were worn in a voluminous high pony-tail with cascading curls.\n" +
+                "Accessories were minimal – just sleek diamond studs and a delicate bracelet, while she sported a brown lip, golden eye shadow and seriously long lashes.\n" +
+                "\n" +
+                "\n" +
+                "Follow us: @MailOnline on Twitter | DailyMail on Facebook\n" +
+                "abcdefgaldkfjlkawejflkawjflkawjefkljaweklfjlkjffffffff");
+        result.add("Further increasing height to her frame, the Problem hitmaker opted for nude pumps, which contrasted nicely against her bronzed complexion, while her light brown locks were worn in a voluminous high pony-tail with cascading curls.\n" +
+                "Accessories were minimal – just sleek diamond studs and a delicate bracelet, while she sported a brown lip, golden eye shadow and seriously long lashes.\n" +
+                "\n" +
+                "\n" +
+                "Read more: http://www.dailymail.co.uk/tvshowbiz/article-2721666/Ariana-Grande-flashes-lot-leg-sexy-bejewelled-mini-dress-Teen-Choice-Awards.html#ixzz3A5IWZbNk\n" +
+                "abcdefgaldkfjlkawejflkawjflkawjefkljaweklfjlkjffffffff");
+        result.add("\n" +
+               "\n" +
+               "abcdefgaldkfjlkawejflkawjflkawjefkljaweklfjlkjffffffff");
+
+        for(int i=0; i<toFind.size(); i++) {
+
+            assertEquals(result.get(i), Grep.executeInvert(input, toFind.get(i)));
+        }
+
+        toFind.clear();
+        toFind.add("us: @MailOnline on Twitter | DailyMai");
+        toFind.add("@");
+        toFind.add(" ");
+        toFind.add("curls");
+
+        for(int i=0; i<toFind.size(); i++) {
+
+            assertNotEquals(result.get(i), Grep.executeInvert(input, toFind.get(i)));
+        }
     }
 }
