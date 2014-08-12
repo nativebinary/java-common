@@ -1,5 +1,6 @@
 package common.basic.utils;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -8,33 +9,44 @@ import static org.junit.Assert.*;
 
 public class GrepTest {
 
-    @Test
-    public void testExecute() throws Exception {
+    String input;
+    ArrayList<String> executeResult;
+    ArrayList<String> executeInvertResult;
 
-        String input = "I am a boy!\n" +
+    @Before
+    public void setup() throws Exception {
+
+        input = "I am a boy!\n" +
                 "You are a girl?\n" +
                 "He is my father.\n" +
                 "She is her mother~\n" +
                 "GrepTDDCode";
 
-        ArrayList<String> toFind = new ArrayList<String>();
-        toFind.add("girl");     //단어 체크
-        toFind.add("He is");    // 문장 체크
-        toFind.add("~");        // 특수문자 체크
-        toFind.add(" ");        // 공백 체크
+        executeResult = new ArrayList<String>();
+        executeResult.add(Grep.execute(input, "girl"));
+        executeResult.add(Grep.execute(input, "He is"));
+        executeResult.add(Grep.execute(input, "~"));
+        executeResult.add(Grep.execute(input, " "));
 
-        ArrayList<String> result = new ArrayList<String>();
-        result.add("You are a girl?");
-        result.add("He is my father.");
-        result.add("She is her mother~");
-        result.add("I am a boy!\n" +
-                "You are a girl?\n" +
-                "He is my father.\n" +
-                "She is her mother~");
+        executeInvertResult = new ArrayList<String>();
+        executeInvertResult.add(Grep.executeInvert(input, "girl"));
+        executeInvertResult.add(Grep.executeInvert(input, "He is"));
+        executeInvertResult.add(Grep.executeInvert(input, "~"));
+        executeInvertResult.add(Grep.executeInvert(input, " "));
+    }
+
+    @Test
+    public void testExecute() throws Exception {
+
+        ArrayList<String> toFind = new ArrayList<String>();
+        toFind.add("girl");
+        toFind.add("He is");
+        toFind.add("~");
+        toFind.add(" ");
 
         for(int i = 0; i < toFind.size(); i++) {
 
-            assertEquals(result.get(i), Grep.execute(input, toFind.get(i)));
+            assertEquals(executeResult.get(i), Grep.execute(input, toFind.get(i)));
         }
 
         toFind.clear();
@@ -45,44 +57,22 @@ public class GrepTest {
 
         for(int i = 0; i < toFind.size(); i++) {
 
-            assertNotEquals(result.get(i), Grep.execute(input, toFind.get(i)));
+            assertNotEquals(executeResult.get(i), Grep.execute(input, toFind.get(i)));
         }
     }
 
     @Test
     public void testExecuteInvert() throws Exception {
 
-        String input = "I am a boy!\n" +
-                "You are a girl?\n" +
-                "He is my father.\n" +
-                "She is her mother~\n" +
-                "GrepTDDCode";
-
         ArrayList<String> toFind = new ArrayList<String>();
-        toFind.add("girl");     //단어 체크
-        toFind.add("He is");    // 문장 체크
-        toFind.add("~");        // 특수문자 체크
-        toFind.add(" ");        // 공백 체크
-
-        ArrayList<String> result = new ArrayList<String>();
-
-        result.add("I am a boy!\n" +
-                "He is my father.\n" +
-                "She is her mother~\n" +
-                "GrepTDDCode");
-        result.add("I am a boy!\n" +
-                "You are a girl?\n" +
-                "She is her mother~\n" +
-                "GrepTDDCode");
-        result.add("I am a boy!\n" +
-                "You are a girl?\n" +
-                "He is my father.\n" +
-                "GrepTDDCode");
-        result.add("GrepTDDCode");
+        toFind.add("girl");
+        toFind.add("He is");
+        toFind.add("~");
+        toFind.add(" ");
 
         for(int i = 0; i < toFind.size(); i++) {
 
-            assertEquals(result.get(i), Grep.executeInvert(input, toFind.get(i)));
+            assertEquals(executeInvertResult.get(i), Grep.executeInvert(input, toFind.get(i)));
         }
 
         toFind.clear();
@@ -93,7 +83,7 @@ public class GrepTest {
 
         for(int i = 0; i < toFind.size(); i++) {
 
-            assertNotEquals(result.get(i), Grep.executeInvert(input, toFind.get(i)));
+            assertNotEquals(executeInvertResult.get(i), Grep.executeInvert(input, toFind.get(i)));
         }
     }
 }
