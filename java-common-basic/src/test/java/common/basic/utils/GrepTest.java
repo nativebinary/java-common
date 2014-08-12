@@ -11,6 +11,11 @@ public class GrepTest {
             "She is her mother~\n" +
             "GrepTDDCode";
 
+    @Test(expected = InstantiationException.class)
+    public void testConstructor() throws Exception {
+        new Grep();
+    }
+
     @Test
     public void testExecute() throws Exception {
 
