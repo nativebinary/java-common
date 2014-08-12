@@ -13,6 +13,7 @@ class JsonUtilTest extends Specification {
 
         def old = JsonUtil.setJsonEngine(new JsonEngineGson());
         def gson = func(param);
+        //noinspection GroovyUnusedAssignment
         def old2 = JsonUtil.setJsonEngine(new JsonEngineJackson());
         def jackson = func(param);
 
@@ -23,8 +24,9 @@ class JsonUtilTest extends Specification {
         JsonUtil.setJsonEngine(old);
 
         where:
-        param       || result
-        1           || "1"
+        param             || result
+        1                 || "1"
+        new Point(10, 20) || "{\"x\":10,\"y\":20}"
     }
 
 
@@ -34,6 +36,7 @@ class JsonUtilTest extends Specification {
 
         def old = JsonUtil.setJsonEngine(new JsonEngineGson());
         def gson = func(paramJson, paramClass);
+        //noinspection GroovyUnusedAssignment
         def old2 = JsonUtil.setJsonEngine(new JsonEngineJackson());
         def jackson = func(paramJson, paramClass);
 
@@ -56,6 +59,7 @@ class JsonUtilTest extends Specification {
 
         def old = JsonUtil.setJsonEngine(new JsonEngineGson());
         def gson = func(param);
+        //noinspection GroovyUnusedAssignment
         def old2 = JsonUtil.setJsonEngine(new JsonEngineJackson());
         def jackson = func(param);
 
@@ -77,11 +81,12 @@ class JsonUtilTest extends Specification {
 
         def old = JsonUtil.setJsonEngine(new JsonEngineGson());
         def gson = func(param);
+        //noinspection GroovyUnusedAssignment
         def old2 = JsonUtil.setJsonEngine(new JsonEngineJackson());
         def jackson = func(param);
 
         expect:
-        MapUtil.equals(result, gson); MapUtil.equals(gson, jackson); jackson == result
+        MapUtil.equals(result, gson as Map<String, Integer>); MapUtil.equals(gson, jackson); jackson == result
 
 
         cleanup:
@@ -100,6 +105,7 @@ class JsonUtilTest extends Specification {
 
         def old = JsonUtil.setJsonEngine(new JsonEngineGson());
         def gson = func(param);
+        //noinspection GroovyUnusedAssignment
         def old2 = JsonUtil.setJsonEngine(new JsonEngineJackson());
         def jackson = func(param);
 
