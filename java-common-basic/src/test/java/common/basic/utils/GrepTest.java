@@ -38,10 +38,10 @@ public class GrepTest {
         }
 
         toFind.clear();
-        toFind.add("us: @MailOnline on Twitter | DailyMai");
-        toFind.add("@");
+        toFind.add("He is");
+        toFind.add("~");
         toFind.add(" ");
-        toFind.add("curls");
+        toFind.add("girl");
 
         for(int i=0; i<toFind.size(); i++) {
 
