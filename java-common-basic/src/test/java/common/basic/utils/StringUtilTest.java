@@ -5,6 +5,65 @@ import org.junit.Test;
 
 public class StringUtilTest extends Assert {
 
+    @Test
+    public void testIsNullOrEmpty(){
+
+        assertTrue(StringUtil.isNullOrEmpty(null));
+        assertTrue(StringUtil.isNullOrEmpty(""));
+
+        assertFalse(StringUtil.isNullOrEmpty(" "));
+        assertFalse(StringUtil.isNullOrEmpty("test"));
+
+    }
+
+    @Test
+    public void testIsNullOrWhitespace(){
+
+        assertTrue(StringUtil.isNullOrWhitespace(null));
+        assertTrue(StringUtil.isNullOrWhitespace(""));
+        assertTrue(StringUtil.isNullOrWhitespace(" "));
+
+        assertFalse(StringUtil.isNullOrWhitespace("test"));
+
+    }
+
+    @Test
+    public void testIsNull(){
+
+        assertEquals(StringUtil.isNull(null), "");
+
+        assertEquals(StringUtil.isNull(""), "");
+        assertEquals(StringUtil.isNull("  "), "  ");
+        assertEquals(StringUtil.isNull("test"), "test");
+
+
+
+        assertEquals(StringUtil.isNull(null,"default"), "default");
+        assertEquals(StringUtil.isNull("","default"), "default");
+        assertEquals(StringUtil.isNull("  ","default"), "  ");
+        assertEquals(StringUtil.isNull("test","default"), "test");
+
+
+    }
+
+    @Test
+    public void testEquals(){
+
+        assertTrue(StringUtil.equals(null,null));
+        assertTrue(StringUtil.equals("test","test"));
+        assertTrue(StringUtil.equals("test ","test "));
+        assertTrue(StringUtil.equals("", ""));
+
+        assertFalse(StringUtil.equals(null,"test"));
+        assertFalse(StringUtil.equals("test",null));
+        assertFalse(StringUtil.equals("test", "t"));
+        assertFalse(StringUtil.equals("t", "test"));
+        assertFalse(StringUtil.equals("test",""));
+        assertFalse(StringUtil.equals("","test"));
+
+    }
+
+
     @Test(expected = InstantiationException.class)
     public void testConstructor() throws Exception {
         new StringUtil();
@@ -27,20 +86,6 @@ public class StringUtilTest extends Assert {
 
     }
 
-    @Test
-    public void testEquals(){
-        assertTrue(StringUtil.equals(null,null));
-        assertFalse(StringUtil.equals(null,"test"));
-        assertFalse(StringUtil.equals("test",null));
-
-        assertTrue(StringUtil.equals("test","test"));
-        assertTrue(StringUtil.equals("", ""));
-
-        assertFalse(StringUtil.equals("test", "t"));
-        assertFalse(StringUtil.equals("t", "test"));
-        assertFalse(StringUtil.equals("test",""));
-        assertFalse(StringUtil.equals("","test"));
-    }
 
     @Test
     public void testEqualsIgnoreCase(){
