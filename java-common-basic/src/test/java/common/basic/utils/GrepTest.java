@@ -32,7 +32,7 @@ public class GrepTest {
                 "He is my father.\n" +
                 "She is her mother~");
 
-        for(int i=0; i<toFind.size(); i++) {
+        for(int i = 0; i < toFind.size(); i++) {
 
             assertEquals(result.get(i), Grep.execute(input, toFind.get(i)));
         }
@@ -43,7 +43,7 @@ public class GrepTest {
         toFind.add(" ");
         toFind.add("girl");
 
-        for(int i=0; i<toFind.size(); i++) {
+        for(int i = 0; i < toFind.size(); i++) {
 
             assertNotEquals(result.get(i), Grep.execute(input, toFind.get(i)));
         }
@@ -80,7 +80,7 @@ public class GrepTest {
                 "GrepTDDCode");
         result.add("GrepTDDCode");
 
-        for(int i=0; i<toFind.size(); i++) {
+        for(int i = 0; i < toFind.size(); i++) {
 
             assertEquals(result.get(i), Grep.executeInvert(input, toFind.get(i)));
         }
@@ -91,7 +91,7 @@ public class GrepTest {
         toFind.add(" ");
         toFind.add("girl");
 
-        for(int i=0; i<toFind.size(); i++) {
+        for(int i = 0; i < toFind.size(); i++) {
 
             assertNotEquals(result.get(i), Grep.executeInvert(input, toFind.get(i)));
         }
