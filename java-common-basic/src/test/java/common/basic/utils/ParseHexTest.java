@@ -28,24 +28,11 @@ public class ParseHexTest {
         Assert.assertEquals("F", ParseHex.getHex("15"));
         Assert.assertEquals("10", ParseHex.getHex("16"));
         Assert.assertEquals("11", ParseHex.getHex("17"));
-        Assert.assertEquals("12", ParseHex.getHex("18"));
-        Assert.assertEquals("13", ParseHex.getHex("19"));
-        Assert.assertEquals("14", ParseHex.getHex("20"));
-        Assert.assertEquals("15", ParseHex.getHex("21"));
-        Assert.assertEquals("16", ParseHex.getHex("22"));
-        Assert.assertEquals("17", ParseHex.getHex("23"));
-        Assert.assertEquals("18", ParseHex.getHex("24"));
-        Assert.assertEquals("19", ParseHex.getHex("25"));
-        Assert.assertEquals("1A", ParseHex.getHex("26"));
-        Assert.assertEquals("1B", ParseHex.getHex("27"));
-        Assert.assertEquals("1C", ParseHex.getHex("28"));
-        Assert.assertEquals("1D", ParseHex.getHex("29"));
-        Assert.assertEquals("1E", ParseHex.getHex("30"));
-        Assert.assertEquals("1F", ParseHex.getHex("31"));
-        Assert.assertEquals("20", ParseHex.getHex("32"));
         Assert.assertEquals("557", ParseHex.getHex("1367"));
         Assert.assertEquals("E7319B", ParseHex.getHex("15151515"));
+        Assert.assertEquals("AAAA", ParseHex.getHex("43690"));
+        Assert.assertEquals("D95A", ParseHex.getHex("55642"));
 
-        Assert.assertEquals("61", ParseHex.getHexStr("a"));
+        Assert.assertEquals("55642", ParseHex.getHexStr("D95A"));
     }
 }
