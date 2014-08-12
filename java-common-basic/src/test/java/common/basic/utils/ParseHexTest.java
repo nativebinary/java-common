@@ -45,5 +45,7 @@ public class ParseHexTest {
         Assert.assertEquals("20", ParseHex.getHex("32"));
         Assert.assertEquals("557", ParseHex.getHex("1367"));
         Assert.assertEquals("E7319B", ParseHex.getHex("15151515"));
+
+        Assert.assertEquals("61", ParseHex.getHexStr("a"));
     }
 }
