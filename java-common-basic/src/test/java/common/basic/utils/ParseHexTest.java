@@ -11,28 +11,45 @@ public class ParseHexTest {
     @Test
     public void testCheckHex() throws Exception {
 
-        Assert.assertEquals("1", ParseHex.getHex("1"));
-        Assert.assertEquals("2", ParseHex.getHex("2"));
-        Assert.assertEquals("3", ParseHex.getHex("3"));
-        Assert.assertEquals("4", ParseHex.getHex("4"));
-        Assert.assertEquals("5", ParseHex.getHex("5"));
-        Assert.assertEquals("6", ParseHex.getHex("6"));
-        Assert.assertEquals("7", ParseHex.getHex("7"));
-        Assert.assertEquals("8", ParseHex.getHex("8"));
-        Assert.assertEquals("9", ParseHex.getHex("9"));
-        Assert.assertEquals("A", ParseHex.getHex("10"));
-        Assert.assertEquals("B", ParseHex.getHex("11"));
-        Assert.assertEquals("C", ParseHex.getHex("12"));
-        Assert.assertEquals("D", ParseHex.getHex("13"));
-        Assert.assertEquals("E", ParseHex.getHex("14"));
-        Assert.assertEquals("F", ParseHex.getHex("15"));
-        Assert.assertEquals("10", ParseHex.getHex("16"));
-        Assert.assertEquals("11", ParseHex.getHex("17"));
-        Assert.assertEquals("557", ParseHex.getHex("1367"));
-        Assert.assertEquals("E7319B", ParseHex.getHex("15151515"));
-        Assert.assertEquals("AAAA", ParseHex.getHex("43690"));
-        Assert.assertEquals("D95A", ParseHex.getHex("55642"));
+        try {
+            ParseHex.parseHex("");
+            Assert.fail();
+        } catch (Exception e) {
 
-        Assert.assertEquals("55642", ParseHex.getHexStr("D95A"));
+        }
+
+        try {
+            ParseHex.parseHex(null);
+            Assert.fail();
+        } catch (Exception e) {
+
+        }
+
+        Assert.assertEquals(0, ParseHex.parseHex("0"));
+        Assert.assertEquals(1, ParseHex.parseHex("1"));
+        Assert.assertEquals(10, ParseHex.parseHex("a"));
+        Assert.assertEquals(10, ParseHex.parseHex("A"));
+        Assert.assertEquals(16, ParseHex.parseHex("10"));
+        Assert.assertEquals(0x7fffffffffffffffL, ParseHex.parseHex("7fff" + "ffff" + "ffff" + "ffff"));
+        Assert.assertEquals(-9223372036854775808L, ParseHex.parseHex("8000" + "0000" + "0000" + "0000"));
+
+
+        Assert.assertEquals('0', 48);
+        Assert.assertEquals('0', 0x30);
+
+        Assert.assertEquals("400", ParseHex.toHex(1024));
+
+        Assert.assertEquals("0", ParseHex.toHex(0));
+        Assert.assertEquals("10", ParseHex.toHex(16));
+
+        Assert.assertEquals(Long.toHexString(0-0xffffffffffffffffL), ParseHex.toHex(0-0xffffffffffffffffL));
+        Assert.assertEquals(Long.toHexString(0-0xffffffffffff0000L), ParseHex.toHex(0-0xffffffffffff0000L));
+        Assert.assertEquals(Long.toHexString(0-0xefffffffffff0000L), ParseHex.toHex(0-0xefffffffffff0000L));
+        Assert.assertEquals(Long.toHexString(0-0x7fffffffffff0000L), ParseHex.toHex(0-0x7fffffffffff0000L));
+        Assert.assertEquals(Long.toHexString(0-0xfffffffffff0000L), ParseHex.toHex(0-0xfffffffffff0000L));
+        Assert.assertEquals(Long.toHexString(-2), ParseHex.toHex(-2));
+        Assert.assertEquals(Long.toHexString(-1), ParseHex.toHex(-1));
+        Assert.assertEquals("8000000000000000", ParseHex.toHex(-9223372036854775808L));
+
     }
 }
