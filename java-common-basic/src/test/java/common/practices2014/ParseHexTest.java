@@ -36,6 +36,11 @@ public class ParseHexTest {
         catch (Exception ignored) {
         }
 
+        try {
+            Assert.assertEquals(16, ParseHex.parseHex("GG"));
+        }
+        catch (Exception ignored) {
+        }
 
     }
 
