@@ -30,6 +30,12 @@ public class ParseHexTest {
         Assert.assertEquals(-9223372036854775808L, ParseHex.parseHex("8000" + "0000" + "0000" + "0000"));
 
 
+        try {
+            ParseHex.parseHex("8000" + "0000" + "0000" + "0000" + "8000" + "0000" + "0000" + "0000");
+        }
+        catch (Exception ignored) {
+        }
+
 
     }
 
