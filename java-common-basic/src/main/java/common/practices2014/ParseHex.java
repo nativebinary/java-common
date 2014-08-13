@@ -2,6 +2,10 @@ package common.practices2014;
 
 public class ParseHex {
 
+    public ParseHex() throws InstantiationException {
+        throw new InstantiationException();
+    }
+
     public static long parseHex(String hexString) throws Exception {
 
         if (null == hexString || 0 == hexString.length())

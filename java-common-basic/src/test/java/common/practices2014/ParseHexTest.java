@@ -5,6 +5,11 @@ import org.junit.Test;
 
 public class ParseHexTest {
 
+    @Test(expected = InstantiationException.class)
+    public void testConstructor() throws Exception {
+        new ParseHex();
+    }
+
     @Test
     public void testParseHex() throws Exception {
         try {
