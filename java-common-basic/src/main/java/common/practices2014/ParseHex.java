@@ -1,12 +1,11 @@
 package common.practices2014;
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
 
 public class ParseHex {
 
-    public static class ExceptionInvalidArgument extends InvalidArgumentException {
-        public ExceptionInvalidArgument(String strings) {
-            super(new String[]{ strings });
+    public static class ExceptionInvalidArgument extends IllegalArgumentException {
+        public ExceptionInvalidArgument(String message) {
+            super(message);
         }
     }
 
