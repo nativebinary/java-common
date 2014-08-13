@@ -1,4 +1,4 @@
-package common.basic.practices2014;
+package common.practices2014;
 
 public class ParseHex {
 
