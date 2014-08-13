@@ -6,8 +6,7 @@ import org.junit.Test;
 public class ParseHexTest {
 
     @Test
-    public void testCheckHex() throws Exception {
-
+    public void testParseHex() throws Exception {
         try {
             ParseHex.parseHex("");
             Assert.fail();
@@ -31,6 +30,12 @@ public class ParseHexTest {
         Assert.assertEquals(-9223372036854775808L, ParseHex.parseHex("8000" + "0000" + "0000" + "0000"));
 
 
+
+    }
+
+    @Test
+    public void testToHex() throws Exception {
+
         Assert.assertEquals('0', 48);
         Assert.assertEquals('0', 0x30);
 
@@ -47,6 +52,6 @@ public class ParseHexTest {
         Assert.assertEquals(Long.toHexString(-2), ParseHex.toHex(-2));
         Assert.assertEquals(Long.toHexString(-1), ParseHex.toHex(-1));
         Assert.assertEquals("8000000000000000", ParseHex.toHex(-9223372036854775808L));
-
     }
+
 }
