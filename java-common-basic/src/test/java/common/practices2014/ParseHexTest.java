@@ -12,11 +12,11 @@ public class ParseHexTest {
 
     @Test
     public void testParseHex() throws Exception {
-        Assert.assertEquals(0, ParseHex.parseHex("0"));
-        Assert.assertEquals(1, ParseHex.parseHex("1"));
-        Assert.assertEquals(10, ParseHex.parseHex("a"));
-        Assert.assertEquals(10, ParseHex.parseHex("A"));
-        Assert.assertEquals(16, ParseHex.parseHex("10"));
+        Assert.assertEquals(0x0, ParseHex.parseHex("0"));
+        Assert.assertEquals(0x1, ParseHex.parseHex("1"));
+        Assert.assertEquals(0xa, ParseHex.parseHex("a"));
+        Assert.assertEquals(0xA, ParseHex.parseHex("A"));
+        Assert.assertEquals(0x10, ParseHex.parseHex("10"));
         Assert.assertEquals(0x7fffffffffffffffL, ParseHex.parseHex("7fff" + "ffff" + "ffff" + "ffff"));
         Assert.assertEquals(-9223372036854775808L, ParseHex.parseHex("8000" + "0000" + "0000" + "0000"));
     }
