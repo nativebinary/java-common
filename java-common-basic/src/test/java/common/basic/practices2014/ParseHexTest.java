@@ -1,4 +1,4 @@
-package common.basic.utils;
+package common.basic.practices2014;
 
 import org.junit.Assert;
 import org.junit.Test;
