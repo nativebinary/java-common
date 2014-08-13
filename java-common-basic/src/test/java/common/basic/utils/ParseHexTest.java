@@ -3,9 +3,6 @@ package common.basic.utils;
 import org.junit.Assert;
 import org.junit.Test;
 
-/**
- * Created by jaebeomi on 8/12/14.
- */
 public class ParseHexTest {
 
     @Test
@@ -14,14 +11,14 @@ public class ParseHexTest {
         try {
             ParseHex.parseHex("");
             Assert.fail();
-        } catch (Exception e) {
+        } catch (Exception ignored) {
 
         }
 
         try {
             ParseHex.parseHex(null);
             Assert.fail();
-        } catch (Exception e) {
+        } catch (Exception ignored) {
 
         }
 
