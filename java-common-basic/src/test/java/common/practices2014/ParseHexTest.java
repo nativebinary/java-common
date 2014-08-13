@@ -52,11 +52,11 @@ public class ParseHexTest {
         Assert.assertEquals("0", ParseHex.toHex(0));
         Assert.assertEquals("10", ParseHex.toHex(16));
 
-        Assert.assertEquals(Long.toHexString(0-0xffffffffffffffffL), ParseHex.toHex(0-0xffffffffffffffffL));
-        Assert.assertEquals(Long.toHexString(0-0xffffffffffff0000L), ParseHex.toHex(0-0xffffffffffff0000L));
-        Assert.assertEquals(Long.toHexString(0-0xefffffffffff0000L), ParseHex.toHex(0-0xefffffffffff0000L));
-        Assert.assertEquals(Long.toHexString(0-0x7fffffffffff0000L), ParseHex.toHex(0-0x7fffffffffff0000L));
-        Assert.assertEquals(Long.toHexString(0-0xfffffffffff0000L), ParseHex.toHex(0-0xfffffffffff0000L));
+        Assert.assertEquals(Long.toHexString(0 - 0xffffffffffffffffL), ParseHex.toHex(0 - 0xffffffffffffffffL));
+        Assert.assertEquals(Long.toHexString(0 - 0xffffffffffff0000L), ParseHex.toHex(0 - 0xffffffffffff0000L));
+        Assert.assertEquals(Long.toHexString(0 - 0xefffffffffff0000L), ParseHex.toHex(0 - 0xefffffffffff0000L));
+        Assert.assertEquals(Long.toHexString(0 - 0x7fffffffffff0000L), ParseHex.toHex(0 - 0x7fffffffffff0000L));
+        Assert.assertEquals(Long.toHexString(0 - 0xfffffffffff0000L), ParseHex.toHex(0 - 0xfffffffffff0000L));
         Assert.assertEquals(Long.toHexString(-2), ParseHex.toHex(-2));
         Assert.assertEquals(Long.toHexString(-1), ParseHex.toHex(-1));
         Assert.assertEquals("8000000000000000", ParseHex.toHex(-9223372036854775808L));
