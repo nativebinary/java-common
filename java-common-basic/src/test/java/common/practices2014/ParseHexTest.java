@@ -12,20 +12,6 @@ public class ParseHexTest {
 
     @Test
     public void testParseHex() throws Exception {
-        try {
-            ParseHex.parseHex("");
-            Assert.fail();
-        } catch (Exception ignored) {
-
-        }
-
-        try {
-            ParseHex.parseHex(null);
-            Assert.fail();
-        } catch (Exception ignored) {
-
-        }
-
         Assert.assertEquals(0, ParseHex.parseHex("0"));
         Assert.assertEquals(1, ParseHex.parseHex("1"));
         Assert.assertEquals(10, ParseHex.parseHex("a"));
@@ -33,20 +19,26 @@ public class ParseHexTest {
         Assert.assertEquals(16, ParseHex.parseHex("10"));
         Assert.assertEquals(0x7fffffffffffffffL, ParseHex.parseHex("7fff" + "ffff" + "ffff" + "ffff"));
         Assert.assertEquals(-9223372036854775808L, ParseHex.parseHex("8000" + "0000" + "0000" + "0000"));
+    }
 
+    @Test(expected = ParseHex.ExceptionInvalidArgument.class)
+    public void testParseHexForEmptyString() throws Exception {
+        ParseHex.parseHex("");
+    }
 
-        try {
-            ParseHex.parseHex("8000" + "0000" + "0000" + "0000" + "8000" + "0000" + "0000" + "0000");
-        }
-        catch (Exception ignored) {
-        }
+    @Test(expected = ParseHex.ExceptionInvalidArgument.class)
+    public void testParseHexForNull() throws Exception {
+        ParseHex.parseHex(null);
+    }
 
-        try {
-            Assert.assertEquals(16, ParseHex.parseHex("GG"));
-        }
-        catch (Exception ignored) {
-        }
+    @Test(expected = ParseHex.ExceptionInvalidArgument.class)
+    public void testParseHexForTooLongString() throws Exception {
+        ParseHex.parseHex("8000" + "0000" + "0000" + "0000" + "8000" + "0000" + "0000" + "0000");
+    }
 
+    @Test(expected = ParseHex.ExceptionInvalidArgument.class)
+    public void testParseHexForInvalidHexString() throws Exception {
+        Assert.assertEquals(16, ParseHex.parseHex("GG"));
     }
 
     @Test

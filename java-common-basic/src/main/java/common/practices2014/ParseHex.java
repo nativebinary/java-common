@@ -1,6 +1,14 @@
 package common.practices2014;
 
+import com.sun.javaws.exceptions.InvalidArgumentException;
+
 public class ParseHex {
+
+    public static class ExceptionInvalidArgument extends InvalidArgumentException {
+        public ExceptionInvalidArgument(String strings) {
+            super(new String[]{ strings });
+        }
+    }
 
     public ParseHex() throws InstantiationException {
         throw new InstantiationException();
@@ -8,11 +16,14 @@ public class ParseHex {
 
     public static long parseHex(String hexString) throws Exception {
 
-        if (null == hexString || 0 == hexString.length())
-            throw new Exception("empty string");
+        if (null == hexString)
+            throw new ExceptionInvalidArgument("null == hexString");
+
+        if (0 == hexString.length())
+            throw new ExceptionInvalidArgument("0 == hexString.length()");
 
         if (16 < hexString.length())
-            throw new Exception("too long string");
+            throw new ExceptionInvalidArgument("16 < hexString.length()");
 
         long value = 0;
 
@@ -26,9 +37,8 @@ public class ParseHex {
                 decimalFromHex = hexChar - 'a' + 10;
             } else if ('A' <= hexChar && hexChar <= 'F') {
                 decimalFromHex = hexChar - 'A' + 10;
-
             } else {
-                throw new Exception("invalid hex string");
+                throw new ExceptionInvalidArgument("invalid hex string");
             }
 
             value *= 16;
