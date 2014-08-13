@@ -1,10 +1,5 @@
 package common.basic.utils;
 
-import java.util.ArrayList;
-
-/**
- * Created by jaebeomi on 8/12/14.
- */
 public class ParseHex {
 
     public static long parseHex(String hexString) throws Exception {
