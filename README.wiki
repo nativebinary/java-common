@@ -1,5 +1,5 @@
 = java-common =
-Maintained silsol and aha00a of nativebinary.
+Maintained by silsol and aha00a of nativebinary.
 
 == Contributors ==
 silsol, aha00a, kig1945, millpoo
