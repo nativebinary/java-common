@@ -24,6 +24,7 @@ class IntUtilTest extends Specification {
         -1000       || "-1000"
         11          || "011"
         11          || "0011"
+        11          || "00011"
     }
 
     def "GenerateListRange"() {
