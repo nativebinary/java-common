@@ -5,6 +5,12 @@ import org.junit.Test;
 
 public class StringUtilTest extends Assert {
 
+
+    @Test(expected = InstantiationException.class)
+    public void testConstructor() throws Exception {
+        new StringUtil();
+    }
+
     @Test
     public void testIsNullOrEmpty(){
 
@@ -63,11 +69,28 @@ public class StringUtilTest extends Assert {
 
     }
 
+    @Test
+    public void testEqualsIgnoreCase(){
 
-    @Test(expected = InstantiationException.class)
-    public void testConstructor() throws Exception {
-        new StringUtil();
+        assertTrue(StringUtil.equalsIgnoreCase(null, null));
+        assertFalse(StringUtil.equalsIgnoreCase(null, "test"));
+        assertFalse(StringUtil.equalsIgnoreCase("test", null));
+
+        assertTrue(StringUtil.equalsIgnoreCase("test","test"));
+        assertTrue(StringUtil.equalsIgnoreCase("",""));
+        assertTrue(StringUtil.equalsIgnoreCase("test","TEST"));
+        assertTrue(StringUtil.equalsIgnoreCase("test", "Test"));
+        assertTrue(StringUtil.equalsIgnoreCase("TEST", "test"));
+        assertTrue(StringUtil.equalsIgnoreCase("Test", "test"));
+        assertTrue(StringUtil.equalsIgnoreCase("Test", "tesT"));
+
+        assertFalse(StringUtil.equalsIgnoreCase("tEST", "t"));
+        assertFalse(StringUtil.equalsIgnoreCase("t", "tEST"));
+        assertFalse(StringUtil.equalsIgnoreCase("test", ""));
+        assertFalse(StringUtil.equalsIgnoreCase("", "test"));
+
     }
+
 
     @Test
     public void testStartsWithIgnoreCase() throws Exception {
@@ -87,25 +110,6 @@ public class StringUtilTest extends Assert {
     }
 
 
-    @Test
-    public void testEqualsIgnoreCase(){
-        assertTrue(StringUtil.equalsIgnoreCase(null, null));
-        assertFalse(StringUtil.equalsIgnoreCase(null, "test"));
-        assertFalse(StringUtil.equalsIgnoreCase("test", null));
-
-        assertTrue(StringUtil.equalsIgnoreCase("test","test"));
-        assertTrue(StringUtil.equalsIgnoreCase("",""));
-        assertTrue(StringUtil.equalsIgnoreCase("test","TEST"));
-        assertTrue(StringUtil.equalsIgnoreCase("test", "Test"));
-        assertTrue(StringUtil.equalsIgnoreCase("TEST", "test"));
-        assertTrue(StringUtil.equalsIgnoreCase("Test", "test"));
-        assertTrue(StringUtil.equalsIgnoreCase("Test", "tesT"));
-
-        assertFalse(StringUtil.equalsIgnoreCase("tEST", "t"));
-        assertFalse(StringUtil.equalsIgnoreCase("t", "tEST"));
-        assertFalse(StringUtil.equalsIgnoreCase("test", ""));
-        assertFalse(StringUtil.equalsIgnoreCase("", "test"));
-    }
 
     @Test
     public void testJoin(){
