@@ -94,7 +94,7 @@ public class StringUtilTest extends Assert {
     @Test
     public void testStartsWith(){
 
-        String str = "Welcome to Tutorialspoint.com";
+        String str = "Welcome to nativebinary.com";
 
         assertTrue(StringUtil.startsWith(str, "Welcome"));
 
@@ -102,17 +102,17 @@ public class StringUtilTest extends Assert {
         assertFalse(StringUtil.startsWith(null, ""));
         assertFalse(StringUtil.startsWith(str, null));
         assertFalse(StringUtil.startsWith(null, null));
-        assertFalse(StringUtil.startsWith(str,"Tutorials"));
+        assertFalse(StringUtil.startsWith(str,"nativebinary"));
 
 
         assertTrue(StringUtil.startsWith(str, " ", 7));
-        assertTrue(StringUtil.startsWith(str,"Tutorials", 11));
+        assertTrue(StringUtil.startsWith(str,"nativebinary", 11));
 
         assertFalse(StringUtil.startsWith(str, "", 7));
         assertFalse(StringUtil.startsWith(null, " ", 7));
         assertFalse(StringUtil.startsWith(str, null, 7));
         assertFalse(StringUtil.startsWith(null, null, 7));
-        assertFalse(StringUtil.startsWith(str,"Tutorials", 7));
+        assertFalse(StringUtil.startsWith(str,"nativebinary", 7));
 
     }
 
