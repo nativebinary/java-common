@@ -59,11 +59,20 @@ public class StringUtil {
         return equals(s1.toLowerCase(), s2.toLowerCase());
     }
 
-    public static boolean startsWith(String s1, String s2) {
-        if(isNullOrEmpty(s1))
+    public static boolean startsWith(String str, String prefix) {
+        if(isNullOrEmpty(str) || isNullOrEmpty(prefix)) {
             return false;
+        }
 
-        return s1.startsWith(s2);
+        return str.startsWith(prefix);
+    }
+
+    public static boolean startsWith(String str, String prefix, int toOffset) {
+        if(isNullOrEmpty(str) || isNullOrEmpty(prefix)) {
+            return false;
+        }
+
+        return str.startsWith(prefix, toOffset);
     }
 
     public static boolean startsWithIgnoreCase(String s1, String s2) {
