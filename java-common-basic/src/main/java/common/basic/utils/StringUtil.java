@@ -60,17 +60,19 @@ public class StringUtil {
     }
 
     public static boolean startsWith(String str, String prefix) {
-        if(isNullOrEmpty(str))
+        if(isNullOrEmpty(str) || isNullOrEmpty(prefix)) {
             return false;
+        }
 
         return str.startsWith(prefix);
     }
 
-    public static boolean startsWith(String str, String prefix, int toffset) {
-        if(isNullOrEmpty(str))
+    public static boolean startsWith(String str, String prefix, int toOffset) {
+        if(isNullOrEmpty(str) || isNullOrEmpty(prefix)) {
             return false;
+        }
 
-        return str.startsWith(prefix, toffset);
+        return str.startsWith(prefix, toOffset);
     }
 
     public static boolean startsWithIgnoreCase(String s1, String s2) {
