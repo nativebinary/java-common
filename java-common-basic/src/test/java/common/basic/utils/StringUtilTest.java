@@ -91,6 +91,20 @@ public class StringUtilTest extends Assert {
 
     }
 
+    @Test
+    public void testStartsWith(){
+
+        String str = new String("Welcome to Tutorialspoint.com");
+
+        assertTrue(StringUtil.startsWith(str, "Welcome"));
+
+        assertFalse(StringUtil.startsWith(str,"Tutorials"));
+
+
+        assertTrue(StringUtil.startsWith(str,"Tutorials", 11));
+
+    }
+
 
     @Test
     public void testStartsWithIgnoreCase() throws Exception {
