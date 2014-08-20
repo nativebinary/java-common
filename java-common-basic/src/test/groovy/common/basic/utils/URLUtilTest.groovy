@@ -20,6 +20,17 @@ class URLUtilTest extends Specification {
 
     def "EscapePipe"() {
 
+        expect:
+            URLUtil.escapePipe(url) == i
+
+        where:
+            url                             ||  i
+            "|"                             ||  "%7c"
+            "||"                            ||  "%7c%7c"
+            " "                             ||  " "
+            " | "                           ||  " %7c "
+            "~!@#%^&*()_+\$"                ||  "~!@#%^&*()_+\$"
+            "http://www.naver.com?a = |"    ||  "http://www.naver.com?a = %7c"
     }
 
     def "EscapeSpace"() {
