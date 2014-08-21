@@ -9,10 +9,10 @@ import android.os.Bundle;
 import com.google.android.gcm.GCMBaseIntentService;
 import common.android.api.v1.ApiV1AccountDevices;
 import common.android.utils.NotificationManagerUtil;
+import common.basic.facades.jsons.JsonUtil;
 import common.basic.interfaces.ICallback;
 import common.basic.logs.Logger;
 import common.basic.utils.EnumUtil;
-import common.basic.facades.jsons.gson.GsonUtil;
 import common.basic.utils.RandomUtil;
 import models.Notice;
 import models.NotificationType;
@@ -24,6 +24,7 @@ public class GCMIntentService extends GCMBaseIntentService {
     int notificationId = RandomUtil.nextInt();
 
     //public 기본 생성자를 무조건 만들어야 한다.
+    @SuppressWarnings("UnusedDeclaration")
     public GCMIntentService() {
         this(PROJECT_ID);
 
@@ -45,6 +46,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 
         Bundle b = intent.getExtras();
 
+        assert b != null;
         final String type = b.getString("notificationType");
         final String data = b.getString("data");
 
@@ -64,7 +66,7 @@ public class GCMIntentService extends GCMBaseIntentService {
         switch (notificationType) {
             case Notice:
             {
-                final Notice notice = GsonUtil.fromJson(data, Notice.class);
+                final Notice notice = JsonUtil.fromJson(data, Notice.class);
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(notice.url));
                 notify(notice.ticker, notice.contentTitle, notice.contentText, intent);
