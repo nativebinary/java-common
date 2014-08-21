@@ -1,6 +1,20 @@
 = java-common =
 Maintained by [https://github.com/silsol silsol] and [https://github.com/aha00a aha00a] of [http://nativebinary.com nativebinary].
 
+[https://lkml.org/lkml/2000/8/25/132 Talk is cheap. Show me the code. - Linus Torvalds]
+
+We don't talk about this repository. Please see the test codes : https://github.com/nativebinary/java-common/tree/master/java-common-basic/src/test
+
+== License ==
+TAMYO
+
+These are mine, yours, and ours.
+
+You can use these codes freely!
+
+Don't afraid send me a pull-request.
+
+
 == Contributors ==
 * [https://github.com/silsol silsol]
 * [https://github.com/aha00a aha00a]
