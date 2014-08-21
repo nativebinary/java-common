@@ -5,7 +5,7 @@ Maintained by silsol and aha00a of nativebinary.
 silsol, aha00a, kig1945, millpoo
 
 == Working with IntelliJ IDEA ==
-<code>
+<pre>
 clone java-common
 
 IntelliJ IDEA
@@ -75,4 +75,4 @@ IntelliJ IDEA
 			[v] do not show this dialog in the future
 			[Replace active suites]
 
-</code>
+</pre>
