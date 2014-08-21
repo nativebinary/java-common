@@ -2,7 +2,10 @@
 Maintained by silsol and aha00a of nativebinary.
 
 == Contributors ==
-silsol, aha00a, kig1945, millpoo
+[https://github.com/silsol silsol]
+[https://github.com/aha00a aha00a]
+[https://github.com/kig1945 kig1945]
+[https://github.com/millpoo millpoo]
 
 == Working with IntelliJ IDEA ==
 <pre>
