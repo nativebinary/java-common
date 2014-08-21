@@ -1,11 +1,11 @@
 = java-common =
-Maintained by silsol and aha00a of nativebinary.
+Maintained by [https://github.com/silsol silsol] and [https://github.com/aha00a aha00a] of nativebinary.
 
 == Contributors ==
-[https://github.com/silsol silsol]
-[https://github.com/aha00a aha00a]
-[https://github.com/kig1945 kig1945]
-[https://github.com/millpoo millpoo]
+* [https://github.com/silsol silsol]
+* [https://github.com/aha00a aha00a]
+* [https://github.com/kig1945 kig1945]
+* [https://github.com/millpoo millpoo]
 
 == Working with IntelliJ IDEA ==
 <pre>
