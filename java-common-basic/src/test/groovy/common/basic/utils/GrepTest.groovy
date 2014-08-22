@@ -18,10 +18,10 @@ class GrepTest extends Specification {
     def "Execute"() {
 
         expect:
-            Grep.execute(input, toFind) == i
+            Grep.execute(input, toFind) == result
 
         where:
-            toFind  ||  i
+            toFind  ||  result
             "girl"  ||  "You are a girl?"
             "is"    ||  "He is my father.\nShe is her mother~"
             "her"   ||  "He is my father.\nShe is her mother~"
@@ -33,10 +33,10 @@ class GrepTest extends Specification {
     def "ExecuteInvert"() {
 
         expect:
-            Grep.executeInvert(input, toFind) == i
+            Grep.executeInvert(input, toFind) == result
 
         where:
-            toFind  ||  i
+            toFind  ||  result
             "girl"  ||  "I am a boy!\nHe is my father.\nShe is her mother~\nGrepTDDCode"
             "is"    ||  "I am a boy!\nYou are a girl?\nGrepTDDCode"
             "her"   ||  "I am a boy!\nYou are a girl?\nGrepTDDCode"
