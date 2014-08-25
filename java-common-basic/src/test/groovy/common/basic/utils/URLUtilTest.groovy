@@ -49,6 +49,16 @@ class URLUtilTest extends Specification {
 
     def "Encode"() {
 
+        expect:
+            URLUtil.encode(str) == result
+
+        where:
+            str                         ||  result
+            "test"                      ||  "test"
+            "test input url code"       ||  "test+input+url+code"
+            "동해물과 백두산이 마르고 닳도록"   ||  "%EB%8F%99%ED%95%B4%EB%AC%BC%EA%B3%BC+%EB%B0%B1%EB%91%90%EC%82%B0%EC%9D%B4+%EB%A7%88%EB%A5%B4%EA%B3%A0+%EB%8B%B3%EB%8F%84%EB%A1%9D"
+            ""                          ||  ""
+            null                        ||  ""
     }
 
     def "DecodeURIComponentIfEncoded"() {
