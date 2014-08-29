@@ -8,6 +8,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class DateUtil {
     public static final long MilliSecond = 1;
@@ -116,4 +118,56 @@ public class DateUtil {
         return new Date().getTime();
     }
 
+
+
+    static Pattern patternTimeSpan = Pattern.compile("(\\d+)\\s*(second|sec|s|ss|minute|min|mi|mm|hour|h|hh|day|d|dd|month|m|MM|year|y|yy|yyyy)");
+    public static Date dateAddHumanReadableTimeSpan(Date date, String timeSpan) {
+
+        final Calendar calendarNow = Calendar.getInstance();
+        calendarNow.setTime(date);
+
+        timeSpan = timeSpan.trim();
+        Matcher matcher = patternTimeSpan.matcher(timeSpan);
+        if (!matcher.find())
+            return calendarNow.getTime();
+
+
+        int number = IntUtil.parseInt(matcher.group(1), 0);
+        String unit = matcher.group(2);
+        if ("second".equals(unit) || "sec".equals(unit) || "s".equals(unit) || "ss".equals(unit)) {
+            calendarNow.add(Calendar.SECOND, number);
+            return calendarNow.getTime();
+        }
+
+        if ("minute".equals(unit) || "min".equals(unit)|| "mi".equals(unit) || "mm".equals(unit)) {
+            calendarNow.add(Calendar.MINUTE, number);
+            return calendarNow.getTime();
+        }
+
+        if ("hour".equals(unit) || "h".equals(unit) || "hh".equals(unit)) {
+            calendarNow.add(Calendar.HOUR, number);
+            return calendarNow.getTime();
+        }
+
+        if ("day".equals(unit) || "d".equals(unit) || "dd".equals(unit)) {
+            calendarNow.add(Calendar.DATE, number);
+            return calendarNow.getTime();
+        }
+
+        if ("month".equals(unit) || "m".equals(unit) || "MM".equals(unit)) {
+            calendarNow.add(Calendar.MONTH, number);
+            return calendarNow.getTime();
+        }
+
+        if ("year".equals(unit) || "y".equals(unit) || "yy".equals(unit) || "yyyy".equals(unit)) {
+            calendarNow.add(Calendar.YEAR, number);
+            return calendarNow.getTime();
+        }
+
+        return calendarNow.getTime();
+    }
+
+    public static Date dateNowAfterHumanReadableTimeSpan(String timeSpan) {
+        return dateAddHumanReadableTimeSpan(new Date(), timeSpan);
+    }
 }
