@@ -1,0 +1,95 @@
+= java-common =
+Maintained by [https://github.com/silsol silsol] and [https://github.com/aha00a aha00a] of [http://nativebinary.com nativebinary].
+
+[https://lkml.org/lkml/2000/8/25/132 Talk is cheap. Show me the code. - Linus Torvalds]
+
+We don't talk about this repository. Please see the test codes : https://github.com/nativebinary/java-common/tree/master/java-common-basic/src/test
+
+== License ==
+TAMYO
+
+These are mine, yours, and ours.
+
+You can use these codes freely!
+
+Don't afraid send me a pull-request.
+
+
+== Contributors ==
+* [https://github.com/silsol silsol]
+* [https://github.com/aha00a aha00a]
+* [https://github.com/kig1945 kig1945]
+* [https://github.com/millpoo millpoo]
+
+== Working with IntelliJ IDEA ==
+<pre>
+clone java-common
+
+IntelliJ IDEA
+	Menu - File
+		Import Project...
+			/.../java-common - [OK]
+			(o) Create project from existing sources - [Next]
+			Project name: [java-common] - [Next]
+			Source files
+				Uncheck java-common-basic
+				[v] /.../java-common/java-common-android
+				[v] /.../java-common/java-common-android/src
+				[ ] /.../java-common/java-common-basic/src/main/java
+				[ ] /.../java-common/java-common-basic/src/test/groovy
+				[ ] /.../java-common/java-common-basic/src/test/java
+				[v] /.../java-common/java-common-playframework1/app
+				[v] /.../java-common/java-common-playframework1/test
+				[Next]
+			Libraries - [Next]
+			Modules - [Next]
+			Project SDK - [Next]
+			Frameworks - [Finish]
+	Menu - File
+		Import Module...
+			/.../java-common/java-common-basic - [OK]
+			(o) Import module from external model - [Gradle] - [Next]
+			[Finish]
+
+Terminal
+	cd /.../java-common/java-common-playframework1
+	play127 deps
+	play127 idea
+
+IntelliJ IDEA
+	Popup - Project Files Changed
+		[v] Reload project - [OK]
+
+
+	Menu - File - Project Structure...
+		Modules
+			java-common-android
+				Dependencies
+					[+]
+						Module Dependency...
+							java-common-basic - [OK]
+			java-common-playframework1
+				Dependencies
+					[+]
+						Module Dependency...
+							java-common-basic - [OK]
+
+		OK
+
+	Panel - 1 Project
+		java-common-basic/src/test/java/common/basic/PrepareTest
+			Right Click
+				Run 'PrepareTest' with Coverage...
+
+	Menu - Run - Edit Configurations...
+		PrepareTest
+			Test kind: [All in package]
+			Package: [common.basic]
+		OK
+
+	Menu - Run - Run 'common.basic in java-common-basic' with Coverage
+		Popup - Code Coverage
+			[v] do not show this dialog in the future
+			[Replace active suites]
+
+</pre>

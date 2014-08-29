@@ -15,6 +15,7 @@ public class StringUtil {
         if(s == null)
             return true;
 
+        //noinspection RedundantIfStatement
         if("".equals(s))
             return true;
 
@@ -25,6 +26,7 @@ public class StringUtil {
         if(null == s)
             return true;
 
+        //noinspection RedundantIfStatement
         if("".equals(s.trim()))
             return true;
 
@@ -43,6 +45,7 @@ public class StringUtil {
         if (null == s1 && null == s2)
             return true;
 
+        //noinspection SimplifiableIfStatement
         if (null == s1 || null == s2)
             return false;
 
@@ -53,23 +56,36 @@ public class StringUtil {
         if (null == s1 && null == s2)
             return true;
 
+        //noinspection SimplifiableIfStatement
         if (null == s1 || null == s2)
             return false;
 
         return equals(s1.toLowerCase(), s2.toLowerCase());
     }
 
-    public static boolean startsWith(String s1, String s2) {
-        if(isNullOrEmpty(s1))
+    public static boolean startsWith(String str, String prefix) {
+        //noinspection SimplifiableIfStatement
+        if(isNullOrEmpty(str) || isNullOrEmpty(prefix)) {
             return false;
+        }
 
-        return s1.startsWith(s2);
+        return str.startsWith(prefix);
+    }
+
+    public static boolean startsWith(String str, String prefix, int toOffset) {
+        //noinspection SimplifiableIfStatement
+        if(isNullOrEmpty(str) || isNullOrEmpty(prefix)) {
+            return false;
+        }
+
+        return str.startsWith(prefix, toOffset);
     }
 
     public static boolean startsWithIgnoreCase(String s1, String s2) {
         if (null == s1 && null == s2)
             return true;
 
+        //noinspection SimplifiableIfStatement
         if (null == s1 || null == s2)
             return false;
 
@@ -116,20 +132,20 @@ public class StringUtil {
     }
 
     public static String join(String splitter, List<String> list) {
-        StringBuffer stringBuffer = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
 
         int size = list.size() ;
         for (int i = 0; i < size - 1; i++) {
-            stringBuffer.append(list.get(i));
-            stringBuffer.append(splitter);
+            sb.append(list.get(i));
+            sb.append(splitter);
         }
 
         if(size - 1 >= 0)
         {
-            stringBuffer.append(list.get(size - 1));
+            sb.append(list.get(size - 1));
         }
 
-        return stringBuffer.toString();
+        return sb.toString();
     }
 
 

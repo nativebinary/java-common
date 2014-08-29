@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Grep {
+    public Grep() throws InstantiationException {
+        throw new InstantiationException();
+    }
+
     public static String execute(String s, String toFind) {
         return execute(s, toFind, false);
     }

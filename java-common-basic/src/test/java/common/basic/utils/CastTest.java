@@ -5,6 +5,19 @@ import org.junit.Test;
 
 public class CastTest extends Assert {
 
+    static class FatherClass {
+        FatherClass(){}
+
+    }
+    static class MotherClass {
+        MotherClass(){}
+
+    }
+
+    static class ChildClass extends FatherClass {
+        ChildClass(){}
+    }
+
     @Test(expected = InstantiationException.class)
     public void testConstructor() throws Exception {
         new Cast();
@@ -35,19 +48,4 @@ public class CastTest extends Assert {
         assertTrue(Cast.is(FatherClass.class, childClass));
 
     }
-
 }
-
-class FatherClass {
-    FatherClass(){}
-
-}
-class MotherClass {
-    MotherClass(){}
-
-}
-
-class ChildClass extends FatherClass {
-    ChildClass(){}
-}
-

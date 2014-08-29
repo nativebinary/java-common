@@ -371,6 +371,7 @@ public class FileUtil {
         return folder;
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public static void setPermission666(File file) {
         file.setReadable(true, false);
         file.setWritable(true, false);
@@ -378,6 +379,7 @@ public class FileUtil {
 
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public static void setPermission777(File file) {
         file.setReadable(true, false);
         file.setWritable(true, false);
