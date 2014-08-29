@@ -23,4 +23,8 @@ public class ApplicationConf extends ApplicationConfBase {
     public static String getGcmApiKey() {
         return getProperty("gcm.api.key");
     }
+
+    public static String getApnsCertPath() {
+        return getProperty("apns.cert.path");
+    }
 }

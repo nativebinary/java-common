@@ -1,0 +1,14 @@
+#{extends '_base.html' /}
+
+<div class="contentWrapper">
+    <div class="sidebar">
+        <ul>
+            <li><a href="@{index()}">&{"PushNotifications.index"}</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <h2>&{request.controller + '.' + request.actionMethod}</h2>
+        #{doLayout /}
+    </div>
+</div>
