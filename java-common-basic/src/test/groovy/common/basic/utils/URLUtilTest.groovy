@@ -80,6 +80,17 @@ class URLUtilTest extends Specification {
 
     def "Decode"() {
 
+        expect:
+            URLUtil.decode(url) == result
+
+        where:
+            url                                                     ||  result
+            "http://www.test.com"                                   ||  "http://www.test.com"
+            "http://www.test.com?a%20=%20tp&b=%7c"                  ||  "http://www.test.com?a = tp&b=|"
+            "http%3A%2F%2Fwww.test.com?a%20=%20tp&b=%7c"            ||  "http://www.test.com?a = tp&b=|"
+            "http%3A%2F%2Fwww.test.com"                             ||  "http://www.test.com"
+            "https%3A%2F%2Fwww.애국가.com"                            ||  "https://www.애국가.com"
+            "https%3A%2F%2Fwww.%EC%95%A0%EA%B5%AD%EA%B0%80.com"     ||  "https://www.애국가.com"
     }
 
     def "GetMapListParameter"() {
