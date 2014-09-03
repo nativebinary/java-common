@@ -213,5 +213,18 @@ class URLUtilTest extends Specification {
 
     def "ToUriString"() {
 
+        expect:
+            URLUtil.toUriString(url) == result
+
+        where:
+        url                             ||  result
+        "http：／／www.test.com"          ||  "http://www.test.com"
+        "fileName=〈＼test file＼〉"        ||  "fileName=<\\test file\\>"
+        "〃test.pds〃"                   ||  '"test.pds"'
+
+        "＼, ／, ：, ∗, ？, 〃, 〈, 〉, ｜"    ||  '\\, /, :, *, ?, \", <, >, |'
+
+        "〃, ~, !, @, #, \$, %, ^, &, ∗, (, ), _, +, -, =, `, 〈 , 〉, ？, ／, ;, ：, [, ], {, }, ＼, ｜〃"  ||
+        '", ~, !, @, #, $, %, ^, &, *, (, ), _, +, -, =, `, < , >, ?, /, ;, :, [, ], {, }, \\, |"'
     }
 }
