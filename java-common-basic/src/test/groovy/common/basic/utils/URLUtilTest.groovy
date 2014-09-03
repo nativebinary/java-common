@@ -95,10 +95,13 @@ class URLUtilTest extends Specification {
 
     def "GetMapListParameter"() {
         expect:
-        m == URLUtil.getMapListParameter(s)
+        result == URLUtil.getMapListParameter(url)
 
         where:
-        m                                                     ||  s
+        result                                                ||  url
+        [:]                                                   ||  "djakhdsjkdlsjf"
+        [:]                                                   ||  "http://www.test.com"
+        [:]                                                   ||  "http://www.test.com?"
         ["a" : ["1"], "b" : ["2"]]                            ||  "http://www.test.com?a=1&b=2"
         ["a" : ["1"], "b" : ["2", "3"]]                       ||  "http://www.test.com?a=1&b=2&b=3"
     }
