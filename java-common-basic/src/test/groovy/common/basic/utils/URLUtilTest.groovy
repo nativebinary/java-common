@@ -94,7 +94,13 @@ class URLUtilTest extends Specification {
     }
 
     def "GetMapListParameter"() {
+        expect:
+        m == URLUtil.getMapListParameter(s)
 
+        where:
+        m                                                     ||  s
+        ["a" : ["1"], "b" : ["2"]]                            ||  "http://www.test.com?a=1&b=2"
+        ["a" : ["1"], "b" : ["2", "3"]]                       ||  "http://www.test.com?a=1&b=2&b=3"
     }
 
     def "PrependHttpIfNoProtocol"() {
