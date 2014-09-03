@@ -132,6 +132,19 @@ class URLUtilTest extends Specification {
 
     def "IsHttps"() {
 
+        expect:
+            URLUtil.isHttps(url) == result
+
+        where:
+            url     ||  result
+            ""                      ||  false
+            " "                     ||  false
+            "|"                     ||  false
+            "http://www.test.com"   ||  false
+            "https://www.test.com"  ||  true
+            " http://www.test.com"  ||  false
+            "test"                  ||  false
+            "test.com"              ||  false
     }
 
     def "IsHttp"() {
