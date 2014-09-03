@@ -166,6 +166,16 @@ class URLUtilTest extends Specification {
 
     def "MakeQueryString"() {
 
+        expect:
+            URLUtil.makeQueryString(map) == result
+
+        where:
+        map                                                                               ||  result
+        new HashMapStringObject().and("a", 3).and("b", 2).and("c", 1)                     ||  "b=2&c=1&a=3"
+        new HashMapStringObject().and("A", 1).and("B", 2).and("C", 3)                     ||  "A=1&B=2&C=3"
+        new HashMapStringObject().and("song", "애국가").and("country", "대한민국")            ||  "song=%EC%95%A0%EA%B5%AD%EA%B0%80&country=%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD"
+        new HashMapStringObject().and("song", "The Reason").and("singer", "hoobas|tank")  ||  "song=The+Reason&singer=hoobas%7Ctank"
+        new HashMapStringObject().and("search name", "이재범").and("search age", "28살")    ||  "search+name=%EC%9D%B4%EC%9E%AC%EB%B2%94&search+age=28%EC%82%B4"
     }
 
     def "Create"() {
