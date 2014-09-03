@@ -136,7 +136,7 @@ class URLUtilTest extends Specification {
             URLUtil.isHttps(url) == result
 
         where:
-            url     ||  result
+            url                     ||  result
             ""                      ||  false
             " "                     ||  false
             "|"                     ||  false
@@ -149,6 +149,19 @@ class URLUtilTest extends Specification {
 
     def "IsHttp"() {
 
+        expect:
+            URLUtil.isHttp(url) == result
+
+        where:
+            url                     ||  result
+            ""                      ||  false
+            " "                     ||  false
+            "|"                     ||  false
+            "http://www.test.com"   ||  true
+            "https://www.test.com"  ||  false
+            " http://www.test.com"  ||  false
+            "test"                  ||  false
+            "test.com"              ||  false
     }
 
     def "MakeQueryString"() {
