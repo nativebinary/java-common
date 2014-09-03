@@ -113,6 +113,7 @@ class URLUtilTest extends Specification {
             "test.com"              ||  "http://test.com"
     }
 
+    @SuppressWarnings("GroovyPointlessBoolean")
     def "IsHttpOrHttps"() {
 
         expect:
@@ -130,6 +131,7 @@ class URLUtilTest extends Specification {
             "test.com"              ||  false
     }
 
+    @SuppressWarnings("GroovyPointlessBoolean")
     def "IsHttps"() {
 
         expect:
@@ -147,6 +149,7 @@ class URLUtilTest extends Specification {
             "test.com"              ||  false
     }
 
+    @SuppressWarnings("GroovyPointlessBoolean")
     def "IsHttp"() {
 
         expect:
