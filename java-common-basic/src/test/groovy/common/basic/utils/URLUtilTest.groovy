@@ -180,6 +180,18 @@ class URLUtilTest extends Specification {
 
     def "Create"() {
 
+        expect:
+            URLUtil.create(url) == result
+
+        where:
+            url                     ||  result
+            "http://www.test.com"   ||  new URL("http://www.test.com")
+            "test"                  ||  null
+            "www.test.com"          ||  null
+            "http://test.com"       ||  new URL("http://test.com")
+            "http://test"           ||  new URL("http://test")
+            "http://"               ||  new URL("http://")
+            "https://"              ||  new URL("https://")
     }
 
     def "ToFilename"() {
