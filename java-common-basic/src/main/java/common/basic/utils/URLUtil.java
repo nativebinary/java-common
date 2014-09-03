@@ -31,11 +31,11 @@ public class URLUtil {
             return URLEncoder.encode(s, "utf-8");
         }
         catch (NullPointerException e) {
-            Logger.e(e, "");
+            Logger.e(e);
             return "";
         }
         catch (UnsupportedEncodingException e) {
-            Logger.e(e, "");  //To change body of catch statement use File | Settings | File Templates.
+            Logger.e(e);
             return "";
         }
     }
@@ -55,7 +55,7 @@ public class URLUtil {
             return URLDecoder.decode(s, "utf-8");
         }
         catch (UnsupportedEncodingException e) {
-            Logger.e(e, "");  //To change body of catch statement use File | Settings | File Templates.
+            Logger.e(e);
             return "";
         }
     }
