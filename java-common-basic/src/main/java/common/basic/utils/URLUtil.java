@@ -14,6 +14,10 @@ import java.util.Map;
 
 public class URLUtil {
 
+    public URLUtil() throws InstantiationException {
+        throw new InstantiationException();
+    }
+
     public static String escape(String url) {
         return escapeSpace(escapePipe(url));
     }
