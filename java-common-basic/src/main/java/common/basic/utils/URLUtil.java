@@ -38,8 +38,7 @@ public class URLUtil {
             Logger.e(e);
             return "";
         }
-        catch (UnsupportedEncodingException e) {
-            Logger.e(e);
+        catch (UnsupportedEncodingException ignored) {
             return "";
         }
     }
@@ -58,8 +57,11 @@ public class URLUtil {
         try {
             return URLDecoder.decode(s, "utf-8");
         }
-        catch (UnsupportedEncodingException e) {
+        catch (NullPointerException e) {
             Logger.e(e);
+            return "";
+        }
+        catch (UnsupportedEncodingException ignored) {
             return "";
         }
     }
