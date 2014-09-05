@@ -47,6 +47,18 @@ class LeftTopRightBottomTest extends Specification {
     }
 
     def "ToString"() {
-        expect: true;
+
+        expect:
+        ltrbLhs.toString() == result
+
+        where:
+        ltrbLhs                                     ||  result
+        new LeftTopRightBottom(10)                  ||  "LeftTopRightBottom{left=10, top=10, right=10, bottom=10}"
+        new LeftTopRightBottom(10, 10, 10, 10)      ||  "LeftTopRightBottom{left=10, top=10, right=10, bottom=10}"
+        new LeftTopRightBottom(10, 15, 34, 87)      ||  "LeftTopRightBottom{left=10, top=15, right=34, bottom=87}"
+        new LeftTopRightBottom(10, 10, null, 10)    ||  "LeftTopRightBottom{left=10, top=10, right=null, bottom=10}"
+        new LeftTopRightBottom(null, 10, null, 10)  ||  "LeftTopRightBottom{left=null, top=10, right=null, bottom=10}"
+        new LeftTopRightBottom(null)                ||  "LeftTopRightBottom{left=null, top=null, right=null, bottom=null}"
+        new LeftTopRightBottom(22)                  ||  "LeftTopRightBottom{left=22, top=22, right=22, bottom=22}"
     }
 }
