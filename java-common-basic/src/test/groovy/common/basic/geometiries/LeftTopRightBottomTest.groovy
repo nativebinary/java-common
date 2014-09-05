@@ -32,12 +32,18 @@ class LeftTopRightBottomTest extends Specification {
 
     def "HashCode"() {
 
-//
-//        expect:
-//        ltrbLhs.hashCode() == result
-//
-//        where:
-//        ltrbLhs     ||  result
+        expect:
+        ltrbLhs.hashCode() == result
+
+        where:
+        ltrbLhs                                     ||  result
+        new LeftTopRightBottom(10)                  ||  307840
+        new LeftTopRightBottom(10, 10, 10, 10)      ||  307840
+        new LeftTopRightBottom(10, 15, 34, 87)      ||  313466
+        new LeftTopRightBottom(10, 10, null, 10)    ||  307530
+        new LeftTopRightBottom(null, 10, null, 10)  ||  9620
+        new LeftTopRightBottom(null)                ||  0
+        new LeftTopRightBottom(22)                  ||  677248
     }
 
     def "ToString"() {
