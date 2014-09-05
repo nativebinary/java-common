@@ -8,25 +8,34 @@ class LeftTopRightBottomTest extends Specification {
     def "Equals"() {
 
         expect:
-        new LeftTopRightBottom(10).equals(obj) == result
+        ltrbLhs.equals(ltrbRhs) == result
 
         where:
-        obj                                     ||  result
-        new LeftTopRightBottom(10)              ||  true
-        new LeftTopRightBottom(10, 10, 10, 10)  ||  true
-        "str"                                   ||  false
-        10                                      ||  false
-        new LeftTopRightBottom(11)              ||  false
-        new LeftTopRightBottom(10, 10, 10, 11)  ||  false
-        new LeftTopRightBottom(10.0)            ||  false
-        new LeftTopRightBottom(10.0F)           ||  false
-        new LeftTopRightBottom(10L)             ||  false
-        new LeftTopRightBottom("10")            ||  false
-        new LeftTopRightBottom('10')            ||  false
+        ltrbLhs                     ||  ltrbRhs                                 ||   result
+        new LeftTopRightBottom(10)  ||  new LeftTopRightBottom(10)              ||   true
+        new LeftTopRightBottom(10)  ||  new LeftTopRightBottom(10, 10, 10, 10)  ||   true
+        new LeftTopRightBottom(10)  ||  new LeftTopRightBottom(11)              ||   false
+        new LeftTopRightBottom(10)  ||  new LeftTopRightBottom(10, 10, 20, 10)  ||   false
+
+        new LeftTopRightBottom(22)  ||  new LeftTopRightBottom(22)              ||   true
+        new LeftTopRightBottom(22)  ||  new LeftTopRightBottom(22, 22, 22, 22)  ||   true
+        new LeftTopRightBottom(22)  ||  new LeftTopRightBottom(22, 11, 22, 22)  ||   false
+
+        new LeftTopRightBottom(10)  ||  new LeftTopRightBottom(10.0)            ||   false
+        new LeftTopRightBottom(10)  ||  new LeftTopRightBottom(10.0F)           ||   false
+        new LeftTopRightBottom(10)  ||  new LeftTopRightBottom(10L)             ||   false
+        new LeftTopRightBottom(10)  ||  new LeftTopRightBottom("10")            ||   false
+        new LeftTopRightBottom(10)  ||  new LeftTopRightBottom('10')            ||   false
     }
 
     def "HashCode"() {
-        expect: true;
+        expect:
+        hashCodeMethod == result
+
+        where:
+        hashCodeMethod                          ||  result
+        new LeftTopRightBottom(10).hashCode()   ||  307840
+        new LeftTopRightBottom(11).hashCode()   ||  338624
     }
 
     def "ToString"() {
