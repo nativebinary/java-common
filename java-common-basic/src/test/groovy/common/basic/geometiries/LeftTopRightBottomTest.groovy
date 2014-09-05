@@ -29,13 +29,7 @@ class LeftTopRightBottomTest extends Specification {
     }
 
     def "HashCode"() {
-        expect:
-        hashCodeMethod == result
 
-        where:
-        hashCodeMethod                          ||  result
-        new LeftTopRightBottom(10).hashCode()   ||  307840
-        new LeftTopRightBottom(11).hashCode()   ||  338624
     }
 
     def "ToString"() {
