@@ -25,9 +25,6 @@ class LeftTopRightBottomTest extends Specification {
         new LeftTopRightBottom(10)                  ||  new LeftTopRightBottom(10.0F)               ||  false
         new LeftTopRightBottom(10)                  ||  new LeftTopRightBottom(10L)                 ||  false
         new LeftTopRightBottom(10)                  ||  null                                        ||  false
-        new LeftTopRightBottom(null)                ||  null                                        ||  false
-        new LeftTopRightBottom(null)                ||  new LeftTopRightBottom(null)                ||  true
-        new LeftTopRightBottom(10, 10, 10, null)    ||  new LeftTopRightBottom(10, 10, 10, null)    ||  true
     }
 
     def "HashCode"() {
@@ -40,9 +37,6 @@ class LeftTopRightBottomTest extends Specification {
         new LeftTopRightBottom(10)                  ||  307840
         new LeftTopRightBottom(10, 10, 10, 10)      ||  307840
         new LeftTopRightBottom(10, 15, 34, 87)      ||  313466
-        new LeftTopRightBottom(10, 10, null, 10)    ||  307530
-        new LeftTopRightBottom(null, 10, null, 10)  ||  9620
-        new LeftTopRightBottom(null)                ||  0
         new LeftTopRightBottom(22)                  ||  677248
     }
 
@@ -56,9 +50,6 @@ class LeftTopRightBottomTest extends Specification {
         new LeftTopRightBottom(10)                  ||  "LeftTopRightBottom{left=10, top=10, right=10, bottom=10}"
         new LeftTopRightBottom(10, 10, 10, 10)      ||  "LeftTopRightBottom{left=10, top=10, right=10, bottom=10}"
         new LeftTopRightBottom(10, 15, 34, 87)      ||  "LeftTopRightBottom{left=10, top=15, right=34, bottom=87}"
-        new LeftTopRightBottom(10, 10, null, 10)    ||  "LeftTopRightBottom{left=10, top=10, right=null, bottom=10}"
-        new LeftTopRightBottom(null, 10, null, 10)  ||  "LeftTopRightBottom{left=null, top=10, right=null, bottom=10}"
-        new LeftTopRightBottom(null)                ||  "LeftTopRightBottom{left=null, top=null, right=null, bottom=null}"
         new LeftTopRightBottom(22)                  ||  "LeftTopRightBottom{left=22, top=22, right=22, bottom=22}"
     }
 }
