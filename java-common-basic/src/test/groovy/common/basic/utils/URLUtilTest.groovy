@@ -13,50 +13,50 @@ class URLUtilTest extends Specification {
     def "Escape"() {
 
         expect:
-            URLUtil.escape(url) == result
+        URLUtil.escape(url) == result
 
         where:
-            url                                 ||  result
-            "http://www.test.com"               ||  "http://www.test.com"
-            "http://www.test.com?a=13"          ||  "http://www.test.com?a=13"
-            "http://www.test.com?a=|"           ||  "http://www.test.com?a=%7c"
-            "http://www.test.com?a=13&b=|"      ||  "http://www.test.com?a=13&b=%7c"
-            "http://www.test.com?a = tp"        ||  "http://www.test.com?a%20=%20tp"
-            "http://www.test.com?a = tp&b=|"    ||  "http://www.test.com?a%20=%20tp&b=%7c"
+        url                                ||  result
+        "http://example.com"               ||  "http://example.com"
+        "http://example.com?a=13"          ||  "http://example.com?a=13"
+        "http://example.com?a=|"           ||  "http://example.com?a=%7c"
+        "http://example.com?a=13&b=|"      ||  "http://example.com?a=13&b=%7c"
+        "http://example.com?a = tp"        ||  "http://example.com?a%20=%20tp"
+        "http://example.com?a = tp&b=|"    ||  "http://example.com?a%20=%20tp&b=%7c"
     }
 
     def "EscapePipe"() {
 
         expect:
-            URLUtil.escapePipe(url) == result
+        URLUtil.escapePipe(url) == result
 
         where:
-            url                 ||  result
-            "|"                 ||  "%7c"
-            "||"                ||  "%7c%7c"
-            "|test|"            ||  "%7ctest%7c"
-            "| |"               ||  "%7c %7c"
-            "~!@#\$%^&*()_+|"   ||  "~!@#\$%^&*()_+%7c"
+        url                 ||  result
+        "|"                 ||  "%7c"
+        "||"                ||  "%7c%7c"
+        "|test|"            ||  "%7ctest%7c"
+        "| |"               ||  "%7c %7c"
+        "~!@#\$%^&*()_+|"   ||  "~!@#\$%^&*()_+%7c"
     }
 
     def "EscapeSpace"() {
 
         expect:
-            URLUtil.escapeSpace(url) == result
+        URLUtil.escapeSpace(url) == result
 
         where:
-            url                 ||  result
-            " "                 ||  "%20"
-            "  "                ||  "%20%20"
-            " test "            ||  "%20test%20"
-            " | "               ||  "%20|%20"
-            "~ ! @ # \$"        ||  "~%20!%20@%20#%20\$"
+        url                 ||  result
+        " "                 ||  "%20"
+        "  "                ||  "%20%20"
+        " test "            ||  "%20test%20"
+        " | "               ||  "%20|%20"
+        "~ ! @ # \$"        ||  "~%20!%20@%20#%20\$"
     }
 
     def "Encode"() {
 
         expect:
-            URLUtil.encode(str) == result
+        URLUtil.encode(str) == result
 
         where:
         str                                 ||  result
@@ -74,16 +74,16 @@ class URLUtilTest extends Specification {
     def "DecodeURIComponentIfEncoded"() {
 
         expect:
-            URLUtil.decodeURIComponentIfEncoded(url) == result
+        URLUtil.decodeURIComponentIfEncoded(url) == result
 
         where:
-            url                                                     ||  result
-            "http://www.test.com"                                   ||  "http://www.test.com"
-            "http://www.test.com?a%20=%20tp&b=%7c"                  ||  "http://www.test.com?a%20=%20tp&b=%7c"
-            "http%3A%2F%2Fwww.test.com?a%20=%20tp&b=%7c"            ||  "http://www.test.com?a = tp&b=|"
-            "http%3A%2F%2Fwww.test.com"                             ||  "http://www.test.com"
-            "https%3A%2F%2Fwww.애국가.com"                            ||  "https://www.애국가.com"
-            "https%3A%2F%2Fwww.%EC%95%A0%EA%B5%AD%EA%B0%80.com"     ||  "https://www.애국가.com"
+        url                                                              ||  result
+        "http://example.com"                                             ||  "http://example.com"
+        "http://example.com?a%20=%20tp&b=%7c"                            ||  "http://example.com?a%20=%20tp&b=%7c"
+        "http%3A%2F%2Fexample.com?a%20=%20tp&b=%7c"                      ||  "http://example.com?a = tp&b=|"
+        "http%3A%2F%2Fexample.com"                                       ||  "http://example.com"
+        "https%3A%2F%2Fwww.보고있나.com"                                   ||  "https://www.보고있나.com"
+        "https%3A%2F%2Fwww.%EB%B3%B4%EA%B3%A0%EC%9E%88%EB%82%98.com"     ||  "https://www.보고있나.com"
     }
 
     def "Decode"() {
@@ -108,110 +108,110 @@ class URLUtilTest extends Specification {
         where:
         result                                                ||  url
         [:]                                                   ||  "djakhdsjkdlsjf"
-        [:]                                                   ||  "http://www.test.com"
-        [:]                                                   ||  "http://www.test.com?"
-        ["a" : ["1"], "b" : ["2"]]                            ||  "http://www.test.com?a=1&b=2"
-        ["a" : ["1"], "b" : ["2", "3"]]                       ||  "http://www.test.com?a=1&b=2&b=3"
+        [:]                                                   ||  "http://example.com"
+        [:]                                                   ||  "http://example.com?"
+        ["a" : ["1"], "b" : ["2"]]                            ||  "http://example.com?a=1&b=2"
+        ["a" : ["1"], "b" : ["2", "3"]]                       ||  "http://example.com?a=1&b=2&b=3"
     }
 
     def "PrependHttpIfNoProtocol"() {
 
         expect:
-            URLUtil.prependHttpIfNoProtocol(url) == result
+        URLUtil.prependHttpIfNoProtocol(url) == result
 
         where:
-            url                     ||  result
-            ""                      ||  ""
-            " "                     ||  " "
-            "|"                     ||  "http://|"
-            "http://www.test.com"   ||  "http://www.test.com"
-            "https://www.test.com"  ||  "https://www.test.com"
-            "test"                  ||  "http://test"
-            "test.com"              ||  "http://test.com"
+        url                     ||  result
+        ""                      ||  ""
+        " "                     ||  " "
+        "|"                     ||  "http://|"
+        "http://example.com"    ||  "http://example.com"
+        "https://example.com"   ||  "https://example.com"
+        "test"                  ||  "http://test"
+        "test.com"              ||  "http://test.com"
     }
 
     @SuppressWarnings("GroovyPointlessBoolean")
     def "IsHttpOrHttps"() {
 
         expect:
-            URLUtil.isHttpOrHttps(url) == result
+        URLUtil.isHttpOrHttps(url) == result
 
         where:
-            url                     ||  result
-            ""                      ||  false
-            " "                     ||  false
-            "|"                     ||  false
-            "http://www.test.com"   ||  true
-            "https://www.test.com"  ||  true
-            " http://www.test.com"  ||  false
-            "test"                  ||  false
-            "test.com"              ||  false
+        url                     ||  result
+        ""                      ||  false
+        " "                     ||  false
+        "|"                     ||  false
+        "http://example.com"    ||  true
+        "https://example.com"   ||  true
+        " http://example.com"   ||  false
+        "test"                  ||  false
+        "test.com"              ||  false
     }
 
     @SuppressWarnings("GroovyPointlessBoolean")
     def "IsHttps"() {
 
         expect:
-            URLUtil.isHttps(url) == result
+        URLUtil.isHttps(url) == result
 
         where:
-            url                     ||  result
-            ""                      ||  false
-            " "                     ||  false
-            "|"                     ||  false
-            "http://www.test.com"   ||  false
-            "https://www.test.com"  ||  true
-            " http://www.test.com"  ||  false
-            "test"                  ||  false
-            "test.com"              ||  false
+        url                     ||  result
+        ""                      ||  false
+        " "                     ||  false
+        "|"                     ||  false
+        "http://example.com"    ||  false
+        "https://example.com"   ||  true
+        " http://example.com"   ||  false
+        "test"                  ||  false
+        "test.com"              ||  false
     }
 
     @SuppressWarnings("GroovyPointlessBoolean")
     def "IsHttp"() {
 
         expect:
-            URLUtil.isHttp(url) == result
+        URLUtil.isHttp(url) == result
 
         where:
-            url                     ||  result
-            ""                      ||  false
-            " "                     ||  false
-            "|"                     ||  false
-            "http://www.test.com"   ||  true
-            "https://www.test.com"  ||  false
-            " http://www.test.com"  ||  false
-            "test"                  ||  false
-            "test.com"              ||  false
+        url                     ||  result
+        ""                      ||  false
+        " "                     ||  false
+        "|"                     ||  false
+        "http://example.com"    ||  true
+        "https://example.com"   ||  false
+        " http://example.com"   ||  false
+        "test"                  ||  false
+        "test.com"              ||  false
     }
 
     def "MakeQueryString"() {
 
         expect:
-            URLUtil.makeQueryString(map) == result
+        URLUtil.makeQueryString(map) == result
 
         where:
         map                                            ||  result
         ["a":3, "b":2, "c":1]                          ||  "a=3&b=2&c=1"
         ["A":1, "B":2, "C":3]                          ||  "A=1&B=2&C=3"
-        ["song":"애국가", "country":"대한민국"]            ||  "song=%EC%95%A0%EA%B5%AD%EA%B0%80&country=%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD"
+        ["song":"보고있나", "country":"대한민국"]           ||  "song=%EB%B3%B4%EA%B3%A0%EC%9E%88%EB%82%98&country=%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD"
         ["song":"The Reason", "singer":"hoobas|tank"]  ||  "song=The+Reason&singer=hoobas%7Ctank"
-        ["search name":"이재범", "search age":"28살"]    ||  "search+name=%EC%9D%B4%EC%9E%AC%EB%B2%94&search+age=28%EC%82%B4"
+        ["search name":"이순신", "search age":"28살"]    ||  "search+name=%EC%9D%B4%EC%88%9C%EC%8B%A0&search+age=28%EC%82%B4"
     }
 
     def "Create"() {
 
         expect:
-            URLUtil.create(url) == result
+        URLUtil.create(url) == result
 
         where:
-            url                     ||  result
-            "http://www.test.com"   ||  new URL("http://www.test.com")
-            "test"                  ||  null
-            "www.test.com"          ||  null
-            "http://test.com"       ||  new URL("http://test.com")
-            "http://test"           ||  new URL("http://test")
-            "http://"               ||  new URL("http://")
-            "https://"              ||  new URL("https://")
+        url                     ||  result
+        "http://example.com"    ||  new URL("http://example.com")
+        "test"                  ||  null
+        "example.com"           ||  null
+        "http://test.com"       ||  new URL("http://test.com")
+        "http://test"           ||  new URL("http://test")
+        "http://"               ||  new URL("http://")
+        "https://"              ||  new URL("https://")
     }
 
     def "ToFilename"() {
@@ -221,7 +221,7 @@ class URLUtilTest extends Specification {
 
         where:
         url                             ||  result
-        "http://www.test.com"           ||  "http：／／www.test.com"
+        "http://example.com"            ||  "http：／／example.com"
         "fileName=<\\test file\\>"      ||  "fileName=〈＼test file＼〉"
         '"test.pds"'                    ||  "〃test.pds〃"
 
@@ -235,11 +235,11 @@ class URLUtilTest extends Specification {
     def "ToUriString"() {
 
         expect:
-            URLUtil.toUriString(url) == result
+        URLUtil.toUriString(url) == result
 
         where:
         url                             ||  result
-        "http：／／www.test.com"          ||  "http://www.test.com"
+        "http：／／example.com"           ||  "http://example.com"
         "fileName=〈＼test file＼〉"        ||  "fileName=<\\test file\\>"
         "〃test.pds〃"                   ||  '"test.pds"'
 
