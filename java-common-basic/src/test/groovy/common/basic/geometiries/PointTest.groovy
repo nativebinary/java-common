@@ -18,6 +18,20 @@ class PointTest extends Specification {
 
     def "Negate"() {
 
+
+        expect:
+        pointObj.negate() == result
+
+        where:
+        pointObj            ||  result
+        new Point(10, 10)   ||  new Point(-10, -10)
+        new Point(15, 20)   ||  new Point(-15, -20)
+        new Point(47, 8)    ||  new Point(-47, -8)
+        new Point(-10, -10) ||  new Point(10, 10)
+        new Point(-15, -20) ||  new Point(15, 20)
+        new Point(-47, -8)  ||  new Point(47, 8)
+        new Point(10, -10) ||  new Point(-10, 10)
+        new Point(-15, 20) ||  new Point(15, -20)
     }
 
     def "Multiply"() {
