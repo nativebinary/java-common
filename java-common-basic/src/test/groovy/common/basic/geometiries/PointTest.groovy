@@ -187,10 +187,10 @@ class PointTest extends Specification {
     def "HashCode"() {
 
         expect:
-        pointLhs.hashCode() == result
+        point.hashCode() == result
 
         where:
-        pointLhs                ||  result
+        point                   ||  result
         new Point(10, 10)       ||  320
         new Point(22, 45)       ||  727
         new Point(-581, 10)     ||  -18001
@@ -200,5 +200,15 @@ class PointTest extends Specification {
 
     def "ToString"() {
 
+        expect:
+        point.toString() == result
+
+        where:
+        point                   ||  result
+        new Point(10, 10)       ||  '{"x":10,"y":10}'
+        new Point(22, 45)       ||  '{"x":22,"y":45}'
+        new Point(-581, 10)     ||  '{"x":-581,"y":10}'
+        new Point(-52, 84)      ||  '{"x":-52,"y":84}'
+        new Point(-68, -92)     ||  '{"x":-68,"y":-92}'
     }
 }
