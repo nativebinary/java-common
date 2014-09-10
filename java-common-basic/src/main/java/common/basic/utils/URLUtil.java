@@ -14,6 +14,10 @@ import java.util.Map;
 
 public class URLUtil {
 
+    public URLUtil() throws InstantiationException {
+        throw new InstantiationException();
+    }
+
     public static String escape(String url) {
         return escapeSpace(escapePipe(url));
     }
@@ -31,11 +35,10 @@ public class URLUtil {
             return URLEncoder.encode(s, "utf-8");
         }
         catch (NullPointerException e) {
-            Logger.e(e, "");
+            Logger.e(e);
             return "";
         }
-        catch (UnsupportedEncodingException e) {
-            Logger.e(e, "");  //To change body of catch statement use File | Settings | File Templates.
+        catch (UnsupportedEncodingException ignored) {
             return "";
         }
     }
@@ -54,8 +57,11 @@ public class URLUtil {
         try {
             return URLDecoder.decode(s, "utf-8");
         }
-        catch (UnsupportedEncodingException e) {
-            Logger.e(e, "");  //To change body of catch statement use File | Settings | File Templates.
+        catch (NullPointerException e) {
+            Logger.e(e);
+            return "";
+        }
+        catch (UnsupportedEncodingException ignored) {
             return "";
         }
     }
