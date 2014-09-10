@@ -57,6 +57,21 @@ class PointTest extends Specification {
 
     def "DivideBy"() {
 
+        expect:
+        point.divideBy(param) == result
+
+        where:
+        point                   ||  param   ||  result
+        new Point(10, 10)       ||  5       ||  new Point((int)(10 / 5), (int)(10 / 5))
+        new Point(15, 20)       ||  13      ||  new Point((int)(15 / 13), (int)(20 / 13))
+        new Point(47, 8)        ||  -6      ||  new Point((int)(47 / (-6)), (int)(8 / (-6)))
+        new Point(30, 0)        ||  -9      ||  new Point((int)(30 / (-9)), 0)
+        new Point(-82, -51)     ||  76      ||  new Point((int)(-82 / 76), (int)(-51 / 76))
+        new Point(11, -72)      ||  11      ||  new Point((int)(11 / 11), (int)(-72 / 11))
+        new Point(-39, 29)      ||  35      ||  new Point((int)(-39 / 35), (int)(29 / 35))
+        new Point(100, 200)     ||  -96     ||  new Point((int)(100 / (-96)), (int)(200 / (-96)))
+        new Point(3678, -98)    ||  27      ||  new Point((int)(3678 / 27), (int)(-98 / 27))
+        new Point(-9834, -9999) || -8       ||  new Point((int)(-9834 / (-8)), (int)(-9999 / (-8)))
     }
 
     def "Delta"() {
