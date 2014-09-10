@@ -1,6 +1,5 @@
 package controllers;
 
-import com.google.android.gcm.server.Message;
 import com.google.android.gcm.server.Result;
 import common.basic.logs.Logger;
 import common.basic.utils.HashMapStringObject;
