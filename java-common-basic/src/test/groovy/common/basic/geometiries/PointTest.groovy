@@ -10,10 +10,17 @@ class PointTest extends Specification {
         point.absolute() == result
 
         where:
-        point            ||  result
-        new Point(10, 10)   ||  new Point(10, 10)
-        new Point(15, 20)   ||  new Point(15, 20)
-        new Point(47, 8)    ||  new Point(47, 8)
+        point                   ||  result
+        new Point(10, 10)       ||  new Point(10, 10)
+        new Point(15, 20)       ||  new Point(15, 20)
+        new Point(47, 8)        ||  new Point(47, 8)
+        new Point(30, 0)        ||  new Point(30, 0)
+        new Point(-82, -51)     ||  new Point(82, 51)
+        new Point(11, -72)      ||  new Point(11, 72)
+        new Point(-39, 29)      ||  new Point(39, 29)
+        new Point(100, 200)     ||  new Point(100, 200)
+        new Point(3678, -98)    ||  new Point(3678, 98)
+        new Point(-9834, -9999) ||  new Point(9834, 9999)
     }
 
     def "Negate"() {
