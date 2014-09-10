@@ -7,10 +7,10 @@ class PointTest extends Specification {
     def "Absolute"() {
 
         expect:
-        pointObj.absolute() == result
+        point.absolute() == result
 
         where:
-        pointObj            ||  result
+        point            ||  result
         new Point(10, 10)   ||  new Point(10, 10)
         new Point(15, 20)   ||  new Point(15, 20)
         new Point(47, 8)    ||  new Point(47, 8)
@@ -20,22 +20,30 @@ class PointTest extends Specification {
 
 
         expect:
-        pointObj.negate() == result
+        point.negate() == result
 
         where:
-        pointObj            ||  result
+        point            ||  result
         new Point(10, 10)   ||  new Point(-10, -10)
         new Point(15, 20)   ||  new Point(-15, -20)
         new Point(47, 8)    ||  new Point(-47, -8)
         new Point(-10, -10) ||  new Point(10, 10)
         new Point(-15, -20) ||  new Point(15, 20)
         new Point(-47, -8)  ||  new Point(47, 8)
-        new Point(10, -10) ||  new Point(-10, 10)
-        new Point(-15, 20) ||  new Point(15, -20)
+        new Point(10, -10)  ||  new Point(-10, 10)
+        new Point(-15, 20)  ||  new Point(15, -20)
     }
 
     def "Multiply"() {
 
+        expect:
+        point.multiply(param) == result
+
+        where:
+        point               ||  param   ||  result
+        new Point(10, 10)   ||  5       ||  new Point(10 * 5, 10 * 5)
+        new Point(15, 20)   ||  13      ||  new Point(15 * 13, 20 * 13)
+        new Point(47, 8)    ||  -6      ||  new Point(47 * -6, 8 * -6)
     }
 
     def "DivideBy"() {
