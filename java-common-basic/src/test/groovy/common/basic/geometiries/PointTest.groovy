@@ -114,6 +114,21 @@ class PointTest extends Specification {
 
     def "Offset"() {
 
+        expect:
+        point.offset(size) == result
+
+        where:
+        point                   ||  size                    ||  result
+        new Point(10, 10)       ||  new Size(5, 5)          ||  new Point(15, 15)
+        new Point(15, 20)       ||  new Size(10, 12)        ||  new Point(25, 32)
+        new Point(47, 8)        ||  new Size(82, 9)         ||  new Point(129, 17)
+        new Point(30, 0)        ||  new Size(19, 8)         ||  new Point(49, 8)
+        new Point(-82, -51)     ||  new Size(60, 74)        ||  new Point(-22, 23)
+        new Point(11, -72)      ||  new Size(7, 127)        ||  new Point(18, 55)
+        new Point(-39, 29)      ||  new Size(27, 56)        ||  new Point(-12, 85)
+        new Point(100, 200)     ||  new Size(68, 124)       ||  new Point(168, 324)
+        new Point(3678, -98)    ||  new Size(2053, 70)      ||  new Point(5731, -28)
+        new Point(-9834, -9999) ||  new Size(17840, 17623)  ||  new Point(8006, 7624)
     }
 
     def "Advance"() {
