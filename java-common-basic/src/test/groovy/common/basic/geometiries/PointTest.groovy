@@ -76,10 +76,40 @@ class PointTest extends Specification {
 
     def "Delta"() {
 
+        expect:
+        point.delta(pointCurrent) == result
+
+        where:
+        point                   ||  pointCurrent            ||  result
+        new Point(10, 10)       ||  new Point(5, 5)         ||  new Size(5, 5)
+        new Point(15, 20)       ||  new Point(25, 32)       ||  new Size(10, 12)
+        new Point(47, 8)        ||  new Point(-35, 17)      ||  new Size(82, 9)
+        new Point(30, 0)        ||  new Point(11, 8)        ||  new Size(19, 8)
+        new Point(-82, -51)     ||  new Point(-22, 23)      ||  new Size(60, 74)
+        new Point(11, -72)      ||  new Point(18, 55)       ||  new Size(7, 127)
+        new Point(-39, 29)      ||  new Point(-66, -27)     ||  new Size(27, 56)
+        new Point(100, 200)     ||  new Point(32, 76)       ||  new Size(68, 124)
+        new Point(3678, -98)    ||  new Point(1625, -168)   ||  new Size(2053, 70)
+        new Point(-9834, -9999) ||  new Point(8006, 7624)   ||  new Size(17840, 17623)
     }
 
     def "Median"() {
 
+        expect:
+        point.median(pointCurrent) == result
+
+        where:
+        point                   ||  pointCurrent            ||  result
+        new Point(10, 10)       ||  new Point(5, 5)         ||  new Point(12, 12)
+        new Point(15, 20)       ||  new Point(25, 32)       ||  new Point(20, 26)
+        new Point(47, 8)        ||  new Point(-35, 17)      ||  new Point(88, 12)
+        new Point(30, 0)        ||  new Point(11, 8)        ||  new Point(39, 4)
+        new Point(-82, -51)     ||  new Point(-22, 23)      ||  new Point(-52, -14)
+        new Point(11, -72)      ||  new Point(18, 55)       ||  new Point(14, -9)
+        new Point(-39, 29)      ||  new Point(-66, -27)     ||  new Point(-26, 57)
+        new Point(100, 200)     ||  new Point(32, 76)       ||  new Point(134, 262)
+        new Point(3678, -98)    ||  new Point(1625, -168)   ||  new Point(4704, -63)
+        new Point(-9834, -9999) ||  new Point(8006, 7624)   ||  new Point(-914, -1188)
     }
 
     def "Offset"() {
