@@ -186,6 +186,16 @@ class PointTest extends Specification {
 
     def "HashCode"() {
 
+        expect:
+        pointLhs.hashCode() == result
+
+        where:
+        pointLhs                ||  result
+        new Point(10, 10)       ||  320
+        new Point(22, 45)       ||  727
+        new Point(-581, 10)     ||  -18001
+        new Point(-52, 84)      ||  -1528
+        new Point(-68, -92)     ||  -2200
     }
 
     def "ToString"() {
