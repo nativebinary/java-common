@@ -133,6 +133,21 @@ class PointTest extends Specification {
 
     def "Advance"() {
 
+        expect:
+        point.advance(pointCurrent) == result
+
+        where:
+        point                   ||  pointCurrent            ||  result
+        new Point(10, 10)       ||  new Point(5, 5)         ||  new Point(15, 15)
+        new Point(15, 20)       ||  new Point(25, 32)       ||  new Point(40, 52)
+        new Point(47, 8)        ||  new Point(-35, 17)      ||  new Point(12, 25)
+        new Point(30, 0)        ||  new Point(11, 8)        ||  new Point(41, 8)
+        new Point(-82, -51)     ||  new Point(-22, 23)      ||  new Point(-104, -28)
+        new Point(11, -72)      ||  new Point(18, 55)       ||  new Point(29, -17)
+        new Point(-39, 29)      ||  new Point(-66, -27)     ||  new Point(-105, 2)
+        new Point(100, 200)     ||  new Point(32, 76)       ||  new Point(132, 276)
+        new Point(3678, -98)    ||  new Point(1625, -168)   ||  new Point(5303, -266)
+        new Point(-9834, -9999) ||  new Point(8006, 7624)   ||  new Point(-1828, -2375)
     }
 
     def "Differ"() {
