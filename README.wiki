@@ -1,5 +1,5 @@
 = java-common =
-https://api.travis-ci.org/nativebinary/java-common.svg?branch=master
+[https://api.travis-ci.org/nativebinary/java-common.svg?branch=master]
 
 Maintained by [https://github.com/silsol silsol] and [https://github.com/aha00a aha00a] of [http://nativebinary.com nativebinary].
 
