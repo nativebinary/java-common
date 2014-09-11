@@ -168,6 +168,17 @@ class RectTest extends Specification {
 
     def "Offset"() {
 
+        expect:
+        rect.offset(size) == result
+
+        where:
+        rect                                                ||  size                    ||  result
+        new Rect(new Point(10, 10), new Size(0, 0))         ||  new Size(5, 5)          ||  new Rect(new Point(15, 15), new Size(0, 0))
+        new Rect(new Point(15, 52), new Size(34, -64))      ||  new Size(25, 34)        ||  new Rect(new Point(40, 86), new Size(34, -64))
+        new Rect(new Point(23, -18), new Size(4, 54))       ||  new Size(1, 9)          ||  new Rect(new Point(24, -9), new Size(4, 54))
+        new Rect(new Point(-126, -92), new Size(165, 159))  ||  new Size(78, 125)       ||  new Rect(new Point(-48, 33), new Size(165, 159))
+        new Rect(new Point(88, 27), new Size(-86, 72))      ||  new Size(63, 97)        ||  new Rect(new Point(151, 124), new Size(-86, 72))
+        new Rect(new Point(-96, 42), new Size(110, -9))     ||  new Size(274, 81)       ||  new Rect(new Point(178, 123), new Size(110, -9))
     }
 
     def "ToString"() {
