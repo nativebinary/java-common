@@ -4,6 +4,12 @@ import spock.lang.Specification
 
 class RectTest extends Specification {
 
+    def "ctor"() {
+
+        when: new Rect(10, 10, 20, 20)
+        then: new Rect(new Point(10, 10), new Size(30, 30))
+    }
+
     def "FromLeftTopRightBottom"() {
 
         expect:
