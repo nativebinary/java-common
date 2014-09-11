@@ -1,4 +1,6 @@
 = java-common =
+<img src="https://api.travis-ci.org/nativebinary/java-common.svg?branch=master"/>
+
 [https://api.travis-ci.org/nativebinary/java-common.svg?branch=master]
 
 [https://api.travis-ci.org/nativebinary/java-common.svg?branch=master Build Status]
