@@ -66,6 +66,17 @@ class RectTest extends Specification {
 
     def "Top"() {
 
+        expect:
+        rect.top() == result
+
+        where:
+        rect                                                ||  result
+        new Rect(new Point(10, 10), new Size(0, 0))         ||  10
+        new Rect(new Point(15, 52), new Size(34, -64))      ||  52
+        new Rect(new Point(23, -18), new Size(4, 54))       ||  -18
+        new Rect(new Point(-126, -92), new Size(165, 159))  ||  -92
+        new Rect(new Point(88, 27), new Size(-86, 72))      ||  27
+        new Rect(new Point(-96, 42), new Size(110, -9))     ||  42
     }
 
     def "Right"() {
