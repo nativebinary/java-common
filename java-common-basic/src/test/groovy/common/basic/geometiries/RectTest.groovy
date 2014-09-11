@@ -197,6 +197,22 @@ class RectTest extends Specification {
         new Rect(new Point(78, 45), new Size(12, 64))       ||  new Rect(new Point(-78, -45), new Size(-12, -64))       ||  false
     }
 
+    def "HashCode"() {
+
+        expect:
+        rect.hashCode() == result
+
+        where:
+        rect                                                ||  result
+        new Rect(new Point(10, 10), new Size(0, 0))         ||  9920
+        new Rect(new Point(-10, -10), new Size(0, 0))       ||  -9920
+        new Rect(new Point(15, 52), new Size(34, -64))      ||  17017
+        new Rect(new Point(23, -18), new Size(4, 54))       ||  21723
+        new Rect(new Point(-126, -92), new Size(165, 159))  ||  -118664
+        new Rect(new Point(88, 27), new Size(-86, 72))      ||  82811
+        new Rect(new Point(-96, 42), new Size(110, -9))     ||  -87553
+    }
+
     def "ToString"() {
 
     }
