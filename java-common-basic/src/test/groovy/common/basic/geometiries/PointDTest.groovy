@@ -189,5 +189,19 @@ class PointDTest extends Specification {
 
     def "ToString"() {
 
+        expect:
+        point.toString() == result
+
+        where:
+        point                       ||  result
+        new PointD(10, 10)          ||  '{"x":10.0,"y":10.0}'
+        new PointD(10.0, 10.0)      ||  '{"x":10.0,"y":10.0}'
+        new PointD(10, 10.0)        ||  '{"x":10.0,"y":10.0}'
+        new PointD(15.5, 9.1)       ||  '{"x":15.5,"y":9.1}'
+        new PointD(26.98, 6.89)     ||  '{"x":26.98,"y":6.89}'
+        new PointD(-56.29, -962.2)  ||  '{"x":-56.29,"y":-962.2}'
+        new PointD(22.225, -16.204) ||  '{"x":22.225,"y":-16.204}'
+        new PointD(-129.0, -77.0)   ||  '{"x":-129.0,"y":-77.0}'
+        new PointD(86.25, -98.2)    ||  '{"x":86.25,"y":-98.2}'
     }
 }
