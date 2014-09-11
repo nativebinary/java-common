@@ -135,6 +135,18 @@ class PointDTest extends Specification {
 
     def "Differ"() {
 
+        expect:
+        point.differ(currentPoint) == result
+
+        where:
+        point                       ||  currentPoint                ||  result
+        new PointD(10, 10)          ||  new PointD(10, 10)          ||  new SizeD(0, 0)
+        new PointD(15.5, 9.1)       ||  new PointD(3.7, 2.8)        ||  new SizeD(11.8, 6.3)
+        new PointD(26.98, 6.89)     ||  new PointD(13.9, 9.56)      ||  new SizeD(13.08, -2.670000000000001)
+        new PointD(-56.29, -962.2)  ||  new PointD(26.5, 167.24)    ||  new SizeD(-82.78999999999999, -1129.44)
+        new PointD(22.225, -16.204) ||  new PointD(-96.2, 43.87)    ||  new SizeD(118.42500000000001, -60.074)
+        new PointD(-129.0, -77.0)   ||  new PointD(62.5, 33.26)     ||  new SizeD(-191.5, -110.25999999999999)
+        new PointD(86.25, -98.2)    ||  new PointD(18.9, -32.9)     ||  new SizeD(67.35, -65.30000000000001)
     }
 
     def "Equals"() {
