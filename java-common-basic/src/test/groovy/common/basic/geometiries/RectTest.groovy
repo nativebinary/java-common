@@ -139,8 +139,31 @@ class RectTest extends Specification {
         new Rect(new Point(-96, 42), new Size(110, -9))     ||  10      ||  new Rect(new Point(-91, 47), new Size(100, -19))
     }
 
+    @SuppressWarnings("GroovyPointlessBoolean")
     def "Contains"() {
 
+        expect:
+        rect.contains(point) == result
+
+        where:
+        rect                                            ||  point                               ||  result
+        new Rect(new Point(10, 10), new Size(0, 0))     ||  new PointF(10, 10)                  ||  true
+        new Rect(new Point(10, 10), new Size(0, 0))     ||  new PointF(9, 9)                    ||  false
+        new Rect(new Point(10, 10), new Size(0, 0))     ||  new PointF(11, 11)                  ||  false
+        new Rect(new Point(10, 10), new Size(10, 10))   ||  new PointF(10, 10)                  ||  true
+        new Rect(new Point(10, 10), new Size(10, 10))   ||  new PointF(9, 9)                    ||  false
+        new Rect(new Point(10, 10), new Size(10, 10))   ||  new PointF(20, 20)                  ||  true
+        new Rect(new Point(10, 10), new Size(10, 10))   ||  new PointF(21, 21)                  ||  false
+
+        new Rect(new Point(15, 52), new Size(34, 64))   ||  new PointF(15, 52)                   ||  true
+        new Rect(new Point(15, 52), new Size(34, 64))   ||  new PointF(14, 52)                   ||  false
+        new Rect(new Point(15, 52), new Size(34, 64))   ||  new PointF(15, 51)                   ||  false
+        new Rect(new Point(15, 52), new Size(34, 64))   ||  new PointF(20, 80)                   ||  true
+        new Rect(new Point(15, 52), new Size(34, 64))   ||  new PointF(36, 99)                   ||  true
+        new Rect(new Point(15, 52), new Size(34, 64))   ||  new PointF(45, 110)                  ||  true
+        new Rect(new Point(15, 52), new Size(34, 64))   ||  new PointF(49, 116)                  ||  true
+        new Rect(new Point(15, 52), new Size(34, 64))   ||  new PointF(50, 116)                  ||  false
+        new Rect(new Point(15, 52), new Size(34, 64))   ||  new PointF(49, 117)                  ||  false
     }
 
     def "Offset"() {
