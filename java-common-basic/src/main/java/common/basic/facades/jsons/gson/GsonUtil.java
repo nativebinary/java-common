@@ -95,6 +95,6 @@ public class GsonUtil {
 
     public static Map<String, Object> fromJsonMap(String json) {
 
-        return new Gson().fromJson(json, new TypeToken<Map<String, String>>() {}.getType());
+        return new Gson().fromJson(json, new TypeToken<Map<String, Object>>(){}.getType());
     }
 }
