@@ -22,6 +22,18 @@ class PointDTest extends Specification {
 
     def "Negate"() {
 
+        expect:
+        point.negate() == result
+
+        where:
+        point                       ||  result
+        new PointD(10, 10)          ||  new PointD(-10, -10)
+        new PointD(10.0, 10.0)      ||  new PointD(-10.0, -10.0)
+        new PointD(10.0, 10)        ||  new PointD(-10, -10.0)
+        new PointD(-10, 10.0)       ||  new PointD(10, -10.0)
+        new PointD(22.225, 16.204)  ||  new PointD(-22.225, -16.204)
+        new PointD(-56.29, -962.2)  ||  new PointD(56.29, 962.2)
+        new PointD(-129.0, -77.0)   ||  new PointD(129, 77)
     }
 
     def "Multiply"() {
