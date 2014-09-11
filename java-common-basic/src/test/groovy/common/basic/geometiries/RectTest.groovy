@@ -126,6 +126,17 @@ class RectTest extends Specification {
 
     def "Deflate"() {
 
+        expect:
+        rect.deflate(param) == result
+
+        where:
+        rect                                                ||  param   ||  result
+        new Rect(new Point(10, 10), new Size(0, 0))         ||  10      ||  new Rect(new Point(15, 15), new Size(-10, -10))
+        new Rect(new Point(15, 52), new Size(34, -64))      ||  10      ||  new Rect(new Point(20, 57), new Size(24, -74))
+        new Rect(new Point(23, -18), new Size(4, 54))       ||  10      ||  new Rect(new Point(28, -13), new Size(-6, 44))
+        new Rect(new Point(-126, -92), new Size(165, 159))  ||  10      ||  new Rect(new Point(-121, -87), new Size(155, 149))
+        new Rect(new Point(88, 27), new Size(-86, 72))      ||  10      ||  new Rect(new Point(93, 32), new Size(-96, 62))
+        new Rect(new Point(-96, 42), new Size(110, -9))     ||  10      ||  new Rect(new Point(-91, 47), new Size(100, -19))
     }
 
     def "Contains"() {
