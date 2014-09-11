@@ -215,5 +215,17 @@ class RectTest extends Specification {
 
     def "ToString"() {
 
+        expect:
+        rect.toString() == result
+
+        where:
+        rect                                                ||  result
+        new Rect(new Point(10, 10), new Size(0, 0))         ||  '{"point":{"x":10,"y":10},"size":{"width":0,"height":0}}'
+        new Rect(new Point(-10, -10), new Size(0, 0))       ||  '{"point":{"x":-10,"y":-10},"size":{"width":0,"height":0}}'
+        new Rect(new Point(15, 52), new Size(34, -64))      ||  '{"point":{"x":15,"y":52},"size":{"width":34,"height":-64}}'
+        new Rect(new Point(23, -18), new Size(4, 54))       ||  '{"point":{"x":23,"y":-18},"size":{"width":4,"height":54}}'
+        new Rect(new Point(-126, -92), new Size(165, 159))  ||  '{"point":{"x":-126,"y":-92},"size":{"width":165,"height":159}}'
+        new Rect(new Point(88, 27), new Size(-86, 72))      ||  '{"point":{"x":88,"y":27},"size":{"width":-86,"height":72}}'
+        new Rect(new Point(-96, 42), new Size(110, -9))     ||  '{"point":{"x":-96,"y":42},"size":{"width":110,"height":-9}}'
     }
 }
