@@ -96,6 +96,17 @@ class RectTest extends Specification {
 
     def "Bottom"() {
 
+        expect:
+        rect.bottom() == result
+
+        where:
+        rect                                                ||  result
+        new Rect(new Point(10, 10), new Size(0, 0))         ||  10
+        new Rect(new Point(15, 52), new Size(34, -64))      ||  -12
+        new Rect(new Point(23, -18), new Size(4, 54))       ||  36
+        new Rect(new Point(-126, -92), new Size(165, 159))  ||  67
+        new Rect(new Point(88, 27), new Size(-86, 72))      ||  99
+        new Rect(new Point(-96, 42), new Size(110, -9))     ||  33
     }
 
     def "Center"() {
