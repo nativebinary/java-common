@@ -4,6 +4,12 @@ import spock.lang.Specification
 
 class PointDTest extends Specification {
 
+    def "ctor"() {
+
+        when: new PointD()
+        then: new PointD(0, 0)
+    }
+
     def "Absolute"() {
 
         expect:
