@@ -171,6 +171,20 @@ class PointDTest extends Specification {
 
     def "HashCode"() {
 
+        expect:
+        point.hashCode() == result
+
+        where:
+        point                       ||  result
+        new PointD(10, 10)          ||  75497472
+        new PointD(10.0, 10.0)      ||  75497472
+        new PointD(10, 10.0)        ||  75497472
+        new PointD(15.5, 9.1)       ||  952238080
+        new PointD(26.98, 6.89)     ||  1408709241
+        new PointD(-56.29, -962.2)  ||  -457995064
+        new PointD(22.225, -16.204) ||  -194726188
+        new PointD(-129.0, -77.0)   ||  200744960
+        new PointD(86.25, -98.2)    ||  -688869375
     }
 
     def "ToString"() {
