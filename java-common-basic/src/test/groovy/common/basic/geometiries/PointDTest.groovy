@@ -86,6 +86,19 @@ class PointDTest extends Specification {
 
     def "Median"() {
 
+        expect:
+        point.median(currentPoint) == result
+
+        where:
+        point                       ||  currentPoint                ||  result
+        new PointD(10, 10)          ||  new PointD(10, 10)          ||  new PointD(10.0, 10.0)
+        new PointD(15.5, 9.1)       ||  new PointD(3.7, 2.8)        ||  new PointD(21.4, 12.25)
+        new PointD(26.98, 6.89)     ||  new PointD(13.9, 9.56)      ||  new PointD(33.52, 8.225)
+        new PointD(-56.29, -962.2)  ||  new PointD(26.5, 167.24)    ||  new PointD(-14.895000000000003, -397.48)
+        new PointD(22.225, -16.204) ||  new PointD(-96.2, 43.87)    ||  new PointD(81.4375, 13.832999999999998)
+        new PointD(-129.0, -77.0)   ||  new PointD(62.5, 33.26)     ||  new PointD(-33.25, -21.870000000000005)
+        new PointD(86.25, -98.2)    ||  new PointD(18.9, -32.9)     ||  new PointD(119.925, -65.55)
+
     }
 
     def "Offset"() {
