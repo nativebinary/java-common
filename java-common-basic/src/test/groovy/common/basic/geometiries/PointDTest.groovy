@@ -103,6 +103,18 @@ class PointDTest extends Specification {
 
     def "Offset"() {
 
+        expect:
+        point.offset(size) == result
+
+        where:
+        point                       ||  size                        ||  result
+        new PointD(10, 10)          ||  new SizeD(10, 10)           ||  new PointD(20.0, 20.0)
+        new PointD(15.5, 9.1)       ||  new SizeD(3.7, 2.8)         ||  new PointD(19.2, 11.899999999999999)
+        new PointD(26.98, 6.89)     ||  new SizeD(13.9, 9.56)       ||  new PointD(40.88, 16.45)
+        new PointD(-56.29, -962.2)  ||  new SizeD(26.5, 167.24)     ||  new PointD(-29.79, -794.96)
+        new PointD(22.225, -16.204) ||  new SizeD(-96.2, 43.87)     ||  new PointD(-73.975, 27.665999999999997)
+        new PointD(-129.0, -77.0)   ||  new SizeD(62.5, 33.26)      ||  new PointD(-66.5, -43.74)
+        new PointD(86.25, -98.2)    ||  new SizeD(18.9, -32.9)      ||  new PointD(105.15, -131.1)
     }
 
     def "Advance"() {
