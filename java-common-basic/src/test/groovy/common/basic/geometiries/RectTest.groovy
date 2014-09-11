@@ -51,6 +51,17 @@ class RectTest extends Specification {
 
     def "Left"() {
 
+        expect:
+        rect.left() == result
+
+        where:
+        rect                                                ||  result
+        new Rect(new Point(10, 10), new Size(0, 0))         ||  10
+        new Rect(new Point(15, 52), new Size(34, -64))      ||  15
+        new Rect(new Point(23, -18), new Size(4, 54))       ||  23
+        new Rect(new Point(-126, -92), new Size(165, 159))  ||  -126
+        new Rect(new Point(88, 27), new Size(-86, 72))      ||  88
+        new Rect(new Point(-96, 42), new Size(110, -9))     ||  -96
     }
 
     def "Top"() {
