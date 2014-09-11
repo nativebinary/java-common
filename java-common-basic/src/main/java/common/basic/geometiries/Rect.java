@@ -71,6 +71,25 @@ public class Rect {
         return new Rect(point.offset(size), this.size);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Rect)) return false;
+
+        Rect rect = (Rect) o;
+
+        if (!point.equals(rect.point)) return false;
+        if (!size.equals(rect.size)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = point.hashCode();
+        result = 31 * result + size.hashCode();
+        return result;
+    }
 
     @Override
     public String toString() {
