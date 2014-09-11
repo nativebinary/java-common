@@ -111,6 +111,17 @@ class RectTest extends Specification {
 
     def "Center"() {
 
+        expect:
+        rect.center() == result
+
+        where:
+        rect                                                ||  result
+        new Rect(new Point(10, 10), new Size(0, 0))         ||  new Point(10, 10)
+        new Rect(new Point(15, 52), new Size(34, -64))      ||  new Point(32, 20)
+        new Rect(new Point(23, -18), new Size(4, 54))       ||  new Point(25, 9)
+        new Rect(new Point(-126, -92), new Size(165, 159))  ||  new Point(-44, -13)
+        new Rect(new Point(88, 27), new Size(-86, 72))      ||  new Point(45, 63)
+        new Rect(new Point(-96, 42), new Size(110, -9))     ||  new Point(-41, 38)
     }
 
     def "Deflate"() {
