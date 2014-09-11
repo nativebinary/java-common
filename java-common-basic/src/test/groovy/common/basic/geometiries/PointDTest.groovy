@@ -149,7 +149,23 @@ class PointDTest extends Specification {
         new PointD(86.25, -98.2)    ||  new PointD(18.9, -32.9)     ||  new SizeD(67.35, -65.30000000000001)
     }
 
+    @SuppressWarnings("GroovyPointlessBoolean")
     def "Equals"() {
+
+        expect:
+        pointLhs.equals(pointRhs) == result
+
+        where:
+        pointLhs                    ||  pointRhs                    ||  result
+        new PointD(10, 10)          ||  new PointD(10, 10)          ||  true
+        new PointD(10.0, 10.0)      ||  new PointD(10, 10)          ||  true
+        new PointD(10, 10.0)        ||  new PointD(10.0, 10)        ||  true
+        new PointD(15.5, 9.1)       ||  new PointD(3.7, 2.8)        ||  false
+        new PointD(26.98, 6.89)     ||  new PointD(13.9, 9.56)      ||  false
+        new PointD(-56.29, -962.2)  ||  new PointD(26.5, 167.24)    ||  false
+        new PointD(22.225, -16.204) ||  new PointD(-96.2, 43.87)    ||  false
+        new PointD(-129.0, -77.0)   ||  new PointD(62.5, 33.26)     ||  false
+        new PointD(86.25, -98.2)    ||  new PointD(18.9, -32.9)     ||  false
 
     }
 
