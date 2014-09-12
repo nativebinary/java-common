@@ -87,6 +87,19 @@ class SizeTest extends Specification {
     }
 
     def "ToString"() {
+        expect:
+        size.toString() == result
 
+        where:
+        size                                ||  result
+        new Size(10, 10)                    ||  '{"width":10,"height":10}'
+        new Size(10, -10)                   ||  '{"width":10,"height":-10}'
+        new Size(522, 128)                  ||  '{"width":522,"height":128}'
+        new Size(963, 31)                   ||  '{"width":963,"height":31}'
+        new Size(-85, 72)                   ||  '{"width":-85,"height":72}'
+        new Size(53, 49)                    ||  '{"width":53,"height":49}'
+        new Size(999999999, 999999999)      ||  '{"width":999999999,"height":999999999}'
+        new Size(2147483647, 2147483647)    ||  '{"width":2147483647,"height":2147483647}'
+        new Size(-2147483648, -2147483648)  ||  '{"width":-2147483648,"height":-2147483648}'
     }
 }
