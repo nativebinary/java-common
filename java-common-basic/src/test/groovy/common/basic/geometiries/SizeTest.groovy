@@ -20,7 +20,19 @@ class SizeTest extends Specification {
     }
 
     def "GetWidthAspectRatioForHeight"() {
+        expect:
+        size.getWidthAspectRatioForHeight(height) == result
 
+        where:
+        size                                ||  height  ||  result
+        new Size(10, 10)                    ||  5       ||  5
+        new Size(522, 128)                  ||  2       ||  8
+        new Size(963, 31)                   ||  17      ||  528
+        new Size(-85, 72)                   ||  23      ||  -27
+        new Size(53, 49)                    ||  -6      ||  -6
+        new Size(999999999, 999999999)      ||  9       ||  0
+        new Size(2147483647, 2147483647)    ||  9       ||  0
+        new Size(-2147483648, -2147483648)  ||  9       ||  1
     }
 
     def "GetHeightAspectRatioForWidth"() {
