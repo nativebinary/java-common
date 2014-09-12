@@ -70,7 +70,20 @@ class SizeTest extends Specification {
     }
 
     def "HashCode"() {
+        expect:
+        size.hashCode() == result
 
+        where:
+        size                                ||  result
+        new Size(10, 10)                    ||  320
+        new Size(10, -10)                   ||  300
+        new Size(522, 128)                  ||  16310
+        new Size(963, 31)                   ||  29884
+        new Size(-85, 72)                   ||  -2563
+        new Size(53, 49)                    ||  1692
+        new Size(999999999, 999999999)      ||  1935228896
+        new Size(2147483647, 2147483647)    ||  -32
+        new Size(-2147483648, -2147483648)  ||  0
     }
 
     def "ToString"() {
