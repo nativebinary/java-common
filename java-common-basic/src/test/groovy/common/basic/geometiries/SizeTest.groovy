@@ -51,8 +51,22 @@ class SizeTest extends Specification {
         new Size(-2147483648, -2147483648)  ||  9       ||  1
     }
 
+    @SuppressWarnings("GroovyPointlessBoolean")
     def "Equals"() {
+        expect:
+        sizeLhs.equals(sizeRhs) == result
 
+        where:
+        sizeLhs                             ||  sizeRhs                             ||  result
+        new Size(10, 10)                    ||  new Size(10, 10)                    ||  true
+        new Size(10, -10)                   ||  new Size(10, 10)                    ||  false
+        new Size(522, 128)                  ||  new Size(-522, 128)                 ||  false
+        new Size(963, 31)                   ||  new Size(963, 31)                   ||  true
+        new Size(-85, 72)                   ||  new Size(85, 72)                    ||  false
+        new Size(53, 49)                    ||  new Size(53, 49)                    ||  true
+        new Size(999999999, 999999999)      ||  new Size(-999999999, -999999999)    ||  false
+        new Size(2147483647, 2147483647)    ||  new Size(-2147483647, -2147483647)  ||  false
+        new Size(-2147483648, -2147483648)  ||  new Size(-2147483648, -2147483648)  ||  true
     }
 
     def "HashCode"() {
