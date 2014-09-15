@@ -5,7 +5,7 @@ import spock.lang.Specification
 class PathUtilNewTest extends Specification {
 
     def "ctor"() {
-        when: new RandomUtil();
+        when: new PathUtilNew();
         then: thrown(InstantiationException);
     }
 
