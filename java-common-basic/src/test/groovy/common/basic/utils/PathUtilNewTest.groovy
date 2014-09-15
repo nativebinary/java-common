@@ -10,7 +10,20 @@ class PathUtilNewTest extends Specification {
     }
 
     def "AppendSlashSafe"() {
+        expect:
+        PathUtilNew.appendSlashSafe(path) == result
 
+        where:
+        path                                    ||  result
+        null                                    ||  "/"
+        ""                                      ||  "/"
+        "/"                                     ||  "/"
+        "."                                     ||  "./"
+        "./"                                    ||  "./"
+        "../"                                   ||  "../"
+        "./path"                                ||  "./path/"
+        "./path/"                               ||  "./path/"
+        "../test/path/url"                      ||  "../test/path/url/"
     }
 
     def "Combine"() {
