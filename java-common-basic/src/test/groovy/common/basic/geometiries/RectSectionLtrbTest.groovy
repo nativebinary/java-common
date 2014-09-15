@@ -107,11 +107,72 @@ class RectSectionLtrbTest extends Specification {
         new SizeF(78, 104)                  ||  new PointF(26, 82)                      ||  false
     }
 
+    @SuppressWarnings("GroovyPointlessBoolean")
     def "IsAfter"() {
+        expect:
+        RectSectionLtrb.getTouchArea(size, point).isAfter() == result
 
+        where:
+        size                                ||  point                                   ||  result
+        new SizeF(30, 36)                   ||  new PointF(35, 39)                      ||  true
+        new SizeF(30, 36)                   ||  new PointF(30, 36)                      ||  true
+        new SizeF(30, 36)                   ||  new PointF(27, -1)                      ||  true
+        new SizeF(30, 36)                   ||  new PointF(-16, -25)                    ||  true
+        new SizeF(75, 27)                   ||  new PointF(80, 30)                      ||  true
+        new SizeF(75, 27)                   ||  new PointF(75, 27)                      ||  true
+        new SizeF(75, 27)                   ||  new PointF(67, -1)                      ||  true
+        new SizeF(75, 27)                   ||  new PointF(-16, -25)                    ||  true
+
+        new SizeF(78, 26)                   ||  new PointF(20, 14)                      ||  true
+        new SizeF(85, 35)                   ||  new PointF(43, 18)                      ||  true
+        new SizeF(98, 42)                   ||  new PointF(75, 19)                      ||  true
+        new SizeF(69, 14)                   ||  new PointF(55, 11)                      ||  true
+        new SizeF(58, 48)                   ||  new PointF(13, 22)                      ||  false
+        new SizeF(27, 12)                   ||  new PointF(5, 11)                       ||  false
+        new SizeF(49, 33)                   ||  new PointF(13, 15)                      ||  false
+        new SizeF(89, 76)                   ||  new PointF(45, 35)                      ||  false
+
+        new SizeF(30, 36)                   ||  new PointF(28, 30)                      ||  true
+        new SizeF(18, 27)                   ||  new PointF(12, 13)                      ||  true
+        new SizeF(26, 52)                   ||  new PointF(25, 8)                       ||  false
+        new SizeF(48, 69)                   ||  new PointF(22, 34)                      ||  false
+        new SizeF(54, 77)                   ||  new PointF(26, 15)                      ||  false
+        new SizeF(86, 94)                   ||  new PointF(42, 47)                      ||  false
+        new SizeF(67, 82)                   ||  new PointF(35, 41)                      ||  true
+        new SizeF(78, 104)                  ||  new PointF(26, 82)                      ||  true
     }
 
     def "GetViewIndex"() {
+        expect:
+        RectSectionLtrb.getTouchArea(size, point).getViewIndex(index) == result
 
+        where:
+        size                        ||  point                           ||  index       ||  result
+        new SizeF(30, 36)           ||  new PointF(35, 39)              ||  10          ||  0
+        new SizeF(30, 36)           ||  new PointF(30, 36)              ||  10          ||  0
+        new SizeF(30, 36)           ||  new PointF(27, -1)              ||  10          ||  0
+        new SizeF(30, 36)           ||  new PointF(-16, -25)            ||  10          ||  0
+        new SizeF(75, 27)           ||  new PointF(80, 30)              ||  10          ||  0
+        new SizeF(75, 27)           ||  new PointF(75, 27)              ||  10          ||  0
+        new SizeF(75, 27)           ||  new PointF(67, -1)              ||  10          ||  0
+        new SizeF(75, 27)           ||  new PointF(-16, -25)            ||  10          ||  0
+
+        new SizeF(78, 26)           ||  new PointF(20, 14)              ||  10          ||  11
+        new SizeF(85, 35)           ||  new PointF(43, 18)              ||  10          ||  11
+        new SizeF(98, 42)           ||  new PointF(75, 19)              ||  10          ||  11
+        new SizeF(69, 14)           ||  new PointF(55, 11)              ||  10          ||  11
+        new SizeF(58, 48)           ||  new PointF(13, 22)              ||  10          ||  10
+        new SizeF(27, 12)           ||  new PointF(5, 11)               ||  10          ||  10
+        new SizeF(49, 33)           ||  new PointF(13, 15)              ||  10          ||  10
+        new SizeF(89, 76)           ||  new PointF(45, 35)              ||  10          ||  10
+
+        new SizeF(30, 36)           ||  new PointF(28, 30)              ||  10          ||  11
+        new SizeF(18, 27)           ||  new PointF(12, 13)              ||  10          ||  11
+        new SizeF(26, 52)           ||  new PointF(25, 8)               ||  10          ||  10
+        new SizeF(48, 69)           ||  new PointF(22, 34)              ||  10          ||  10
+        new SizeF(54, 77)           ||  new PointF(26, 15)              ||  10          ||  10
+        new SizeF(86, 94)           ||  new PointF(42, 47)              ||  10          ||  10
+        new SizeF(67, 82)           ||  new PointF(35, 41)              ||  10          ||  11
+        new SizeF(78, 104)          ||  new PointF(26, 82)              ||  10          ||  11
     }
 }
