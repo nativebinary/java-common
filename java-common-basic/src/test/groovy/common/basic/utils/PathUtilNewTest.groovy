@@ -27,6 +27,18 @@ class PathUtilNewTest extends Specification {
     }
 
     def "Combine"() {
+        expect:
+        PathUtilNew.combine(path, fileName) == result
+
+        where:
+        path            ||  fileName        ||  result
+        null            ||  "empty.txt"     ||  "/empty.txt"
+        ""              ||  "empty.txt"     ||  "/empty.txt"
+        "./"            ||  "empty.txt"     ||  "./empty.txt"
+        "../"           ||  "empty.txt"     ||  "../empty.txt"
+        "./path"        ||  "empty.txt"     ||  "./path/empty.txt"
+        "./path/"       ||  "empty.txt"     ||  "./path/empty.txt"
+        "./path/url/"   ||  "empty.txt"     ||  "./path/url/empty.txt"
 
     }
 
