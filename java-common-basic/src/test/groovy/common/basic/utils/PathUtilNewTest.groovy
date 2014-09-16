@@ -43,6 +43,19 @@ class PathUtilNewTest extends Specification {
     }
 
     def "RemoveLeadingSlash"() {
+        expect:
+        PathUtilNew.removeLeadingSlash(path) == result
 
+        where:
+        path            ||  result
+        ""              ||  ""
+        "/"             ||  ""
+        "./"            ||  "./"
+        "../"           ||  "../"
+        "./path"        ||  "./path"
+        "./path/url/"   ||  "./path/url/"
+        "/path"         ||  "path"
+        "/path/url/"    ||  "path/url/"
+        "/path/url"     ||  "path/url"
     }
 }
