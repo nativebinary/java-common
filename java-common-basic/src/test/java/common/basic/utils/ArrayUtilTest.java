@@ -19,4 +19,5 @@ public class ArrayUtilTest extends Assert{
         assertFalse(ArrayUtil.isNullOrEmpty(new String[]{"", "", "", "", ""}));
     }
 
+
 }
