@@ -14,6 +14,10 @@ import java.util.Map;
 
 public class URLUtil {
 
+    public URLUtil() throws InstantiationException {
+        throw new InstantiationException();
+    }
+
     public static String escape(String url) {
         return escapeSpace(escapePipe(url));
     }
@@ -109,9 +113,13 @@ public class URLUtil {
     }
 
     public static String makeQueryString(Map<String, Object> map) {
+
         List<String> list = new ArrayList<String>(map.size());
+
         for (String key : map.keySet()) {
+
             list.add(String.format("%s=%s", encode(key), encode(map.get(key).toString())));
+
         }
 
         return StringUtil.join("&", list);
