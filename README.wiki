@@ -86,7 +86,7 @@ IntelliJ IDEA
 	Menu - Run - Edit Configurations...
 		PrepareTest
 			Test kind: [All in package]
-			Package: [common.basic]
+			Package: []
 		OK
 
 	Menu - Run - Run 'common.basic in java-common-basic' with Coverage
