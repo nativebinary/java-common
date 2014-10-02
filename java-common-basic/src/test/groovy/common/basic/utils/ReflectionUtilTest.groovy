@@ -35,8 +35,8 @@ class ReflectionUtilTest extends Specification {
         field.name == "s"
     }
 
-    def "GetAnnotatedKeyFieldName"() {
-        def name = ReflectionUtil.getAnnotatedKeyFieldName(Test1.class, AnnotationForTest.class)
+    def "GetAnnotatedFieldNameFirst"() {
+        def name = ReflectionUtil.getAnnotatedFieldNameFirst(Test1.class, AnnotationForTest.class)
         expect:
         name == "s"
     }
