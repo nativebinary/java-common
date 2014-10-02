@@ -127,6 +127,7 @@ class ReflectionUtilTest extends Specification {
     }
 
     def "GetFieldDeclaredRecursive"() {
-
+        expect:
+        ReflectionUtil.getFieldDeclaredRecursive(Test1Child.class, "s").name == "s"
     }
 }
