@@ -52,7 +52,10 @@ class ReflectionUtilTest extends Specification {
         public int ll;
     }
 
-
+    def "ctor"() {
+        when: new ReflectionUtil()
+        then: thrown(InstantiationException)
+    }
 
     def "GetAnnotatedField"() {
         List<Field> list = ReflectionUtil.getAnnotatedField(Test1.class, AnnotationForTest.class)
