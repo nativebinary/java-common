@@ -104,7 +104,11 @@ class ReflectionUtilTest extends Specification {
     }
 
     def "ToMap"() {
-        ["s":"s", "i":10, "l":1000l] == ReflectionUtil.toMap(new Test1("s", 10, 1000l))
+        def map = ReflectionUtil.toMap(new Test1("s", 10, 1000l))
+        expect:
+        map["s"] == "s";
+        map["i"] == 10;
+        map["l"] == 1000l;
     }
 
     def "GetListFieldDeclaredRecursive"() {
