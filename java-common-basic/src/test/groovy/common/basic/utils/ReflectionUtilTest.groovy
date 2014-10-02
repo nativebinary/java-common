@@ -16,6 +16,9 @@ class ReflectionUtilTest extends Specification {
 
         long l;
 
+        Test1() {
+        }
+
         Test1(String s, int i, long l) {
             this.s = s
             this.i = i
@@ -82,7 +85,8 @@ class ReflectionUtilTest extends Specification {
     }
 
     def "FromListMap"() {
-
+        expect:
+        [new Test1("s1", 11, 1000l), new Test1("s2", 12, 2000l)] == ReflectionUtil.fromListMap(Test1.class, [["s":"s1", "i":11, "l":1000l], ["s":"s2", "i":12, "l":2000l]])
     }
 
     def "FromListMap1"() {
@@ -90,6 +94,7 @@ class ReflectionUtilTest extends Specification {
     }
 
     def "FromMap"() {
+        expect:
         new Test1("s", 10, 1000l) == ReflectionUtil.fromMap(Test1.class, ["s":"s", "i":10, "l":1000l])
     }
 
