@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import java.util.Map;
 
-public class ReflectionUtilTest extends Assert {
+public class ReflectionUtilTestWithJUnit extends Assert {
 
     @Test(expected = InstantiationException.class)
     public void testConstructor() throws Exception {
