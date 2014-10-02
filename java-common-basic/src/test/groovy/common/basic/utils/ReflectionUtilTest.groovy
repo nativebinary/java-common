@@ -7,14 +7,14 @@ import java.lang.reflect.Field
 class ReflectionUtilTest extends Specification {
 
     static class Test1 {
-        @AnnotationForTest
-        @Deprecated
-        String s;
 
         @AnnotationForTest
-        int i;
+        public String s;
 
-        long l;
+        @AnnotationForTest
+        public int i;
+
+        public long l;
 
         Test1() {
         }
@@ -69,8 +69,9 @@ class ReflectionUtilTest extends Specification {
         name == "s"
     }
 
-    def "GetAnnotatedKeyFieldValue"() {
-
+    def "GetAnnotatedFieldValueFirst"() {
+        expect:
+        "s" == ReflectionUtil.getAnnotatedKeyFieldValue(new Test1("s", 1, 10), AnnotationForTest.class)
     }
 
     def "GetMapField"() {
