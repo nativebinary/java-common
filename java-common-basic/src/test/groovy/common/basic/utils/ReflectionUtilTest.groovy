@@ -47,6 +47,11 @@ class ReflectionUtilTest extends Specification {
         }
     }
 
+    static class Test1Child extends Test1 {
+        public int ii;
+        public int ll;
+    }
+
     def "GetAnnotatedField"() {
         List<Field> list = ReflectionUtil.getAnnotatedField(Test1.class, AnnotationForTest.class)
 
@@ -112,7 +117,8 @@ class ReflectionUtilTest extends Specification {
     }
 
     def "GetMapFieldDeclaredRecursive"() {
-
+        expect:
+        ReflectionUtil.getMapFieldDeclaredRecursive(Test1Child.class).keySet().containsAll(["s", "i", "l", "ii", "ll"])
     }
 
     def "GetFieldDeclaredRecursive"() {
