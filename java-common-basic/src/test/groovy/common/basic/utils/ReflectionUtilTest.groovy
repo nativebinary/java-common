@@ -108,7 +108,13 @@ class ReflectionUtilTest extends Specification {
     }
 
     def "GetListFieldDeclaredRecursive"() {
-
+        expect:
+        ListUtil.transform(ReflectionUtil.getListFieldDeclaredRecursive(Test1Child.class), new ListUtil.ICallbackTransform<Field, String>() {
+            @Override
+            String transform(Field field) {
+                return field.name;
+            }
+        }).containsAll(["s", "i", "l", "ii", "ll"])
     }
 
     def "GetMapFieldDeclaredRecursive"() {
