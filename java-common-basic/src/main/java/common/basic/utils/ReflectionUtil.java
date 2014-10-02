@@ -145,6 +145,7 @@ public class ReflectionUtil {
                 {
                     if(type.isEnum())
                     {
+                        //noinspection unchecked
                         field.set(t, EnumUtil.parse((Class<Enum>)type, (String)value));
                     }
                     else {
