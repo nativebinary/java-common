@@ -56,7 +56,7 @@ public class ReflectionUtil {
     }
 
 
-    public static <T extends Annotation> Object getAnnotatedKeyFieldValue(Object object, Class<T> annotationClass) {
+    public static <T extends Annotation> Object getAnnotatedFieldValueFirst(Object object, Class<T> annotationClass) {
         Field annotatedField = ReflectionUtil.getAnnotatedFieldFirst(object.getClass(), annotationClass);
 
         if (null == annotatedField)

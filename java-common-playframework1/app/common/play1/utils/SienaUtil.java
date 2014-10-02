@@ -12,7 +12,7 @@ public class SienaUtil {
 
     public static Object getAnnotatedKeyFieldValue(Object object)  {
         final Class<Id> annotationClass = Id.class;
-        return ReflectionUtil.getAnnotatedKeyFieldValue(object, annotationClass);
+        return ReflectionUtil.getAnnotatedFieldValueFirst(object, annotationClass);
     }
 
 }

@@ -71,7 +71,7 @@ class ReflectionUtilTest extends Specification {
 
     def "GetAnnotatedFieldValueFirst"() {
         expect:
-        "s" == ReflectionUtil.getAnnotatedKeyFieldValue(new Test1("s", 1, 10), AnnotationForTest.class)
+        "s" == ReflectionUtil.getAnnotatedFieldValueFirst(new Test1("s", 1, 10), AnnotationForTest.class)
     }
 
     def "GetMapField"() {
