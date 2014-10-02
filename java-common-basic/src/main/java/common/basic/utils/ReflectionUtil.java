@@ -46,6 +46,7 @@ public class ReflectionUtil {
         return null;
     }
 
+    // TODO: rename
     public static <T, U extends Annotation> String getAnnotatedKeyFieldName(Class<T> clazz, Class<U> annotationClass) {
         Field annotatedField = ReflectionUtil.getAnnotatedFieldFirst(clazz, annotationClass);
 
