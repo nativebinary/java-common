@@ -46,7 +46,10 @@ class ReflectionUtilTest extends Specification {
     }
 
     def "GetMapField"() {
+        Map<String, Field> map = ReflectionUtil.getMapField(Test1.class);
 
+        expect:
+        map.keySet().containsAll(["s", "i", "l"])
     }
 
     def "GetValue"() {
