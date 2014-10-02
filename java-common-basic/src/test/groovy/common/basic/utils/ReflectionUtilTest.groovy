@@ -52,6 +52,8 @@ class ReflectionUtilTest extends Specification {
         public int ll;
     }
 
+
+
     def "GetAnnotatedField"() {
         List<Field> list = ReflectionUtil.getAnnotatedField(Test1.class, AnnotationForTest.class)
 
@@ -86,8 +88,9 @@ class ReflectionUtilTest extends Specification {
         map.keySet().containsAll(["s", "i", "l"])
     }
 
-    def "GetValue"() {
-
+    def "GetValue fail"() {
+        expect:
+        null == ReflectionUtil.getValue(new Test1("aaa", 1, 2), ReflectionUtil.getListFieldDeclaredRecursive(String.class)[0])
     }
 
     def "FromListMap"() {
