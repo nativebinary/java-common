@@ -16,7 +16,32 @@ class ReflectionUtilTest extends Specification {
 
         long l;
 
+        Test1(String s, int i, long l) {
+            this.s = s
+            this.i = i
+            this.l = l
+        }
 
+        boolean equals(o) {
+            if (this.is(o)) return true
+            if (!(o instanceof Test1)) return false
+
+            Test1 test1 = (Test1) o
+
+            if (i != test1.i) return false
+            if (l != test1.l) return false
+            if (s != test1.s) return false
+
+            return true
+        }
+
+        int hashCode() {
+            int result
+            result = (s != null ? s.hashCode() : 0)
+            result = 31 * result + i
+            result = 31 * result + (int) (l ^ (l >>> 32))
+            return result
+        }
     }
 
     def "GetAnnotatedField"() {
@@ -65,7 +90,7 @@ class ReflectionUtilTest extends Specification {
     }
 
     def "FromMap"() {
-
+        new Test1("s", 10, 1000l) == ReflectionUtil.fromMap(Test1.class, ["s":"s", "i":10, "l":1000l])
     }
 
     def "FromMap1"() {
