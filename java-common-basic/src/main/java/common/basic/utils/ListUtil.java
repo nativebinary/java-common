@@ -17,6 +17,13 @@ public class ListUtil extends CollectionUtil {
         throw new InstantiationException();
     }
 
+    public static <T> List<T> isNull(List<T> list) {
+        if(list == null)
+            return new ArrayList<T>();
+
+        return list;
+    }
+
     public static <T> boolean equals(List<T> listT1, List<T> listT2) {
         if (listT1.size() != listT2.size())
             return false;

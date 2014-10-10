@@ -29,6 +29,12 @@ class ListUtilTest extends Specification {
         }
     }
 
+    def "isNull"() {
+        expect:
+        ListUtil.isNull(null) == []
+        ListUtil.isNull([1, 2]) == [1, 2]
+    }
+
     def "toListString"() {
 
         Object[] array = [null, 1, "A", new HasToString(20, "C")];
