@@ -2,8 +2,10 @@ package common.basic.utils;
 
 import common.basic.interfaces.ITransform;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class MapUtil {
@@ -64,4 +66,18 @@ public class MapUtil {
         return mapResult;
     }
 
+    public static String getString(Map<String, Object> map, String key, String defaultValue) {
+        if (!map.containsKey(key))
+            return defaultValue;
+
+        Object value = map.get(key);
+        if (!(value instanceof String))
+            return defaultValue;
+
+        return value.toString();
+    }
+
+    public static String getString(Map<String, Object> map, String key) {
+        return getString(map, key, "");
+    }
 }
