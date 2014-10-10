@@ -46,7 +46,7 @@ public class ReflectionUtil {
         return null;
     }
 
-    public static <T, U extends Annotation> String getAnnotatedKeyFieldName(Class<T> clazz, Class<U> annotationClass) {
+    public static <T, U extends Annotation> String getAnnotatedFieldNameFirst(Class<T> clazz, Class<U> annotationClass) {
         Field annotatedField = ReflectionUtil.getAnnotatedFieldFirst(clazz, annotationClass);
 
         if (null == annotatedField)
@@ -56,7 +56,7 @@ public class ReflectionUtil {
     }
 
 
-    public static <T extends Annotation> Object getAnnotatedKeyFieldValue(Object object, Class<T> annotationClass) {
+    public static <T extends Annotation> Object getAnnotatedFieldValueFirst(Object object, Class<T> annotationClass) {
         Field annotatedField = ReflectionUtil.getAnnotatedFieldFirst(object.getClass(), annotationClass);
 
         if (null == annotatedField)
@@ -144,6 +144,7 @@ public class ReflectionUtil {
                 {
                     if(type.isEnum())
                     {
+                        //noinspection unchecked
                         field.set(t, EnumUtil.parse((Class<Enum>)type, (String)value));
                     }
                     else {
