@@ -49,4 +49,23 @@ public class RandomUtil {
     public static float nextFloat() {
         return random.nextFloat();
     }
+
+    public static long nextLong() {
+        return random.nextLong();
+    }
+
+    public static String nextNumberString(int length)
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.append(Math.abs(nextInt(10)));
+        while(sb.length() < length)
+        {
+            sb.append(Math.abs(nextLong()));
+        }
+
+        sb.delete(length, sb.length());
+        return sb.toString();
+
+    }
+
 }
