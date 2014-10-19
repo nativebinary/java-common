@@ -51,7 +51,7 @@ public class ConvertModels implements RunnableThrowsException {
 
         final String bodyRemoveBrace = removeBrace(body);
         final int semicolon = bodyRemoveBrace.indexOf(";");
-        String bodyHead = body.substring(0, semicolon);
+        String bodyHead = bodyRemoveBrace.substring(0, semicolon);
         String bodyHeadRemoveParenthesis = removeParenthesis(bodyHead);
         return RegExpUtil.removeRepeatedNewLine(StringUtil.join("\n", convertHead(head), bodyHeadRemoveParenthesis, convertTail(tail)));
     }
