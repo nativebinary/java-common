@@ -16,13 +16,19 @@ class ReflectionUtilTest extends Specification {
 
         public long l;
 
+        public float f;
+
+        public double d;
+
         Test1() {
         }
 
-        Test1(String s, int i, long l) {
+        Test1(String s, int i, long l, float f, double d) {
             this.s = s
             this.i = i
             this.l = l
+            this.f = f;
+            this.d = d;
         }
 
         boolean equals(o) {
@@ -34,6 +40,8 @@ class ReflectionUtilTest extends Specification {
             if (i != test1.i) return false
             if (l != test1.l) return false
             if (s != test1.s) return false
+            if (f != test1.f) return false
+            if (d != test1.d) return false
 
             return true
         }
@@ -81,7 +89,7 @@ class ReflectionUtilTest extends Specification {
 
     def "GetAnnotatedFieldValueFirst"() {
         expect:
-        "s" == ReflectionUtil.getAnnotatedFieldValueFirst(new Test1("s", 1, 10), AnnotationForTest.class)
+        "s" == ReflectionUtil.getAnnotatedFieldValueFirst(new Test1("s", 1, 10, 3f, 4d), AnnotationForTest.class)
     }
 
     def "GetMapField"() {
@@ -93,25 +101,32 @@ class ReflectionUtilTest extends Specification {
 
     def "GetValue fail"() {
         expect:
-        null == ReflectionUtil.getValue(new Test1("aaa", 1, 2), ReflectionUtil.getListFieldDeclaredRecursive(String.class)[0])
+        null == ReflectionUtil.getValue(new Test1("aaa", 1, 2, 3f, 4d), ReflectionUtil.getListFieldDeclaredRecursive(String.class)[0])
     }
 
     def "FromListMap"() {
         expect:
-        [new Test1("s1", 11, 1000l), new Test1("s2", 12, 2000l)] == ReflectionUtil.fromListMap(Test1.class, [["s":"s1", "i":11, "l":1000l], ["s":"s2", "i":12, "l":2000l]])
+        [new Test1("s1", 11, 1000l, 3f, 4d), new Test1("s2", 12, 2000l, 3f, 4d)] == ReflectionUtil.fromListMap(Test1.class, [["s":"s1", "i":11, "l":1000l, "f":3f, "d":4d], ["s":"s2", "i":12, "l":2000l, "f":3f, "d":4d]])
     }
 
     def "FromMap"() {
         expect:
-        new Test1("s", 10, 1000l) == ReflectionUtil.fromMap(Test1.class, ["s":"s", "i":10, "l":1000l])
+        new Test1("s", 10, 1000l, 3f, 4d) == ReflectionUtil.fromMap(Test1.class, ["s":"s", "i":10, "l":1000l, "f":3f, "d":4d])
+    }
+
+    def "FromMap2"() {
+        expect:
+        new Test1("s", 10, 1000l, 3f, 4d) == ReflectionUtil.fromMap(Test1.class, ["s":"s", "i":new Long(10), "l":1000l, "f":new Double(3f), "d":4d])
     }
 
     def "ToMap"() {
-        def map = ReflectionUtil.toMap(new Test1("s", 10, 1000l))
+        def map = ReflectionUtil.toMap(new Test1("s", 10, 1000l, 3f, 4d))
         expect:
         map["s"] == "s";
         map["i"] == 10;
         map["l"] == 1000l;
+        map["f"] == 3f;
+        map["d"] == 4d;
     }
 
     def "GetListFieldDeclaredRecursive"() {

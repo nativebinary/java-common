@@ -78,6 +78,41 @@ public class ReflectionUtil {
         field.set(object, value);
     }
 
+    private static <T, U extends Annotation> void setFieldValue(T instance, Field field, Object value, Class<U> annotationClass) throws IllegalAccessException, InstantiationException {
+        field.setAccessible(true);
+
+        final Class<?> type = field.getType();
+        if(type.isPrimitive())
+        {
+            if ("int".equals(type.getName()) && (value instanceof Long)) {
+                field.setInt(instance, ((Long) value).intValue());
+            } else if ("float".equals(type.getName()) && (value instanceof Double)) {
+                field.setFloat(instance, ((Double) value).floatValue());
+            } else {
+                field.set(instance, value);
+            }
+        }
+        else if(type.equals(String.class) || type.equals(Date.class))
+        {
+            field.set(instance, value);
+        }
+        else
+        {
+            if(type.isEnum())
+            {
+                //noinspection unchecked
+                field.set(instance, EnumUtil.parse((Class<Enum>) type, (String) value));
+            }
+            else {
+                if(annotationClass == null)
+                    return;
+
+                final Object o = type.newInstance();
+                setAnnotatedKeyFieldValue(o, annotationClass, value);
+                field.set(instance, o);
+            }
+        }
+    }
 
     public static <T> Map<String, Field> getMapField(Class<T> clazz) {
 
@@ -99,110 +134,6 @@ public class ReflectionUtil {
             return null;
         }
     }
-
-
-
-    public static <T> List<T> fromListMap(Class<T> clazz, List<Map<String, Object>> listMap) {
-        return fromListMap(clazz, listMap, null);
-    }
-
-    public static <T, U extends Annotation> List<T> fromListMap(Class<T> clazz, List<Map<String, Object>> listMap, Class<U> annotationClass) {
-        if(listMap == null)
-            return null;
-
-        List<T> list = new ArrayList<T>(listMap.size());
-        for (Map<String, Object> map : listMap)
-            list.add(fromMap(clazz, map, annotationClass));
-
-        return list;
-    }
-
-    public static <T> T fromMap(Class<T> clazz, Map<String, Object> map) {
-        return fromMap(clazz, map, null);
-    }
-
-    public static <T, U extends Annotation> T fromMap(Class<T> clazz, Map<String, Object> map, Class<U> annotationClass) {
-        final T t;
-        try {
-            t = clazz.getConstructor(new Class<?>[0]).newInstance();
-            for (String key : map.keySet())
-            {
-                final Object value = map.get(key);
-
-                final Field field = getFieldDeclaredRecursive(clazz, key);
-                if(Modifier.isTransient(field.getModifiers()))
-                    continue;
-
-                field.setAccessible(true);
-
-                final Class<?> type = field.getType();
-                if(type.isPrimitive() || type.equals(String.class) || type.equals(Date.class))
-                {
-                    field.set(t, value);
-                }
-                else
-                {
-                    if(type.isEnum())
-                    {
-                        //noinspection unchecked
-                        field.set(t, EnumUtil.parse((Class<Enum>)type, (String)value));
-                    }
-                    else {
-                        final Object o = type.newInstance();
-                        if(annotationClass == null)
-                            continue;
-
-                        setAnnotatedKeyFieldValue(o, annotationClass, value);
-                        field.set(t, o);
-                    }
-                }
-            }
-            return t;
-        }
-        catch (InstantiationException e) {
-            Logger.e(e);
-        }
-        catch (IllegalAccessException e) {
-            Logger.e(e);
-        }
-        catch (InvocationTargetException e) {
-            Logger.e(e);
-        }
-        catch (NoSuchMethodException e) {
-            Logger.e(e);
-        }
-        catch (NoSuchFieldException e) {
-            Logger.e(e);
-        }
-
-        return null;
-    }
-
-
-    public static <T> Map<String, Object> toMap(T t) {
-        try {
-            Map<String, Object> map = new HashMap<String, Object>();
-            final Class<?> clazz = t.getClass();
-            final List<Field> arrayField = getListFieldDeclaredRecursive(clazz);
-
-            for (Field field : arrayField)
-            {
-                if(Modifier.isTransient(field.getModifiers()))
-                    continue;
-
-                field.setAccessible(true);
-                map.put(field.getName(), field.get(t));
-            }
-
-            return map;
-        }
-        catch (IllegalAccessException e) {
-            Logger.e(e);
-        }
-
-        return null;
-    }
-
 
     public static <T> List<Field> getListFieldDeclaredRecursive(Class<T> clazz){
         List<Field> listField = new ArrayList<Field>();
@@ -242,5 +173,147 @@ public class ReflectionUtil {
             }
         }
     }
+
+
+
+    public static <T> List<T> fromListMap(Class<T> clazz, List<Map<String, Object>> listMap) {
+        return fromListMap(clazz, listMap, null);
+    }
+
+    public static <T, U extends Annotation> List<T> fromListMap(Class<T> clazz, List<Map<String, Object>> listMap, Class<U> annotationClass) {
+        if(listMap == null)
+            return null;
+
+        List<T> list = new ArrayList<T>(listMap.size());
+        for (Map<String, Object> map : listMap)
+            list.add(fromMap(clazz, map, annotationClass));
+
+        return list;
+    }
+
+    public static <T> List<T> fromListMapByClass(Class<T> clazz, List<Map<String, Object>> listMap) {
+        return fromListMapByClass(clazz, listMap, null);
+    }
+
+    public static <T, U extends Annotation> List<T> fromListMapByClass(Class<T> clazz, List<Map<String, Object>> listMap, Class<U> annotationClass) {
+        if(listMap == null)
+            return null;
+
+        List<T> list = new ArrayList<T>(listMap.size());
+        for (Map<String, Object> map : listMap)
+            list.add(fromMapByClass(clazz, map, annotationClass));
+
+        return list;
+    }
+
+
+    public static <T> T fromMap(Class<T> clazz, Map<String, Object> map) {
+        return fromMap(clazz, map, null);
+    }
+
+    public static <T, U extends Annotation> T fromMap(Class<T> clazz, Map<String, Object> map, Class<U> annotationClass) {
+        final T t;
+        try {
+            t = clazz.getConstructor(new Class<?>[0]).newInstance();
+            for (String key : map.keySet())
+            {
+                final Object value = map.get(key);
+
+                final Field field = getFieldDeclaredRecursive(clazz, key);
+                if(Modifier.isTransient(field.getModifiers()))
+                    continue;
+
+
+                setFieldValue(t, field, value, annotationClass);
+            }
+            return t;
+        }
+        catch (InstantiationException e) {
+            Logger.e(e);
+        }
+        catch (IllegalAccessException e) {
+            Logger.e(e);
+        }
+        catch (InvocationTargetException e) {
+            Logger.e(e);
+        }
+        catch (NoSuchMethodException e) {
+            Logger.e(e);
+        }
+        catch (NoSuchFieldException e) {
+            Logger.e(e);
+        }
+
+        return null;
+    }
+
+
+    public static <T> T fromMapByClass(Class<T> clazz, Map<String, Object> map) {
+        return fromMapByClass(clazz, map, null);
+    }
+
+    public static <T, U extends Annotation> T fromMapByClass(Class<T> clazz, Map<String, Object> map, Class<U> annotationClass) {
+        final T t;
+        try {
+            t = clazz.getConstructor(new Class<?>[0]).newInstance();
+
+            List<Field> listFieldDeclaredRecursive = getListFieldDeclaredRecursive(clazz);
+
+            for (Field field : listFieldDeclaredRecursive) {
+                String fieldName = field.getName();
+
+                Object value = map.get(fieldName);
+                if (null == value)
+                    continue;
+
+                if(Modifier.isTransient(field.getModifiers()))
+                    continue;
+
+                setFieldValue(t, field, value, annotationClass);
+            }
+
+            return t;
+        }
+        catch (InstantiationException e) {
+            Logger.e(e);
+        }
+        catch (IllegalAccessException e) {
+            Logger.e(e);
+        }
+        catch (InvocationTargetException e) {
+            Logger.e(e);
+        }
+        catch (NoSuchMethodException e) {
+            Logger.e(e);
+        }
+
+        return null;
+    }
+
+
+    public static <T> Map<String, Object> toMap(T t) {
+        try {
+            Map<String, Object> map = new HashMap<String, Object>();
+            final Class<?> clazz = t.getClass();
+            final List<Field> arrayField = getListFieldDeclaredRecursive(clazz);
+
+            for (Field field : arrayField)
+            {
+                if(Modifier.isTransient(field.getModifiers()))
+                    continue;
+
+                field.setAccessible(true);
+                map.put(field.getName(), field.get(t));
+            }
+
+            return map;
+        }
+        catch (IllegalAccessException e) {
+            Logger.e(e);
+        }
+
+        return null;
+    }
+
 
 }
