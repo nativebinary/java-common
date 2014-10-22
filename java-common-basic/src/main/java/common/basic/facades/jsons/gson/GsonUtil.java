@@ -1,6 +1,7 @@
 package common.basic.facades.jsons.gson;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -19,39 +20,47 @@ public class GsonUtil {
         throw new InstantiationException();
     }
 
+    private static Gson createGson() {
+        return new GsonBuilder()
+                .serializeNulls()
+//              TODO  .setExclusionStrategies(new ExclusionStrategyWithExcludeGson())
+                .setDateFormat("yyyy-MM-dd HH:mm:ss")
+                .create();
+    }
+
 
     public static String toJson(Object o) {
-        return new Gson().toJson(o);
+        return createGson().toJson(o);
     }
 
     public static void toJson(Object o, Appendable appendable) {
-        new Gson().toJson(o, appendable);
+        createGson().toJson(o, appendable);
     }
 
     public static <T> T fromJson(String json, Class<T> clazz) {
-        return new Gson().fromJson(json, clazz);
+        return createGson().fromJson(json, clazz);
     }
 
     public static <T> T fromJson(InputStream inputStream, Class<T> clazz) {
-        return new Gson().fromJson(new InputStreamReader(inputStream), clazz);
+        return createGson().fromJson(new InputStreamReader(inputStream), clazz);
     }
 
     public static <T> T fromJson(Reader reader, Class<T> clazz) {
-        return new Gson().fromJson(reader, clazz);
+        return createGson().fromJson(reader, clazz);
     }
 
     public static <T> T fromJson(JsonObject jsonObject, Class<T> clazz) {
-        return new Gson().fromJson(jsonObject, clazz);
+        return createGson().fromJson(jsonObject, clazz);
     }
 
     @Deprecated // use toList()
     public static <T, U extends TypeToken<List<T>>> List<T> fromJsonArray(String json, U typeToken) {
         Logger.e("Deprecated, use toList().");
-        return new Gson().fromJson(json, typeToken.getType());
+        return createGson().fromJson(json, typeToken.getType());
     }
 
     public static <T, U extends TypeToken<List<T>>> List<T> toList(String json, U typeToken) {
-        return new Gson().fromJson(json, typeToken.getType());
+        return createGson().fromJson(json, typeToken.getType());
     }
 
     public static JsonElement fromString(String body) {
@@ -95,6 +104,6 @@ public class GsonUtil {
 
     public static Map<String, Object> fromJsonMap(String json) {
 
-        return new Gson().fromJson(json, new TypeToken<Map<String, Object>>(){}.getType());
+        return createGson().fromJson(json, new TypeToken<Map<String, Object>>() {}.getType());
     }
 }
