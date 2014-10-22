@@ -60,7 +60,34 @@ public class ResultSetUtil {
 		return listMap;
 	}
 
-	public static List<List<Object>> getListList(ResultSet resultSet) {
+    public static Map<Object, Map<String, Object>> getMapMap(ResultSet resultSet, String keyFieldName) {
+        Map<Object, Map<String, Object>> mapMap = new HashMap<Object, Map<String, Object>>();
+        try {
+            while(resultSet.next())
+            {
+                HashMap<String, Object> hashMap = new HashMap<String, Object>();
+
+                ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+                int iColumnCount = resultSetMetaData.getColumnCount();
+
+                for (int i = 1; i <= iColumnCount; i++) {
+                    String columnName = resultSetMetaData.getColumnLabel(i);
+                    Object value = resultSet.getObject(i);
+                    hashMap.put(columnName, value);
+                }
+
+                Object idValue = hashMap.get(keyFieldName);
+
+                mapMap.put(idValue, hashMap);
+            }
+        } catch (SQLException e) {
+            Logger.e(e);
+        }
+        return mapMap;
+    }
+
+
+    public static List<List<Object>> getListList(ResultSet resultSet) {
 		List<List<Object>> listList = new ArrayList<List<Object>>();
 		try {
 			while(resultSet.next())
