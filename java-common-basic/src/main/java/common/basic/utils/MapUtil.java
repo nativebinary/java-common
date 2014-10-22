@@ -80,4 +80,22 @@ public class MapUtil {
     public static String getString(Map<String, Object> map, String key) {
         return getString(map, key, "");
     }
+
+    public static long getLong(Map<String, Object> map, String key, long defaultValue) {
+        if (!map.containsKey(key))
+            return defaultValue;
+
+        Object value = map.get(key);
+        if (value instanceof Long)
+            return (Long) value;
+
+        if (value instanceof Integer)
+            return (Integer)value;
+
+        return LongUtil.parseLong(value.toString(), defaultValue);
+    }
+
+    public static long getLong(Map<String, Object> map, String key) {
+        return getLong(map, key, 0L);
+    }
 }
