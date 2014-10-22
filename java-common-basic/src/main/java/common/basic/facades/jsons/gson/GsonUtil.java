@@ -46,7 +46,7 @@ public class GsonUtil {
 
     @Deprecated // use toList()
     public static <T, U extends TypeToken<List<T>>> List<T> fromJsonArray(String json, U typeToken) {
-        Logger.e("deprecatd method.");
+        Logger.e("Deprecated, use toList().");
         return new Gson().fromJson(json, typeToken.getType());
     }
 
