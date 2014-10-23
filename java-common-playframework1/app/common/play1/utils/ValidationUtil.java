@@ -1,5 +1,6 @@
 package common.play1.utils;
 
+import common.basic.interfaces.ICallbackTransform;
 import common.basic.utils.ListUtil;
 import common.basic.utils.StringUtil;
 import play.data.validation.Error;
@@ -18,7 +19,7 @@ public class ValidationUtil {
     }
 
     public static String getMessageJoined(List<Error> listError) {
-        return StringUtil.join(",", ListUtil.transform(listError, new ListUtil.ICallbackTransform<Error, String>() {
+        return StringUtil.join(",", ListUtil.transform(listError, new ICallbackTransform<Error, String>() {
             @Override
             public String transform(Error error) {
                 return error.message(error.getKey());

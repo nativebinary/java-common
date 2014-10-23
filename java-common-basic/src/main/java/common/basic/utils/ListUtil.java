@@ -1,10 +1,12 @@
 package common.basic.utils;
 
+import common.basic.interfaces.ICallbackTransform;
 import common.basic.interfaces.IPredicator;
 import common.basic.logs.Logger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -191,11 +193,7 @@ public class ListUtil extends CollectionUtil {
         return listResult;
     }
 
-    public static interface ICallbackTransform<TIn, TOut> {
-        TOut transform(TIn in);
-    }
-
-    public static <TIn, TOut> List<TOut> transform(List<TIn> list, ICallbackTransform<TIn, TOut> callbackTransform) {
+    public static <TIn, TOut> List<TOut> transform(Collection<TIn> list, ICallbackTransform<TIn, TOut> callbackTransform) {
         List<TOut> listOut = new ArrayList<TOut>(list.size());
         for (TIn in : list) {
             listOut.add(callbackTransform.transform(in));

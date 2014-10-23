@@ -1,5 +1,6 @@
 package common.basic.utils
 
+import common.basic.interfaces.ICallbackTransform
 import spock.lang.Specification
 
 import java.lang.reflect.Field
@@ -131,7 +132,7 @@ class ReflectionUtilTest extends Specification {
 
     def "GetListFieldDeclaredRecursive"() {
         expect:
-        ListUtil.transform(ReflectionUtil.getListFieldDeclaredRecursive(Test1Child.class), new ListUtil.ICallbackTransform<Field, String>() {
+        ListUtil.transform(ReflectionUtil.getListFieldDeclaredRecursive(Test1Child.class), new ICallbackTransform<Field, String>() {
             @Override
             String transform(Field field) {
                 return field.name;
