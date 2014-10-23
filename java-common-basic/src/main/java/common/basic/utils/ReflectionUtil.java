@@ -1,5 +1,6 @@
 package common.basic.utils;
 
+import common.basic.interfaces.IPredicator;
 import common.basic.logs.Logger;
 
 import java.lang.annotation.Annotation;
@@ -65,7 +66,7 @@ public class ReflectionUtil {
         return ReflectionUtil.getValue(object, annotatedField);
     }
 
-    private static <T extends Annotation> void setAnnotatedKeyFieldValue(Object object, Class<T> annotationClass, Object value) throws IllegalAccessException {
+    public static <T extends Annotation> void setAnnotatedKeyFieldValue(Object object, Class<T> annotationClass, Object value) throws IllegalAccessException {
         Field annotatedField = ReflectionUtil.getAnnotatedFieldFirst(object.getClass(), annotationClass);
 
         if (null == annotatedField)
@@ -74,11 +75,11 @@ public class ReflectionUtil {
         setValue(object, annotatedField, value);
     }
 
-    private static void setValue(Object object, Field field, Object value) throws IllegalAccessException {
+    public static void setValue(Object object, Field field, Object value) throws IllegalAccessException {
         field.set(object, value);
     }
 
-    private static <T, U extends Annotation> void setFieldValue(T instance, Field field, Object value, Class<U> annotationClass) throws IllegalAccessException, InstantiationException {
+    public static <T, U extends Annotation> void setFieldValue(T instance, Field field, Object value, Class<U> annotationClass) throws IllegalAccessException, InstantiationException {
         field.setAccessible(true);
 
         final Class<?> type = field.getType();
@@ -315,5 +316,49 @@ public class ReflectionUtil {
         return null;
     }
 
+
+    public static <TLhs, TRhs> void assignAnnotatedMemberVariable(List<TLhs> listLhs, List<TRhs> listRhs, Class classAnnotation) {
+        if(listLhs.size() == 0) {
+            Logger.e("listLhs.size() == 0");
+            return;
+        }
+
+        if(listRhs.size() == 0) {
+            Logger.e("listRhs.size() == 0");
+            return;
+        }
+
+        final TLhs lhs0 = listLhs.get(0);
+        final TRhs rhs0 = listRhs.get(0);
+        final Class<?> classLhs = lhs0.getClass();
+        final Class<?> classRhs = rhs0.getClass();
+
+        final List<Field> listTarget = ListUtil.findAll(getListFieldDeclaredRecursive(classLhs), new IPredicator<Field>() {
+            @Override
+            public boolean predicate(Field field) {
+                return field.getType().equals(classRhs);
+            }
+        });
+
+        Map<Object, TRhs> map = new HashMap<Object, TRhs>();
+        for (TRhs rhs : listRhs) {
+            map.put(getAnnotatedFieldValueFirst(rhs, classAnnotation), rhs);
+        }
+
+
+        for (Field field : listTarget) {
+            for (TLhs lhs : listLhs) {
+                final Object memberVar = getValue(lhs, field);
+                final Object annotatedFieldValueFirst = getAnnotatedFieldValueFirst(memberVar, classAnnotation);
+
+                try {
+                    setValue(lhs, field, map.get(annotatedFieldValueFirst));
+                }
+                catch (IllegalAccessException e) {
+                    Logger.e(e);
+                }
+            }
+        }
+    }
 
 }
