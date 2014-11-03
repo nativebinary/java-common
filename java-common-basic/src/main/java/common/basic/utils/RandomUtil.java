@@ -46,6 +46,10 @@ public class RandomUtil {
         return nextInt() % 2 == 0;
     }
 
+    public static boolean nextBoolean(float ratioPositive){
+        return nextFloat() < ratioPositive;
+    }
+
     public static float nextFloat() {
         return random.nextFloat();
     }
