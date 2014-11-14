@@ -317,6 +317,7 @@ public class ReflectionUtil {
     }
 
 
+
     public static <TLhs, TRhs> void assignAnnotatedMemberVariable(List<TLhs> listLhs, List<TRhs> listRhs, Class classAnnotation) {
         if(listLhs.size() == 0) {
             Logger.e("listLhs.size() == 0");
@@ -352,7 +353,11 @@ public class ReflectionUtil {
                 final Object annotatedFieldValueFirst = getAnnotatedFieldValueFirst(memberVar, classAnnotation);
 
                 try {
-                    setValue(lhs, field, map.get(annotatedFieldValueFirst));
+                    final TRhs value = map.get(annotatedFieldValueFirst);
+                    if(value == null)
+                        continue;
+
+                    setValue(lhs, field, value);
                 }
                 catch (IllegalAccessException e) {
                     Logger.e(e);
