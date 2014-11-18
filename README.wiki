@@ -14,12 +14,13 @@ These are mine, yours, and ours.
 
 You can use these codes freely!
 
-Don't afraid send me a pull-request.
+Don't afraid to send me a pull-request.
 
 
 == Contributors ==
 * [https://github.com/silsol silsol]
 * [https://github.com/aha00a aha00a]
+* [https://github.com/roadster01 roadster01]
 * [https://github.com/kig1945 kig1945]
 * [https://github.com/millpoo millpoo]
 
