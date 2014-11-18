@@ -232,6 +232,25 @@ public class ListUtil extends CollectionUtil {
         while(list.remove(null));
     }
 
+    public static <T> void removeFirstInPlace(List<T> list) {
+        if(list.size() == 0) {
+            Logger.e("list.size() == 0");
+            return;
+        }
+
+        list.remove(0);
+    }
+
+    public static <T> void removeLastInPlace(List<T> list) {
+        if(list.size() == 0) {
+            Logger.e("list.size() == 0");
+            return;
+        }
+
+        list.remove(list.size() - 1);
+    }
+
+
     public static <T> void replace(List<T> list, T tToRemove, T tToInsert) {
         final int i = list.indexOf(tToRemove);
         list.remove(i);

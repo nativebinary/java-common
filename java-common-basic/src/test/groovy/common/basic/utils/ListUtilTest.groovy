@@ -296,4 +296,21 @@ class ListUtilTest extends Specification {
         ["A", "A", "A", "A"] | ["A", "A"] | ["A", "A", "A", "A"]
         ["A", "A", "A", "A"] | ["A"] | ["A", "A", "A", "A"]
     }
+
+    def "removeFirstInPlace"() {
+        def list = [1, 2, 3];
+        ListUtil.removeFirstInPlace(list)
+
+        expect:
+        list == [2, 3]
+    }
+
+
+    def "removeLastInPlace"() {
+        def list = [1, 2, 3];
+        ListUtil.removeLastInPlace(list)
+
+        expect:
+        list == [1, 2]
+    }
 }
