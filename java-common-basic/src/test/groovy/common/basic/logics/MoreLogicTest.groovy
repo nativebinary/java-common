@@ -12,7 +12,7 @@ class MoreLogicTest extends Specification {
 
 
         where:
-        src                               | b     | expect
+        src                                | b     | expect
         [1]                                | false | [1]
         [1, 2]                             | false | [1, 2]
         [1, 2, 3]                          | false | [1, 2, 3]
