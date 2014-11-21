@@ -46,5 +46,29 @@ public class ReflectionUtilTestWithJUnit extends Assert {
         assertEquals(testClass.i, testClass2.i);
 
     }
+
+    public static class TestTest {
+        public int i;
+        public boolean b;
+    }
+
+    @Test
+    public void setFieldValue() throws Exception {
+
+        TestTest testTest = new TestTest();
+
+        ReflectionUtil.setFieldValue(testTest, ReflectionUtil.getFieldDeclaredRecursive(TestTest.class, "i"), 10, null);
+        assertEquals(10, testTest.i);
+
+        ReflectionUtil.setFieldValue(testTest, ReflectionUtil.getFieldDeclaredRecursive(TestTest.class, "i"), 99, null);
+        assertEquals(99, testTest.i);
+
+        ReflectionUtil.setFieldValue(testTest, ReflectionUtil.getFieldDeclaredRecursive(TestTest.class, "b"), 1, null);
+        assertEquals(true, testTest.b);
+
+        ReflectionUtil.setFieldValue(testTest, ReflectionUtil.getFieldDeclaredRecursive(TestTest.class, "b"), 0, null);
+        assertEquals(false, testTest.b);
+
+    }
 }
 
