@@ -5,9 +5,9 @@ import com.google.android.gcm.server.Message;
 import com.google.android.gcm.server.Result;
 import com.google.android.gcm.server.Sender;
 import common.basic.facades.jsons.gson.GsonUtil;
-import common.basic.utils.HashMapStringObject;
 
 import java.io.IOException;
+import java.util.Map;
 
 public class GcmUtil {
     public static class GcmException extends Exception {
@@ -32,14 +32,14 @@ public class GcmUtil {
         throw new GcmException(result);
     }
 
-    public static Result send(String gcmApiKey, String udid, HashMapStringObject hashMapStringObject) throws IOException, GcmException {
-        return send(gcmApiKey, udid, getMessage(hashMapStringObject));
+    public static Result send(String gcmApiKey, String udid, Map<String, Object> map) throws IOException, GcmException {
+        return send(gcmApiKey, udid, getMessage(map));
     }
 
-    public static Message getMessage(HashMapStringObject hashMapStringObject) {
+    public static Message getMessage(Map<String, Object> map) {
         final Message.Builder builder = new Message.Builder();
-        for (String key : hashMapStringObject.keySet()) {
-            final Object o = hashMapStringObject.get(key);
+        for (String key : map.keySet()) {
+            final Object o = map.get(key);
             if(o instanceof String)
             {
                 builder.addData(key, String.valueOf(o));
