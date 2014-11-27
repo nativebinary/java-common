@@ -14,6 +14,11 @@ abstract class JsonUtilTest extends Specification {
         JsonUtil.setJsonEngine(old);
     }
 
+    def "ctor"() {
+        when: new JsonUtil()
+        then: thrown(InstantiationException)
+    }
+
     def "toJson"() {
         expect:
         result == JsonUtil.toJson(param);
