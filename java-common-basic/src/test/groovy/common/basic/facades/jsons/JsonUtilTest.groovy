@@ -1,27 +1,22 @@
 package common.basic.facades.jsons
-
-import common.basic.facades.jsons.gson.JsonEngineGson
-import common.basic.facades.jsons.jackson.JsonEngineJackson
 import common.basic.geometiries.Point
-import common.basic.utils.MapUtil
 import spock.lang.Specification
 
-class JsonUtilTest extends Specification {
-    def "toJson"() {
-        setup:
-        def func = { p -> JsonUtil.toJson(p); }
+abstract class JsonUtilTest extends Specification {
+    abstract IJsonEngine createJsonEngine()
 
-        def old = JsonUtil.setJsonEngine(new JsonEngineGson());
-        def gson = func(param);
-        //noinspection GroovyUnusedAssignment
-        def old2 = JsonUtil.setJsonEngine(new JsonEngineJackson());
-        def jackson = func(param);
+    def old;
+    def setup() {
+        old = JsonUtil.setJsonEngine(createJsonEngine());
+    }
 
-        expect:
-        result == gson; gson == jackson; jackson == result
-
-        cleanup:
+    def cleanup() {
         JsonUtil.setJsonEngine(old);
+    }
+
+    def "toJson"() {
+        expect:
+        result == JsonUtil.toJson(param);
 
         where:
         param             || result
@@ -29,88 +24,37 @@ class JsonUtilTest extends Specification {
         new Point(10, 20) || "{\"x\":10,\"y\":20}"
     }
 
-
     def "fromJson"() {
-        setup:
-        def func = { p1, p2 ->  JsonUtil.fromJson(p1, p2); }
-
-        def old = JsonUtil.setJsonEngine(new JsonEngineGson());
-        def gson = func(paramJson, paramClass);
-        //noinspection GroovyUnusedAssignment
-        def old2 = JsonUtil.setJsonEngine(new JsonEngineJackson());
-        def jackson = func(paramJson, paramClass);
-
         expect:
-        result == gson; gson == jackson; jackson == result
-
-        cleanup:
-        JsonUtil.setJsonEngine(old);
+        result == JsonUtil.fromJson(paramJson, paramClass);
 
         where:
         paramJson                      || paramClass            || result
         "{\"x\":10,\"y\":20}"          || Point.class           || new Point(10, 20)
-
     }
 
 
     def "toList"() {
-        setup:
-        def func = { p -> JsonUtil.toList(p); }
-
-        def old = JsonUtil.setJsonEngine(new JsonEngineGson());
-        def gson = func(param);
-        //noinspection GroovyUnusedAssignment
-        def old2 = JsonUtil.setJsonEngine(new JsonEngineJackson());
-        def jackson = func(param);
-
         expect:
-        result == gson; gson == jackson; jackson == result
-
-        cleanup:
-        JsonUtil.setJsonEngine(old);
+        result == JsonUtil.toList(param);
 
         where:
         param       || result
         "[1, 2]"    || [1, 2]
     }
 
-
     def "toMap"() {
-        setup:
-        def func = { p -> JsonUtil.toMap(p); }
-
-        def old = JsonUtil.setJsonEngine(new JsonEngineGson());
-        def gson = func(param);
-        //noinspection GroovyUnusedAssignment
-        def old2 = JsonUtil.setJsonEngine(new JsonEngineJackson());
-        def jackson = func(param);
-
         expect:
-        MapUtil.equals(result, gson as Map<String, Integer>); MapUtil.equals(gson, jackson); jackson == result
-
-
-        cleanup:
-        JsonUtil.setJsonEngine(old);
+        result == JsonUtil.toMap(param);
 
         where:
-
         param           || result
         "{\"A\":10}"    || ["A":10]
     }
 
-
     def "toListMap"() {
-        setup:
-        def func = { p -> JsonUtil.toListMap(p); }
-
-        def old = JsonUtil.setJsonEngine(new JsonEngineGson());
-        def gson = func(param);
-        //noinspection GroovyUnusedAssignment
-        def old2 = JsonUtil.setJsonEngine(new JsonEngineJackson());
-        def jackson = func(param);
-
         expect:
-        result == gson; gson == jackson; jackson == result
+        result == JsonUtil.toListMap(param);
 
 
         cleanup:
