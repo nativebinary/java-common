@@ -40,12 +40,14 @@ public class HttpRequestHelper {
         static HttpParams params;
         static ClientConnectionManager cm;
 
+        static int connectionTimeOut = 7 * 1000;
+
         static
         {
             params = new BasicHttpParams();
 
-            HttpConnectionParams.setConnectionTimeout(params, 7 * 1000);
-            HttpConnectionParams.setSoTimeout(params, 7 * 1000);
+            HttpConnectionParams.setConnectionTimeout(params, connectionTimeOut);
+            HttpConnectionParams.setSoTimeout(params, connectionTimeOut);
             ConnManagerParams.setMaxTotalConnections(params, 100);
             HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
 
@@ -56,6 +58,10 @@ public class HttpRequestHelper {
             cm = new ThreadSafeClientConnManager(params, schemeRegistry);
         }
 
+        public static void setConnectionTimeOut(int timeOut) {
+            HttpConnectionParams.setConnectionTimeout(params, timeOut);
+            HttpConnectionParams.setSoTimeout(params, timeOut);
+        }
 
         public static HttpClient createHttpClient() {
             return new DefaultHttpClient(cm, params);
@@ -124,8 +130,6 @@ public class HttpRequestHelper {
 
         //HttpClient httpClient = new DefaultHttpClient();
         HttpClient httpClient = HttpClientConnManager.createHttpClient();
-
-        HttpConnectionParams.setConnectionTimeout(httpClient.getParams(), 30000);
 
         Logger.d(httpMethod, uri, listParam);
 

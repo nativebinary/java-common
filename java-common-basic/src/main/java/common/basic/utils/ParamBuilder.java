@@ -52,6 +52,26 @@ public class ParamBuilder extends ArrayList<NameValuePair> {
         return paramBuilder;
     }
 
+    public static ParamBuilder fromObjectWithArrayBracket(Object object) {
+        final ParamBuilder paramBuilder = create();
+
+        final Map<String, Object> map = ReflectionUtil.toMap(object);
+        for (String key : map.keySet()) {
+            final Object objectInMap = map.get(key);
+            final List list = Cast.as(objectInMap, List.class);
+            if(list != null){
+                for (Object objectInList : list) {
+                    paramBuilder.append(key + "[]", StringUtil.toString(objectInList));
+                }
+                continue;
+            }
+
+            paramBuilder.append(key, StringUtil.toString(objectInMap));
+        }
+
+        return paramBuilder;
+    }
+
     public ParamBuilder append(String key, List<String> listValue) {
         for (String value : listValue)
             super.add(new BasicNameValuePair(key, value));
