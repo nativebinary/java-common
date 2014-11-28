@@ -1,8 +1,5 @@
-package common.android.helpers;
+package common.basic.helpers;
 
-import android.app.ActivityManager;
-import android.content.Context;
-import common.android.utils.ContextUtil;
 import common.basic.logs.Logger;
 import common.basic.utils.StringUtil;
 import common.basic.utils.ThreadUtil;
@@ -10,16 +7,14 @@ import common.basic.utils.ThreadUtil;
 public class MemoryWatcher {
     private static boolean running = false;
     private static String percentBefore = "00.00%";
-    public static void start(Context context) {
+    public static void start() {
         Logger.e();
-
-        final ActivityManager activityManager = ContextUtil.getActivityManager(context);
 
         final Thread thread = ThreadUtil.createBackgroundThread(MemoryWatcher.class.getSimpleName(), new Runnable() {
             @Override
             public void run() {
                 running = true;
-                percentBefore = "00.00%";
+                percentBefore = "00.0%";
 
                 while(running) {
                     try {
@@ -43,9 +38,9 @@ public class MemoryWatcher {
 
         final String allocMemMB = String.format("%,dKB", allocatedMemory / 1024);
         final String maxMemMB = String.format("%,dKB", maxMemory / 1024);
-        final String percent = String.format("%.2f%%", allocatedMemory * 100d / maxMemory);
+        final String percent = String.format("%.1f%%", allocatedMemory * 100d / maxMemory);
         if (!StringUtil.equals(percentBefore, percent)) {
-            Logger.e(allocMemMB, maxMemMB, percentBefore, "->", percent);
+            Logger.i(allocMemMB, maxMemMB, percentBefore, "->", percent);
             percentBefore = percent;
         }
     }

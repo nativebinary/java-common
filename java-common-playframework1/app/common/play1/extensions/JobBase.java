@@ -16,7 +16,7 @@ public abstract class JobBase<T> extends Job<T> {
         } finally {
             Date dateEnd = new Date();
             long diff = dateEnd.getTime() - dateStart.getTime();
-            Logger.i(String.format("%s ~ %s : %dms", DateUtil.yyyyMMddHHmmss(dateStart), DateUtil.yyyyMMddHHmmss(dateEnd), diff));
+            Logger.i(String.format("%s\t%s ~ %s\t%dms", getClass().getSimpleName(), DateUtil.yyyyMMddHHmmss(dateStart), DateUtil.yyyyMMddHHmmss(dateEnd), diff));
 
         }
     }

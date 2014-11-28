@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 public class JsonUtil {
-
-
     static IJsonEngine jsonEngine;
 
     public JsonUtil() throws InstantiationException {

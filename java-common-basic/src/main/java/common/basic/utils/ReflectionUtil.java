@@ -89,6 +89,8 @@ public class ReflectionUtil {
                 field.setInt(instance, ((Long) value).intValue());
             } else if ("float".equals(type.getName()) && (value instanceof Double)) {
                 field.setFloat(instance, ((Double) value).floatValue());
+            } else if ("boolean".equals(type.getName())) {
+                field.setBoolean(instance, BooleanUtil.convert01(value.toString()));
             } else {
                 field.set(instance, value);
             }
@@ -317,6 +319,7 @@ public class ReflectionUtil {
     }
 
 
+
     public static <TLhs, TRhs> void assignAnnotatedMemberVariable(List<TLhs> listLhs, List<TRhs> listRhs, Class classAnnotation) {
         if(listLhs.size() == 0) {
             Logger.e("listLhs.size() == 0");
@@ -352,7 +355,11 @@ public class ReflectionUtil {
                 final Object annotatedFieldValueFirst = getAnnotatedFieldValueFirst(memberVar, classAnnotation);
 
                 try {
-                    setValue(lhs, field, map.get(annotatedFieldValueFirst));
+                    final TRhs value = map.get(annotatedFieldValueFirst);
+                    if(value == null)
+                        continue;
+
+                    setValue(lhs, field, value);
                 }
                 catch (IllegalAccessException e) {
                     Logger.e(e);

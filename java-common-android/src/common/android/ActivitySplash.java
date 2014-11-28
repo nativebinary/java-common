@@ -9,11 +9,11 @@ import com.google.android.gcm.GCMRegistrar;
 import common.CommonInit;
 import common.android.extensions.ActivityBase;
 import common.android.helpers.CacheHelper;
-import common.android.helpers.MemoryWatcher;
 import common.android.logs.LoggerAndroid;
 import common.android.utils.HandlerUtil;
 import common.android.utils.MetaData;
 import common.basic.facades.jsons.gson.JsonEngineGson;
+import common.basic.helpers.MemoryWatcher;
 import common.basic.logs.Logger;
 import common.basic.utils.DateUtil;
 
@@ -26,7 +26,7 @@ public class ActivitySplash extends ActivityBase {
 
         setContentView(R.layout.activity_splash);
 
-        MemoryWatcher.start(this.getApplicationContext());
+        MemoryWatcher.start();
 
 
         initTextViewVersion();
