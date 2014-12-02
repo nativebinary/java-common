@@ -2,6 +2,7 @@ package common.basic.utils;
 
 import java.util.List;
 
+@SuppressWarnings("UnusedDeclaration")
 public class StringUtil {
     public static final String empty = "";
 
@@ -33,6 +34,7 @@ public class StringUtil {
         return false;
     }
 
+    // TODO: rename. boolean?
     public static String isNull(String s) {
         return null == s ? "" : s;
     }
