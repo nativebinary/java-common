@@ -3,6 +3,8 @@ package common.basic.utils;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -77,5 +79,14 @@ public class ParamBuilder extends ArrayList<NameValuePair> {
             super.add(new BasicNameValuePair(key, value));
 
         return this;
+    }
+
+    public String toUrlEncoded() throws UnsupportedEncodingException {
+        List<String> listKeyValue = new ArrayList<String>();
+        for (NameValuePair pair : this) {
+            listKeyValue.add(URLEncoder.encode(pair.getName(), "UTF-8") + "=" + URLEncoder.encode(pair.getValue(), "UTF-8"));
+        }
+
+        return StringUtil.join("=", listKeyValue);
     }
 }
