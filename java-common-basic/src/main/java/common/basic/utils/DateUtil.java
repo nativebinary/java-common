@@ -21,12 +21,14 @@ public class DateUtil {
 
     private final static SimpleDateFormat EEE = new SimpleDateFormat("EEE", Locale.US);
     private final static SimpleDateFormat HHmm = new SimpleDateFormat("HHmm", Locale.KOREA);
+    private final static SimpleDateFormat HH_mm = new SimpleDateFormat("HH:mm", Locale.KOREA);
     private final static SimpleDateFormat Korean = new SimpleDateFormat("yyyy년MM월dd일", Locale.KOREA);
     private final static SimpleDateFormat MM = new SimpleDateFormat("MM", Locale.KOREA);
     private final static SimpleDateFormat nginxlog = new SimpleDateFormat("dd/MMM/yyyy:HH:mm:ss Z");
     private final static SimpleDateFormat yyMMdd = new SimpleDateFormat("yyMMdd", Locale.KOREA);
     private final static SimpleDateFormat yyyy = new SimpleDateFormat("yyyy", Locale.KOREA);
     private final static SimpleDateFormat yyyy_MM_dd = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
+    private final static SimpleDateFormat yyyy_MM_dd_E = new SimpleDateFormat("yyyy-MM-dd (E)", Locale.KOREA);
     private final static SimpleDateFormat yyyyMM = new SimpleDateFormat("yyyyMM", Locale.KOREA);
     private final static SimpleDateFormat yyyyMMdd = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
     private final static SimpleDateFormat yyyyMMdd_HHmm = new SimpleDateFormat("yyyyMMdd HHmm", Locale.KOREA);
@@ -41,12 +43,14 @@ public class DateUtil {
 
     public static String EEE(Date date) { synchronized (EEE) { return EEE.format(date); } }
     public static String HHmm(Date date) { synchronized (HHmm) { return HHmm.format(date); } }
+    public static String HH_mm(Date date) { synchronized (HH_mm) { return HH_mm.format(date); } }
     public static String Korean(Date date) { synchronized (Korean) { return Korean.format(date); } }
     public static String MM(Date date) { synchronized (MM) { return MM.format(date); } }
     public static String nginxlog(Date date) { synchronized (nginxlog) { return nginxlog.format(date); } }
     public static String yyMMdd(Date date) { synchronized (yyMMdd) { return yyMMdd.format(date); } }
     public static String yyyy(Date date) { synchronized (yyyy) { return yyyy.format(date); } }
     public static String yyyy_MM_dd(Date date) { synchronized (yyyy_MM_dd) { return yyyy_MM_dd.format(date); } }
+    public static String yyyy_MM_dd_E(Date date) { synchronized (yyyy_MM_dd_E) { return yyyy_MM_dd_E.format(date); } }
     public static String yyyyMM(Date date) { synchronized (yyyyMM) { return yyyyMM.format(date); } }
     public static String yyyyMMdd(Date date) { synchronized (yyyyMMdd) { return yyyyMMdd.format(date); } }
     public static String yyyyMMdd_HHmm(Date date) { synchronized (yyyyMMdd_HHmm) { return yyyyMMdd_HHmm.format(date); } }
@@ -74,6 +78,18 @@ public class DateUtil {
     public static Date yyyyMMddHHmmssForFile(String s, Date dateDefault) { synchronized (yyyyMMddHHmmssForFile) { try { return yyyyMMddHHmmssForFile.parse(s); } catch (ParseException e) { Logger.e(e); return dateDefault; } } }
     public static Date yyyyMMddHHmmssSSS(String s, Date dateDefault) { synchronized (yyyyMMddHHmmssSSS) { try { return yyyyMMddHHmmssSSS.parse(s); } catch (ParseException e) { Logger.e(e); return dateDefault; } } }
     //</editor-fold>
+
+    public static String yyyyMMdd2yyyy_MM_dd(String YYYYMMDD) {
+        return yyyy_MM_dd(yyyyMMdd(YYYYMMDD, new Date()));
+    }
+
+    public static String yyyyMMdd2yyyy_MM_dd_E(String YYYYMMDD) {
+        return yyyy_MM_dd_E(yyyyMMdd(YYYYMMDD, new Date()));
+    }
+
+    public static String HHmm2HH_mm(String HHmm) {
+        return HH_mm(HHmm(HHmm, new Date()));
+    }
 
     public static Date parse(String s) {
         if(s == null || s.isEmpty())
@@ -169,5 +185,9 @@ public class DateUtil {
 
     public static Date dateNowAfterHumanReadableTimeSpan(String timeSpan) {
         return dateAddHumanReadableTimeSpan(new Date(), timeSpan);
+    }
+
+    public static String YYYYMMDD2YYYY_MM_DD(String YYYYMMDD) {
+        return String.format("%s-%s-%s", YYYYMMDD.substring(0, 4), YYYYMMDD.substring(4, 6), YYYYMMDD.substring(6, 8));
     }
 }
