@@ -25,6 +25,10 @@ public class JsonUtil {
         return jsonEngine.fromJson(json, clazz);
     }
 
+    public static <T> List<T> toList(String json, Class<T> clazz) {
+        return jsonEngine.toList(json, clazz);
+    }
+
     public static List<Object> toList(String json) {
         return jsonEngine.toList(json);
     }
