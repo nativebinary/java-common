@@ -1,5 +1,6 @@
 package common.basic.facades.jsons
 import common.basic.geometiries.Point
+import common.basic.utils.TestClass
 import spock.lang.Specification
 
 abstract class JsonUtilTest extends Specification {
@@ -70,4 +71,10 @@ abstract class JsonUtilTest extends Specification {
         param                                     || result
         "[{\"A\":10}, {\"B\":20}, {\"C\":30}]"    || [["A":10.0], ["B":20.0], ["C":30.0]]
     }
+
+    class TempClass {
+        String aaa;
+        String bbb;
+    }
+
 }

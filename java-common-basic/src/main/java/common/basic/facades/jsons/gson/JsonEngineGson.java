@@ -4,6 +4,7 @@ import com.google.gson.reflect.TypeToken;
 import common.basic.facades.jsons.IJsonEngine;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -20,12 +21,12 @@ public class JsonEngineGson implements IJsonEngine {
 
     @Override
     public List<Object> toList(String json) {
-        return GsonUtil.toList(json, new TypeToken<List<Object>>() {});
+        return GsonUtil.toList(json, new TypeToken<ArrayList<Object>>() {});
     }
 
     @Override
     public <T> List<T> toList(String json, Class<T> clazz) {
-        return GsonUtil.toList(json, new TypeToken<List<T>>() {});
+        return GsonUtil.toList(json, new TypeToken<ArrayList<T>>() {});
     }
 
     @Override
@@ -35,7 +36,7 @@ public class JsonEngineGson implements IJsonEngine {
 
     @Override
     public List<Map<String, Object>> toListMap(String json) {
-        return GsonUtil.toList(json, new TypeToken<List<Map<String, Object>>>() {});
+        return GsonUtil.toList(json, new TypeToken<ArrayList<Map<String, Object>>>() {});
     }
 
     @Override
@@ -45,7 +46,7 @@ public class JsonEngineGson implements IJsonEngine {
 
     @Override
     public <T> List<T> toListT(String json, Class<T> clazz) {
-        return GsonUtil.toList(json, new TypeToken<List<T>>() {});
+        return GsonUtil.toList(json, new TypeToken<ArrayList<T>>() {});
     }
 
     @Override

@@ -64,10 +64,6 @@ public class GsonUtil {
         return createGson().fromJson(json, typeToken.getType());
     }
 
-    public static <T> List<T> toList(InputStream json, TypeToken<List<T>> typeToken) {
-        return createGson().fromJson(new InputStreamReader(json), typeToken.getType());
-    }
-
     public static JsonElement fromString(String body) {
         return new JsonParser().parse(body);
     }
@@ -112,4 +108,7 @@ public class GsonUtil {
         return createGson().fromJson(json, new TypeToken<Map<String, Object>>() {}.getType());
     }
 
+    public static <T> List<T> toList(InputStream json, TypeToken<List<T>> typeToken) {
+        return null;
+    }
 }
