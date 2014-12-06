@@ -169,4 +169,12 @@ public class StringUtilTest extends Assert {
         assertEquals("test", StringUtil.replaceFirstCharacterToLower("Test"));
     }
 
+    @Test
+    public void testGetSumIntString(){
+        assertEquals(0, StringUtil.getSumIntString());
+        assertEquals(10, StringUtil.getSumIntString("1", "2", "3", "4"));
+        assertEquals(10, StringUtil.getSumIntString("0", "1", "2", "3", "4"));
+        assertEquals(0, StringUtil.getSumIntString("0", "1", "-1"));
+    }
+
 }
