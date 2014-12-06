@@ -28,6 +28,7 @@ public class JsonUtilTest2 extends Assert {
         List<TempClass> tempClasses = JsonUtil.toListT("[{\"stringField\":\"a\", \"intField\":2}]", TempClass.class);
 
         assertEquals(1, tempClasses.size());
+        assertEquals(TempClass.class, tempClasses.get(0).getClass());
     }
 
     @Test
@@ -36,5 +37,6 @@ public class JsonUtilTest2 extends Assert {
         List<TempClass> tempClasses = JsonUtil.toListT("[{\"stringField\":\"a\", \"intField\":2}]", TempClass.class);
 
         assertEquals(1, tempClasses.size());
+        assertEquals(TempClass.class, tempClasses.get(0).getClass());
     }
 }
