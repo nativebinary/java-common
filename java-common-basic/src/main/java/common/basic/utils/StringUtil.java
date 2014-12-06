@@ -180,4 +180,13 @@ public class StringUtil {
     public static String cutRight(String s, int length) {
         return left(s, s.length() - length);
     }
+
+    public static int getSumIntString(String... arrayObject) {
+
+        int sum = 0;
+        for (int i = 0; i < arrayObject.length; ++i) {
+            sum += IntUtil.parseInt(arrayObject[i], 0);
+        }
+        return sum;
+    }
 }
