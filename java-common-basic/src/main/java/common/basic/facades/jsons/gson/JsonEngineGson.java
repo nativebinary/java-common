@@ -23,6 +23,11 @@ public class JsonEngineGson implements IJsonEngine {
     }
 
     @Override
+    public <T> List<T> toList(String json, Class<T> clazz) {
+        return GsonUtil.toList(json, new TypeToken<List<T>>() {});
+    }
+
+    @Override
     public Map<String, Object> toMap(String json) {
         return GsonUtil.fromJsonMap(json);
     }

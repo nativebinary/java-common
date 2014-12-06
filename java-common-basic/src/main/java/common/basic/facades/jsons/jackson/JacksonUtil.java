@@ -94,6 +94,10 @@ public class JacksonUtil {
         return new ObjectMapper().readValue(json, new TypeReference<List<Object>>() {});
     }
 
+    public static <T> List<T> toList(String json, Class<T> clazz) throws IOException {
+        return new ObjectMapper().readValue(json, new TypeReference<List<T>>() {});
+    }
+
     public static List<Object> toListCatches(String json) {
         try {
             return toList(json);
@@ -104,6 +108,16 @@ public class JacksonUtil {
         }
     }
 
+
+    public static <T> List<T> toListCatches(String json, Class<T> clazz) {
+        try {
+            return toList(json, clazz);
+        }
+        catch (IOException e) {
+            Logger.e(e);
+            return null;
+        }
+    }
 
     public static Map<String, Object> toMap(String json) throws IOException {
         return new ObjectMapper().readValue(json, new TypeReference<Map<String, Object>>() {});
@@ -133,6 +147,7 @@ public class JacksonUtil {
     private static List<Map<String, Object>> toListMap(String json) throws IOException {
         return new ObjectMapper().readValue(json, new TypeReference<List<Map<String, Object>>>() {});
     }
+
 }
 
 
