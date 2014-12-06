@@ -5,6 +5,7 @@ import common.basic.facades.jsons.jackson.JacksonUtil;
 import common.basic.logs.Logger;
 import common.basic.utils.ParamBuilder;
 import common.basic.utils.ThreadUtil;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
 import org.apache.http.NameValuePair;
@@ -107,6 +108,24 @@ public class HttpRequestHelper {
         }
     }
 
+    public static HttpResponse getHttpResponse(final HttpMethod httpMethod, final String urlString, final List<NameValuePair> listParam) throws Exception {
+        URI uri = new URI(urlString);
+
+        //HttpClient httpClient = new DefaultHttpClient();
+        HttpClient httpClient = HttpClientConnManager.createHttpClient();
+
+        HttpRequestBase httpRequestBase = getHttpRequestBase(httpMethod, uri, listParam);
+        return httpClient.execute(httpRequestBase);
+    }
+
+    public static HttpResponse get(final String url, final List<NameValuePair> listParam) throws Exception {
+        return getHttpResponse(HttpMethod.Get, url, listParam);
+    }
+
+    public static HttpResponse post(final String url, final List<NameValuePair> listParam) throws Exception {
+        return getHttpResponse(HttpMethod.Post, url, listParam);
+    }
+
     public static void request(final HttpMethod httpMethod, final String urlString, final List<NameValuePair> listParam, final IResponse response) {
 
         ThreadUtil.createBackgroundThread("", new Runnable() {
@@ -122,28 +141,6 @@ public class HttpRequestHelper {
 
             }
         }).run();
-
-    }
-
-    public static HttpResponse getHttpResponse(final HttpMethod httpMethod, final String urlString, final List<NameValuePair> listParam) throws Exception {
-        URI uri = new URI(urlString);
-
-        //HttpClient httpClient = new DefaultHttpClient();
-        HttpClient httpClient = HttpClientConnManager.createHttpClient();
-
-        Logger.d(httpMethod, uri, listParam);
-
-        HttpRequestBase httpRequestBase = getHttpRequestBase(httpMethod, uri, listParam);
-
-        return httpClient.execute(httpRequestBase);
-    }
-
-    public static HttpResponse get(final String url, final List<NameValuePair> listParam) throws Exception {
-        return getHttpResponse(HttpMethod.Get, url, listParam);
-    }
-
-    public static HttpResponse post(final String url, final List<NameValuePair> listParam) throws Exception {
-        return getHttpResponse(HttpMethod.Post, url, listParam);
     }
 
     public static void get(final String url, final List<NameValuePair> listParam, final IResponse response) {
@@ -218,16 +215,14 @@ public class HttpRequestHelper {
         return EntityUtils.toString(httpResponse.getEntity(), "utf-8");
     }
 
+    @Deprecated
     public static Map<String, Object> parseMap(HttpResponse httpResponse) throws IOException {
-        final String responseText = responseText(httpResponse);
-        Logger.d(responseText);
-        return JacksonUtil.toMap(responseText);
+        return JacksonUtil.toMap(responseText(httpResponse));
     }
 
+    @Deprecated
     public static List<Map<String, Object>> parseListMap(HttpResponse httpResponse) throws IOException {
-        final String responseText = responseText(httpResponse);
-        Logger.d(responseText);
-        return JsonUtil.toListMap(responseText);
+        return JsonUtil.toListMap(responseText(httpResponse));
     }
 
     public static String getTextSync(String url) {

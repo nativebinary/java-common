@@ -5,10 +5,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.CollectionType;
 import common.basic.logs.Logger;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -109,11 +111,15 @@ public class JacksonUtil {
     }
 
     public static <T> List<T> toList(String json, Class<T> clazz) throws IOException {
-        return new ObjectMapper().readValue(json, new TypeReference<List<T>>() {});
+        ObjectMapper objectMapper = new ObjectMapper();
+        CollectionType valueType = objectMapper.getTypeFactory().constructCollectionType(List.class, clazz);
+        return objectMapper.readValue(json, valueType);
     }
 
     public static <T> List<T> toList(InputStream json, Class<T> clazz) throws IOException {
-        return new ObjectMapper().readValue(json, new TypeReference<List<T>>() {});
+        ObjectMapper objectMapper = new ObjectMapper();
+        CollectionType valueType = objectMapper.getTypeFactory().constructCollectionType(List.class, clazz);
+        return objectMapper.readValue(json, valueType);
     }
 
     public static List<Object> toListCatches(String json) {
