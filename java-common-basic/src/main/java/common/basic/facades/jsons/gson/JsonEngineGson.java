@@ -3,6 +3,7 @@ package common.basic.facades.jsons.gson;
 import com.google.gson.reflect.TypeToken;
 import common.basic.facades.jsons.IJsonEngine;
 
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -35,5 +36,25 @@ public class JsonEngineGson implements IJsonEngine {
     @Override
     public List<Map<String, Object>> toListMap(String json) {
         return GsonUtil.toList(json, new TypeToken<List<Map<String, Object>>>() {});
+    }
+
+    @Override
+    public <T> T toT(String json, Class<T> clazz) {
+        return GsonUtil.fromJson(json, clazz);
+    }
+
+    @Override
+    public <T> List<T> toListT(String json, Class<T> clazz) {
+        return GsonUtil.toList(json, new TypeToken<List<T>>() {});
+    }
+
+    @Override
+    public <T> T toT(InputStream json, Class<T> clazz) {
+        return GsonUtil.fromJson(json, clazz);
+    }
+
+    @Override
+    public <T> List<T> toListT(InputStream json, Class<T> clazz) {
+        return GsonUtil.toList(json, new TypeToken<List<T>>() {});
     }
 }

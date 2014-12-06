@@ -2,6 +2,7 @@ package common.basic.facades.jsons.jackson;
 
 import common.basic.facades.jsons.IJsonEngine;
 
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -34,5 +35,25 @@ public class JsonEngineJackson implements IJsonEngine {
     @Override
     public List<Map<String, Object>> toListMap(String json) {
         return JacksonUtil.toListMapCatches(json);
+    }
+
+    @Override
+    public <T> T toT(String json, Class<T> clazz) {
+        return JacksonUtil.fromJsonCatches(json, clazz);
+    }
+
+    @Override
+    public <T> List<T> toListT(String json, Class<T> clazz) {
+        return JacksonUtil.toListCatches(json, clazz);
+    }
+
+    @Override
+    public <T> T toT(InputStream json, Class<T> clazz) {
+        return JacksonUtil.fromJsonCatches(json, clazz);
+    }
+
+    @Override
+    public <T> List<T> toListT(InputStream json, Class<T> clazz) {
+        return JacksonUtil.toListCatches(json, clazz);
     }
 }

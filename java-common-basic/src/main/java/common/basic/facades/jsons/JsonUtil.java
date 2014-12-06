@@ -1,5 +1,6 @@
 package common.basic.facades.jsons;
 
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -40,4 +41,24 @@ public class JsonUtil {
     public static List<Map<String, Object>> toListMap(String json) {
         return JsonUtil.jsonEngine.toListMap(json);
     }
+
+
+
+    public static <T> T toT(String json, Class<T> clazz) {
+        return jsonEngine.toT(json, clazz);
+    }
+
+    public static <T> List<T> toListT(String json, Class<T> clazz) {
+        return jsonEngine.toListT(json, clazz);
+    }
+
+    public static <T> T toT(InputStream json, Class<T> clazz) {
+        return jsonEngine.toT(json, clazz);
+    }
+
+    public static <T> List<T> toListT(InputStream json, Class<T> clazz) {
+        return jsonEngine.toListT(json, clazz);
+    }
+
+
 }

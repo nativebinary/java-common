@@ -1,5 +1,6 @@
 package common.basic.facades.jsons.jackson;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -35,6 +36,11 @@ public class JacksonUtil {
         return new ObjectMapper().treeToValue(jsonNode, clazz);
     }
 
+    public static <T> T fromJson(InputStream json, Class<T> clazz) throws IOException {
+        return new ObjectMapper().readValue(json, clazz);
+    }
+
+
     public static <T> T fromJsonCatches(String json, Class<T> clazz) {
         try {
             return fromJson(json, clazz);
@@ -55,6 +61,15 @@ public class JacksonUtil {
         }
     }
 
+    public static <T> T fromJsonCatches(InputStream json, Class<T> clazz) {
+        try {
+            return fromJson(json, clazz);
+        } catch (IOException e) {
+            Logger.e(e);
+            return null;
+        }
+    }
+
 
     public static JsonNode toJsonNode(String json) throws IOException {
         return new ObjectMapper().readValue(json, JsonNode.class);
@@ -67,7 +82,6 @@ public class JacksonUtil {
     public static JsonNode toJsonNode(Object paramObject) {
         return new ObjectMapper().valueToTree(paramObject);
     }
-
 
     public static JsonNode toJsonNodeCatches(String json) {
         try {
@@ -98,6 +112,10 @@ public class JacksonUtil {
         return new ObjectMapper().readValue(json, new TypeReference<List<T>>() {});
     }
 
+    public static <T> List<T> toList(InputStream json, Class<T> clazz) throws IOException {
+        return new ObjectMapper().readValue(json, new TypeReference<List<T>>() {});
+    }
+
     public static List<Object> toListCatches(String json) {
         try {
             return toList(json);
@@ -118,6 +136,16 @@ public class JacksonUtil {
             return null;
         }
     }
+
+    public static <T> List<T> toListCatches(InputStream json, Class<T> clazz) {
+        try {
+            return toList(json, clazz);
+        }
+        catch (IOException e) {
+            Logger.e(e);
+            return null;
+        }    }
+
 
     public static Map<String, Object> toMap(String json) throws IOException {
         return new ObjectMapper().readValue(json, new TypeReference<Map<String, Object>>() {});
