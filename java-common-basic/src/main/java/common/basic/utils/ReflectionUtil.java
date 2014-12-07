@@ -91,7 +91,7 @@ public class ReflectionUtil {
             } else if ("float".equals(type.getName()) && (value instanceof Double)) {
                 field.setFloat(instance, ((Double) value).floatValue());
             } else if ("boolean".equals(type.getName())) {
-                field.setBoolean(instance, BooleanUtil.convert01(value.toString()));
+                field.setBoolean(instance, BooleanUtil.parse(value.toString()));
             } else {
                 field.set(instance, value);
             }
