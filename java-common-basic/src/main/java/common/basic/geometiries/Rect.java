@@ -93,6 +93,6 @@ public class Rect {
 
     @Override
     public String toString() {
-        return JsonUtil.toJson(this);
+        return JsonUtil.toJsonString(this);
     }
 }

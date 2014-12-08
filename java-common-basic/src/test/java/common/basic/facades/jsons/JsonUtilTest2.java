@@ -1,9 +1,7 @@
 package common.basic.facades.jsons;
 
 import common.basic.facades.jsons.gson.JsonEngineGson;
-import common.basic.facades.jsons.jackson.JacksonUtil;
 import common.basic.facades.jsons.jackson.JsonEngineJackson;
-import common.basic.logs.Logger;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +23,7 @@ public class JsonUtilTest2 extends Assert {
     @Test
     public void testJackson() throws Exception {
         JsonUtil.setJsonEngine(new JsonEngineJackson());
-        List<TempClass> tempClasses = JsonUtil.toListT("[{\"stringField\":\"a\", \"intField\":2}]", TempClass.class);
+        List<TempClass> tempClasses = JsonUtil.parseList("[{\"stringField\":\"a\", \"intField\":2}]", TempClass.class);
 
         assertEquals(1, tempClasses.size());
         assertEquals(TempClass.class, tempClasses.get(0).getClass());
@@ -34,7 +32,7 @@ public class JsonUtilTest2 extends Assert {
     @Test
     public void testGson() throws Exception {
         JsonUtil.setJsonEngine(new JsonEngineGson());
-        List<TempClass> tempClasses = JsonUtil.toListT("[{\"stringField\":\"a\", \"intField\":2}]", TempClass.class);
+        List<TempClass> tempClasses = JsonUtil.parseList("[{\"stringField\":\"a\", \"intField\":2}]", TempClass.class);
 
         assertEquals(1, tempClasses.size());
         assertEquals(TempClass.class, tempClasses.get(0).getClass());

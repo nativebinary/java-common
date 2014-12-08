@@ -46,7 +46,7 @@ public class GcmUtil {
                 continue;
             }
 
-            builder.addData(key, GsonUtil.toJson(o));
+            builder.addData(key, GsonUtil.toJsonString(o));
         }
 
         return builder.build();

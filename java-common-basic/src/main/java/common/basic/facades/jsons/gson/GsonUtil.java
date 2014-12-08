@@ -6,12 +6,10 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
-import common.basic.logs.Logger;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +28,7 @@ public class GsonUtil {
     }
 
 
-    public static String toJson(Object o) {
+    public static String toJsonString(Object o) {
         return createGson().toJson(o);
     }
 
@@ -38,11 +36,11 @@ public class GsonUtil {
         createGson().toJson(o, appendable);
     }
 
-    public static <T> T fromJson(String json, Class<T> clazz) {
+    public static <T> T parse(String json, Class<T> clazz) {
         return createGson().fromJson(json, clazz);
     }
 
-    public static <T> T fromJson(InputStream inputStream, Class<T> clazz) {
+    public static <T> T parse(InputStream inputStream, Class<T> clazz) {
         return createGson().fromJson(new InputStreamReader(inputStream), clazz);
     }
 
@@ -54,15 +52,16 @@ public class GsonUtil {
         return createGson().fromJson(jsonObject, clazz);
     }
 
-    @Deprecated // use toList()
-    public static <T, U extends TypeToken<List<T>>> List<T> fromJsonArray(String json, U typeToken) {
-        Logger.e("Deprecated, use toList().");
-        return createGson().fromJson(json, typeToken.getType());
+
+    public static <T> List<T> parseList(String json, Class<T> clazz) {
+        return createGson().fromJson(json, new ParameterizedTypeListWrapper<T>(clazz));
     }
 
-    public static <T, U extends TypeToken<List<T>>> List<T> toList(String json, U typeToken) {
-        return createGson().fromJson(json, typeToken.getType());
+    public static <T> List<T> parseList(InputStream inputStream, Class<T> clazz) {
+        return createGson().fromJson(new InputStreamReader(inputStream), new ParameterizedTypeListWrapper<T>(clazz));
     }
+
+
 
     public static JsonElement fromString(String body) {
         return new JsonParser().parse(body);
@@ -103,12 +102,13 @@ public class GsonUtil {
     }
 
 
-    public static Map<String, Object> fromJsonMap(String json) {
+    public static Map<String, Object> parse(String json) {
 
         return createGson().fromJson(json, new TypeToken<Map<String, Object>>() {}.getType());
     }
 
-    public static <T> List<T> toList(InputStream json, TypeToken<List<T>> typeToken) {
+    public static List<Map<String, Object>> parseList(String json, TypeToken<List<Map<String, Object>>> typeToken) {
+        // TODO
         return null;
     }
 }

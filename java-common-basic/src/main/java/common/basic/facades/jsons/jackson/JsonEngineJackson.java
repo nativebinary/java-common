@@ -8,52 +8,37 @@ import java.util.Map;
 
 public class JsonEngineJackson implements IJsonEngine {
     @Override
-    public String toJson(Object o) {
+    public String toJsonString(Object o) {
         return JacksonUtil.toJsonCatches(o);
     }
 
     @Override
-    public <T> T fromJson(String json, Class<T> clazz) {
+    public <T> T parse(String json, Class<T> clazz) {
         return JacksonUtil.fromJsonCatches(json, clazz);
     }
 
     @Override
-    public List<Object> toList(String json) {
-        return JacksonUtil.toListCatches(json);
+    public <T> T parse(InputStream inputStream, Class<T> clazz) {
+        return JacksonUtil.fromJsonCatches(inputStream, clazz);
     }
 
     @Override
-    public <T> List<T> toList(String json, Class<T> clazz) {
-        return JacksonUtil.toListCatches(json, clazz);
-    }
-
-    @Override
-    public Map<String, Object> toMap(String json) {
+    public Map<String, Object> parse(String json) {
         return JacksonUtil.toMapCatches(json);
     }
 
     @Override
-    public List<Map<String, Object>> toListMap(String json) {
+    public <T> List<T> parseList(String json, Class<T> clazz) {
+        return JacksonUtil.toListCatches(json, clazz);
+    }
+
+    @Override
+    public <T> List<T> parseList(InputStream inputStream, Class<T> clazz) {
+        return JacksonUtil.toListCatches(inputStream, clazz);
+    }
+
+    @Override
+    public List<Map<String, Object>> parseList(String json) {
         return JacksonUtil.toListMapCatches(json);
-    }
-
-    @Override
-    public <T> T toT(String json, Class<T> clazz) {
-        return JacksonUtil.fromJsonCatches(json, clazz);
-    }
-
-    @Override
-    public <T> List<T> toListT(String json, Class<T> clazz) {
-        return JacksonUtil.toListCatches(json, clazz);
-    }
-
-    @Override
-    public <T> T toT(InputStream json, Class<T> clazz) {
-        return JacksonUtil.fromJsonCatches(json, clazz);
-    }
-
-    @Override
-    public <T> List<T> toListT(InputStream json, Class<T> clazz) {
-        return JacksonUtil.toListCatches(json, clazz);
     }
 }

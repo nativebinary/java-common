@@ -37,6 +37,6 @@ public abstract class ModelBase extends EnhancedModel {
     @Override public void _save()  { touch(); super._save(); }
 
     @Override
-    public String toString() { return GsonUtil.toJson(this); }
+    public String toString() { return GsonUtil.toJsonString(this); }
 }
 

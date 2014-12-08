@@ -80,7 +80,7 @@ public class LogUtil {
             Logger.e(e);
         }
 
-        return JsonUtil.toJson(ReflectionUtil.toMap(o));
+        return JsonUtil.toJsonString(ReflectionUtil.toMap(o));
     }
 
 }

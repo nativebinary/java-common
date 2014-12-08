@@ -9,52 +9,37 @@ import java.util.Map;
 
 public class JsonEngineGson implements IJsonEngine {
     @Override
-    public String toJson(Object o) {
-        return GsonUtil.toJson(o);
+    public String toJsonString(Object o) {
+        return GsonUtil.toJsonString(o);
     }
 
     @Override
-    public <T> T fromJson(String json, Class<T> clazz) {
-        return GsonUtil.fromJson(json, clazz);
+    public <T> T parse(String json, Class<T> clazz) {
+        return GsonUtil.parse(json, clazz);
     }
 
     @Override
-    public List<Object> toList(String json) {
-        return GsonUtil.toList(json, new TypeToken<List<Object>>() {});
+    public <T> T parse(InputStream inputStream, Class<T> clazz) {
+        return GsonUtil.parse(inputStream, clazz);
     }
 
     @Override
-    public <T> List<T> toList(String json, Class<T> clazz) {
-        return GsonUtil.toList(json, new TypeToken<List<T>>() {});
+    public Map<String, Object> parse(String json) {
+        return GsonUtil.parse(json);
     }
 
     @Override
-    public Map<String, Object> toMap(String json) {
-        return GsonUtil.fromJsonMap(json);
+    public <T> List<T> parseList(String json, Class<T> clazz) {
+        return GsonUtil.parseList(json, clazz);
     }
 
     @Override
-    public List<Map<String, Object>> toListMap(String json) {
-        return GsonUtil.toList(json, new TypeToken<List<Map<String, Object>>>() {});
+    public <T> List<T> parseList(InputStream inputStream, Class<T> clazz) {
+        return GsonUtil.parseList(inputStream, clazz);
     }
 
     @Override
-    public <T> T toT(String json, Class<T> clazz) {
-        return GsonUtil.fromJson(json, clazz);
-    }
-
-    @Override
-    public <T> List<T> toListT(String json, Class<T> clazz) {
-        return GsonUtil.toList(json, new TypeToken<List<T>>() {});
-    }
-
-    @Override
-    public <T> T toT(InputStream json, Class<T> clazz) {
-        return GsonUtil.fromJson(json, clazz);
-    }
-
-    @Override
-    public <T> List<T> toListT(InputStream json, Class<T> clazz) {
-        return GsonUtil.toList(json, new TypeToken<List<T>>() {});
+    public List<Map<String, Object>> parseList(String json) {
+        return GsonUtil.parseList(json, new TypeToken<List<Map<String, Object>>>() {});
     }
 }
