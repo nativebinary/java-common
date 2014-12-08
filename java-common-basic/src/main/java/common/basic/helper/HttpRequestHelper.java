@@ -5,7 +5,6 @@ import common.basic.facades.jsons.jackson.JacksonUtil;
 import common.basic.logs.Logger;
 import common.basic.utils.ParamBuilder;
 import common.basic.utils.ThreadUtil;
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
 import org.apache.http.NameValuePair;
@@ -135,7 +134,7 @@ public class HttpRequestHelper {
                     HttpResponse httpResponse = getHttpResponse(httpMethod, urlString, listParam);
                     response.onResponse(httpResponse);
                 } catch (Exception e) {
-                    Logger.e("HttpRequestHelper : request [URL=" + urlString + "; PRAM=" + JsonUtil.toJson(listParam) + "; ERR=" + e.toString() + ";]");
+                    Logger.e("HttpRequestHelper : request [URL=" + urlString + "; PRAM=" + JsonUtil.toJsonString(listParam) + "; ERR=" + e.toString() + ";]");
                     response.onException(e);
                 }
 
@@ -222,7 +221,7 @@ public class HttpRequestHelper {
 
     @Deprecated
     public static List<Map<String, Object>> parseListMap(HttpResponse httpResponse) throws IOException {
-        return JsonUtil.toListMap(responseText(httpResponse));
+        return JsonUtil.parseList(responseText(httpResponse));
     }
 
     public static String getTextSync(String url) {

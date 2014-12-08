@@ -5,16 +5,15 @@ import java.util.List;
 import java.util.Map;
 
 public interface IJsonEngine {
-    String toJson(Object o);
-    <T> T fromJson(String json, Class<T> clazz);
-    List<Object> toList(String json);
-    <T> List<T> toList(String json, Class<T> clazz);
-    Map<String, Object> toMap(String json);
-    List<Map<String, Object>> toListMap(String json);
 
-    <T> T toT(String json, Class<T> clazz);
-    <T> List<T> toListT(String json, Class<T> clazz);
+    String toJsonString(Object o);
 
-    <T> T toT(InputStream json, Class<T> clazz);
-    <T> List<T> toListT(InputStream json, Class<T> clazz);
+    <T> T parse(String json, Class<T> clazz);
+    <T> T parse(InputStream inputStream, Class<T> clazz);
+    Map<String, Object> parse(String json);
+
+    <T> List<T> parseList(String json, Class<T> clazz);
+    <T> List<T> parseList(InputStream inputStream, Class<T> clazz);
+    List<Map<String, Object>> parseList(String json);
 }
+

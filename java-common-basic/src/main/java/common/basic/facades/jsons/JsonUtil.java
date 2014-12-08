@@ -18,47 +18,31 @@ public class JsonUtil {
     }
 
 
-    public static String toJson(Object o) {
-        return jsonEngine.toJson(o);
+    public static String toJsonString(Object o) {
+        return jsonEngine.toJsonString(o);
     }
 
-    public static <T> T fromJson(String json, Class<T> clazz) {
-        return jsonEngine.fromJson(json, clazz);
+    public static <T> T parse(String json, Class<T> clazz) {
+        return jsonEngine.parse(json, clazz);
     }
 
-    public static <T> List<T> toList(String json, Class<T> clazz) {
-        return jsonEngine.toList(json, clazz);
+    public static <T> T parse(InputStream inputStream, Class<T> clazz) {
+        return jsonEngine.parse(inputStream, clazz);
     }
 
-    public static List<Object> toList(String json) {
-        return jsonEngine.toList(json);
+    public static Map<String, Object> parse(String json) {
+        return jsonEngine.parse(json);
     }
 
-    public static Map<String, Object> toMap(String json) {
-        return jsonEngine.toMap(json);
+    public static <T> List<T> parseList(String json, Class<T> clazz) {
+        return jsonEngine.parseList(json, clazz);
     }
 
-    public static List<Map<String, Object>> toListMap(String json) {
-        return JsonUtil.jsonEngine.toListMap(json);
+    public static <T> List<T> parseList(InputStream inputStream, Class<T> clazz) {
+        return jsonEngine.parseList(inputStream, clazz);
     }
 
-
-
-    public static <T> T toT(String json, Class<T> clazz) {
-        return jsonEngine.toT(json, clazz);
+    public static List<Map<String, Object>> parseList(String json) {
+        return jsonEngine.parseList(json);
     }
-
-    public static <T> List<T> toListT(String json, Class<T> clazz) {
-        return jsonEngine.toListT(json, clazz);
-    }
-
-    public static <T> T toT(InputStream json, Class<T> clazz) {
-        return jsonEngine.toT(json, clazz);
-    }
-
-    public static <T> List<T> toListT(InputStream json, Class<T> clazz) {
-        return jsonEngine.toListT(json, clazz);
-    }
-
-
 }
