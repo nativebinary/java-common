@@ -2,6 +2,7 @@ package common.basic.facades.jsons.jackson;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
@@ -13,6 +14,12 @@ import java.util.List;
 import java.util.Map;
 
 public class JacksonUtil {
+    private static ObjectMapper createObjectMapper() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        return objectMapper;
+    }
+
     public static String stringify(Object o) throws JsonProcessingException {
         return createObjectMapper().writeValueAsString(o);
     }
@@ -30,10 +37,6 @@ public class JacksonUtil {
 
     public static <T> T fromJson(String json, Class<T> clazz) throws IOException {
         return createObjectMapper().readValue(json, clazz);
-    }
-
-    private static ObjectMapper createObjectMapper() {
-        return new ObjectMapper();
     }
 
     public static <T> T fromJson(JsonNode jsonNode, Class<T> clazz) throws JsonProcessingException {
@@ -109,7 +112,8 @@ public class JacksonUtil {
 
 
     public static List<Object> toList(String json) throws IOException {
-        return createObjectMapper().readValue(json, new TypeReference<List<Object>>() {});
+        return createObjectMapper().readValue(json, new TypeReference<List<Object>>() {
+        });
     }
 
     public static <T> List<T> toList(String json, Class<T> clazz) throws IOException {
@@ -156,7 +160,8 @@ public class JacksonUtil {
 
 
     public static Map<String, Object> toMap(String json) throws IOException {
-        return createObjectMapper().readValue(json, new TypeReference<Map<String, Object>>() {});
+        return createObjectMapper().readValue(json, new TypeReference<Map<String, Object>>() {
+        });
     }
 
     public static Map<String, Object> parseCatches(String json) {
@@ -181,7 +186,8 @@ public class JacksonUtil {
     }
 
     private static List<Map<String, Object>> toListMap(String json) throws IOException {
-        return createObjectMapper().readValue(json, new TypeReference<List<Map<String, Object>>>() {});
+        return createObjectMapper().readValue(json, new TypeReference<List<Map<String, Object>>>() {
+        });
     }
 
 }
