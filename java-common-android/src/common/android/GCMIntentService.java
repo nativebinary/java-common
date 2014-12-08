@@ -66,7 +66,7 @@ public class GCMIntentService extends GCMBaseIntentService {
         switch (notificationType) {
             case Notice:
             {
-                final Notice notice = JsonUtil.fromJson(data, Notice.class);
+                final Notice notice = JsonUtil.parse(data, Notice.class);
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(notice.url));
                 notify(notice.ticker, notice.contentTitle, notice.contentText, intent);
