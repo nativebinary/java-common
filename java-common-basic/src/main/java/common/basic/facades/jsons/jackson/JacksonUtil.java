@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class JacksonUtil {
     public static String toJsonString(Object o) throws JsonProcessingException {
-        return new ObjectMapper().writeValueAsString(o);
+        return createObjectMapper().writeValueAsString(o);
     }
 
     public static String toJsonStringCatches(Object o) {
@@ -29,15 +29,19 @@ public class JacksonUtil {
 
 
     public static <T> T fromJson(String json, Class<T> clazz) throws IOException {
-        return new ObjectMapper().readValue(json, clazz);
+        return createObjectMapper().readValue(json, clazz);
+    }
+
+    private static ObjectMapper createObjectMapper() {
+        return new ObjectMapper();
     }
 
     public static <T> T fromJson(JsonNode jsonNode, Class<T> clazz) throws JsonProcessingException {
-        return new ObjectMapper().treeToValue(jsonNode, clazz);
+        return createObjectMapper().treeToValue(jsonNode, clazz);
     }
 
     public static <T> T fromJson(InputStream json, Class<T> clazz) throws IOException {
-        return new ObjectMapper().readValue(json, clazz);
+        return createObjectMapper().readValue(json, clazz);
     }
 
 
@@ -72,15 +76,15 @@ public class JacksonUtil {
 
 
     public static JsonNode toJsonNode(String json) throws IOException {
-        return new ObjectMapper().readValue(json, JsonNode.class);
+        return createObjectMapper().readValue(json, JsonNode.class);
     }
 
     public static JsonNode toJsonNode(InputStream inputStream) throws IOException {
-        return new ObjectMapper().readValue(inputStream, JsonNode.class);
+        return createObjectMapper().readValue(inputStream, JsonNode.class);
     }
 
     public static JsonNode toJsonNode(Object paramObject) {
-        return new ObjectMapper().valueToTree(paramObject);
+        return createObjectMapper().valueToTree(paramObject);
     }
 
     public static JsonNode toJsonNodeCatches(String json) {
@@ -105,17 +109,17 @@ public class JacksonUtil {
 
 
     public static List<Object> toList(String json) throws IOException {
-        return new ObjectMapper().readValue(json, new TypeReference<List<Object>>() {});
+        return createObjectMapper().readValue(json, new TypeReference<List<Object>>() {});
     }
 
     public static <T> List<T> toList(String json, Class<T> clazz) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectMapper objectMapper = createObjectMapper();
         CollectionType valueType = objectMapper.getTypeFactory().constructCollectionType(List.class, clazz);
         return objectMapper.readValue(json, valueType);
     }
 
     public static <T> List<T> toList(InputStream json, Class<T> clazz) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectMapper objectMapper = createObjectMapper();
         CollectionType valueType = objectMapper.getTypeFactory().constructCollectionType(List.class, clazz);
         return objectMapper.readValue(json, valueType);
     }
@@ -152,7 +156,7 @@ public class JacksonUtil {
 
 
     public static Map<String, Object> toMap(String json) throws IOException {
-        return new ObjectMapper().readValue(json, new TypeReference<Map<String, Object>>() {});
+        return createObjectMapper().readValue(json, new TypeReference<Map<String, Object>>() {});
     }
 
     public static Map<String, Object> parseCatches(String json) {
@@ -177,7 +181,7 @@ public class JacksonUtil {
     }
 
     private static List<Map<String, Object>> toListMap(String json) throws IOException {
-        return new ObjectMapper().readValue(json, new TypeReference<List<Map<String, Object>>>() {});
+        return createObjectMapper().readValue(json, new TypeReference<List<Map<String, Object>>>() {});
     }
 
 }
