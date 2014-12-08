@@ -6,6 +6,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 public abstract class JsonUtilTest extends Assert {
 
 
@@ -34,7 +36,16 @@ public abstract class JsonUtilTest extends Assert {
     }
 
     @Test
-    public void testGson() throws Exception {
+    public void testParse() throws Exception {
         assertEquals(new Point(1, 10), JsonUtil.parse("{\"x\":1,\"y\":10}", Point.class));
+    }
+
+    @Test
+    public void testParseList() throws Exception {
+        final List<Point> list = JsonUtil.parseList("[{\"x\":1,\"y\":10}]", Point.class);
+        assertEquals(1, list.size());
+        assertEquals(Point.class, list.get(0).getClass());
+        assertEquals(1, list.get(0).x);
+        assertEquals(10, list.get(0).y);
     }
 }
