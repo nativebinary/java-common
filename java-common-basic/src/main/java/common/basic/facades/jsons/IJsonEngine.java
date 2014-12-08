@@ -6,7 +6,7 @@ import java.util.Map;
 
 public interface IJsonEngine {
 
-    String toJsonString(Object o);
+    String stringify(Object o);
 
     <T> T parse(String json, Class<T> clazz);
     <T> T parse(InputStream inputStream, Class<T> clazz);

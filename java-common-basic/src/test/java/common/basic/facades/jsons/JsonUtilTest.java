@@ -28,11 +28,11 @@ public abstract class JsonUtilTest extends Assert {
 
     @Test
     public void testToJsonString() throws Exception {
-        assertEquals("null", JsonUtil.toJsonString(null));
-        assertEquals("true", JsonUtil.toJsonString(true));
-        assertEquals("10", JsonUtil.toJsonString(10));
-        assertEquals("\"ss\"", JsonUtil.toJsonString("ss"));
-        assertEquals("{\"x\":1,\"y\":10}", JsonUtil.toJsonString(new Point(1, 10)));
+        assertEquals("null", JsonUtil.stringify(null));
+        assertEquals("true", JsonUtil.stringify(true));
+        assertEquals("10", JsonUtil.stringify(10));
+        assertEquals("\"ss\"", JsonUtil.stringify("ss"));
+        assertEquals("{\"x\":1,\"y\":10}", JsonUtil.stringify(new Point(1, 10)));
     }
 
     @Test

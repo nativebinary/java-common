@@ -72,7 +72,7 @@ public class Account extends ModelAutoIncrement {
     }
 
     public String getJsonArrayPermission() {
-        return GsonUtil.toJsonString(getListPermission());
+        return GsonUtil.stringify(getListPermission());
     }
 
     public void load() {

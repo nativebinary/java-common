@@ -18,8 +18,8 @@ public class JsonUtil {
     }
 
 
-    public static String toJsonString(Object o) {
-        return jsonEngine.toJsonString(o);
+    public static String stringify(Object o) {
+        return jsonEngine.stringify(o);
     }
 
     public static <T> T parse(String json, Class<T> clazz) {
