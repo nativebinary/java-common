@@ -1,6 +1,5 @@
 package common.basic.facades.jsons.jackson;
 
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -10,18 +9,17 @@ import common.basic.logs.Logger;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class JacksonUtil {
-    public static String toJson(Object o) throws JsonProcessingException {
+    public static String toJsonString(Object o) throws JsonProcessingException {
         return new ObjectMapper().writeValueAsString(o);
     }
 
-    public static String toJsonCatches(Object o) {
+    public static String toJsonStringCatches(Object o) {
         try {
-            return toJson(o);
+            return toJsonString(o);
         }
         catch (JsonProcessingException e) {
             Logger.e(e);
@@ -43,7 +41,7 @@ public class JacksonUtil {
     }
 
 
-    public static <T> T fromJsonCatches(String json, Class<T> clazz) {
+    public static <T> T parseCatches(String json, Class<T> clazz) {
         try {
             return fromJson(json, clazz);
         }
@@ -63,7 +61,7 @@ public class JacksonUtil {
         }
     }
 
-    public static <T> T fromJsonCatches(InputStream json, Class<T> clazz) {
+    public static <T> T parseCatches(InputStream json, Class<T> clazz) {
         try {
             return fromJson(json, clazz);
         } catch (IOException e) {
@@ -133,7 +131,7 @@ public class JacksonUtil {
     }
 
 
-    public static <T> List<T> toListCatches(String json, Class<T> clazz) {
+    public static <T> List<T> parseListCatches(String json, Class<T> clazz) {
         try {
             return toList(json, clazz);
         }
@@ -143,7 +141,7 @@ public class JacksonUtil {
         }
     }
 
-    public static <T> List<T> toListCatches(InputStream json, Class<T> clazz) {
+    public static <T> List<T> parseListCatches(InputStream json, Class<T> clazz) {
         try {
             return toList(json, clazz);
         }
@@ -157,7 +155,7 @@ public class JacksonUtil {
         return new ObjectMapper().readValue(json, new TypeReference<Map<String, Object>>() {});
     }
 
-    public static Map<String, Object> toMapCatches(String json) {
+    public static Map<String, Object> parseCatches(String json) {
         try {
             return toMap(json);
         }
@@ -168,7 +166,7 @@ public class JacksonUtil {
     }
 
 
-    public static List<Map<String, Object>> toListMapCatches(String json) {
+    public static List<Map<String, Object>> parseListCatches(String json) {
         try {
             return toListMap(json);
         }

@@ -22,7 +22,7 @@ abstract class JsonUtilTest extends Specification {
 
     def "toJson"() {
         expect:
-        result == JsonUtil.toJson(param);
+        result == JsonUtil.toJsonString(param);
 
         where:
         param             || result

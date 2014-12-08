@@ -9,36 +9,36 @@ import java.util.Map;
 public class JsonEngineJackson implements IJsonEngine {
     @Override
     public String toJsonString(Object o) {
-        return JacksonUtil.toJsonCatches(o);
+        return JacksonUtil.toJsonStringCatches(o);
     }
 
     @Override
     public <T> T parse(String json, Class<T> clazz) {
-        return JacksonUtil.fromJsonCatches(json, clazz);
+        return JacksonUtil.parseCatches(json, clazz);
     }
 
     @Override
     public <T> T parse(InputStream inputStream, Class<T> clazz) {
-        return JacksonUtil.fromJsonCatches(inputStream, clazz);
+        return JacksonUtil.parseCatches(inputStream, clazz);
     }
 
     @Override
     public Map<String, Object> parse(String json) {
-        return JacksonUtil.toMapCatches(json);
+        return JacksonUtil.parseCatches(json);
     }
 
     @Override
     public <T> List<T> parseList(String json, Class<T> clazz) {
-        return JacksonUtil.toListCatches(json, clazz);
+        return JacksonUtil.parseListCatches(json, clazz);
     }
 
     @Override
     public <T> List<T> parseList(InputStream inputStream, Class<T> clazz) {
-        return JacksonUtil.toListCatches(inputStream, clazz);
+        return JacksonUtil.parseListCatches(inputStream, clazz);
     }
 
     @Override
     public List<Map<String, Object>> parseList(String json) {
-        return JacksonUtil.toListMapCatches(json);
+        return JacksonUtil.parseListCatches(json);
     }
 }
