@@ -74,6 +74,6 @@ public class RectD {
 
     @Override
     public String toString() {
-        return JsonUtil.toJsonString(this);
+        return JsonUtil.stringify(this);
     }
 }

@@ -134,7 +134,7 @@ public class HttpRequestHelper {
                     HttpResponse httpResponse = getHttpResponse(httpMethod, urlString, listParam);
                     response.onResponse(httpResponse);
                 } catch (Exception e) {
-                    Logger.e("HttpRequestHelper : request [URL=" + urlString + "; PRAM=" + JsonUtil.toJsonString(listParam) + "; ERR=" + e.toString() + ";]");
+                    Logger.e("HttpRequestHelper : request [URL=" + urlString + "; PRAM=" + JsonUtil.stringify(listParam) + "; ERR=" + e.toString() + ";]");
                     response.onException(e);
                 }
 

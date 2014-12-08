@@ -74,6 +74,6 @@ public class RectF {
 
     @Override
     public String toString() {
-        return JsonUtil.toJsonString(this);
+        return JsonUtil.stringify(this);
     }
 }

@@ -8,8 +8,8 @@ import java.util.Map;
 
 public class JsonEngineJackson implements IJsonEngine {
     @Override
-    public String toJsonString(Object o) {
-        return JacksonUtil.toJsonStringCatches(o);
+    public String stringify(Object o) {
+        return JacksonUtil.stringifyCatches(o);
     }
 
     @Override

@@ -9,8 +9,8 @@ import java.util.Map;
 
 public class JsonEngineGson implements IJsonEngine {
     @Override
-    public String toJsonString(Object o) {
-        return GsonUtil.toJsonString(o);
+    public String stringify(Object o) {
+        return GsonUtil.stringify(o);
     }
 
     @Override

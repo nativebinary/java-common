@@ -13,13 +13,13 @@ import java.util.List;
 import java.util.Map;
 
 public class JacksonUtil {
-    public static String toJsonString(Object o) throws JsonProcessingException {
+    public static String stringify(Object o) throws JsonProcessingException {
         return createObjectMapper().writeValueAsString(o);
     }
 
-    public static String toJsonStringCatches(Object o) {
+    public static String stringifyCatches(Object o) {
         try {
-            return toJsonString(o);
+            return stringify(o);
         }
         catch (JsonProcessingException e) {
             Logger.e(e);

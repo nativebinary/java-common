@@ -51,7 +51,7 @@ public class SizeD {
 
     @Override
     public String toString() {
-        return JsonUtil.toJsonString(this);
+        return JsonUtil.stringify(this);
     }
 
     public SizeD negate() {

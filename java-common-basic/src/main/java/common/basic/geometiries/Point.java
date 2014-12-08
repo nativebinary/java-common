@@ -81,6 +81,6 @@ public class Point {
 
     @Override
     public String toString() {
-        return JsonUtil.toJsonString(this);
+        return JsonUtil.stringify(this);
     }
 }

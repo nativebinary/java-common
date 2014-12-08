@@ -28,7 +28,7 @@ public class GsonUtil {
     }
 
 
-    public static String toJsonString(Object o) {
+    public static String stringify(Object o) {
         return createGson().toJson(o);
     }
 
