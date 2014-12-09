@@ -116,6 +116,18 @@ public class DateUtil {
         }
     }
 
+    public static Date parse_yyyyMMdd(String s) {
+        if (s == null || s.isEmpty())
+            return null;
+
+        try {
+            return yyyyMMdd.parse(s);
+        } catch (ParseException e) {
+            Logger.e(e);
+            return null;
+        }
+    }
+
     public static Date getDateRandom(Date dateFrom, Date dateTo) {
         Calendar cal = Calendar.getInstance();
 
