@@ -40,6 +40,9 @@ public class ParamBuilder extends ArrayList<NameValuePair> {
         final Map<String, Object> map = ReflectionUtil.toMap(object);
         for (String key : map.keySet()) {
             final Object objectInMap = map.get(key);
+            if (null == objectInMap)
+                continue;
+
             final List list = Cast.as(objectInMap, List.class);
             if(list != null){
                 for (Object objectInList : list) {
@@ -60,6 +63,10 @@ public class ParamBuilder extends ArrayList<NameValuePair> {
         final Map<String, Object> map = ReflectionUtil.toMap(object);
         for (String key : map.keySet()) {
             final Object objectInMap = map.get(key);
+
+            if (null == objectInMap)
+                continue;
+
             final List list = Cast.as(objectInMap, List.class);
             if(list != null){
                 for (Object objectInList : list) {
