@@ -29,7 +29,10 @@ import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -95,19 +98,28 @@ public class HttpRequestHelper {
         Post
     }
 
-    private static HttpRequestBase getHttpRequestBase(HttpMethod httpMethod, URI uri, List<NameValuePair> listParam) throws Exception {
-        if (httpMethod == HttpMethod.Get) {
-            return new HttpGet(new URI(uri + "?" + URLEncodedUtils.format(listParam, "UTF-8")));
-        } else if (httpMethod == HttpMethod.Post) {
-            HttpPost httpPost = new HttpPost(uri);
-            httpPost.setEntity(new UrlEncodedFormEntity(listParam, "UTF-8"));
-            return httpPost;
-        } else {
-            throw new Exception("Unsupported Http Method");
+    private static HttpRequestBase getHttpRequestBase(HttpMethod httpMethod, URI uri, List<NameValuePair> listParam) throws URISyntaxException, UnsupportedEncodingException {
+        final List<NameValuePair> list = new ArrayList<NameValuePair>();
+
+        for (NameValuePair nameValuePair : listParam)
+        {
+            if (null == nameValuePair.getValue())
+                continue;
+
+            list.add(nameValuePair);
         }
+
+
+        if (httpMethod == HttpMethod.Post) {
+            HttpPost httpPost = new HttpPost(uri);
+            httpPost.setEntity(new UrlEncodedFormEntity(list, "UTF-8"));
+            return httpPost;
+        }
+
+        return new HttpGet(new URI(uri + "?" + URLEncodedUtils.format(list, "UTF-8")));
     }
 
-    public static HttpResponse getHttpResponse(final HttpMethod httpMethod, final String urlString, final List<NameValuePair> listParam) throws Exception {
+    public static HttpResponse getHttpResponse(final HttpMethod httpMethod, final String urlString, final List<NameValuePair> listParam) throws IOException, URISyntaxException {
         URI uri = new URI(urlString);
 
         //HttpClient httpClient = new DefaultHttpClient();
@@ -117,11 +129,11 @@ public class HttpRequestHelper {
         return httpClient.execute(httpRequestBase);
     }
 
-    public static HttpResponse get(final String url, final List<NameValuePair> listParam) throws Exception {
+    public static HttpResponse get(final String url, final List<NameValuePair> listParam) throws IOException, URISyntaxException {
         return getHttpResponse(HttpMethod.Get, url, listParam);
     }
 
-    public static HttpResponse post(final String url, final List<NameValuePair> listParam) throws Exception {
+    public static HttpResponse post(final String url, final List<NameValuePair> listParam) throws IOException, URISyntaxException {
         return getHttpResponse(HttpMethod.Post, url, listParam);
     }
 
