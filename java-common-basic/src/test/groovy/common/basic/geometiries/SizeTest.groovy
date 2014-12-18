@@ -102,4 +102,21 @@ class SizeTest extends Specification {
         new Size(2147483647, 2147483647)    ||  '{"width":2147483647,"height":2147483647}'
         new Size(-2147483648, -2147483648)  ||  '{"width":-2147483648,"height":-2147483648}'
     }
+
+    def "IsAllPositive"() {
+        expect:
+        size.isPositiveAll() == result
+
+        where:
+        size                | result
+        new Size(-1, -1)    | false
+        new Size(-1, 0)     | false
+        new Size(-1, 1)     | false
+        new Size(0, -1)     | false
+        new Size(0, 0)      | false
+        new Size(0, 1)      | false
+        new Size(1, -1)     | false
+        new Size(1, 0)      | false
+        new Size(1, 1)      | true
+    }
 }

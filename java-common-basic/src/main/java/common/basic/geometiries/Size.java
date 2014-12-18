@@ -49,4 +49,8 @@ public class Size {
     public String toString() {
         return JsonUtil.stringify(this);
     }
+
+    public boolean isPositiveAll() {
+        return width > 0 && height > 0;
+    }
 }
