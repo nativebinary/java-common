@@ -189,4 +189,11 @@ public class StringUtil {
         }
         return sum;
     }
+
+    public static String removeButNumber(String value) {
+        if (null == value)
+            return "";
+
+        return value.replaceAll("\\D", "");
+    }
 }

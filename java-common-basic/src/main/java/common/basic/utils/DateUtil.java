@@ -207,5 +207,4 @@ public class DateUtil {
         return String.format("%s-%s-%s %s:%s", YYYYMMDDHHmm.substring(0, 4), YYYYMMDDHHmm.substring(4, 6), YYYYMMDDHHmm.substring(6, 8), YYYYMMDDHHmm.substring(8, 10), YYYYMMDDHHmm.substring(10, 12));
     }
 
-
 }
