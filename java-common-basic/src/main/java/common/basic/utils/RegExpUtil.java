@@ -37,4 +37,10 @@ public class RegExpUtil {
     public static String removeRepeatedNewLine(String s) {
         return patternRemoveRepeatedNewLine.matcher(s).replaceAll("\n\n");
     }
+
+    static final Pattern patternEmail = Pattern.compile("\\b[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*\\b");
+    public static boolean isValidEmailAddress(String value) {
+        Matcher matcher = patternEmail.matcher(value);
+        return matcher.matches();
+    }
 }

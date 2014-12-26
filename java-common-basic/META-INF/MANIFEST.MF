@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
-Library-Version: 1.0.20141217.172004
+Library-Version: 1.0.20141226.210904
 
