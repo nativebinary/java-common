@@ -202,4 +202,9 @@ public class DateUtil {
     public static String YYYYMMDD2YYYY_MM_DD(String YYYYMMDD) {
         return String.format("%s-%s-%s", YYYYMMDD.substring(0, 4), YYYYMMDD.substring(4, 6), YYYYMMDD.substring(6, 8));
     }
+
+    public static String YYYYMMDDHHmm2YYYY_MM_DD_HH_mm(String YYYYMMDDHHmm) {
+        return String.format("%s-%s-%s %s:%s", YYYYMMDDHHmm.substring(0, 4), YYYYMMDDHHmm.substring(4, 6), YYYYMMDDHHmm.substring(6, 8), YYYYMMDDHHmm.substring(8, 10), YYYYMMDDHHmm.substring(10, 12));
+    }
+
 }
