@@ -164,12 +164,8 @@ public class ListUtil extends CollectionUtil {
     }
 
 	public static <T> T getRandomValue(List<T> list) {
-		if(list == null || 0 == list.size())
-			return null;
-
-		return list.get(RandomUtil.nextInt(0, list.size()));
+        return RandomUtil.get(list);
 	}
-
 
     public static <T> boolean hasMore(List<T> list, int limit) {
         boolean hasMore = list.size() > limit;

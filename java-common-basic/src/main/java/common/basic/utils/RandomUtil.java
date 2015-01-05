@@ -1,6 +1,8 @@
 package common.basic.utils;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 public class RandomUtil {
@@ -84,5 +86,16 @@ public class RandomUtil {
 
     public static Date nextDate() {
         return new Date(nextLong(404146800000L, 2613222000000L));
+    }
+
+    public static <T> T get(T... array) {
+        return get(Arrays.asList(array));
+    }
+
+    public static <T> T get(List<T> list) {
+        if(list == null || 0 == list.size())
+            return null;
+
+        return list.get(nextInt(0, list.size()));
     }
 }
