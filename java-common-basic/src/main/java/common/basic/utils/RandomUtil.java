@@ -42,6 +42,19 @@ public class RandomUtil {
         return start + nextInt(until - start);
     }
 
+    public static long nextLong() {
+        return random.nextLong();
+    }
+
+    public static long nextLong(long i) {
+        return nextLong() % i;
+    }
+
+    public static long nextLong(long start, long until) {
+        return start + nextLong(until - start);
+    }
+
+
     public static boolean nextBoolean(){
         return nextInt() % 2 == 0;
     }
@@ -52,10 +65,6 @@ public class RandomUtil {
 
     public static float nextFloat() {
         return random.nextFloat();
-    }
-
-    public static long nextLong() {
-        return random.nextLong();
     }
 
     public static String nextNumberString(int length)
