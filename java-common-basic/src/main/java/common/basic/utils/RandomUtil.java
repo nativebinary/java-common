@@ -1,5 +1,6 @@
 package common.basic.utils;
 
+import java.util.Date;
 import java.util.Random;
 
 public class RandomUtil {
@@ -81,4 +82,7 @@ public class RandomUtil {
 
     }
 
+    public static Date nextDate() {
+        return new Date(nextLong(404146800000L, 2613222000000L));
+    }
 }
