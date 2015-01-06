@@ -1,11 +1,13 @@
 package common.basic.utils;
 
+import common.basic.interfaces.ICallbackTransform;
 import common.basic.interfaces.ITransform;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MapUtil {
@@ -65,6 +67,19 @@ public class MapUtil {
 
         return mapResult;
     }
+
+
+    public static <TKey, TValue> Map<TKey, TValue> transformFromList(List<TValue> list, ICallbackTransform<TValue, TKey> transform) {
+        LinkedHashMap<TKey, TValue> mapResult = new LinkedHashMap<TKey, TValue>();
+
+        for (TValue value : list) {
+            mapResult.put(transform.transform(value), value);
+        }
+
+        return mapResult;
+    }
+
+
 
     public static String getString(Map<String, Object> map, String key, String defaultValue) {
         if (!map.containsKey(key))
