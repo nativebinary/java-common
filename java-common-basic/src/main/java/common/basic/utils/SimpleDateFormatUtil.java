@@ -15,6 +15,7 @@ public class SimpleDateFormatUtil {
     private final static SimpleDateFormat yyMMdd = new SimpleDateFormat("yyMMdd", Locale.KOREA);
     private final static SimpleDateFormat yyyy = new SimpleDateFormat("yyyy", Locale.KOREA);
     private final static SimpleDateFormat yyyy_dash_MM_dash_dd = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
+    private final static SimpleDateFormat yyyy_dash_MM_dash_dd_space_HH = new SimpleDateFormat("yyyy-MM-dd HH", Locale.KOREA);
     private final static SimpleDateFormat yyyy_dash_MM_dash_dd_space_HH_colon_mm = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.KOREA);
     private final static SimpleDateFormat yyyy_dash_MM_dash_dd_space_HH_colon_mm_colon_ss = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA);
     private final static SimpleDateFormat yyyy_dash_MM_dash_dd_space_HH_colon_mm_colon_ss_dot_SSS = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.KOREA);
@@ -45,6 +46,8 @@ public class SimpleDateFormatUtil {
     public static Date yyyy(String s, Date dateDefault) { synchronized (yyyy) { try { return yyyy.parse(s); } catch (ParseException e) { Logger.e(e); return dateDefault; } } }
     public static String yyyy_dash_MM_dash_dd(Date date) { synchronized (yyyy_dash_MM_dash_dd) { return yyyy_dash_MM_dash_dd.format(date); } }
     public static Date yyyy_dash_MM_dash_dd(String s, Date dateDefault) { synchronized (yyyy_dash_MM_dash_dd) { try { return yyyy_dash_MM_dash_dd.parse(s); } catch (ParseException e) { Logger.e(e); return dateDefault; } } }
+    public static String yyyy_dash_MM_dash_dd_space_HH(Date date) { synchronized (yyyy_dash_MM_dash_dd_space_HH) { return yyyy_dash_MM_dash_dd_space_HH.format(date); } }
+    public static Date yyyy_dash_MM_dash_dd_space_HH(String s, Date dateDefault) { synchronized (yyyy_dash_MM_dash_dd_space_HH) { try { return yyyy_dash_MM_dash_dd_space_HH.parse(s); } catch (ParseException e) { Logger.e(e); return dateDefault; } } }
     public static String yyyy_dash_MM_dash_dd_space_HH_colon_mm(Date date) { synchronized (yyyy_dash_MM_dash_dd_space_HH_colon_mm) { return yyyy_dash_MM_dash_dd_space_HH_colon_mm.format(date); } }
     public static Date yyyy_dash_MM_dash_dd_space_HH_colon_mm(String s, Date dateDefault) { synchronized (yyyy_dash_MM_dash_dd_space_HH_colon_mm) { try { return yyyy_dash_MM_dash_dd_space_HH_colon_mm.parse(s); } catch (ParseException e) { Logger.e(e); return dateDefault; } } }
     public static String yyyy_dash_MM_dash_dd_space_HH_colon_mm_colon_ss(Date date) { synchronized (yyyy_dash_MM_dash_dd_space_HH_colon_mm_colon_ss) { return yyyy_dash_MM_dash_dd_space_HH_colon_mm_colon_ss.format(date); } }
@@ -63,6 +66,8 @@ public class SimpleDateFormatUtil {
     public static Date yyyyMMdd_dot_HHmmss(String s, Date dateDefault) { synchronized (yyyyMMdd_dot_HHmmss) { try { return yyyyMMdd_dot_HHmmss.parse(s); } catch (ParseException e) { Logger.e(e); return dateDefault; } } }
     public static String yyyyMMdd_space_HH(Date date) { synchronized (yyyyMMdd_space_HH) { return yyyyMMdd_space_HH.format(date); } }
     public static Date yyyyMMdd_space_HH(String s, Date dateDefault) { synchronized (yyyyMMdd_space_HH) { try { return yyyyMMdd_space_HH.parse(s); } catch (ParseException e) { Logger.e(e); return dateDefault; } } }
+    public static String yyyyMMdd_space_HHmm(Date date) { synchronized (yyyyMMdd_space_HHmm) { return yyyyMMdd_space_HHmm.format(date); } }
+    public static Date yyyyMMdd_space_HHmm(String s, Date dateDefault) { synchronized (yyyyMMdd_space_HHmm) { try { return yyyyMMdd_space_HHmm.parse(s); } catch (ParseException e) { Logger.e(e); return dateDefault; } } }
 
     //</editor-fold>
 }
