@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,6 +37,9 @@ public class DateUtil {
     private final static SimpleDateFormat yyyyMMddHHmmssForFile = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.KOREA);
     private final static SimpleDateFormat yyyyMMddHHmmssSSS = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.KOREA);
     private final static SimpleDateFormat gmtFormat = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss z", Locale.US);
+    static {
+        gmtFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+    }
 
 
     //<editor-fold desc="generated code : convert Date -> String">
