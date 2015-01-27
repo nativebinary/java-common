@@ -35,15 +35,16 @@ public class DateUtil {
     private final static SimpleDateFormat yyyyMMddHHmmss = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA);
     private final static SimpleDateFormat yyyyMMddHHmmssForFile = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.KOREA);
     private final static SimpleDateFormat yyyyMMddHHmmssSSS = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.KOREA);
+    private final static SimpleDateFormat gmtFormat = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss z", Locale.US);
 
 
     //<editor-fold desc="generated code : convert Date -> String">
 
     // s/private final static SimpleDateFormat (\w+) = .+/public static String $1(Date date) { synchronized ($1) { return $1.format(date); } }/
-
     public static String EEE(Date date) { synchronized (EEE) { return EEE.format(date); } }
-    public static String HHmm(Date date) { synchronized (HHmm) { return HHmm.format(date); } }
+    public static String gmtFormat(Date date) { synchronized (gmtFormat) { return gmtFormat.format(date); } }
     public static String HH_mm(Date date) { synchronized (HH_mm) { return HH_mm.format(date); } }
+    public static String HHmm(Date date) { synchronized (HHmm) { return HHmm.format(date); } }
     public static String Korean(Date date) { synchronized (Korean) { return Korean.format(date); } }
     public static String MM(Date date) { synchronized (MM) { return MM.format(date); } }
     public static String nginxlog(Date date) { synchronized (nginxlog) { return nginxlog.format(date); } }
@@ -64,6 +65,8 @@ public class DateUtil {
     // s/private final static SimpleDateFormat (\w+) = .+/public static Date $1(String s, Date dateDefault) { synchronized ($1) { try { return $1.parse(s); } catch (ParseException e) { Logger.e(e); return dateDefault; } } }/
 
     public static Date EEE(String s, Date dateDefault) { synchronized (EEE) { try { return EEE.parse(s); } catch (ParseException e) { Logger.e(e); return dateDefault; } } }
+    public static Date gmtFormat(String s, Date dateDefault) { synchronized (gmtFormat) { try { return gmtFormat.parse(s); } catch (ParseException e) { Logger.e(e); return dateDefault; } } }
+    public static Date HH_mm(String s, Date dateDefault) { synchronized (HH_mm) { try { return HH_mm.parse(s); } catch (ParseException e) { Logger.e(e); return dateDefault; } } }
     public static Date HHmm(String s, Date dateDefault) { synchronized (HHmm) { try { return HHmm.parse(s); } catch (ParseException e) { Logger.e(e); return dateDefault; } } }
     public static Date Korean(String s, Date dateDefault) { synchronized (Korean) { try { return Korean.parse(s); } catch (ParseException e) { Logger.e(e); return dateDefault; } } }
     public static Date MM(String s, Date dateDefault) { synchronized (MM) { try { return MM.parse(s); } catch (ParseException e) { Logger.e(e); return dateDefault; } } }
@@ -71,6 +74,7 @@ public class DateUtil {
     public static Date yyMMdd(String s, Date dateDefault) { synchronized (yyMMdd) { try { return yyMMdd.parse(s); } catch (ParseException e) { Logger.e(e); return dateDefault; } } }
     public static Date yyyy(String s, Date dateDefault) { synchronized (yyyy) { try { return yyyy.parse(s); } catch (ParseException e) { Logger.e(e); return dateDefault; } } }
     public static Date yyyy_MM_dd(String s, Date dateDefault) { synchronized (yyyy_MM_dd) { try { return yyyy_MM_dd.parse(s); } catch (ParseException e) { Logger.e(e); return dateDefault; } } }
+    public static Date yyyy_MM_dd_E(String s, Date dateDefault) { synchronized (yyyy_MM_dd_E) { try { return yyyy_MM_dd_E.parse(s); } catch (ParseException e) { Logger.e(e); return dateDefault; } } }
     public static Date yyyyMM(String s, Date dateDefault) { synchronized (yyyyMM) { try { return yyyyMM.parse(s); } catch (ParseException e) { Logger.e(e); return dateDefault; } } }
     public static Date yyyyMMdd(String s, Date dateDefault) { synchronized (yyyyMMdd) { try { return yyyyMMdd.parse(s); } catch (ParseException e) { Logger.e(e); return dateDefault; } } }
     public static Date yyyyMMdd_HHmm(String s, Date dateDefault) { synchronized (yyyyMMdd_HHmm) { try { return yyyyMMdd_HHmm.parse(s); } catch (ParseException e) { Logger.e(e); return dateDefault; } } }
