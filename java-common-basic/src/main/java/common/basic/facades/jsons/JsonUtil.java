@@ -26,8 +26,16 @@ public class JsonUtil {
         return jsonEngine.parse(json, clazz);
     }
 
+    public static <T> T parse(String json, JsonTypeT<T> jsonTypeT) {
+        return jsonEngine.parse(json, jsonTypeT);
+    }
+
     public static <T> T parse(InputStream inputStream, Class<T> clazz) {
         return jsonEngine.parse(inputStream, clazz);
+    }
+
+    public static <T> T parse(InputStream inputStream, JsonTypeT<T> jsonTypeT) {
+        return jsonEngine.parse(inputStream, jsonTypeT);
     }
 
     public static Map<String, Object> parse(String json) {

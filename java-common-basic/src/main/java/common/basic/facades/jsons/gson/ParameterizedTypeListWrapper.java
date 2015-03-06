@@ -4,7 +4,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
 
-class ParameterizedTypeListWrapper<T> implements ParameterizedType {
+public class ParameterizedTypeListWrapper<T> implements ParameterizedType {
 
     private Class<T> classWrapped;
 

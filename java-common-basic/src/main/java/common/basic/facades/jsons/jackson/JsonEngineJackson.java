@@ -1,6 +1,7 @@
 package common.basic.facades.jsons.jackson;
 
 import common.basic.facades.jsons.IJsonEngine;
+import common.basic.facades.jsons.JsonTypeT;
 
 import java.io.InputStream;
 import java.util.List;
@@ -18,8 +19,18 @@ public class JsonEngineJackson implements IJsonEngine {
     }
 
     @Override
+    public <T> T parse(String json, JsonTypeT<T> type) {
+        return JacksonUtil.parseCatches(json, type);
+    }
+
+    @Override
     public <T> T parse(InputStream inputStream, Class<T> clazz) {
         return JacksonUtil.parseCatches(inputStream, clazz);
+    }
+
+    @Override
+    public <T> T parse(InputStream inputStream, JsonTypeT<T> jsonTypeT) {
+        return JacksonUtil.parseCatches(inputStream, jsonTypeT);
     }
 
     @Override

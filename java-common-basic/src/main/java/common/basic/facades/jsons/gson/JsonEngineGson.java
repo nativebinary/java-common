@@ -2,6 +2,7 @@ package common.basic.facades.jsons.gson;
 
 import com.google.gson.reflect.TypeToken;
 import common.basic.facades.jsons.IJsonEngine;
+import common.basic.facades.jsons.JsonTypeT;
 
 import java.io.InputStream;
 import java.util.List;
@@ -19,8 +20,19 @@ public class JsonEngineGson implements IJsonEngine {
     }
 
     @Override
+    public <T> T parse(String json, JsonTypeT<T> jsonTypeT) {
+        return GsonUtil.parse(json, jsonTypeT);
+    }
+
+    @Override
     public <T> T parse(InputStream inputStream, Class<T> clazz) {
         return GsonUtil.parse(inputStream, clazz);
+    }
+
+
+    @Override
+    public <T> T parse(InputStream inputStream, JsonTypeT<T> jsonTypeT) {
+        return GsonUtil.parse(inputStream, jsonTypeT);
     }
 
     @Override
