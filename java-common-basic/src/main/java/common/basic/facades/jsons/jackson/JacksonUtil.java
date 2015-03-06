@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.introspect.VisibilityChecker;
 import com.fasterxml.jackson.databind.type.CollectionType;
-import common.basic.facades.jsons.JsonTypeT;
+import common.basic.generics.TypeWrapperT;
 import common.basic.logs.Logger;
 
 import java.io.IOException;
@@ -47,12 +47,6 @@ public class JacksonUtil {
         return createObjectMapper().readValue(json, clazz);
     }
 
-    public static <T> T fromJson(String json, JsonTypeT<T> jsonTypeT) throws IOException {
-        ObjectMapper objectMapper = createObjectMapper();
-        JavaType javaType = objectMapper.getTypeFactory().constructType(jsonTypeT.getType());
-        return objectMapper.readValue(json, javaType);
-    }
-
     public static <T> T fromJson(JsonNode jsonNode, Class<T> clazz) throws JsonProcessingException {
         return createObjectMapper().treeToValue(jsonNode, clazz);
     }
@@ -61,9 +55,15 @@ public class JacksonUtil {
         return createObjectMapper().readValue(json, clazz);
     }
 
-    public static <T> T fromJson(InputStream json, JsonTypeT<T> jsonTypeT) throws IOException {
+    public static <T> T fromJson(String json, TypeWrapperT<T> typeWrapperT) throws IOException {
         ObjectMapper objectMapper = createObjectMapper();
-        JavaType javaType = objectMapper.getTypeFactory().constructType(jsonTypeT.getType());
+        JavaType javaType = objectMapper.getTypeFactory().constructType(typeWrapperT.getType());
+        return objectMapper.readValue(json, javaType);
+    }
+
+    public static <T> T fromJson(InputStream json, TypeWrapperT<T> typeWrapperT) throws IOException {
+        ObjectMapper objectMapper = createObjectMapper();
+        JavaType javaType = objectMapper.getTypeFactory().constructType(typeWrapperT.getType());
         return objectMapper.readValue(json, javaType);
     }
 
@@ -97,9 +97,9 @@ public class JacksonUtil {
         }
     }
 
-    public static <T> T parseCatches(String json, JsonTypeT<T> jsonTypeT) {
+    public static <T> T parseCatches(String json, TypeWrapperT<T> typeWrapperT) {
         try {
-            return fromJson(json, jsonTypeT);
+            return fromJson(json, typeWrapperT);
         }
         catch (IOException e) {
             Logger.e(e);
@@ -107,9 +107,9 @@ public class JacksonUtil {
         }
     }
 
-    public static <T> T parseCatches(InputStream json, JsonTypeT<T> jsonTypeT) {
+    public static <T> T parseCatches(InputStream json, TypeWrapperT<T> typeWrapperT) {
         try {
-            return fromJson(json, jsonTypeT);
+            return fromJson(json, typeWrapperT);
         } catch (IOException e) {
             Logger.e(e);
             return null;

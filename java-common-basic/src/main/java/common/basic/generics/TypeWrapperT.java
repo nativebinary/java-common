@@ -1,15 +1,15 @@
-package common.basic.facades.jsons;
+package common.basic.generics;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
-public class JsonTypeT<T> implements Comparable<JsonTypeT<T>> {
+public class TypeWrapperT<T> implements Comparable<TypeWrapperT<T>> {
     protected final Type _type;
 
-    protected JsonTypeT() {
+    protected TypeWrapperT() {
         Type superClass = getClass().getGenericSuperclass();
-        if (superClass instanceof Class<?>) { // sanity check, should never happen
-            throw new IllegalArgumentException("Internal error: TypeReference constructed without actual type information");
+        if (superClass instanceof Class<?>) {
+            throw new IllegalArgumentException("TypeWrapperT");
         }
         _type = ((ParameterizedType) superClass).getActualTypeArguments()[0];
     }
@@ -19,9 +19,8 @@ public class JsonTypeT<T> implements Comparable<JsonTypeT<T>> {
     }
 
     @Override
-    public int compareTo(JsonTypeT<T> o) {
-        // just need an implementation, not a good one... hence:
-        return 0;
+    public int compareTo(TypeWrapperT<T> o) {
+        return null != this._type && this._type.equals(o._type) ? 0 : 1;
     }
 
     public T newInstance() {

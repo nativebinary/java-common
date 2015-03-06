@@ -6,7 +6,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
-import common.basic.facades.jsons.JsonTypeT;
+import common.basic.generics.TypeWrapperT;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -44,8 +44,13 @@ public class GsonUtil {
     public static <T> T parse(InputStream inputStream, Class<T> clazz) {
         return createGson().fromJson(new InputStreamReader(inputStream), clazz);
     }
-    public static <T> T parse(InputStream inputStream, JsonTypeT<T> jsonTypeT) {
-        return createGson().fromJson(new InputStreamReader(inputStream), jsonTypeT.getType());
+
+    public static <T> T parse(String json, TypeWrapperT<T> typeWrapperT) {
+        return createGson().fromJson(json, typeWrapperT.getType());
+    }
+
+    public static <T> T parse(InputStream inputStream, TypeWrapperT<T> typeWrapperT) {
+        return createGson().fromJson(new InputStreamReader(inputStream), typeWrapperT.getType());
     }
 
     public static <T> T fromJson(Reader reader, Class<T> clazz) {
@@ -107,12 +112,7 @@ public class GsonUtil {
 
 
     public static Map<String, Object> parse(String json) {
-
         return createGson().fromJson(json, new TypeToken<Map<String, Object>>() {}.getType());
-    }
-
-    public static <T> T parse(String json, JsonTypeT<T> type) {
-        return createGson().fromJson(json, type.getType());
     }
 
     public static List<Map<String, Object>> parseList(String json, TypeToken<List<Map<String, Object>>> typeToken) {
