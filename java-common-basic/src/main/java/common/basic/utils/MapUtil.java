@@ -5,6 +5,7 @@ import common.basic.interfaces.ITransform;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -79,7 +80,22 @@ public class MapUtil {
         return mapResult;
     }
 
+    public static <TKey, TValue> Map<TKey, List<TValue>> groupBy(List<TValue> list, ICallbackTransform<TValue, TKey> transform) {
+        LinkedHashMap<TKey, List<TValue>> mapResult = new LinkedHashMap<TKey, List<TValue>>();
 
+        for (TValue value : list) {
+            TKey key = transform.transform(value);
+
+            List<TValue> listValue = mapResult.get(key);
+            if (null == listValue) {
+                listValue = new ArrayList<TValue>();
+                mapResult.put(key, listValue);
+            }
+            listValue.add(value);
+        }
+
+        return mapResult;
+    }
 
     public static String getString(Map<String, Object> map, String key, String defaultValue) {
         if (!map.containsKey(key))
