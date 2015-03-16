@@ -16,10 +16,13 @@ class ArrayUtilTest extends Specification {
         where:
         i       ||  a
         true    ||  null
-        true    ||  new String[0]
-        false   ||  new String[10]
-        false   ||  new ArrayList<String>()
-        false   ||  new ArrayList<String>().add("1")
+        false   ||  ["10", "20"] as String[]
+        true    ||  [] as String[]
+        true    ||  [] as Object[]
+        true    ||  [] as Integer[]
+        false   ||  [1, 2, 3, 4, 5] as Integer[]
+        false   ||  [true, true, false] as boolean[]
+        false   ||  [null, null, null] as String[]
     }
 
     def "startsWith"() {
