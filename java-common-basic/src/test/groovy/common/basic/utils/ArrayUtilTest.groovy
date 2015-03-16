@@ -16,8 +16,6 @@ class ArrayUtilTest extends Specification {
         where:
         i       ||  a
         true    ||  null
-        false   ||  "String"
-        false   ||  10
         true    ||  new String[0]
         false   ||  new String[10]
         false   ||  new ArrayList<String>()
