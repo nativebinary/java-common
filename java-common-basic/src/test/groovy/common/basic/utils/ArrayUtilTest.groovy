@@ -11,10 +11,10 @@ class ArrayUtilTest extends Specification {
 
     def "isNullOrEmpty"() {
         expect:
-        i == ArrayUtil.isNullOrEmpty(a)
+        b == ArrayUtil.isNullOrEmpty(array)
 
         where:
-        i       ||  a
+        b       ||  array
         true    ||  null
         false   ||  ["10", "20"] as String[]
         true    ||  [] as String[]
@@ -27,10 +27,10 @@ class ArrayUtilTest extends Specification {
 
     def "startsWith"() {
         expect:
-        i == ArrayUtil.startsWith(array1 as String[], array2 as String[])
+        b == ArrayUtil.startsWith(array1 as String[], array2 as String[])
 
         where:
-        i       ||  array1                  ||  array2
+        b       ||  array1                  ||  array2
         true    ||  ["1"]                   ||  ["1"]
         false   ||  ["1"]                   ||  ["2"]
         true    ||  ["1", "2"]              ||  ["1"]
@@ -43,5 +43,20 @@ class ArrayUtilTest extends Specification {
         false   ||  ["1", "2", "3"]         ||  ["3", "2", "1"]
         false   ||  ["1", "2", "3"]         ||  ["1", "3", "2"]
         false   ||  ["1", "2", "3"]         ||  ["1", "3"]
+    }
+
+    def "isNull"() {
+        expect:
+        result == ArrayUtil.isNull(array, arrayWhenNull)
+
+        where:
+        result      ||  array                   ||  arrayWhenNull
+        ["2"]       ||  null                    ||  ["2"] as String[]
+        null        ||  null                    ||  null
+        [1]         ||  [1] as Integer[]        ||  null
+        ["1"]       ||  ["1"] as String[]       ||  ["2"] as String[]
+        [1]         ||  [1] as Integer[]        ||  ["2"] as String[]
+        []          ||  [] as Integer[]         ||  ["2"] as String[]
+        ["1", "2"]  ||  ["1", "2"] as String[]  ||  [1, 2] as String[]
     }
 }
