@@ -18,6 +18,7 @@ class DateUtilTest extends Specification {
     def "gmtFormatString"() {
         expect:
         result == DateUtil.gmtFormat(date)
+        Logger.e(result, date);
 
         where:
         result                              ||  date
