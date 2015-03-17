@@ -179,4 +179,24 @@ class ArrayUtilTest extends Specification {
         [3, 0]          ||  [1, 2, 3]           ||  2       ||  2
         [3, 0, 0]       ||  [1, 2, 3]           ||  2       ||  3
     }
+
+    def "sliceBoolean"() {
+        expect:
+        result == ArrayUtil.slice(array as boolean[], i, length)
+
+        where:
+        result                      ||  array               ||  i       ||  length
+        []                          ||  [true, true, false] ||  0       ||  0
+        [true]                      ||  [true, true, false] ||  0       ||  1
+        [true, true]                ||  [true, true, false] ||  0       ||  2
+        [true, true, false]         ||  [true, true, false] ||  0       ||  3
+        [true, true, false, false]  ||  [true, true, false] ||  0       ||  4
+        []                          ||  [true, true, false] ||  1       ||  0
+        [true]                      ||  [true, true, false] ||  1       ||  1
+        [true, false]               ||  [true, true, false] ||  1       ||  2
+        [true, false, false]        ||  [true, true, false] ||  1       ||  3
+        [false]                     ||  [true, true, false] ||  2       ||  1
+        [false, false]              ||  [true, true, false] ||  2       ||  2
+        [false, false, false]       ||  [true, true, false] ||  2       ||  3
+    }
 }
