@@ -27,14 +27,17 @@ class DateUtilTest extends Specification {
         "Sat, 31 Jan 2015 15:00:00 GMT"     ||  DateUtil.yyyyMMdd("20150201", null)
     }
 
-    def "HH_mm"() {
+    def "HH_mmString"() {
         expect:
         result == DateUtil.HH_mm(date)
 
         where:
-        result              ||  date
-        "00:00"             ||  DateUtil.yyyyMMdd("20141212", null)
-        "12:30"             ||  DateUtil.yyyyMMddHHmmss("2014-12-12 12:30:24", null)
-        "08:45"             ||  DateUtil.yyyyMMddHHmmss("2014-12-12 08:45:11", null)
+        result      ||  date
+        "00:00"     ||  DateUtil.yyyyMMdd("20141212", null)
+        "12:30"     ||  DateUtil.yyyyMMddHHmmss("2014-12-12 12:30:24", null)
+        "08:45"     ||  DateUtil.yyyyMMddHHmmss("2014-12-12 08:45:11", null)
+        "08:45"     ||  DateUtil.yyyyMMdd_HHmm("20141212 0845", null)
+        "08:45"     ||  DateUtil.yyyyMMddHHmmssForFile("20141212_084512", null)
+        "08:45"     ||  DateUtil.yyyyMMddHHmmssSSS("2014-12-12 08:45:12.111", null)
     }
 }
