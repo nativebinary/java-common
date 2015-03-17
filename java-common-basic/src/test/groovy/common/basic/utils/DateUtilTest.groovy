@@ -68,4 +68,18 @@ class DateUtilTest extends Specification {
         "2015년01월01일"      ||  DateUtil.yyyyMMddHHmmssForFile("20150101_084512", null)
         "2015년02월27일"      ||  DateUtil.yyyyMMddHHmmssSSS("2015-02-27 08:45:12.111", null)
     }
+
+    def "MMString"() {
+        expect:
+        result == DateUtil.MM(date)
+
+        where:
+        result      ||  date
+        "12"        ||  DateUtil.yyyyMMdd("20141212", null)
+        "11"        ||  DateUtil.yyyyMMddHHmmss("2014-11-30 12:30:24", null)
+        "12"        ||  DateUtil.yyyyMMddHHmmss("2014-12-25 08:45:11", null)
+        "03"        ||  DateUtil.yyyyMMdd_HHmm("20150317 0845", null)
+        "01"        ||  DateUtil.yyyyMMddHHmmssForFile("20150101_084512", null)
+        "02"        ||  DateUtil.yyyyMMddHHmmssSSS("2015-02-27 08:45:12.111", null)
+    }
 }
