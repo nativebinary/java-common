@@ -3,22 +3,38 @@ package common.basic.utils
 import spock.lang.Specification
 
 class DateUtilTest extends Specification {
-    def "yyMMdd"() {
+    def "EEEString"() {
         expect:
-        DateUtil.yyMMdd(DateUtil.yyyyMMdd("20140725", null)) == "140725";
-        DateUtil.yyyyMMdd(DateUtil.yyMMdd("140725", null)) == "20140725";
-        DateUtil.MM(DateUtil.yyyyMMdd("20140725", null)) == "07";
+        result == DateUtil.EEE(date)
+
+        where:
+        result      ||  date
+        "Fri"       ||  DateUtil.yyyyMMdd("20141212", null)
+        "Sat"       ||  DateUtil.yyyyMMdd("20141213", null)
+        "Thu"       ||  DateUtil.yyyyMMdd("20150101", null)
+        "Sun"       ||  DateUtil.yyyyMMdd("20150201", null)
     }
 
-
-    def "humanReadable"() {
-        def date = DateUtil.parse("2014-07-25")
+    def "gmtFormatString"() {
         expect:
-        DateUtil.dateAddHumanReadableTimeSpan(date, "1 sec").getTime() == (date.getTime() + DateUtil.Second);
-        DateUtil.dateAddHumanReadableTimeSpan(date, "1minute").getTime() == (date.getTime() + DateUtil.Minute);
-        DateUtil.dateAddHumanReadableTimeSpan(date, "1hour").getTime() == (date.getTime() + DateUtil.Hour);
-        DateUtil.dateAddHumanReadableTimeSpan(date, "1day").getTime() == (date.getTime() + DateUtil.Day);
-        DateUtil.dateAddHumanReadableTimeSpan(date, "1month").getTime() == (date.getTime() + DateUtil.Day * 31);
-        DateUtil.dateAddHumanReadableTimeSpan(date, "1year").getTime() == (date.getTime() + DateUtil.Day * 365);
+        result == DateUtil.gmtFormat(date)
+
+        where:
+        result                              ||  date
+        "Thu, 11 Dec 2014 15:00:00 GMT"     ||  DateUtil.yyyyMMdd("20141212", null)
+        "Fri, 12 Dec 2014 15:00:00 GMT"     ||  DateUtil.yyyyMMdd("20141213", null)
+        "Wed, 31 Dec 2014 15:00:00 GMT"     ||  DateUtil.yyyyMMdd("20150101", null)
+        "Sat, 31 Jan 2015 15:00:00 GMT"     ||  DateUtil.yyyyMMdd("20150201", null)
+    }
+
+    def "HH_mm"() {
+        expect:
+        result == DateUtil.HH_mm(date)
+
+        where:
+        result              ||  date
+        "00:00"             ||  DateUtil.yyyyMMdd("20141212", null)
+        "12:30"             ||  DateUtil.yyyyMMddHHmmss("2014-12-12 12:30:24", null)
+        "08:45"             ||  DateUtil.yyyyMMddHHmmss("2014-12-12 08:45:11", null)
     }
 }
