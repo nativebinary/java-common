@@ -82,4 +82,18 @@ class DateUtilTest extends Specification {
         "01"        ||  DateUtil.yyyyMMddHHmmssForFile("20150101_084512", null)
         "02"        ||  DateUtil.yyyyMMddHHmmssSSS("2015-02-27 08:45:12.111", null)
     }
+
+    def "nginxlogString"() {
+        expect:
+        result == DateUtil.nginxlog(date)
+
+        where:
+        result                          ||  date
+        "12/Dec/2014:00:00:00 +0900"    ||  DateUtil.yyyyMMdd("20141212", null)
+        "30/Nov/2014:12:30:24 +0900"    ||  DateUtil.yyyyMMddHHmmss("2014-11-30 12:30:24", null)
+        "25/Dec/2014:08:45:11 +0900"    ||  DateUtil.yyyyMMddHHmmss("2014-12-25 08:45:11", null)
+        "17/Mar/2015:08:45:00 +0900"    ||  DateUtil.yyyyMMdd_HHmm("20150317 0845", null)
+        "01/Jan/2015:08:45:12 +0900"    ||  DateUtil.yyyyMMddHHmmssForFile("20150101_084512", null)
+        "27/Feb/2015:08:45:12 +0900"    ||  DateUtil.yyyyMMddHHmmssSSS("2015-02-27 08:45:12.111", null)
+    }
 }
