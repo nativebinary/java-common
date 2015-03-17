@@ -17,6 +17,11 @@ class ByteUtilTest extends Specification {
         i           || array
         0           || [0, 0, 0, 0] as byte[]
         2130706433  || [127, 0, 0, 1] as byte[]
+        2134922241  || [127, 64, 84, 1] as byte[]
+        -1          || [] as byte[]
+        -1          || [0] as byte[]
+        -1          || [0, 0] as byte[]
+        -1          || [0, 0, 0] as byte[]
     }
 
 }
