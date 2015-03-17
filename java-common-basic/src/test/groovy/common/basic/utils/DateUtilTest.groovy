@@ -21,10 +21,10 @@ class DateUtilTest extends Specification {
 
         where:
         result                              ||  date
-        "Thu, 11 Dec 2014 15:00:00 GMT"     ||  DateUtil.yyyyMMdd("20141212", null)
-        "Fri, 12 Dec 2014 15:00:00 GMT"     ||  DateUtil.yyyyMMdd("20141213", null)
-        "Wed, 31 Dec 2014 15:00:00 GMT"     ||  DateUtil.yyyyMMdd("20150101", null)
-        "Sat, 31 Jan 2015 15:00:00 GMT"     ||  DateUtil.yyyyMMdd("20150201", null)
+        "Sun, 30 Nov 2014 03:30:24 GMT"     ||  DateUtil.yyyyMMddHHmmss("2014-11-30 12:30:24", null)
+        "Sat, 13 Dec 2014 06:22:32 GMT"     ||  DateUtil.yyyyMMddHHmmss("2014-12-13 15:22:32", null)
+        "Wed, 31 Dec 2014 23:34:11 GMT"     ||  DateUtil.yyyyMMddHHmmss("2015-01-01 08:34:11", null)
+        "Sun, 1 Feb 2015 13:22:22 GMT"      ||  DateUtil.yyyyMMddHHmmss("2015-02-01 22:22:22", null)
     }
 
     def "HH_mmString"() {
