@@ -60,12 +60,32 @@ class ArrayUtilTest extends Specification {
         ["1", "2"]  ||  ["1", "2"] as String[]  ||  [1, 2] as String[]
     }
 
-    def "slice"() {
+    def "sliceByte"() {
         expect:
-        result == ArrayUtil.slice(byteArray as byte[], i, length)
+        result == ArrayUtil.slice(array as byte[], i, length)
 
         where:
-        result          ||  byteArray           ||  i       ||  length
+        result          ||  array               ||  i       ||  length
+        []              ||  [1, 2, 3]           ||  0       ||  0
+        [1]             ||  [1, 2, 3]           ||  0       ||  1
+        [1, 2]          ||  [1, 2, 3]           ||  0       ||  2
+        [1, 2, 3]       ||  [1, 2, 3]           ||  0       ||  3
+        []              ||  [1, 2, 3]           ||  1       ||  0
+        [2]             ||  [1, 2, 3]           ||  1       ||  1
+        [2, 3]          ||  [1, 2, 3]           ||  1       ||  2
+        [2, 3, 0]       ||  [1, 2, 3]           ||  1       ||  3
+        [2, 3, 0, 0]    ||  [1, 2, 3]           ||  1       ||  4
+        [3]             ||  [1, 2, 3]           ||  2       ||  1
+        [3, 0]          ||  [1, 2, 3]           ||  2       ||  2
+        [3, 0, 0]       ||  [1, 2, 3]           ||  2       ||  3
+    }
+
+    def "sliceShort"() {
+        expect:
+        result == ArrayUtil.slice(array as short[], i, length)
+
+        where:
+        result          ||  array               ||  i       ||  length
         []              ||  [1, 2, 3]           ||  0       ||  0
         [1]             ||  [1, 2, 3]           ||  0       ||  1
         [1, 2]          ||  [1, 2, 3]           ||  0       ||  2
