@@ -40,4 +40,18 @@ class DateUtilTest extends Specification {
         "08:45"     ||  DateUtil.yyyyMMddHHmmssForFile("20141212_084512", null)
         "08:45"     ||  DateUtil.yyyyMMddHHmmssSSS("2014-12-12 08:45:12.111", null)
     }
+
+    def "HHmmString"() {
+        expect:
+        result == DateUtil.HHmm(date)
+
+        where:
+        result      ||  date
+        "0000"      ||  DateUtil.yyyyMMdd("20141212", null)
+        "1230"      ||  DateUtil.yyyyMMddHHmmss("2014-12-12 12:30:24", null)
+        "0845"      ||  DateUtil.yyyyMMddHHmmss("2014-12-12 08:45:11", null)
+        "0845"      ||  DateUtil.yyyyMMdd_HHmm("20141212 0845", null)
+        "0845"      ||  DateUtil.yyyyMMddHHmmssForFile("20141212_084512", null)
+        "0845"      ||  DateUtil.yyyyMMddHHmmssSSS("2014-12-12 08:45:12.111", null)
+    }
 }
