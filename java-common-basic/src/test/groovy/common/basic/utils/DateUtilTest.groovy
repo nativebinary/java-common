@@ -223,4 +223,20 @@ class DateUtilTest extends Specification {
         "2015-01-01 08:45:12"   ||  DateUtil.yyyyMMddHHmmssForFile("20150101_084512", null)
         "2015-02-27 08:45:12"   ||  DateUtil.yyyyMMddHHmmssSSS("2015-02-27 08:45:12.111", null)
     }
+
+    def "yyyyMMddHHmmssForFileString"() {
+        expect:
+        result == DateUtil.yyyyMMddHHmmssForFile(date)
+
+        where:
+        result              ||  date
+        "20141212_000000"   ||  DateUtil.yyMMdd("141212", null)
+        "20141212_000000"   ||  DateUtil.yyyyMMdd("20141212", null)
+        "20141212_000000"   ||  DateUtil.yyyyMMdd("20141212", null)
+        "20141130_123024"   ||  DateUtil.yyyyMMddHHmmss("2014-11-30 12:30:24", null)
+        "20141225_084511"   ||  DateUtil.yyyyMMddHHmmss("2014-12-25 08:45:11", null)
+        "20150317_084500"   ||  DateUtil.yyyyMMdd_HHmm("20150317 0845", null)
+        "20150101_084512"   ||  DateUtil.yyyyMMddHHmmssForFile("20150101_084512", null)
+        "20150227_084512"   ||  DateUtil.yyyyMMddHHmmssSSS("2015-02-27 08:45:12.111", null)
+    }
 }
