@@ -128,7 +128,7 @@ class DateUtilTest extends Specification {
         "2015"      ||  DateUtil.yyyyMMddHHmmssSSS("2015-02-27 08:45:12.111", null)
     }
 
-    def "yyyy_MM_dd"() {
+    def "yyyy_MM_ddString"() {
         expect:
         result == DateUtil.yyyy_MM_dd(date)
 
@@ -142,5 +142,21 @@ class DateUtilTest extends Specification {
         "2015-03-17"    ||  DateUtil.yyyyMMdd_HHmm("20150317 0845", null)
         "2015-01-01"    ||  DateUtil.yyyyMMddHHmmssForFile("20150101_084512", null)
         "2015-02-27"    ||  DateUtil.yyyyMMddHHmmssSSS("2015-02-27 08:45:12.111", null)
+    }
+
+    def "yyyy_MM_dd_EString"() {
+        expect:
+        result == DateUtil.yyyy_MM_dd_E(date)
+
+        where:
+        result              ||  date
+        "2014-12-12 (금)"    ||  DateUtil.yyMMdd("141212", null)
+        "2014-12-12 (금)"    ||  DateUtil.yyyyMMdd("20141212", null)
+        "2014-12-12 (금)"    ||  DateUtil.yyyyMMdd("20141212", null)
+        "2014-11-30 (일)"    ||  DateUtil.yyyyMMddHHmmss("2014-11-30 12:30:24", null)
+        "2014-12-25 (목)"    ||  DateUtil.yyyyMMddHHmmss("2014-12-25 08:45:11", null)
+        "2015-03-17 (화)"    ||  DateUtil.yyyyMMdd_HHmm("20150317 0845", null)
+        "2015-01-01 (목)"    ||  DateUtil.yyyyMMddHHmmssForFile("20150101_084512", null)
+        "2015-02-27 (금)"    ||  DateUtil.yyyyMMddHHmmssSSS("2015-02-27 08:45:12.111", null)
     }
 }
