@@ -54,4 +54,18 @@ class DateUtilTest extends Specification {
         "0845"      ||  DateUtil.yyyyMMddHHmmssForFile("20141212_084512", null)
         "0845"      ||  DateUtil.yyyyMMddHHmmssSSS("2014-12-12 08:45:12.111", null)
     }
+
+    def "KoreanString"() {
+        expect:
+        result == DateUtil.Korean(date)
+
+        where:
+        result              ||  date
+        "2014년12월12일"      ||  DateUtil.yyyyMMdd("20141212", null)
+        "2014년11월30일"      ||  DateUtil.yyyyMMddHHmmss("2014-11-30 12:30:24", null)
+        "2014년12월25일"      ||  DateUtil.yyyyMMddHHmmss("2014-12-25 08:45:11", null)
+        "2015년03월17일"      ||  DateUtil.yyyyMMdd_HHmm("20150317 0845", null)
+        "2015년01월01일"      ||  DateUtil.yyyyMMddHHmmssForFile("20150101_084512", null)
+        "2015년02월27일"      ||  DateUtil.yyyyMMddHHmmssSSS("2015-02-27 08:45:12.111", null)
+    }
 }
