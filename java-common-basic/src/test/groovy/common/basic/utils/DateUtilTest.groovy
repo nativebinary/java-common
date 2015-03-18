@@ -317,4 +317,17 @@ class DateUtilTest extends Specification {
         DateUtil.yyyyMMddHHmmss("1970-01-01 20:14:00", null)    ||  "2014-03-27"    ||  DateUtil.yyyyMMddHHmmss("2015-01-01 12:00:00", null)
         DateUtil.yyyyMMddHHmmss("1970-01-01 11:11:00", null)    ||  "1111"          ||  DateUtil.yyyyMMddHHmmss("2015-01-01 12:00:00", null)
     }
+
+    def "KoreanDate"() {
+        expect:
+        result == DateUtil.Korean(stringDate, dateDefault)
+
+        where:
+        result                                  ||  stringDate          ||  dateDefault
+        DateUtil.yyyyMMdd("20141212", null)     ||  "2014년12월12일"      ||  null
+        null                                    ||  "2014-12-12"        ||  null
+        null                                    ||  "20141212"          ||  null
+        DateUtil.yyyyMMdd("20140527", null)     ||  "20141212"          ||  DateUtil.yyyyMMdd("20140527", null)
+        DateUtil.yyyyMMdd("20150318", null)     ||  "2015년3월18일"       ||  DateUtil.yyyyMMdd("20140527", null)
+    }
 }
