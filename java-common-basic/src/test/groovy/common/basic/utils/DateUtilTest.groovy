@@ -272,20 +272,20 @@ class DateUtilTest extends Specification {
         DateUtil.yyyyMMdd("19700101", null)     ||  "Thu Dec 25 08:24:11 KST 2014"      ||  DateUtil.yyyyMMddHHmmss("2014-12-25 08:24:11", null)
     }
 
-    def "gmtFormatDate"() {
-        expect:
-        result == DateUtil.gmtFormat(stringDate, dateDefault)
-
-        where:
-        result                                                  ||  stringDate                          ||  dateDefault
-        null                                                    ||  "2014-05-27"                        ||  null
-        DateUtil.yyyyMMddHHmmss("2014-05-27 00:00:00", null)    ||  "2014-05-27"                        ||  DateUtil.yyyyMMdd("20140527", null)
-        null                                                    ||  ""                                  ||  null
-        DateUtil.yyyyMMddHHmmss("2014-11-30 12:30:24", null)    ||  "Sun, 30 Nov 2014 03:30:24 GMT"     ||  null
-        DateUtil.yyyyMMddHHmmss("2014-12-13 15:22:32", null)    ||  "Sat, 13 Dec 2014 06:22:32 GMT"     ||  null
-        DateUtil.yyyyMMddHHmmss("2015-01-01 08:34:11", null)    ||  "Wed, 31 Dec 2014 23:34:11 GMT"     ||  new Date()
-        DateUtil.yyyyMMddHHmmss("2015-01-01 08:34:11", null)    ||  "Wed, 31 Dec 2014 23:34:11 GMT"     ||  new Date()
-    }
+//    def "gmtFormatDate"() {
+//        expect:
+//        result == DateUtil.gmtFormat(stringDate, dateDefault)
+//
+//        where:
+//        result                                                  ||  stringDate                          ||  dateDefault
+//        null                                                    ||  "2014-05-27"                        ||  null
+//        DateUtil.yyyyMMddHHmmss("2014-05-27 00:00:00", null)    ||  "2014-05-27"                        ||  DateUtil.yyyyMMdd("20140527", null)
+//        null                                                    ||  ""                                  ||  null
+//        DateUtil.yyyyMMddHHmmss("2014-11-30 12:30:24", null)    ||  "Sun, 30 Nov 2014 03:30:24 GMT"     ||  null
+//        DateUtil.yyyyMMddHHmmss("2014-12-13 15:22:32", null)    ||  "Sat, 13 Dec 2014 06:22:32 GMT"     ||  null
+//        DateUtil.yyyyMMddHHmmss("2015-01-01 08:34:11", null)    ||  "Wed, 31 Dec 2014 23:34:11 GMT"     ||  new Date()
+//        DateUtil.yyyyMMddHHmmss("2015-01-01 08:34:11", null)    ||  "Wed, 31 Dec 2014 23:34:11 GMT"     ||  new Date()
+//    }
 
     def "HH_mmDate"() {
         expect:
