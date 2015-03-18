@@ -330,4 +330,21 @@ class DateUtilTest extends Specification {
         DateUtil.yyyyMMdd("20140527", null)     ||  "20141212"          ||  DateUtil.yyyyMMdd("20140527", null)
         DateUtil.yyyyMMdd("20150318", null)     ||  "2015년3월18일"       ||  DateUtil.yyyyMMdd("20140527", null)
     }
+
+    def "MMDate"() {
+        expect:
+        result == DateUtil.MM(stringDate, dateDefault)
+
+        where:
+        result                                              ||  stringDate                      ||  dateDefault
+        DateUtil.yyyyMMddHHmmss("20150318 20:48:33", null)  ||  "Wed Mar 18 20:48:33 KST 2015"  ||  null
+        DateUtil.yyyyMMddHHmmss("20141225 08:24:11", null)  ||  "Thu Dec 25 08:24:11 KST 2014"  ||  null
+        DateUtil.yyyyMMdd("19701001", null)                 ||  "10"                            ||  null
+        DateUtil.yyyyMMdd("19700101", null)                 ||  "01"                            ||  null
+        DateUtil.yyyyMMdd("19700201", null)                 ||  "02"                            ||  null
+        DateUtil.yyyyMMdd("19700501", null)                 ||  "05"                            ||  null
+        DateUtil.yyyyMMdd("21371101", null)                 ||  "2015-03-07"                    ||  null
+        null                                                ||  ""                              ||  null
+        DateUtil.yyyyMMdd("20150101", null)                 ||  ""                              ||  DateUtil.yyyyMMdd("20150101", null)
+    }
 }
