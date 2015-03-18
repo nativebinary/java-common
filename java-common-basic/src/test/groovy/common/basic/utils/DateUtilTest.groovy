@@ -286,4 +286,18 @@ class DateUtilTest extends Specification {
         DateUtil.yyyyMMddHHmmss("2015-01-01 08:34:11", null)    ||  "Wed, 31 Dec 2014 23:34:11 GMT"     ||  new Date()
         DateUtil.yyyyMMddHHmmss("2015-01-01 08:34:11", null)    ||  "Wed, 31 Dec 2014 23:34:11 GMT"     ||  new Date()
     }
+
+    def "HH_mmDate"() {
+        expect:
+        result == DateUtil.HH_mm(stringDate, dateDefault)
+
+        where:
+        result                                                  ||  stringDate                          ||  dateDefault
+        null                                                    ||  "2014-12-12 12:30:24"               ||  null
+        null                                                    ||  "Thu Dec 25 08:24:11 KST 2014"      ||  null
+        null                                                    ||  "20140527 12:30"                    ||  null
+        DateUtil.yyyyMMddHHmmss("2015-01-01 12:00:00", null)    ||  "20140527 12:30"                    ||  DateUtil.yyyyMMddHHmmss("2015-01-01 12:00:00", null)
+        DateUtil.yyyyMMddHHmmss("1970-01-01 12:30:00", null)    ||  "12:30"                             ||  DateUtil.yyyyMMddHHmmss("2015-01-01 12:00:00", null)
+        DateUtil.yyyyMMddHHmmss("1970-01-01 23:34:00", null)    ||  "23:34:11"                          ||  DateUtil.yyyyMMddHHmmss("2015-01-01 12:00:00", null)
+    }
 }
