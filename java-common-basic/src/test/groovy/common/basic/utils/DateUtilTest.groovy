@@ -255,4 +255,22 @@ class DateUtilTest extends Specification {
         "2015-01-01 08:45:12.000"   ||  DateUtil.yyyyMMddHHmmssForFile("20150101_084512", null)
         "2015-02-27 08:45:12.111"   ||  DateUtil.yyyyMMddHHmmssSSS("2015-02-27 08:45:12.111", null)
     }
+
+    def "EEEDate"() {
+        expect:
+        result == DateUtil.EEE(stringDate, dateDefault)
+
+        where:
+        result                                                  ||  stringDate                          ||  dateDefault
+        null                                                    ||  "2014-12-25 08:45:11"               ||  null
+        null                                                    ||  ""                                  ||  null
+        new Date()                                              ||  ""                                  ||  new Date()
+        new Date()                                              ||  "2014-05-27"                        ||  new Date()
+        DateUtil.yyyyMMdd("20140527", null)                     ||  "2014-05-27"                        ||  DateUtil.yyyyMMdd("20140527", null)
+        DateUtil.yyyyMMdd("20140527", null)                     ||  "2014-12-25 08:45:11"               ||  DateUtil.yyyyMMdd("20140527", null)
+        DateUtil.yyyyMMdd("19700106", null)                     ||  "Tue May 27 00:00:00 KST 2014"      ||  null
+        DateUtil.yyyyMMdd("19700106", null)                     ||  "Tue May 27 00:00:00 KST 2014"      ||  new Date()
+        DateUtil.yyyyMMdd("19700105", null)                     ||  "Mon Nov 11 00:00:00 KST 2013"      ||  DateUtil.yyyyMMdd("20131111", null)
+        DateUtil.yyyyMMdd("19700101", null)                     ||  "Thu Dec 25 08:24:11 KST 2014"      ||  DateUtil.yyyyMMddHHmmss("2014-12-25 08:24:11", null)
+    }
 }
