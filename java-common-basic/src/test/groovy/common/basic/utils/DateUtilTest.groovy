@@ -300,4 +300,21 @@ class DateUtilTest extends Specification {
         DateUtil.yyyyMMddHHmmss("1970-01-01 12:30:00", null)    ||  "12:30"                             ||  DateUtil.yyyyMMddHHmmss("2015-01-01 12:00:00", null)
         DateUtil.yyyyMMddHHmmss("1970-01-01 23:34:00", null)    ||  "23:34:11"                          ||  DateUtil.yyyyMMddHHmmss("2015-01-01 12:00:00", null)
     }
+
+    def "HHmmDate"() {
+        expect:
+        result == DateUtil.HHmm(stringDate, dateDefault)
+
+        where:
+        result                                                  ||  stringDate      ||  dateDefault
+        null                                                    ||  ""              ||  null
+        null                                                    ||  "12:41"         ||  null
+        DateUtil.yyyyMMddHHmmss("2015-01-01 12:00:00", null)    ||  ""              ||  DateUtil.yyyyMMddHHmmss("2015-01-01 12:00:00", null)
+        DateUtil.yyyyMMddHHmmss("1970-01-01 12:41:00", null)    ||  "1241"          ||  null
+        DateUtil.yyyyMMddHHmmss("1970-01-01 03:08:00", null)    ||  "0308"          ||  null
+        DateUtil.yyyyMMddHHmmss("1970-01-01 20:20:00", null)    ||  "2020"          ||  null
+        DateUtil.yyyyMMddHHmmss("2015-01-01 12:00:00", null)    ||  "20:20"         ||  DateUtil.yyyyMMddHHmmss("2015-01-01 12:00:00", null)
+        DateUtil.yyyyMMddHHmmss("1970-01-01 20:14:00", null)    ||  "2014-03-27"    ||  DateUtil.yyyyMMddHHmmss("2015-01-01 12:00:00", null)
+        DateUtil.yyyyMMddHHmmss("1970-01-01 11:11:00", null)    ||  "1111"          ||  DateUtil.yyyyMMddHHmmss("2015-01-01 12:00:00", null)
+    }
 }
