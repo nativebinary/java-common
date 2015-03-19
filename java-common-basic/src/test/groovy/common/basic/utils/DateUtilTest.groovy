@@ -255,4 +255,96 @@ class DateUtilTest extends Specification {
         "2015-01-01 08:45:12.000"   ||  DateUtil.yyyyMMddHHmmssForFile("20150101_084512", null)
         "2015-02-27 08:45:12.111"   ||  DateUtil.yyyyMMddHHmmssSSS("2015-02-27 08:45:12.111", null)
     }
+
+    def "EEEDate"() {
+        expect:
+        result == DateUtil.EEE(stringDate, dateDefault)
+
+        where:
+        result                                  ||  stringDate                          ||  dateDefault
+        null                                    ||  "2014-12-25 08:45:11"               ||  null
+        null                                    ||  ""                                  ||  null
+        DateUtil.yyyyMMdd("20140527", null)     ||  "2014-05-27"                        ||  DateUtil.yyyyMMdd("20140527", null)
+        DateUtil.yyyyMMdd("20140527", null)     ||  "2014-12-25 08:45:11"               ||  DateUtil.yyyyMMdd("20140527", null)
+        DateUtil.yyyyMMdd("19700106", null)     ||  "Tue May 27 00:00:00 KST 2014"      ||  null
+        DateUtil.yyyyMMdd("19700106", null)     ||  "Tue May 27 00:00:00 KST 2014"      ||  new Date()
+        DateUtil.yyyyMMdd("19700105", null)     ||  "Mon Nov 11 00:00:00 KST 2013"      ||  DateUtil.yyyyMMdd("20131111", null)
+        DateUtil.yyyyMMdd("19700101", null)     ||  "Thu Dec 25 08:24:11 KST 2014"      ||  DateUtil.yyyyMMddHHmmss("2014-12-25 08:24:11", null)
+    }
+
+//    def "gmtFormatDate"() {
+//        expect:
+//        result == DateUtil.gmtFormat(stringDate, dateDefault)
+//
+//        where:
+//        result                                                  ||  stringDate                          ||  dateDefault
+//        null                                                    ||  "2014-05-27"                        ||  null
+//        DateUtil.yyyyMMddHHmmss("2014-05-27 00:00:00", null)    ||  "2014-05-27"                        ||  DateUtil.yyyyMMdd("20140527", null)
+//        null                                                    ||  ""                                  ||  null
+//        DateUtil.yyyyMMddHHmmss("2014-11-30 12:30:24", null)    ||  "Sun, 30 Nov 2014 03:30:24 GMT"     ||  null
+//        DateUtil.yyyyMMddHHmmss("2014-12-13 15:22:32", null)    ||  "Sat, 13 Dec 2014 06:22:32 GMT"     ||  null
+//        DateUtil.yyyyMMddHHmmss("2015-01-01 08:34:11", null)    ||  "Wed, 31 Dec 2014 23:34:11 GMT"     ||  new Date()
+//        DateUtil.yyyyMMddHHmmss("2015-01-01 08:34:11", null)    ||  "Wed, 31 Dec 2014 23:34:11 GMT"     ||  new Date()
+//    }
+
+    def "HH_mmDate"() {
+        expect:
+        result == DateUtil.HH_mm(stringDate, dateDefault)
+
+        where:
+        result                                                  ||  stringDate                          ||  dateDefault
+        null                                                    ||  "2014-12-12 12:30:24"               ||  null
+        null                                                    ||  "Thu Dec 25 08:24:11 KST 2014"      ||  null
+        null                                                    ||  "20140527 12:30"                    ||  null
+        DateUtil.yyyyMMddHHmmss("2015-01-01 12:00:00", null)    ||  "20140527 12:30"                    ||  DateUtil.yyyyMMddHHmmss("2015-01-01 12:00:00", null)
+        DateUtil.yyyyMMddHHmmss("1970-01-01 12:30:00", null)    ||  "12:30"                             ||  DateUtil.yyyyMMddHHmmss("2015-01-01 12:00:00", null)
+        DateUtil.yyyyMMddHHmmss("1970-01-01 23:34:00", null)    ||  "23:34:11"                          ||  DateUtil.yyyyMMddHHmmss("2015-01-01 12:00:00", null)
+    }
+
+    def "HHmmDate"() {
+        expect:
+        result == DateUtil.HHmm(stringDate, dateDefault)
+
+        where:
+        result                                                  ||  stringDate      ||  dateDefault
+        null                                                    ||  ""              ||  null
+        null                                                    ||  "12:41"         ||  null
+        DateUtil.yyyyMMddHHmmss("2015-01-01 12:00:00", null)    ||  ""              ||  DateUtil.yyyyMMddHHmmss("2015-01-01 12:00:00", null)
+        DateUtil.yyyyMMddHHmmss("1970-01-01 12:41:00", null)    ||  "1241"          ||  null
+        DateUtil.yyyyMMddHHmmss("1970-01-01 03:08:00", null)    ||  "0308"          ||  null
+        DateUtil.yyyyMMddHHmmss("1970-01-01 20:20:00", null)    ||  "2020"          ||  null
+        DateUtil.yyyyMMddHHmmss("2015-01-01 12:00:00", null)    ||  "20:20"         ||  DateUtil.yyyyMMddHHmmss("2015-01-01 12:00:00", null)
+        DateUtil.yyyyMMddHHmmss("1970-01-01 20:14:00", null)    ||  "2014-03-27"    ||  DateUtil.yyyyMMddHHmmss("2015-01-01 12:00:00", null)
+        DateUtil.yyyyMMddHHmmss("1970-01-01 11:11:00", null)    ||  "1111"          ||  DateUtil.yyyyMMddHHmmss("2015-01-01 12:00:00", null)
+    }
+
+    def "KoreanDate"() {
+        expect:
+        result == DateUtil.Korean(stringDate, dateDefault)
+
+        where:
+        result                                  ||  stringDate          ||  dateDefault
+        DateUtil.yyyyMMdd("20141212", null)     ||  "2014년12월12일"      ||  null
+        null                                    ||  "2014-12-12"        ||  null
+        null                                    ||  "20141212"          ||  null
+        DateUtil.yyyyMMdd("20140527", null)     ||  "20141212"          ||  DateUtil.yyyyMMdd("20140527", null)
+        DateUtil.yyyyMMdd("20150318", null)     ||  "2015년3월18일"       ||  DateUtil.yyyyMMdd("20140527", null)
+    }
+
+    def "MMDate"() {
+        expect:
+        result == DateUtil.MM(stringDate, dateDefault)
+
+        where:
+        result                                              ||  stringDate                      ||  dateDefault
+        DateUtil.yyyyMMddHHmmss("20150318 20:48:33", null)  ||  "Wed Mar 18 20:48:33 KST 2015"  ||  null
+        DateUtil.yyyyMMddHHmmss("20141225 08:24:11", null)  ||  "Thu Dec 25 08:24:11 KST 2014"  ||  null
+        DateUtil.yyyyMMdd("19701001", null)                 ||  "10"                            ||  null
+        DateUtil.yyyyMMdd("19700101", null)                 ||  "01"                            ||  null
+        DateUtil.yyyyMMdd("19700201", null)                 ||  "02"                            ||  null
+        DateUtil.yyyyMMdd("19700501", null)                 ||  "05"                            ||  null
+        DateUtil.yyyyMMdd("21371101", null)                 ||  "2015-03-07"                    ||  null
+        null                                                ||  ""                              ||  null
+        DateUtil.yyyyMMdd("20150101", null)                 ||  ""                              ||  DateUtil.yyyyMMdd("20150101", null)
+    }
 }
