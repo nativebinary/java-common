@@ -8,6 +8,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -376,4 +377,29 @@ public class ReflectionUtil {
         }
     }
 
+
+    private static final String TYPE_CLASS_NAME_PREFIX = "class ";
+    private static final String TYPE_INTERFACE_NAME_PREFIX = "interface ";
+
+    public static String getClassName(Type type) {
+        if (type==null) {
+            return "";
+        }
+        String className = type.toString();
+        if (className.startsWith(TYPE_CLASS_NAME_PREFIX)) {
+            className = className.substring(TYPE_CLASS_NAME_PREFIX.length());
+        } else if (className.startsWith(TYPE_INTERFACE_NAME_PREFIX)) {
+            className = className.substring(TYPE_INTERFACE_NAME_PREFIX.length());
+        }
+        return className;
+    }
+
+    public static Class<?> getClass(Type type)
+            throws ClassNotFoundException {
+        String className = getClassName(type);
+        if (className==null || className.isEmpty()) {
+            return null;
+        }
+        return Class.forName(className);
+    }
 }

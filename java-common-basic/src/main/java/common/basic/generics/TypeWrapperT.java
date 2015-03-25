@@ -23,22 +23,4 @@ public class TypeWrapperT<T> implements Comparable<TypeWrapperT<T>> {
         return null != this._type && this._type.equals(o._type) ? 0 : 1;
     }
 
-    public T newInstance() {
-        Class<T> instanceType = getClassT();
-        try {
-            return instanceType.newInstance();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public Class<T> getClassT() {
-        Class<T> instanceType;
-        if (_type instanceof ParameterizedType) {
-            instanceType = (Class<T>) ((ParameterizedType) _type).getRawType();
-        } else {
-            instanceType = (Class<T>) _type;
-        }
-        return instanceType;
-    }
 }
