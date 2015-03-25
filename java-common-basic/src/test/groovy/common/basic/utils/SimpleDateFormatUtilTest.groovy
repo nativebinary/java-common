@@ -16,18 +16,18 @@ class SimpleDateFormatUtilTest extends Specification {
     public static SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
     public static int count = 10 * 1000 * 1000;
 
-    public static synchronized SimpleDateFormat getSimpleDateFormat() {
-        return simpleDateFormat;
+    public static synchronized Date parseUsingStatic(String s) {
+        return simpleDateFormat.parse(s);
     }
 
-    public static SimpleDateFormat createSimpleDateFormat() {
-        return new SimpleDateFormat(dateFormat);
+    public static Date parseUsingLocal(String s) {
+        return new SimpleDateFormat(dateFormat).parse(s);
     }
 
     def "staticInstanceWithLock"() {
         // about 18sec
         for (int i = 0; i < count; i++) {
-            getSimpleDateFormat().parse("20150101")
+            parseUsingStatic("20150101")
         }
         expect:
         true;
@@ -36,7 +36,7 @@ class SimpleDateFormatUtilTest extends Specification {
     def "localInstanceWithoutLock"() {
         // about 7sec
         for (int i = 0; i < count; i++) {
-            createSimpleDateFormat().parse("20150101")
+            parseUsingLocal("20150101")
         }
 
         expect:
