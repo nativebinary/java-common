@@ -1,5 +1,6 @@
 package common.basic.utils;
 
+import common.basic.interfaces.ICallbackListToMap;
 import common.basic.interfaces.ICallbackTransform;
 import common.basic.interfaces.IPredicator;
 import common.basic.logs.Logger;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -62,6 +64,15 @@ public class ListUtil extends CollectionUtil {
             list.add(StringUtil.toString(o));
         }
         return list;
+    }
+
+    public static <TKey, TValue> Map<TKey, TValue> toMap(List<TValue> list, ICallbackListToMap<TKey, TValue> callback) {
+        Map<TKey, TValue> map = new HashMap<TKey, TValue>();
+        for (TValue value : list) {
+            map.put(callback.getKey(value), value);
+        }
+
+        return map;
     }
 
     public static <T> List<T> create(T... array) {

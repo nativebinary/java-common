@@ -1,5 +1,6 @@
 package common.basic.utils
 
+import common.basic.interfaces.ICallbackListToMap
 import spock.lang.Specification
 
 class ListUtilTest extends Specification {
@@ -42,6 +43,18 @@ class ListUtilTest extends Specification {
 
         expect:
         list == ["null", "1", "A", "20C"]
+    }
+
+    def "toMap"() {
+        Map<String, String> map = ListUtil.toMap(["A", "B", "C"], new ICallbackListToMap<String, String>() {
+            @Override
+            public String getKey(String s) {
+                return "key" + s;
+            }
+        });
+
+        expect:
+        map == [ "keyA": "A", "keyB": "B", "keyC": "C"]
     }
 
     def "getIndexNext"() {
