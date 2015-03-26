@@ -14,7 +14,7 @@ class SimpleDateFormatUtilTest extends Specification {
 
     public static String dateFormat = "yyyyMMdd";
     public static SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
-    public static int count = 10 * 1000 * 1000;
+    public static int count = 10/* * 1000 * 1000*/;
 
     public static synchronized Date parseUsingStatic(String s) {
         return simpleDateFormat.parse(s);
