@@ -1,5 +1,7 @@
 package common.basic.utils;
 
+import org.apache.commons.codec.binary.Base64;
+
 import java.util.List;
 
 @SuppressWarnings("UnusedDeclaration")
@@ -196,4 +198,5 @@ public class StringUtil {
 
         return value.replaceAll("\\D", "");
     }
+
 }
