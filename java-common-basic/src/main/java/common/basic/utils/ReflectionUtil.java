@@ -426,9 +426,8 @@ public class ReflectionUtil {
         try {
             Method declaredMethod = clazz.getDeclaredMethod(method);
             declaredMethod.invoke(t);
-
         } catch (NoSuchMethodException e) {
-            Logger.i(e);
+            // Do Nothing
         } catch (InvocationTargetException e) {
             Logger.i(e);
         } catch (IllegalAccessException e) {
