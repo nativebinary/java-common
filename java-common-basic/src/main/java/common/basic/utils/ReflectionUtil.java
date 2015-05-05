@@ -6,6 +6,7 @@ import common.basic.logs.Logger;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -85,44 +86,62 @@ public class ReflectionUtil {
         field.setAccessible(true);
 
         final Class<?> type = field.getType();
+
         if(type.isPrimitive())
         {
-            if ("int".equals(type.getName()) && (value instanceof Long)) {
-                field.setInt(instance, ((Long) value).intValue());
-            } else if ("float".equals(type.getName()) && (value instanceof Double)) {
-                field.setFloat(instance, ((Double) value).floatValue());
-            } else if ("boolean".equals(type.getName())) {
-                field.setBoolean(instance, BooleanUtil.parse(value.toString()));
+            if (value instanceof String) {
+                String stringValue = value.toString();
+
+                if ("int".equals(type.getName())) {
+                    field.setInt(instance, IntUtil.parseInt(stringValue, 0));
+                } else if ("long".equals(type.getName())) {
+                    field.setLong(instance, LongUtil.parseLong(stringValue, 0));
+                } else if ("float".equals(type.getName())) {
+                    field.setFloat(instance, Float.parseFloat(stringValue));
+                } else if ("double".equals(type.getName())) {
+                    field.setDouble(instance, Double.parseDouble(stringValue));
+                } else if ("boolean".equals(type.getName())) {
+                    field.setBoolean(instance, BooleanUtil.parse(stringValue));
+                } else if ("byte".equals(type.getName())) {
+                    field.setByte(instance, Byte.parseByte(stringValue));
+                } else if ("short".equals(type.getName())) {
+                    field.setShort(instance, Short.parseShort(stringValue));
+                } else if ("char".equals(type.getName())) {
+                    field.setChar(instance, stringValue.charAt(0));
+                } else {
+                    field.set(instance, stringValue);
+                }
             } else {
-                field.set(instance, value);
+                if ("int".equals(type.getName()) && (value instanceof Long)) {
+                    field.setInt(instance, ((Long) value).intValue());
+                } else if ("float".equals(type.getName()) && (value instanceof Double)) {
+                    field.setFloat(instance, ((Double) value).floatValue());
+                } else if ("boolean".equals(type.getName())) {
+                    field.setBoolean(instance, BooleanUtil.parse(value.toString()));
+                } else {
+                    field.set(instance, value);
+                }
             }
-        }
-        else if(type.equals(String.class) || type.equals(Date.class))
-        {
+
+        } else if(type.equals(String.class) || type.equals(Date.class)) {
             field.set(instance, value);
-        }
-        else
-        {
-            if (type == java.util.List.class && value instanceof List) {
-                ParameterizedType stringListType = (ParameterizedType) field.getGenericType();
-                Class<?> genericClass = (Class<?>) stringListType.getActualTypeArguments()[0];
+        } else if (type == java.util.List.class && value instanceof List) {
+            ParameterizedType stringListType = (ParameterizedType) field.getGenericType();
+            Class<?> genericClass = (Class<?>) stringListType.getActualTypeArguments()[0];
 
-                List<?> objects = fromListMapByClass(genericClass, (List<Map<String, Object>>)value);
-                field.set(instance, objects);
+            List<?> objects = fromListMapByClass(genericClass, (List<Map<String, Object>>)value);
 
-            } else if(type.isEnum())
-            {
-                //noinspection unchecked
-                field.set(instance, EnumUtil.parse((Class<Enum>) type, (String) value));
-            }
-            else {
-                if(annotationClass == null)
-                    return;
+            field.set(instance, objects);
+        } else if(type.isEnum()) {
+            //noinspection unchecked
+            field.set(instance, EnumUtil.parse((Class<Enum>) type, (String) value));
+        } else {
+            if(annotationClass == null)
+                return;
 
-                final Object o = type.newInstance();
-                setAnnotatedKeyFieldValue(o, annotationClass, value);
-                field.set(instance, o);
-            }
+            final Object o = type.newInstance();
+            setAnnotatedKeyFieldValue(o, annotationClass, value);
+            field.set(instance, o);
         }
     }
 
@@ -328,7 +347,6 @@ public class ReflectionUtil {
     }
 
 
-
     public static <TLhs, TRhs> void assignAnnotatedMemberVariable(List<TLhs> listLhs, List<TRhs> listRhs, Class classAnnotation) {
         if(listLhs.size() == 0) {
             Logger.e("listLhs.size() == 0");
@@ -401,5 +419,21 @@ public class ReflectionUtil {
             return null;
         }
         return Class.forName(className);
+    }
+
+    public static <T> void invokeIfExists(T t, String method) {
+        final Class<?> clazz = t.getClass();
+        try {
+            Method declaredMethod = clazz.getDeclaredMethod(method);
+            declaredMethod.invoke(t);
+
+        } catch (NoSuchMethodException e) {
+            Logger.i(e);
+        } catch (InvocationTargetException e) {
+            Logger.i(e);
+        } catch (IllegalAccessException e) {
+            Logger.i(e);
+        }
+
     }
 }
