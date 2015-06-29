@@ -94,6 +94,6 @@ public class ParamBuilder extends ArrayList<NameValuePair> {
             listKeyValue.add(URLEncoder.encode(pair.getName(), "UTF-8") + "=" + URLEncoder.encode(pair.getValue(), "UTF-8"));
         }
 
-        return StringUtil.join("=", listKeyValue);
+        return StringUtil.join("&", listKeyValue);
     }
 }
