@@ -137,6 +137,18 @@ public class ReflectionUtil {
         } else if(type.isEnum()) {
             //noinspection unchecked
             field.set(instance, EnumUtil.parse((Class<Enum>) type, (String) value));
+        } else if(type.equals(Integer.class)) {
+            if(value instanceof String)
+                try {
+                    field.set(instance, Integer.valueOf((String)value));
+                } catch(NumberFormatException e) {
+                }
+        } else if(type.equals(Long.class)) {
+            if(value instanceof String)
+                try {
+                    field.set(instance, Long.valueOf((String)value));
+                } catch(NumberFormatException e) {
+                }
         } else {
             if(annotationClass == null)
                 return;
