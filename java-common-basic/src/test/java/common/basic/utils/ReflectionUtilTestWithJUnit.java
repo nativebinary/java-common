@@ -50,6 +50,8 @@ public class ReflectionUtilTestWithJUnit extends Assert {
     public static class TestTest {
         public int i;
         public boolean b;
+        public Integer integer;
+        public Long long_;
     }
 
     @Test
@@ -69,6 +71,23 @@ public class ReflectionUtilTestWithJUnit extends Assert {
         ReflectionUtil.setFieldValue(testTest, ReflectionUtil.getFieldDeclaredRecursive(TestTest.class, "b"), 0, null);
         assertEquals(false, testTest.b);
 
+        ReflectionUtil.setFieldValue(testTest, ReflectionUtil.getFieldDeclaredRecursive(TestTest.class, "integer"), null, null);
+        assertEquals(null, testTest.integer);
+
+        ReflectionUtil.setFieldValue(testTest, ReflectionUtil.getFieldDeclaredRecursive(TestTest.class, "integer"), "", null);
+        assertEquals(null, testTest.integer);
+
+        ReflectionUtil.setFieldValue(testTest, ReflectionUtil.getFieldDeclaredRecursive(TestTest.class, "integer"), "2", null);
+        assertEquals(new Integer(2), testTest.integer);
+
+        ReflectionUtil.setFieldValue(testTest, ReflectionUtil.getFieldDeclaredRecursive(TestTest.class, "long_"), null, null);
+        assertEquals(null, testTest.long_);
+
+        ReflectionUtil.setFieldValue(testTest, ReflectionUtil.getFieldDeclaredRecursive(TestTest.class, "long_"), "1", null);
+        assertEquals(new Long(1), testTest.long_);
+
+        ReflectionUtil.setFieldValue(testTest, ReflectionUtil.getFieldDeclaredRecursive(TestTest.class, "long_"), "2", null);
+        assertEquals(new Long(2), testTest.long_);
     }
 }
 
