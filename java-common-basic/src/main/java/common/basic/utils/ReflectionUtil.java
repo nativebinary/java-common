@@ -572,6 +572,18 @@ public class ReflectionUtil {
             //noinspection unchecked
             String stringValue = arrayString[0];
             field.set(instance, EnumUtil.parse((Class<? extends Enum>) type, stringValue));
+        } else if(type.equals(Integer.class)) {
+            String stringValue = arrayString[0];
+            try {
+                field.set(instance, Integer.valueOf(stringValue));
+            } catch(NumberFormatException e) {
+            }
+        } else if(type.equals(Long.class)) {
+            String stringValue = arrayString[0];
+            try {
+                field.set(instance, Long.valueOf(stringValue));
+            } catch(NumberFormatException e) {
+            }
         } else {
             if(annotationClass == null)
                 return;

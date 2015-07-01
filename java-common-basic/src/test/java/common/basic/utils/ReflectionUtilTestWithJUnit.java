@@ -89,5 +89,29 @@ public class ReflectionUtilTestWithJUnit extends Assert {
         ReflectionUtil.setFieldValue(testTest, ReflectionUtil.getFieldDeclaredRecursive(TestTest.class, "long_"), "2", null);
         assertEquals(new Long(2), testTest.long_);
     }
+
+    @Test
+    public void setFieldByStringArray() throws Exception {
+
+        TestTest testTest = new TestTest();
+
+        ReflectionUtil.setFieldByStringArray(testTest, ReflectionUtil.getFieldDeclaredRecursive(TestTest.class, "integer"), null, null);
+        assertEquals(null, testTest.integer);
+
+        ReflectionUtil.setFieldByStringArray(testTest, ReflectionUtil.getFieldDeclaredRecursive(TestTest.class, "integer"), new String[] {""}, null);
+        assertEquals(null, testTest.integer);
+
+        ReflectionUtil.setFieldByStringArray(testTest, ReflectionUtil.getFieldDeclaredRecursive(TestTest.class, "integer"), new String[] {"2"}, null);
+        assertEquals(new Integer(2), testTest.integer);
+
+        ReflectionUtil.setFieldByStringArray(testTest, ReflectionUtil.getFieldDeclaredRecursive(TestTest.class, "long_"), null, null);
+        assertEquals(null, testTest.long_);
+
+        ReflectionUtil.setFieldByStringArray(testTest, ReflectionUtil.getFieldDeclaredRecursive(TestTest.class, "long_"), new String[] {""}, null);
+        assertEquals(null, testTest.long_);
+
+        ReflectionUtil.setFieldByStringArray(testTest, ReflectionUtil.getFieldDeclaredRecursive(TestTest.class, "long_"), new String[] {"2"}, null);
+        assertEquals(new Long(2), testTest.long_);
+    }
 }
 
