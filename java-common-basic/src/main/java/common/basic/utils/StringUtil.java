@@ -152,6 +152,23 @@ public class StringUtil {
         return sb.toString();
     }
 
+    public static <T> String joinWithToString(String splitter, List<T> list) {
+        StringBuilder sb = new StringBuilder();
+
+        int size = list.size() ;
+        for (int i = 0; i < size - 1; i++) {
+            sb.append(list.get(i).toString());
+            sb.append(splitter);
+        }
+
+        if(size - 1 >= 0)
+        {
+            sb.append(list.get(size - 1).toString());
+        }
+
+        return sb.toString();
+    }
+
 
     public static String toString(Object o) {
         if(o == null)

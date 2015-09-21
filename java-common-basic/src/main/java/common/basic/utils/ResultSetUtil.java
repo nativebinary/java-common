@@ -2,6 +2,7 @@ package common.basic.utils;
 
 import common.basic.logs.Logger;
 
+import java.lang.reflect.Field;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -37,28 +38,94 @@ public class ResultSetUtil {
 
 
     public static List<Map<String, Object>> getListMap(ResultSet resultSet) {
-		List<Map<String, Object>> listMap = new ArrayList<Map<String, Object>>();
-		try {
-			while(resultSet.next())
-			{
-				HashMap<String, Object> hashMap = new HashMap<String, Object>();
-				
-				ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
-				int iColumnCount = resultSetMetaData.getColumnCount();
-				
-				for (int i = 1; i <= iColumnCount; i++) {
-					String columnName = resultSetMetaData.getColumnLabel(i);
-					Object value = resultSet.getObject(i);
-					hashMap.put(columnName, value);
-				}
-				
-				listMap.add(hashMap);
-			}
-		} catch (SQLException e) {
-			Logger.e(e);
-		}
-		return listMap;
-	}
+        List<Map<String, Object>> listMap = new ArrayList<Map<String, Object>>();
+        try {
+            while(resultSet.next())
+            {
+                HashMap<String, Object> hashMap = new HashMap<String, Object>();
+
+                ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+                int iColumnCount = resultSetMetaData.getColumnCount();
+
+                for (int i = 1; i <= iColumnCount; i++) {
+                    String columnName = resultSetMetaData.getColumnLabel(i);
+                    Object value = resultSet.getObject(i);
+                    hashMap.put(columnName, value);
+                }
+
+                listMap.add(hashMap);
+            }
+        } catch (SQLException e) {
+            Logger.e(e);
+        }
+        return listMap;
+    }
+
+    public static <T> List<T> getListT(ResultSet resultSet, Class<T> clazz) {
+        List<T> listT = new ArrayList<T>();
+        try {
+            Map<String, Field> mapFieldDeclaredRecursive = ReflectionUtil.getMapFieldDeclaredRecursive(clazz);
+
+            while(resultSet.next())
+            {
+                T t = clazz.newInstance();
+
+                ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+                int iColumnCount = resultSetMetaData.getColumnCount();
+
+                for (int i = 1; i <= iColumnCount; i++) {
+                    String columnName = resultSetMetaData.getColumnLabel(i);
+                    Object value = resultSet.getObject(i);
+
+                    Field field = mapFieldDeclaredRecursive.get(columnName);
+                    if (null != field) {
+                        ReflectionUtil.setFieldValue(t, field, value, null);
+                    }
+                }
+                listT.add(t);
+            }
+        } catch (SQLException e) {
+            Logger.e(e);
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return listT;
+    }
+
+    public static <T> T getFirstRowT(ResultSet resultSet, Class<T> clazz) {
+        try {
+
+            if (resultSet.next())
+            {
+                Map<String, Field> mapFieldDeclaredRecursive = ReflectionUtil.getMapFieldDeclaredRecursive(clazz);
+                T t = clazz.newInstance();
+                ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+                int iColumnCount = resultSetMetaData.getColumnCount();
+
+                for (int i = 1; i <= iColumnCount; i++) {
+                    String columnName = resultSetMetaData.getColumnLabel(i);
+                    Object value = resultSet.getObject(i);
+
+                    Field field = mapFieldDeclaredRecursive.get(columnName);
+                    if (null != field) {
+                        ReflectionUtil.setFieldValue(t, field, value, null);
+                    }
+                }
+                return t;
+            }
+        } catch (SQLException e) {
+            Logger.e(e);
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 
     public static Map<Object, Map<String, Object>> getMapMap(ResultSet resultSet, String keyFieldName) {
         Map<Object, Map<String, Object>> mapMap = new HashMap<Object, Map<String, Object>>();
