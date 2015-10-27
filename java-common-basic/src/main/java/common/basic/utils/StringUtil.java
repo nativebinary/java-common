@@ -199,15 +199,17 @@ public class StringUtil {
         return value.replaceAll("\\D", "");
     }
 
-    public static String removeTail(String str, char symbol) {
+    public static String removeTail(String path, char symbol) {
 
-        if (isNullOrEmpty(str))
+        if (isNullOrEmpty(path))
             return "";
 
-        if (str.charAt(str.length() - 1) == symbol)
-            return str.substring(0, str.length() - 1);
+        String trimPath = path.trim();
 
-        return str;
+        if (trimPath.charAt(trimPath.length() - 1) == symbol)
+            return trimPath.substring(0, trimPath.length() - 1);
+
+        return trimPath;
     }
 
     public static String removeHead(String path, char symbol) {
@@ -215,10 +217,12 @@ public class StringUtil {
         if (isNullOrEmpty(path))
             return "";
 
-        if (path.charAt(0) == symbol)
-            return path.substring(1);
+        String trimPath = path.trim();
 
-        return path;
+        if (trimPath.charAt(0) == symbol)
+            return trimPath.substring(1);
+
+        return trimPath;
     }
 
 

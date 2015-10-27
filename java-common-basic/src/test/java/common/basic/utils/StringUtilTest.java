@@ -177,4 +177,18 @@ public class StringUtilTest extends Assert {
         assertEquals(0, StringUtil.getSumIntString("0", "1", "-1"));
     }
 
+    @Test
+    public void testRemoveTail(){
+        assertEquals("/path/test", StringUtil.removeTail("/path/test/", '/'));
+        assertEquals("/path/test", StringUtil.removeTail("/path/test", '/'));
+        assertEquals("/path/test", StringUtil.removeTail("/path/test/     ", '/'));
+    }
+
+    @Test
+    public void testRemoveHead(){
+        assertEquals("path/test/", StringUtil.removeHead("/path/test/", '/'));
+        assertEquals("path/test/", StringUtil.removeHead("     /path/test/", '/'));
+        assertEquals("path/test/", StringUtil.removeHead("path/test/", '/'));
+    }
+
 }
