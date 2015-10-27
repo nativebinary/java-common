@@ -1,5 +1,6 @@
 package common.basic.facades.jsons;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import common.basic.generics.TypeWrapperT;
 
 import java.io.InputStream;
@@ -55,4 +56,14 @@ public class JsonUtil {
     public static List<Map<String, Object>> parseList(String json) {
         return jsonEngine.parseList(json);
     }
+
+    public static String convertStringMapToJson(Object obj) {
+        try {
+            return new ObjectMapper().writeValueAsString(obj);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
 }

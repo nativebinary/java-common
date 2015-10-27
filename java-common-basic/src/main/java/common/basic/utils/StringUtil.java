@@ -186,8 +186,8 @@ public class StringUtil {
     public static int getSumIntString(String... arrayObject) {
 
         int sum = 0;
-        for (int i = 0; i < arrayObject.length; ++i) {
-            sum += IntUtil.parseInt(arrayObject[i], 0);
+        for (String anArrayObject : arrayObject) {
+            sum += IntUtil.parseInt(anArrayObject, 0);
         }
         return sum;
     }
@@ -198,5 +198,28 @@ public class StringUtil {
 
         return value.replaceAll("\\D", "");
     }
+
+    public static String removeTail(String str, char symbol) {
+
+        if (isNullOrEmpty(str))
+            return "";
+
+        if (str.charAt(str.length() - 1) == symbol)
+            return str.substring(0, str.length() - 1);
+
+        return str;
+    }
+
+    public static String removeHead(String path, char symbol) {
+
+        if (isNullOrEmpty(path))
+            return "";
+
+        if (path.charAt(0) == symbol)
+            return path.substring(1);
+
+        return path;
+    }
+
 
 }
