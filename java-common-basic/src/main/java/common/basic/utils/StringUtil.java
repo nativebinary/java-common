@@ -225,5 +225,8 @@ public class StringUtil {
         return trimPath;
     }
 
+    public static boolean isNumeric(String s) {
+        return s.matches("[-+]?\\d*\\.?\\d+");
+    }
 
 }

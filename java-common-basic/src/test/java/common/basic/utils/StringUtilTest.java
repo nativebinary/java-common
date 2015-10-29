@@ -191,4 +191,19 @@ public class StringUtilTest extends Assert {
         assertEquals("path/test/", StringUtil.removeHead("path/test/", '/'));
     }
 
+
+    @Test
+    public void testIsNumeric() throws Exception {
+
+        assertTrue(StringUtil.isNumeric("123"));          /* true */
+        assertTrue(StringUtil.isNumeric("123.45"));      /* true */
+        assertFalse(StringUtil.isNumeric("$123"));      /* false */
+        assertFalse(StringUtil.isNumeric("123x"));        /* false */
+        assertFalse(StringUtil.isNumeric("123x45"));    /* false */
+        assertFalse(StringUtil.isNumeric("123x.45"));    /* false */
+        assertFalse(StringUtil.isNumeric("123.x45"));    /* false */
+        assertTrue(StringUtil.isNumeric("-123.45"));    /* true */
+        assertTrue(StringUtil.isNumeric("+123.45"));    /* true */
+    }
+
 }
