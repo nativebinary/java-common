@@ -63,6 +63,20 @@ class MapUtilTest extends Specification {
         "bb" == MapUtil.getString(map, "intValue", "bb")
     }
 
+    def "getInt"() {
+
+        def map = [
+                "intValue": 1
+                , "stringValue":"value"
+        ];
+
+        expect:
+        0 == MapUtil.getInt(map, "stringValue")
+        1 == MapUtil.getInt(map, "intValue")
+        2 == MapUtil.getInt(map, "stringValue1", 2)
+        1 == MapUtil.getInt(map, "intValue", 3)
+    }
+
     def ""(){
         def map = new MapBuilderT<String, Object>()
                 .and("a", "a")

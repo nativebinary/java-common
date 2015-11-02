@@ -1,6 +1,7 @@
 package common.basic.facades.jsons;
 
 import common.basic.geometiries.Point;
+import common.basic.utils.HashMapStringObject;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -48,4 +49,11 @@ public abstract class JsonUtilTest extends Assert {
         assertEquals(1, list.get(0).x);
         assertEquals(10, list.get(0).y);
     }
+
+    @Test
+    public void testConvertStringMapToJson() {
+        assertEquals("{\"test1\":\"1\",\"test2\":\"2\"}", JsonUtil.convertStringMapToJson(new HashMapStringObject().and("test1","1").and("test2", "2")));
+    }
+
+
 }

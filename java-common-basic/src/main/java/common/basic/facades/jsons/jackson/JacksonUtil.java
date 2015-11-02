@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 public class JacksonUtil {
+    final static boolean catchLog = false;
     private static ObjectMapper createObjectMapper() {
         ObjectMapper objectMapper = new ObjectMapper();
 
@@ -37,7 +38,8 @@ public class JacksonUtil {
             return stringify(o);
         }
         catch (JsonProcessingException e) {
-            Logger.e(e);
+            if(catchLog)
+                Logger.e(e);
             return null;
         }
     }
@@ -73,7 +75,8 @@ public class JacksonUtil {
             return fromJson(json, clazz);
         }
         catch (IOException e) {
-            Logger.e(e);
+            if(catchLog)
+                Logger.e(e);
             return null;
         }
     }
@@ -83,7 +86,8 @@ public class JacksonUtil {
             return fromJson(jsonNode, clazz);
         }
         catch (JsonProcessingException e) {
-            Logger.e(e);
+            if(catchLog)
+                Logger.e(e);
             return null;
         }
     }
@@ -92,7 +96,8 @@ public class JacksonUtil {
         try {
             return fromJson(json, clazz);
         } catch (IOException e) {
-            Logger.e(e);
+            if(catchLog)
+                Logger.e(e);
             return null;
         }
     }
@@ -102,7 +107,8 @@ public class JacksonUtil {
             return fromJson(json, typeWrapperT);
         }
         catch (IOException e) {
-            Logger.e(e);
+            if(catchLog)
+                Logger.e(e);
             return null;
         }
     }
@@ -111,7 +117,8 @@ public class JacksonUtil {
         try {
             return fromJson(json, typeWrapperT);
         } catch (IOException e) {
-            Logger.e(e);
+            if(catchLog)
+                Logger.e(e);
             return null;
         }
     }
@@ -134,7 +141,8 @@ public class JacksonUtil {
             return toJsonNode(json);
         }
         catch (IOException e) {
-            Logger.e(e);
+            if(catchLog)
+                Logger.e(e);
             return null;
         }
     }
@@ -144,7 +152,8 @@ public class JacksonUtil {
             return toJsonNode(inputStream);
         }
         catch (IOException e) {
-            Logger.e(e);
+            if(catchLog)
+                Logger.e(e);
             return null;
         }
     }
@@ -172,7 +181,8 @@ public class JacksonUtil {
             return toList(json);
         }
         catch (IOException e) {
-            Logger.e(e);
+            if(catchLog)
+                Logger.e(e);
             return null;
         }
     }
@@ -183,7 +193,8 @@ public class JacksonUtil {
             return toList(json, clazz);
         }
         catch (IOException e) {
-            Logger.e(e);
+            if(catchLog)
+                Logger.e(e);
             return null;
         }
     }
@@ -193,9 +204,11 @@ public class JacksonUtil {
             return toList(json, clazz);
         }
         catch (IOException e) {
-            Logger.e(e);
+            if(catchLog)
+                Logger.e(e);
             return null;
-        }    }
+        }
+    }
 
 
     public static Map<String, Object> toMap(String json) throws IOException {
@@ -208,7 +221,8 @@ public class JacksonUtil {
             return toMap(json);
         }
         catch (IOException e) {
-            Logger.e(e);
+            if(catchLog)
+                Logger.e(e);
             return null;
         }
     }
@@ -219,7 +233,8 @@ public class JacksonUtil {
             return toListMap(json);
         }
         catch (IOException e) {
-            Logger.e(e);
+            if(catchLog)
+                Logger.e(e);
             return null;
         }
     }

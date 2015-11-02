@@ -203,8 +203,8 @@ public class StringUtil {
     public static int getSumIntString(String... arrayObject) {
 
         int sum = 0;
-        for (int i = 0; i < arrayObject.length; ++i) {
-            sum += IntUtil.parseInt(arrayObject[i], 0);
+        for (String anArrayObject : arrayObject) {
+            sum += IntUtil.parseInt(anArrayObject, 0);
         }
         return sum;
     }
@@ -214,6 +214,36 @@ public class StringUtil {
             return "";
 
         return value.replaceAll("\\D", "");
+    }
+
+    public static String removeTail(String path, char symbol) {
+
+        if (isNullOrEmpty(path))
+            return "";
+
+        String trimPath = path.trim();
+
+        if (trimPath.charAt(trimPath.length() - 1) == symbol)
+            return trimPath.substring(0, trimPath.length() - 1);
+
+        return trimPath;
+    }
+
+    public static String removeHead(String path, char symbol) {
+
+        if (isNullOrEmpty(path))
+            return "";
+
+        String trimPath = path.trim();
+
+        if (trimPath.charAt(0) == symbol)
+            return trimPath.substring(1);
+
+        return trimPath;
+    }
+
+    public static boolean isNumeric(String s) {
+        return s.matches("[-+]?\\d*\\.?\\d+");
     }
 
 }

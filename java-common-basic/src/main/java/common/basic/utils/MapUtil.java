@@ -129,4 +129,19 @@ public class MapUtil {
     public static long getLong(Map<String, Object> map, String key) {
         return getLong(map, key, 0L);
     }
+
+    public static int getInt(Map<String, Object> map, String key) {
+        return getInt(map, key, 0);
+    }
+
+    public static int getInt(Map<String, Object> map, String key, int defaultValue) {
+
+        if (!map.containsKey(key))
+            return defaultValue;
+
+        Object value = map.get(key);
+
+        return IntUtil.parseInt(value.toString(), defaultValue);
+    }
+
 }
