@@ -251,6 +251,21 @@ public class ReflectionUtil {
         return list;
     }
 
+    public static <T> List<T> fromListMapStringStringByClass(Class<T> clazz, List<Map<String, String>> listMap) {
+        return fromListMapStringStringByClass(clazz, listMap, null);
+    }
+
+    public static <T, U extends Annotation> List<T> fromListMapStringStringByClass(Class<T> clazz, List<Map<String, String>> listMap, Class<U> annotationClass) {
+        if(listMap == null)
+            return null;
+
+        List<T> list = new ArrayList<T>(listMap.size());
+        for (Map<String, String> map : listMap)
+            list.add(fromMapStringStringByClass(clazz, map, annotationClass));
+
+        return list;
+    }
+
 
     public static <T> T fromMap(Class<T> clazz, Map<String, Object> map) {
         return fromMap(clazz, map, null);
@@ -308,6 +323,48 @@ public class ReflectionUtil {
                 String fieldName = field.getName();
 
                 Object value = map.get(fieldName);
+                if (null == value)
+                    continue;
+
+                if(Modifier.isTransient(field.getModifiers()))
+                    continue;
+
+                setFieldValue(t, field, value, annotationClass);
+            }
+
+            return t;
+        }
+        catch (InstantiationException e) {
+            Logger.e(e);
+        }
+        catch (IllegalAccessException e) {
+            Logger.e(e);
+        }
+        catch (InvocationTargetException e) {
+            Logger.e(e);
+        }
+        catch (NoSuchMethodException e) {
+            Logger.e(e);
+        }
+
+        return null;
+    }
+
+    public static <T> T fromMapStringStringByClass(Class<T> clazz, Map<String, String> map) {
+        return fromMapStringStringByClass(clazz, map, null);
+    }
+
+    public static <T, U extends Annotation> T fromMapStringStringByClass(Class<T> clazz, Map<String, String> map, Class<U> annotationClass) {
+        final T t;
+        try {
+            t = clazz.getConstructor(new Class<?>[0]).newInstance();
+
+            List<Field> listFieldDeclaredRecursive = getListFieldDeclaredRecursive(clazz);
+
+            for (Field field : listFieldDeclaredRecursive) {
+                String fieldName = field.getName();
+
+                String value = map.get(fieldName);
                 if (null == value)
                     continue;
 

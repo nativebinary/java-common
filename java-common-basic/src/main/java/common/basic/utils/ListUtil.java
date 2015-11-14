@@ -200,6 +200,18 @@ public class ListUtil extends CollectionUtil {
         return listResult;
     }
 
+
+    public static <T> int count(List<T> list, IPredicator<T> predicator) {
+        int count = 0;
+
+        for (T t : list) {
+            if(predicator.predicate(t))
+                ++count;
+        }
+
+        return count;
+    }
+
     public static <TIn, TOut> List<TOut> transform(Collection<TIn> list, ICallbackTransform<TIn, TOut> callbackTransform) {
         List<TOut> listOut = new ArrayList<TOut>(list.size());
         for (TIn in : list) {

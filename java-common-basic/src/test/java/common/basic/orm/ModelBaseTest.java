@@ -1,13 +1,16 @@
 package common.basic.orm;
 
+import common.basic.orm.annotation.AutoIncrement;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class ModelBaseTest extends Assert {
 
     public static class TestModel extends ModelBase {
-        public String s;
+        @AutoIncrement
         public int i;
+
+        public String s;
     }
 
     @Test
@@ -30,6 +33,7 @@ public class ModelBaseTest extends Assert {
                 .endWhere()
                 .order("Field1", true)
                 .limit(5);
+
         querySelect.traceBindValues();
 
         assertEquals("SELECT * FROM TestModel INNER JOIN Table2 ON Table1.Field1 = Table2.Field2 INNER JOIN Table3 ON Table2.field2 = Table3.Field3 WHERE ( Field1 = ? AND Field2 = ? AND Field1 LIKE ?) ORDER BY Field1 ASC LIMIT 5"
