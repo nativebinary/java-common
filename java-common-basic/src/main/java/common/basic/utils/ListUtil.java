@@ -326,7 +326,6 @@ public class ListUtil extends CollectionUtil {
 
     public static <T> boolean isNullOrEmpty(List<T> list) {
         return list == null || list.isEmpty();
-
     }
 
     public static <T> void swap(List<T> list, int index1, int index2) {
