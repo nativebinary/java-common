@@ -1,6 +1,7 @@
 package common.basic.utils;
 
 import common.basic.interfaces.ICallbackListToMap;
+import common.basic.interfaces.ICallbackTF;
 import common.basic.interfaces.ICallbackTransform;
 import common.basic.interfaces.IPredicator;
 import common.basic.logs.Logger;
@@ -354,4 +355,11 @@ public class ListUtil extends CollectionUtil {
         return concatenate(top, bottom);
     }
 
+    public static <T> int sum(List<T> list, ICallbackTF<T, Integer> callback) {
+        int sum = 0;
+        for (T t : list) {
+            sum += callback.getValue(t);
+        }
+        return sum;
+    }
 }
