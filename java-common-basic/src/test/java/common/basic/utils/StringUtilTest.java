@@ -206,4 +206,23 @@ public class StringUtilTest extends Assert {
         assertTrue(StringUtil.isNumeric("+123.45"));    /* true */
     }
 
+    @Test
+    public void testEqualsLimit() {
+        assertFalse(StringUtil.equalsLimit(null, null, 6));    /* false */
+        assertFalse(StringUtil.equalsLimit("abcdef", null, 6));    /* false */
+        assertFalse(StringUtil.equalsLimit(null, "abcdef", 6));    /* false */
+
+        assertTrue(StringUtil.equalsLimit("abcdef", "abcdef", 5));    /* true */
+        assertTrue(StringUtil.equalsLimit("abcdef", "abcdef", 6));    /* true */
+        assertFalse(StringUtil.equalsLimit("abcdef", "abcdef", 7));    /* false */
+
+        assertTrue(StringUtil.equalsLimit("abcde", "abcdef", 4));    /* true */
+        assertTrue(StringUtil.equalsLimit("abcde", "abcdef", 5));    /* true */
+        assertFalse(StringUtil.equalsLimit("abcde", "abcdef", 6));    /* false */
+
+        assertTrue(StringUtil.equalsLimit("abcdef", "abcde", 4));    /* true */
+        assertTrue(StringUtil.equalsLimit("abcdef", "abcde", 5));    /* true */
+        assertFalse(StringUtil.equalsLimit("abcdef", "abcde", 6));    /* false */
+
+    }
 }

@@ -67,6 +67,20 @@ public class StringUtil {
         return equals(s1.toLowerCase(), s2.toLowerCase());
     }
 
+    public static boolean equalsLimit(String s1, String s2, int limit) {
+        if (null == s1 && null == s2)
+            return false;
+
+        //noinspection SimplifiableIfStatement
+        if (null == s1 || null == s2)
+            return false;
+
+        if (s1.length() < limit || s2.length() < limit)
+            return false;
+
+        return s1.startsWith(s2.substring(0, limit));
+    }
+
     public static boolean startsWith(String str, String prefix) {
         //noinspection SimplifiableIfStatement
         if(isNullOrEmpty(str) || isNullOrEmpty(prefix)) {
