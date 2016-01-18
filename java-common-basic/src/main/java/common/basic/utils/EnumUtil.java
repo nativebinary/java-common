@@ -43,4 +43,12 @@ public class EnumUtil {
 
         return false;
     }
+
+    public static <E extends Enum<E>> String toString(E value) {
+
+        if (null == value)
+            return "";
+
+        return value.toString();
+    }
 }
