@@ -51,4 +51,11 @@ public class EnumUtil {
 
         return value.toString();
     }
+
+    public static <T extends Enum<T>, F extends Enum<F>> F convertTF(Class<F> clazz, T t) {
+        if (t == null)
+            return null;
+
+        return parse(clazz, t.toString());
+    }
 }
