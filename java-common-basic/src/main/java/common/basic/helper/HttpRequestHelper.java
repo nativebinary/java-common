@@ -93,7 +93,7 @@ public class HttpRequestHelper {
         void onException(Exception e);
     }
 
-    private enum HttpMethod {
+    public enum HttpMethod {
         Get,
         Post
     }
@@ -254,6 +254,15 @@ public class HttpRequestHelper {
             }
 
             HttpResponse httpResponse = getHttpResponse(HttpMethod.Get, url, listParam);
+            return responseText(httpResponse);
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    public static String postTextSync(String url, List<NameValuePair> listParam) {
+        try {
+            HttpResponse httpResponse = getHttpResponse(HttpMethod.Post, url, listParam);
             return responseText(httpResponse);
         } catch (Exception e) {
             return "";
