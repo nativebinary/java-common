@@ -12,4 +12,9 @@ public class DoubleUtil {
             return defaultValue;
         }
     }
+
+    public static double parse(String value) {
+        return parse(value, 0);
+    }
+
 }

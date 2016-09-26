@@ -19,6 +19,7 @@ public class SimpleDateFormatUtil {
     private final static SimpleDateFormat yyyy_dash_MM_dash_dd_space_HH_colon_mm = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.KOREA);
     private final static SimpleDateFormat yyyy_dash_MM_dash_dd_space_HH_colon_mm_colon_ss = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA);
     private final static SimpleDateFormat yyyy_dash_MM_dash_dd_space_HH_colon_mm_colon_ss_dot_SSS = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.KOREA);
+    private final static SimpleDateFormat yyyy_dash_MM_dash_dd_space_HH_colon_mm_a_space_z = new SimpleDateFormat("yyyy-MM-dd HH:mma z", Locale.KOREA);
     private final static SimpleDateFormat yyyy_dash_MM_dash_dd_space_leftParenthesis_E_rightParenthesis = new SimpleDateFormat("yyyy-MM-dd (E)", Locale.KOREA);
     private final static SimpleDateFormat yyyy_nyeon_MM_wol_dd_Il = new SimpleDateFormat("yyyy년MM월dd일", Locale.KOREA);
     private final static SimpleDateFormat yyyyMM = new SimpleDateFormat("yyyyMM", Locale.KOREA);
@@ -54,6 +55,8 @@ public class SimpleDateFormatUtil {
     public static Date yyyy_dash_MM_dash_dd_space_HH_colon_mm_colon_ss(String s, Date dateDefault) { synchronized (yyyy_dash_MM_dash_dd_space_HH_colon_mm_colon_ss) { try { return yyyy_dash_MM_dash_dd_space_HH_colon_mm_colon_ss.parse(s); } catch (ParseException e) { Logger.e(e); return dateDefault; } } }
     public static String yyyy_dash_MM_dash_dd_space_HH_colon_mm_colon_ss_dot_SSS(Date date) { synchronized (yyyy_dash_MM_dash_dd_space_HH_colon_mm_colon_ss_dot_SSS) { return yyyy_dash_MM_dash_dd_space_HH_colon_mm_colon_ss_dot_SSS.format(date); } }
     public static Date yyyy_dash_MM_dash_dd_space_HH_colon_mm_colon_ss_dot_SSS(String s, Date dateDefault) { synchronized (yyyy_dash_MM_dash_dd_space_HH_colon_mm_colon_ss_dot_SSS) { try { return yyyy_dash_MM_dash_dd_space_HH_colon_mm_colon_ss_dot_SSS.parse(s); } catch (ParseException e) { Logger.e(e); return dateDefault; } } }
+    public static String yyyy_dash_MM_dash_dd_space_HH_colon_mm_a_space_z(Date date) { synchronized (yyyy_dash_MM_dash_dd_space_HH_colon_mm_a_space_z) { return yyyy_dash_MM_dash_dd_space_HH_colon_mm_a_space_z.format(date); } }
+    public static Date yyyy_dash_MM_dash_dd_space_HH_colon_mm_a_space_z(String s, Date dateDefault) { synchronized (yyyy_dash_MM_dash_dd_space_HH_colon_mm_a_space_z) { try { return yyyy_dash_MM_dash_dd_space_HH_colon_mm_a_space_z.parse(s); } catch (ParseException e) { Logger.e(e); return dateDefault; } } }
     public static String yyyy_dash_MM_dash_dd_space_leftParenthesis_E_rightParenthesis(Date date) { synchronized (yyyy_dash_MM_dash_dd_space_leftParenthesis_E_rightParenthesis) { return yyyy_dash_MM_dash_dd_space_leftParenthesis_E_rightParenthesis.format(date); } }
     public static Date yyyy_dash_MM_dash_dd_space_leftParenthesis_E_rightParenthesis(String s, Date dateDefault) { synchronized (yyyy_dash_MM_dash_dd_space_leftParenthesis_E_rightParenthesis) { try { return yyyy_dash_MM_dash_dd_space_leftParenthesis_E_rightParenthesis.parse(s); } catch (ParseException e) { Logger.e(e); return dateDefault; } } }
     public static String yyyy_nyeon_MM_wol_dd_Il(Date date) { synchronized (yyyy_nyeon_MM_wol_dd_Il) { return yyyy_nyeon_MM_wol_dd_Il.format(date); } }

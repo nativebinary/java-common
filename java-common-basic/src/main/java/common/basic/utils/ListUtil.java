@@ -1,11 +1,9 @@
 package common.basic.utils;
 
-import common.basic.interfaces.ICallbackInt;
-import common.basic.interfaces.ICallbackListToMap;
-import common.basic.interfaces.ICallbackTransform;
-import common.basic.interfaces.IPredicator;
+import common.basic.interfaces.*;
 import common.basic.logs.Logger;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -359,6 +357,22 @@ public class ListUtil extends CollectionUtil {
         int sum = 0;
         for (T t : list) {
             sum += callback.getValue(t);
+        }
+        return sum;
+    }
+
+    public static <T> double sum(List<T> list, ICallbackDouble<T> callback) {
+        double sum = 0;
+        for (T t : list) {
+            sum += callback.getValue(t);
+        }
+        return sum;
+    }
+
+    public static <T > BigDecimal sum(List<T> list, ICallbackBigDecimal<T> callback) {
+        BigDecimal sum = BigDecimal.ZERO;
+        for (T t : list) {
+            sum = sum.add(callback.getValue(t));
         }
         return sum;
     }
