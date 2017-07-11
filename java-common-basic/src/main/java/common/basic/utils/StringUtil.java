@@ -16,24 +16,23 @@ public class StringUtil {
     }
 
 
-
     public static boolean isNullOrEmpty(String s) {
-        if(s == null)
+        if (s == null)
             return true;
 
         //noinspection RedundantIfStatement
-        if("".equals(s))
+        if ("".equals(s))
             return true;
 
         return false;
     }
 
     public static boolean isNullOrWhitespace(String s) {
-        if(null == s)
+        if (null == s)
             return true;
 
         //noinspection RedundantIfStatement
-        if("".equals(s.trim()))
+        if ("".equals(s.trim()))
             return true;
 
         return false;
@@ -86,7 +85,7 @@ public class StringUtil {
 
     public static boolean startsWith(String str, String prefix) {
         //noinspection SimplifiableIfStatement
-        if(isNullOrEmpty(str) || isNullOrEmpty(prefix)) {
+        if (isNullOrEmpty(str) || isNullOrEmpty(prefix)) {
             return false;
         }
 
@@ -95,7 +94,7 @@ public class StringUtil {
 
     public static boolean startsWith(String str, String prefix, int toOffset) {
         //noinspection SimplifiableIfStatement
-        if(isNullOrEmpty(str) || isNullOrEmpty(prefix)) {
+        if (isNullOrEmpty(str) || isNullOrEmpty(prefix)) {
             return false;
         }
 
@@ -115,29 +114,28 @@ public class StringUtil {
 
 
     public static String left(String s, int i) {
-        if(s.length() <= i)
+        if (s.length() <= i)
             return s;
 
         return s.substring(0, i);
     }
 
     public static String right(String s, int i) {
-        if(s.length() <= i)
+        if (s.length() <= i)
             return s;
 
         return s.substring(s.length() - i);
     }
 
     public static String padLeft(String s, int length, char pad) {
-        if(StringUtil.isNullOrEmpty(s))
+        if (StringUtil.isNullOrEmpty(s))
             return repeat(Character.toString(pad), length);
 
-        if(s.length() > length)
+        if (s.length() > length)
             return s;
 
         return repeat(Character.toString(pad), length - s.length()) + s;
     }
-
 
 
     public static String repeat(String s, int count) {
@@ -155,14 +153,13 @@ public class StringUtil {
     public static String join(String splitter, List<String> list) {
         StringBuilder sb = new StringBuilder();
 
-        int size = list.size() ;
+        int size = list.size();
         for (int i = 0; i < size - 1; i++) {
             sb.append(list.get(i));
             sb.append(splitter);
         }
 
-        if(size - 1 >= 0)
-        {
+        if (size - 1 >= 0) {
             sb.append(list.get(size - 1));
         }
 
@@ -172,14 +169,13 @@ public class StringUtil {
     public static <T> String joinWithToString(String splitter, List<T> list) {
         StringBuilder sb = new StringBuilder();
 
-        int size = list.size() ;
+        int size = list.size();
         for (int i = 0; i < size - 1; i++) {
             sb.append(list.get(i).toString());
             sb.append(splitter);
         }
 
-        if(size - 1 >= 0)
-        {
+        if (size - 1 >= 0) {
             sb.append(list.get(size - 1).toString());
         }
 
@@ -188,7 +184,7 @@ public class StringUtil {
 
 
     public static String toString(Object o) {
-        if(o == null)
+        if (o == null)
             return "" + null;
 
         return o.toString();
@@ -198,7 +194,7 @@ public class StringUtil {
     public static int count(String path, char c) {
         int count = 0;
         for (int i = 0; i < path.length(); i++) {
-            if(c == path.charAt(i))
+            if (c == path.charAt(i))
                 count++;
         }
 
@@ -270,7 +266,7 @@ public class StringUtil {
     public static String leftByEucKrByte(String value, int byteLength) {
         try {
             byte[] bytes = value.getBytes("EUC-KR");
-            if( bytes.length < byteLength )
+            if (bytes.length < byteLength)
                 return value;
 
             int count = 0;
@@ -315,4 +311,5 @@ public class StringUtil {
     public static String format(String format, Object... args) {
         return String.format(Locale.getDefault(), format, args);
     }
+
 }
