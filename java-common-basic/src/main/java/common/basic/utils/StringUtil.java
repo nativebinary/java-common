@@ -1,8 +1,11 @@
 package common.basic.utils;
 
+import common.basic.logs.Logger;
 import org.apache.commons.codec.binary.Base64;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 @SuppressWarnings("UnusedDeclaration")
 public class StringUtil {
@@ -260,4 +263,56 @@ public class StringUtil {
         return s.matches("[-+]?\\d*\\.?\\d+");
     }
 
+    public static String fillZeroAtLeft(String stringNumber, int length) {
+        return String.format(Locale.getDefault(), "%0" + length + "d", LongUtil.parseLong(stringNumber, 0));
+    }
+
+    public static String leftByEucKrByte(String value, int byteLength) {
+        try {
+            byte[] bytes = value.getBytes("EUC-KR");
+            if( bytes.length < byteLength )
+                return value;
+
+            int count = 0;
+            for (int i = 0; i < byteLength; ++i) {
+                if (bytes[i] < 0)
+                    ++count;
+            }
+            if (count % 2 == 0) {
+                return new String(bytes, 0, byteLength, "EUC-KR");
+            } else {
+                return new String(bytes, 0, byteLength - 1, "EUC-KR");
+            }
+        } catch (Throwable e) {
+            Logger.e(e);
+            return "";
+        }
+    }
+
+    public static String leftByEucKrByteFixWidth(String value, int byteLength) {
+        try {
+            byte[] bytes = value.getBytes("EUC-KR");
+            if (bytes.length < byteLength) {
+                return value + join("", Collections.nCopies(byteLength - bytes.length, " "));
+            }
+
+            int count = 0;
+            for (int i = 0; i < byteLength; ++i) {
+                if (bytes[i] < 0)
+                    ++count;
+            }
+            if (count % 2 == 0) {
+                return new String(bytes, 0, byteLength, "EUC-KR");
+            } else {
+                return new String(bytes, 0, byteLength - 1, "EUC-KR") + " ";
+            }
+        } catch (Throwable e) {
+            Logger.e(e);
+            return "";
+        }
+    }
+
+    public static String format(String format, Object... args) {
+        return String.format(Locale.getDefault(), format, args);
+    }
 }
