@@ -180,6 +180,17 @@ public class ReflectionUtil {
         }
     }
 
+    public static Object getValue(Object object, String fieldName) {
+        try {
+            Field field = object.getClass().getField(fieldName);
+            return field.get(object);
+        } catch (IllegalAccessException e) {
+            return null;
+        } catch (NoSuchFieldException e) {
+            return null;
+        }
+    }
+
     public static <T> List<Field> getListFieldDeclaredRecursive(Class<T> clazz){
         List<Field> listField = new ArrayList<Field>();
         listField.addAll(Arrays.asList(clazz.getDeclaredFields()));
@@ -709,4 +720,5 @@ public class ReflectionUtil {
         }
 
     }
+
 }
