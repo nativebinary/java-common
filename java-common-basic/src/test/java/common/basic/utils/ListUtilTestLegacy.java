@@ -66,7 +66,6 @@ public class ListUtilTestLegacy extends Assert {
         }
 
         final List<Integer> list10 = ListUtil.findAll(list, new IPredicator<Integer>() {
-            @Override
             public boolean predicate(Integer integer) {
                 return (integer % 10) == 0;
             }

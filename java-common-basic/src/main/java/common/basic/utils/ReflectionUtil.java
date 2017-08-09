@@ -28,11 +28,10 @@ public class ReflectionUtil {
     public static <T> List<Field> getAnnotatedField(Class<T> clazz, Class annotation) {
         List<Field> arrayField = getListFieldDeclaredRecursive(clazz);
         List<Field> listField = new ArrayList<Field>();
-        for(Field field : arrayField){
+        for (Field field : arrayField) {
             Annotation[] arrayAnnotation = field.getAnnotations();
-            for(Annotation a : arrayAnnotation)
-            {
-                if(a.annotationType().equals(annotation))
+            for (Annotation a : arrayAnnotation) {
+                if (a.annotationType().equals(annotation))
                     listField.add(field);
             }
         }
@@ -42,7 +41,7 @@ public class ReflectionUtil {
 
     public static <T, U extends Annotation> Field getAnnotatedFieldFirst(Class<T> clazz, Class<U> annotationClass) {
         List<Field> arrayField = getListFieldDeclaredRecursive(clazz);
-        for(Field field : arrayField){
+        for (Field field : arrayField) {
             final U annotation = field.getAnnotation(annotationClass);
 
             if (null != annotation)
@@ -89,8 +88,7 @@ public class ReflectionUtil {
 
         final Class<?> type = field.getType();
 
-        if(type.isPrimitive())
-        {
+        if (type.isPrimitive()) {
             if (value instanceof String) {
                 String stringValue = value.toString();
 
@@ -125,32 +123,32 @@ public class ReflectionUtil {
                 }
             }
 
-        } else if(type.equals(String.class) || type.equals(Date.class)) {
+        } else if (type.equals(String.class) || type.equals(Date.class)) {
             field.set(instance, value);
         } else if (type == java.util.List.class && value instanceof List) {
             ParameterizedType stringListType = (ParameterizedType) field.getGenericType();
             Class<?> genericClass = (Class<?>) stringListType.getActualTypeArguments()[0];
 
-            List<?> objects = fromListMapByClass(genericClass, (List<Map<String, Object>>)value);
+            List<?> objects = fromListMapByClass(genericClass, (List<Map<String, Object>>) value);
 
             field.set(instance, objects);
-        } else if(type.isEnum()) {
+        } else if (type.isEnum()) {
             //noinspection unchecked
             field.set(instance, EnumUtil.parse((Class<Enum>) type, (String) value));
-        } else if(type.equals(Integer.class)) {
-            if(value instanceof String)
+        } else if (type.equals(Integer.class)) {
+            if (value instanceof String)
                 try {
-                    field.set(instance, Integer.valueOf((String)value));
-                } catch(NumberFormatException e) {
+                    field.set(instance, Integer.valueOf((String) value));
+                } catch (NumberFormatException e) {
                 }
-        } else if(type.equals(Long.class)) {
-            if(value instanceof String)
+        } else if (type.equals(Long.class)) {
+            if (value instanceof String)
                 try {
-                    field.set(instance, Long.valueOf((String)value));
-                } catch(NumberFormatException e) {
+                    field.set(instance, Long.valueOf((String) value));
+                } catch (NumberFormatException e) {
                 }
         } else {
-            if(annotationClass == null)
+            if (annotationClass == null)
                 return;
 
             final Object o = type.newInstance();
@@ -164,8 +162,7 @@ public class ReflectionUtil {
         List<Field> arrayField = getListFieldDeclaredRecursive(clazz);
         Map<String, Field> mapField = new HashMap<String, Field>(arrayField.size());
 
-        for(Field field : arrayField)
-        {
+        for (Field field : arrayField) {
             mapField.put(field.getName(), field);
         }
         return mapField;
@@ -191,12 +188,11 @@ public class ReflectionUtil {
         }
     }
 
-    public static <T> List<Field> getListFieldDeclaredRecursive(Class<T> clazz){
+    public static <T> List<Field> getListFieldDeclaredRecursive(Class<T> clazz) {
         List<Field> listField = new ArrayList<Field>();
         listField.addAll(Arrays.asList(clazz.getDeclaredFields()));
         final Class<? super T> classSuper = clazz.getSuperclass();
-        if(null != classSuper)
-        {
+        if (null != classSuper) {
             listField.addAll(getListFieldDeclaredRecursive(classSuper));
         }
 
@@ -216,20 +212,15 @@ public class ReflectionUtil {
     public static <T> Field getFieldDeclaredRecursive(Class<T> clazz, String fieldName) throws NoSuchFieldException {
         try {
             return clazz.getDeclaredField(fieldName);
-        }
-        catch (NoSuchFieldException e) {
+        } catch (NoSuchFieldException e) {
             final Class<? super T> classSuper = clazz.getSuperclass();
-            if(null == classSuper)
-            {
+            if (null == classSuper) {
                 throw e;
-            }
-            else
-            {
+            } else {
                 return getFieldDeclaredRecursive(classSuper, fieldName);
             }
         }
     }
-
 
 
     public static <T> List<T> fromListMap(Class<T> clazz, List<Map<String, Object>> listMap) {
@@ -237,7 +228,7 @@ public class ReflectionUtil {
     }
 
     public static <T, U extends Annotation> List<T> fromListMap(Class<T> clazz, List<Map<String, Object>> listMap, Class<U> annotationClass) {
-        if(listMap == null)
+        if (listMap == null)
             return null;
 
         List<T> list = new ArrayList<T>(listMap.size());
@@ -252,7 +243,7 @@ public class ReflectionUtil {
     }
 
     public static <T, U extends Annotation> List<T> fromListMapByClass(Class<T> clazz, List<Map<String, Object>> listMap, Class<U> annotationClass) {
-        if(listMap == null)
+        if (listMap == null)
             return null;
 
         List<T> list = new ArrayList<T>(listMap.size());
@@ -267,7 +258,7 @@ public class ReflectionUtil {
     }
 
     public static <T, U extends Annotation> List<T> fromListMapStringStringByClass(Class<T> clazz, List<Map<String, String>> listMap, Class<U> annotationClass) {
-        if(listMap == null)
+        if (listMap == null)
             return null;
 
         List<T> list = new ArrayList<T>(listMap.size());
@@ -286,32 +277,26 @@ public class ReflectionUtil {
         final T t;
         try {
             t = clazz.getConstructor(new Class<?>[0]).newInstance();
-            for (String key : map.keySet())
-            {
+            for (String key : map.keySet()) {
                 final Object value = map.get(key);
 
                 final Field field = getFieldDeclaredRecursive(clazz, key);
-                if(Modifier.isTransient(field.getModifiers()))
+                if (Modifier.isTransient(field.getModifiers()))
                     continue;
 
 
                 setFieldValue(t, field, value, annotationClass);
             }
             return t;
-        }
-        catch (InstantiationException e) {
+        } catch (InstantiationException e) {
             Logger.e(e);
-        }
-        catch (IllegalAccessException e) {
+        } catch (IllegalAccessException e) {
             Logger.e(e);
-        }
-        catch (InvocationTargetException e) {
+        } catch (InvocationTargetException e) {
             Logger.e(e);
-        }
-        catch (NoSuchMethodException e) {
+        } catch (NoSuchMethodException e) {
             Logger.e(e);
-        }
-        catch (NoSuchFieldException e) {
+        } catch (NoSuchFieldException e) {
             Logger.e(e);
         }
 
@@ -337,24 +322,20 @@ public class ReflectionUtil {
                 if (null == value)
                     continue;
 
-                if(Modifier.isTransient(field.getModifiers()))
+                if (Modifier.isTransient(field.getModifiers()))
                     continue;
 
                 setFieldValue(t, field, value, annotationClass);
             }
 
             return t;
-        }
-        catch (InstantiationException e) {
+        } catch (InstantiationException e) {
             Logger.e(e);
-        }
-        catch (IllegalAccessException e) {
+        } catch (IllegalAccessException e) {
             Logger.e(e);
-        }
-        catch (InvocationTargetException e) {
+        } catch (InvocationTargetException e) {
             Logger.e(e);
-        }
-        catch (NoSuchMethodException e) {
+        } catch (NoSuchMethodException e) {
             Logger.e(e);
         }
 
@@ -379,24 +360,20 @@ public class ReflectionUtil {
                 if (null == value)
                     continue;
 
-                if(Modifier.isTransient(field.getModifiers()))
+                if (Modifier.isTransient(field.getModifiers()))
                     continue;
 
                 setFieldValue(t, field, value, annotationClass);
             }
 
             return t;
-        }
-        catch (InstantiationException e) {
+        } catch (InstantiationException e) {
             Logger.e(e);
-        }
-        catch (IllegalAccessException e) {
+        } catch (IllegalAccessException e) {
             Logger.e(e);
-        }
-        catch (InvocationTargetException e) {
+        } catch (InvocationTargetException e) {
             Logger.e(e);
-        }
-        catch (NoSuchMethodException e) {
+        } catch (NoSuchMethodException e) {
             Logger.e(e);
         }
 
@@ -410,9 +387,8 @@ public class ReflectionUtil {
             final Class<?> clazz = t.getClass();
             final List<Field> arrayField = getListFieldDeclaredRecursive(clazz);
 
-            for (Field field : arrayField)
-            {
-                if(Modifier.isTransient(field.getModifiers()))
+            for (Field field : arrayField) {
+                if (Modifier.isTransient(field.getModifiers()))
                     continue;
 
                 field.setAccessible(true);
@@ -420,8 +396,7 @@ public class ReflectionUtil {
             }
 
             return map;
-        }
-        catch (IllegalAccessException e) {
+        } catch (IllegalAccessException e) {
             Logger.e(e);
         }
 
@@ -430,12 +405,12 @@ public class ReflectionUtil {
 
 
     public static <TLhs, TRhs> void assignAnnotatedMemberVariable(List<TLhs> listLhs, List<TRhs> listRhs, Class classAnnotation) {
-        if(listLhs.size() == 0) {
+        if (listLhs.size() == 0) {
             Logger.e("listLhs.size() == 0");
             return;
         }
 
-        if(listRhs.size() == 0) {
+        if (listRhs.size() == 0) {
             Logger.e("listRhs.size() == 0");
             return;
         }
@@ -446,7 +421,6 @@ public class ReflectionUtil {
         final Class<?> classRhs = rhs0.getClass();
 
         final List<Field> listTarget = ListUtil.findAll(getListFieldDeclaredRecursive(classLhs), new IPredicator<Field>() {
-            @Override
             public boolean predicate(Field field) {
                 return field.getType().equals(classRhs);
             }
@@ -465,12 +439,11 @@ public class ReflectionUtil {
 
                 try {
                     final TRhs value = map.get(annotatedFieldValueFirst);
-                    if(value == null)
+                    if (value == null)
                         continue;
 
                     setValue(lhs, field, value);
-                }
-                catch (IllegalAccessException e) {
+                } catch (IllegalAccessException e) {
                     Logger.e(e);
                 }
             }
@@ -482,7 +455,7 @@ public class ReflectionUtil {
     private static final String TYPE_INTERFACE_NAME_PREFIX = "interface ";
 
     public static String getClassName(Type type) {
-        if (type==null) {
+        if (type == null) {
             return "";
         }
         String className = type.toString();
@@ -495,9 +468,9 @@ public class ReflectionUtil {
     }
 
     public static Class<?> getClass(Type type)
-            throws ClassNotFoundException {
+        throws ClassNotFoundException {
         String className = getClassName(type);
-        if (className==null || className.isEmpty()) {
+        if (className == null || "".equals(className)) {
             return null;
         }
         return Class.forName(className);
@@ -505,7 +478,6 @@ public class ReflectionUtil {
 
 
     ////////////////////////////////
-
 
 
     public static <T, U extends Annotation> void setFieldByStringArray(T instance, Field field, String[] arrayString, Class<U> annotationClass) throws IllegalAccessException, InstantiationException {
@@ -517,8 +489,7 @@ public class ReflectionUtil {
 
         final Class<?> type = field.getType();
 
-        if(type.isPrimitive())
-        {
+        if (type.isPrimitive()) {
             String stringValue = arrayString[0];
 
             if (int.class.equals(type)) {
@@ -540,10 +511,10 @@ public class ReflectionUtil {
             } else {
                 field.set(instance, stringValue);
             }
-        } else if(type.equals(String.class)) {
+        } else if (type.equals(String.class)) {
             String stringValue = arrayString[0];
             field.set(instance, stringValue);
-        } else if(type.equals(Date.class)) {
+        } else if (type.equals(Date.class)) {
             String stringValue = arrayString[0];
             Date parse = DateUtil.yyyyMMddHHmmss(stringValue, null);
             if (null != parse)
@@ -560,63 +531,55 @@ public class ReflectionUtil {
                     objects.add(parse);
                 }
                 field.set(instance, objects);
-            } else if (genericClass.equals(String.class)){
+            } else if (genericClass.equals(String.class)) {
                 List<String> objects = new ArrayList<String>();
                 Collections.addAll(objects, arrayString);
                 field.set(instance, objects);
             } else {
                 if (Integer.class.equals(type)) {
                     field.set(instance, ListUtil.transform(arrayString, new ICallbackTransform<String, Integer>() {
-                        @Override
                         public Integer transform(String s) {
                             return IntUtil.parseInt(s, 0);
                         }
                     }));
                 } else if (Long.class.equals(type)) {
                     field.set(instance, ListUtil.transform(arrayString, new ICallbackTransform<String, Long>() {
-                        @Override
                         public Long transform(String s) {
                             return LongUtil.parseLong(s, 0);
                         }
                     }));
                 } else if (Float.class.equals(type)) {
                     field.set(instance, ListUtil.transform(arrayString, new ICallbackTransform<String, Float>() {
-                        @Override
                         public Float transform(String s) {
                             return Float.parseFloat(s);
                         }
                     }));
                 } else if (Double.class.equals(type)) {
                     field.set(instance, ListUtil.transform(arrayString, new ICallbackTransform<String, Double>() {
-                        @Override
                         public Double transform(String s) {
                             return Double.parseDouble(s);
                         }
                     }));
                 } else if (Boolean.class.equals(type)) {
                     field.set(instance, ListUtil.transform(arrayString, new ICallbackTransform<String, Boolean>() {
-                        @Override
                         public Boolean transform(String s) {
                             return BooleanUtil.parse(s);
                         }
                     }));
                 } else if (Byte.class.equals(type)) {
                     field.set(instance, ListUtil.transform(arrayString, new ICallbackTransform<String, Byte>() {
-                        @Override
                         public Byte transform(String s) {
                             return Byte.parseByte(s);
                         }
                     }));
                 } else if (Short.class.equals(type)) {
                     field.set(instance, ListUtil.transform(arrayString, new ICallbackTransform<String, Short>() {
-                        @Override
                         public Short transform(String s) {
                             return Short.parseShort(s);
                         }
                     }));
                 } else if (Character.class.equals(type)) {
                     field.set(instance, ListUtil.transform(arrayString, new ICallbackTransform<String, Character>() {
-                        @Override
                         public Character transform(String s) {
                             if (StringUtil.isNullOrEmpty(s))
                                 return null;
@@ -627,7 +590,6 @@ public class ReflectionUtil {
                 } else {
                     Logger.e(field, arrayString);
                     field.set(instance, ListUtil.transform(arrayString, new ICallbackTransform<String, Object>() {
-                        @Override
                         public Object transform(String s) {
                             return s;
                         }
@@ -636,24 +598,24 @@ public class ReflectionUtil {
 
 
             }
-        } else if(type.isEnum()) {
+        } else if (type.isEnum()) {
             //noinspection unchecked
             String stringValue = arrayString[0];
             field.set(instance, EnumUtil.parse((Class<? extends Enum>) type, stringValue));
-        } else if(type.equals(Integer.class)) {
+        } else if (type.equals(Integer.class)) {
             String stringValue = arrayString[0];
             try {
                 field.set(instance, Integer.valueOf(stringValue));
-            } catch(NumberFormatException e) {
+            } catch (NumberFormatException e) {
             }
-        } else if(type.equals(Long.class)) {
+        } else if (type.equals(Long.class)) {
             String stringValue = arrayString[0];
             try {
                 field.set(instance, Long.valueOf(stringValue));
-            } catch(NumberFormatException e) {
+            } catch (NumberFormatException e) {
             }
         } else {
-            if(annotationClass == null)
+            if (annotationClass == null)
                 return;
 
             final Object o = type.newInstance();
@@ -677,24 +639,20 @@ public class ReflectionUtil {
                 if (null == value)
                     continue;
 
-                if(Modifier.isTransient(field.getModifiers()))
+                if (Modifier.isTransient(field.getModifiers()))
                     continue;
 
                 setFieldByStringArray(t, field, value, annotationClass);
             }
 
             return t;
-        }
-        catch (InstantiationException e) {
+        } catch (InstantiationException e) {
             Logger.e(e);
-        }
-        catch (IllegalAccessException e) {
+        } catch (IllegalAccessException e) {
             Logger.e(e);
-        }
-        catch (InvocationTargetException e) {
+        } catch (InvocationTargetException e) {
             Logger.e(e);
-        }
-        catch (NoSuchMethodException e) {
+        } catch (NoSuchMethodException e) {
             Logger.e(e);
         }
 
