@@ -18,12 +18,13 @@ import java.util.List;
 import java.util.Map;
 
 public class JacksonUtil {
-    final static boolean catchLog = false;
+    static boolean catchLog = false;
     private static ObjectMapper createObjectMapper() {
         ObjectMapper objectMapper = new ObjectMapper();
 
 //        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+        objectMapper.enable(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
         objectMapper.setVisibilityChecker(VisibilityChecker.Std.defaultInstance().withFieldVisibility(JsonAutoDetect.Visibility.ANY));
 
         return objectMapper;
@@ -210,7 +211,6 @@ public class JacksonUtil {
         }
     }
 
-
     public static Map<String, Object> toMap(String json) throws IOException {
         return createObjectMapper().readValue(json, new TypeReference<Map<String, Object>>() {
         });
@@ -244,6 +244,9 @@ public class JacksonUtil {
         });
     }
 
+    public static void setCatchLog(boolean value) {
+        catchLog = value;
+    }
 }
 
 
