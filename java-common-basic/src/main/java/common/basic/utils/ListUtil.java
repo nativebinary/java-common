@@ -369,11 +369,80 @@ public class ListUtil extends CollectionUtil {
         return sum;
     }
 
-    public static <T > BigDecimal sum(List<T> list, ICallbackBigDecimal<T> callback) {
+    public static <T> BigDecimal sum(List<T> list, ICallbackBigDecimal<T> callback) {
         BigDecimal sum = BigDecimal.ZERO;
         for (T t : list) {
             sum = sum.add(callback.getValue(t));
         }
         return sum;
     }
+
+
+    public static <T> T find(List<T> list, ICallbackBoolean<T> callback) {
+        int i = 0;
+        for (T t : list) {
+            if (callback.callback(t, i++, list))
+                return t;
+        }
+        return null;
+    }
+
+    public static <T> List<T> filter(List<T> list, ICallbackBoolean<T> callback) {
+        List<T> listT = new ArrayList<T>();
+        int i = 0;
+        for (T t : list) {
+            if (callback.callback(t, i++, list))
+                listT.add(t);
+        }
+        return listT;
+    }
+
+    public static <T> void forEach(List<T> list, ICallbackForEach<T> callback) {
+        int i = 0;
+        for (T t : list) {
+            callback.callback(t, i++, list);
+        }
+    }
+
+    public static <T,F> List<F> map(List<T> list, ICallbackMap<T, F> callback) {
+        List<F> listF = new ArrayList<F>(list.size());
+        int i = 0;
+        for (T t : list) {
+            listF.add(callback.callback(t, i++, list));
+        }
+        return listF;
+    }
+
+
+    public static <T,F> F reduce(List<T> list, ICallbackReduce<T, F> callback, F init) {
+        int i = 0;
+        for (T t : list) {
+            init = callback.callback(init, t, i++, list);
+        }
+        return init;
+    }
+
+
+    public static <T> boolean some(List<T> list, ICallbackBoolean<T> callback) {
+        int i = 0;
+        for (T t : list) {
+            if (callback.callback(t, i++, list))
+                return true;
+        }
+        return false;
+    }
+
+
+    public static <T> boolean every(List<T> list, ICallbackBoolean<T> callback) {
+        int i = 0;
+        for (T t : list) {
+            if (!callback.callback(t, i++, list))
+                return false;
+        }
+        return true;
+    }
+
+
+
+
 }
