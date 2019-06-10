@@ -29,4 +29,8 @@ public class IntUtil {
 
         return list;
     }
+
+    public static int compare(int lf, int rf) {
+        return Integer.valueOf(lf).compareTo(rf);
+    }
 }

@@ -11,6 +11,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -118,6 +119,8 @@ public class ReflectionUtil {
                     field.setFloat(instance, ((Double) value).floatValue());
                 } else if ("boolean".equals(type.getName())) {
                     field.setBoolean(instance, BooleanUtil.parse(value.toString()));
+                } else if ("double".equals(type.getName()) && (value instanceof BigDecimal)) {
+                    field.setDouble(instance, ((BigDecimal) value).doubleValue());
                 } else {
                     field.set(instance, value);
                 }
